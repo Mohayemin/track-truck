@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tracktruck">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Track Truck</title>
+
+    <!-- Bootstrap -->
+    <link href="lib/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="truckReportController">
+<h1 ng-bind="message"></h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Truck Number</th>
+            <th>Driver</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>From Outlet</th>
+            <th>To Outlet</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="truck in trucks">
+            <td ng-bind="truck.TruckNumber"></td>
+            <td ng-bind="truck.DriverName"></td>
+            <td ng-bind="truck.ItemsCarrying"></td>
+            <td ng-bind="truck.Status"></td>
+            <td ng-bind="truck.FromOutlet"></td>
+            <td ng-bind="truck.ToOutlet"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/javascript" src="lib/js/angular.min.js"></script>
+<script type="text/javascript" src="app/js/app.js"></script>
+<script type="text/javascript" src="app/js/truckRepository.js"></script>
+<script type="text/javascript" src="app/js/truckReportController.js"></script>
+</body>
+</html>
