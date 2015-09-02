@@ -16,11 +16,46 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="truckReportController">
-<h1 ng-bind="message"></h1>
+<body ng-controller="truckReportController" class="container">
 
-<table class="table table-responsive">
-    <thead>
+<div>
+    <h3>Summary</h3>
+    <table class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Moving</th>
+                <th>Not In Use</th>
+                <th>Unloading</th>
+                <th>Loading</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Trucks</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th></th>
+            </tr>
+            <tr>
+                <th>Items</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h3>Detail</h3>
+    <table class="table table-bordered table-responsive">
+        <thead>
         <tr>
             <th>Truck Number</th>
             <th>Driver</th>
@@ -29,8 +64,8 @@
             <th>From Outlet</th>
             <th>To Outlet</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <tr ng-class="getStatusClass(truck)" ng-repeat="truck in trucks">
             <td ng-bind="truck.TruckNumber"></td>
             <td><a href="" ng-bind="truck.DriverName" title="We can show driver's details when clicked here"></a></td>
@@ -39,9 +74,9 @@
             <td ng-bind="truck.FromOutlet"></td>
             <td ng-bind="truck.ToOutlet"></td>
         </tr>
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 <script type="text/javascript" src="lib/js/angular.min.js"></script>
 <script type="text/javascript" src="app/js/app.js"></script>
 <script type="text/javascript" src="app/js/truckRepository.js"></script>

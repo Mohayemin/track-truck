@@ -5,6 +5,8 @@ function truckReportController($scope, repository){
 
     repository.getCurrentStatus().then(function (response) {
         $scope.trucks = response.data;
+
+        
     });
 
     $scope.getStatusClass = function (truck) {
@@ -20,5 +22,5 @@ function truckReportController($scope, repository){
         if(truck.Status === 'Unloading'){
             return 'warning';
         }
-    }
+    };
 }
