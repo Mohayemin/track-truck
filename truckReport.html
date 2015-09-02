@@ -34,19 +34,19 @@
         <tbody>
             <tr>
                 <th>Trucks</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <th></th>
+                <td ng-bind="Summary.Trucks['Moving']"></td>
+                <td ng-bind="Summary.Trucks['Not In Use']"></td>
+                <td ng-bind="Summary.Trucks['Unloading']"></td>
+                <td ng-bind="Summary.Trucks['Loading']"></td>
+                <th ng-bind="Summary.Trucks['Total']"></th>
             </tr>
             <tr>
                 <th>Items</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <th></th>
+                <td ng-bind="Summary.Items['Moving']"></td>
+                <td ng-bind="Summary.Items['Not In Use']"></td>
+                <td ng-bind="Summary.Items['Unloading']"></td>
+                <td ng-bind="Summary.Items['Loading']"></td>
+                <th ng-bind="Summary.Items['Total']"></th>
             </tr>
         </tbody>
     </table>
@@ -66,7 +66,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-class="getStatusClass(truck)" ng-repeat="truck in trucks">
+        <tr ng-class="getStatusClass(truck)" ng-repeat="truck in Trucks">
             <td ng-bind="truck.TruckNumber"></td>
             <td><a href="" ng-bind="truck.DriverName" title="We can show driver's details when clicked here"></a></td>
             <td ng-bind="truck.ItemsCarrying"></td>
@@ -78,6 +78,7 @@
     </table>
 </div>
 <script type="text/javascript" src="lib/js/angular.min.js"></script>
+<script type="text/javascript" src="lib/js/underscore-min.js"></script>
 <script type="text/javascript" src="app/js/app.js"></script>
 <script type="text/javascript" src="app/js/truckRepository.js"></script>
 <script type="text/javascript" src="app/js/truckReportController.js"></script>
