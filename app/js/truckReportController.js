@@ -1,8 +1,17 @@
 app.controller('truckReportController', ['$scope', 'truckRepository', truckReportController]);
 
 function truckReportController($scope, repository) {
+    $scope.DetailReportHeaders = {
+        'TruckId' : 'Truck Number',
+        'DriverName': 'Driver',
+        'ItemsCarrying': 'Items',
+        'Status': 'Status',
+        'FromOutlet': 'From Outlet',
+        'ToOutlet': 'To Outlet'
+    };
     $scope.Trucks = [];
     $scope.Summary = {};
+
     repository.getCurrentStatus().then(function (response) {
         $scope.Trucks = response.data;
         updateSummary();
@@ -44,6 +53,16 @@ function truckReportController($scope, repository) {
         }
         if (truck.Status === 'Unloading') {
             return 'warning';
+        }
+    };
+
+    $scope.Sort = {Name: 'DriverId', Reverse: false};
+    $scope.updateSort = function (headerId) {
+        if($scope.Sort.Id == headerId){
+            $scope.Sort.Reverse = !$scope.Sort.Reverse;
+        }else{
+            $scope.Sort.Id = headerId;
+            $scope.Sort.Reverse = false;
         }
     };
 }
