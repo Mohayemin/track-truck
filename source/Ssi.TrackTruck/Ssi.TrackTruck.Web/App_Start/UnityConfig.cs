@@ -1,5 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Practices.Unity;
+using Ssi.TrackTruck.Bussiness.Auth;
+using Ssi.TrackTruck.Bussiness.DAL;
 
 namespace Ssi.TrackTruck.Web
 {
@@ -23,6 +27,15 @@ namespace Ssi.TrackTruck.Web
         {
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
+
+            RegisterRepository(container);
+            container.RegisterType<IHasher, Pbkdf2Hasher>();
+        }
+
+        private static void RegisterRepository(IUnityContainer container)
+        {
+            var data = new Dictionary<Type, IList>();
+            container.RegisterType<IRepository, ListStorageRepository>(new InjectionConstructor(data));
         }
     }
 }
