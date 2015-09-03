@@ -37,6 +37,7 @@
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
+    <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
