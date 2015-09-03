@@ -7,11 +7,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">TrackTruck</a>
+            <a class="navbar-brand" href="@Url.Action("", "")">TrackTruck</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="@Url.Action("Report", "Attendence")">Load Items</a></li>
+                <li><a href="@Url.Action("Report", "Attendence")">Unload Items</a></li>
                 <li><a href="@Url.Action("Report", "Attendence")">Delivery</a></li>
                 <li><a href="@Url.Action("Report", "Attendence")">Trucks</a></li>
                 <li><a href="@Url.Action("Report", "Attendence")">Attendence</a></li>
