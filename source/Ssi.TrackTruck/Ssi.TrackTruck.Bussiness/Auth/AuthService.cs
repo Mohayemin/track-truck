@@ -24,7 +24,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
                 if (valid)
                 {
-                    return Response.Success();
+                    return Response.Success(null, "Verified, redirecting...");
                 }
 
                 return Response.Error("InvalidCredentials", "Username an password does not match");
