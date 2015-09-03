@@ -1,0 +1,1 @@
+﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap']);

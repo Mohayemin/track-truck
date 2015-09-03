@@ -1,40 +1,28 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="trackTruck">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <title>Track Truck: @ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-superhero.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/track-truck.css"/>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+<body ng-controller="trackTruckController">
+    @Html.Partial("_Nav")
 
-    <div class="container body-content">
+    <div class="container main-container">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - SSI Group of Companies</p>
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Lib/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/App/trackTruckModule.js"></script>
+    <script type="text/javascript" src="~/Scripts/App/trackTruckController.js"></script>
 </body>
 </html>
