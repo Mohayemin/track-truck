@@ -14,13 +14,13 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult SignIn()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(LoginRequest request)
+        public ActionResult SignIn(SignInRequest request)
         {
             return Json(_authService.AuthenticateUser(request));
         }

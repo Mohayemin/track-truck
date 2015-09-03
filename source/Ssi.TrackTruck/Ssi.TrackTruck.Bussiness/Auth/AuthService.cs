@@ -15,7 +15,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             _hasher = hasher;
         }
 
-        public Response AuthenticateUser(LoginRequest request)
+        public Response AuthenticateUser(SignInRequest request)
         {
             if (request.Validate())
             {
