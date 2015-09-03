@@ -100,8 +100,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\App\track-truck.css" />
-    <Content Include="Content\Lib\bootstrap-superhero.min.css" />
+    <Content Include="Content\css\bootstrap-superhero.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\track-truck.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\App\trackTruckModule.js" />
     <Content Include="Scripts\Lib\angular.min.js" />
     <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.13.4.min.js" />
@@ -109,7 +111,7 @@
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -127,6 +129,11 @@
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Nav.cshtml" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
