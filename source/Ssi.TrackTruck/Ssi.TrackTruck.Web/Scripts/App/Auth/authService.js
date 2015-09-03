@@ -5,8 +5,8 @@
 ]);
 
 function authService($http, url) {
-    function signIn(model) {
-        return $http.post(url('Auth', 'SignIn'), model).then(function(response) {
+    function signIn(request) {
+        return $http.post(url('Auth', 'SignIn'), request).then(function(response) {
             return response.data;
         });
     }
