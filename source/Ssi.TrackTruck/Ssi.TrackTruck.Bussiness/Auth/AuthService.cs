@@ -1,5 +1,6 @@
 ﻿using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Auth
 {
@@ -14,10 +15,21 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             _hasher = hasher;
         }
 
-        public bool AuthenticateUser(string username, string password)
+        public Response AuthenticateUser(LoginRequest request)
         {
-            var user = _repository.FindOne<User>(u => u.UsernameLowerCase == username);
-            return user != null && _hasher.Match(password, user.PasswordHash);
+            if (request.Validate())
+            {
+                var usernameLower = request.Username.ToLower();
+                var user = _repository.FindOne<User>(u => u.UsernameLowerCase == usernameLower);
+                var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
+                if (valid)
+                {
+                    return Response.Success();
+                }
+
+                return Response.Error("InvalidCredentials", "Username an password does not match");
+            }
+            return Response.Error("Validation", "Please enter both username and password");
         }
     }
 }
