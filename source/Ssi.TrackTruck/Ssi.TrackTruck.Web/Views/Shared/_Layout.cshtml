@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="trackTruck">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/Lib/bootstrap-superhero.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/App/track-truck.css"/>
 </head>
-<body>
+<body ng-controller="trackTruckController">
     @Html.Partial("_Nav")
 
     <div class="container main-container">
@@ -18,5 +18,10 @@
         </footer>
     </div>
 
+    <script type="text/javascript" src="~/Scripts/Lib/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/App/trackTruckModule.js"></script>
+    <script type="text/javascript" src="~/Scripts/App/trackTruckController.js"></script>
 </body>
 </html>
