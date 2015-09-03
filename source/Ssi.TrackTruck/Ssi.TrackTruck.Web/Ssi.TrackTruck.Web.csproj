@@ -100,7 +100,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\App\track-truck.css" />
     <Content Include="Content\Lib\bootstrap-superhero.min.css" />
+    <Content Include="Scripts\App\trackTruckModule.js" />
+    <Content Include="Scripts\Lib\angular.min.js" />
+    <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.13.4.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -132,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ssi.TrackTruck.Bussiness\Ssi.TrackTruck.Bussiness.csproj">
