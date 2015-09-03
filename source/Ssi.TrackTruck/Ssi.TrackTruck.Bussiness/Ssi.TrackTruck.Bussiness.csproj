@@ -34,6 +34,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\AuthService.cs" />
+    <Compile Include="Auth\Pbkdf2Hasher.cs" />
+    <Compile Include="Auth\IHasher.cs" />
+    <Compile Include="DAL\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
