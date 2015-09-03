@@ -28,8 +28,8 @@
                 </div>
                 
                 <div class="form-group text-center message-box">
-                    <span class="text-danger" ng-if="response.IsError" ng-bind="response.Message"></span>
-                    <span class="text-info" ng-if="message" ng-bind="message"></span>
+                    <span ng-if="response" ng-class="{'text-danger': response.IsError, 'text-success': !response.IsError}" ng-bind="response.Message"></span>
+                    <span class="text-info" ng-if="message"></span>
                 </div>
             </div>
         </fieldset>
