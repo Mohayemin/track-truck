@@ -8,21 +8,23 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/css/track-truck.css"/>
 </head>
-<body ng-controller="trackTruckController">
-    @Html.Partial("_Nav")
+    <body ng-controller="trackTruckController">
+        <script type="text/javascript" src="~/Scripts/Lib/angular.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/App/trackTruckModule.js"></script>
+        <script type="text/javascript" src="~/Scripts/App/url.js"></script>
 
-    <div class="container main-container">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - SSI Group of Companies</p>
-        </footer>
-    </div>
+        @Html.Partial("_Nav")
 
-    <script type="text/javascript" src="~/Scripts/Lib/angular.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
+        <div class="container main-container">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - SSI Group of Companies</p>
+            </footer>
+        </div>
 
-    <script type="text/javascript" src="~/Scripts/App/trackTruckModule.js"></script>
-    <script type="text/javascript" src="~/Scripts/App/trackTruckController.js"></script>
-</body>
+   
+        <script type="text/javascript" src="~/Scripts/App/trackTruckController.js"></script>
+    </body>
 </html>
