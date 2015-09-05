@@ -9,24 +9,54 @@
             </button>
             <a class="navbar-brand" href="@Url.Action("", "")">TrackTruck</a>
         </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="@Url.Action("Report", "Attendence")">Load Items
-                        <i class="fa fa-fw fa-lg fa-download"></i></a></li>
+
+                <li>
+                    <a href="@Url.Action("Report", "Attendence")">
+                        Load Items
+                        <i class="fa fa-fw fa-lg fa-download"></i>
+                    </a>
+                </li>
                 <li>
                     <a href="@Url.Action("Report", "Attendence")">
                         Unload Items
                         <i class="fa fa-fw fa-lg fa-upload"></i>
                     </a>
                 </li>
-                <li><a href="@Url.Action("Report", "Attendence")">Delivery <i class="fa fa-fw fa-lg fa-gift"></i></a></li>
-                <li><a href="@Url.Action("Report", "Attendence")">Trucks <i class="fa fa-fw fa-lg fa-truck"></i></a></li>
-                <li><a href="@Url.Action("Report", "Attendence")">Attendence <i class="fa fa-fw fa-lg fa-group"></i></a></li>
-                <li><a href="@Url.Action("Profile", "User")">@User.Identity.Name<i class="fa fa-fw fa-lg fa-user"></i></a></li>
+                <li>
+                    <a href="@Url.Action("Report", "Attendence")">
+                        Delivery <i class="fa fa-fw fa-lg fa-gift"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Report", "Attendence")">
+                        Trucks <i class="fa fa-fw fa-lg fa-truck"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Report", "Attendence")">
+                        Attendence <i class="fa fa-fw fa-lg fa-group"></i>
+                    </a>
+                </li>
+                <li dropdown>
+                    <a dropdown-toggle href="@Url.Action("Profile", "User")">
+                        @User.Identity.Name<i class="fa fa-fw fa-lg fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="@Url.Action("ChangePassword", "Auth")">
+                                <i class="fa fa-fw fa-lg fa-key"></i>  Change Password
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("SignOut", "Auth")">
+                                <i class="fa fa-fw fa-lg fa-sign-out"></i> Sign Out
+                            </a>
+                        </li>
 
-                <li><a href="@Url.Action("SignIn", "Auth")">Sign In <i class="fa fa-fw fa-lg fa-sign-in"></i> </a></li>
-                <li><a href="@Url.Action("SignOut", "Auth")">Sign Out <i class="fa fa-fw fa-lg fa-sign-out"></i> </a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
