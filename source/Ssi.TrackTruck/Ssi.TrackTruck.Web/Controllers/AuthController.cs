@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Models;
 
@@ -22,7 +23,12 @@ namespace Ssi.TrackTruck.Web.Controllers
         [HttpPost]
         public ActionResult SignIn(SignInRequest request)
         {
-            return Json(_authService.AuthenticateUser(request));
+            var response = _authService.AuthenticateUser(request);
+            if (!response.IsError)
+            {
+                FormsAuthentication.SetAuthCookie(request.Username, request.RememberMe);
+            }
+            return Json(response);
         }
-	}
+    }
 }
