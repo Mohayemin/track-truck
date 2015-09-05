@@ -2,6 +2,10 @@
     margin-top: 50px;
 }
 
+.message-box {
+    min-height: 25px
+}
+
 .fa.space-left {
     margin-left: 2px;
 }
