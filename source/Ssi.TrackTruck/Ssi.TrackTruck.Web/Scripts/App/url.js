@@ -4,6 +4,10 @@
 
 function urlFactory() {
     return function (controller, action, params) {
+        if (!controller) {
+            return '/';
+        }
+        
         var urlString = '/' + controller + '/' + action;
         if (params) {
             urlString = urlString + '?';
