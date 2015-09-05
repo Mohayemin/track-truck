@@ -40,6 +40,7 @@
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ListStorageRepository.cs" />
+    <Compile Include="Models\CreateUserRequest.cs" />
     <Compile Include="Models\SignInRequest.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
