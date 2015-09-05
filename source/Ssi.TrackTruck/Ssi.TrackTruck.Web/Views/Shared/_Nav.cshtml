@@ -23,7 +23,7 @@
                 <li><a href="@Url.Action("Report", "Attendence")">Delivery <i class="fa fa-fw fa-lg fa-gift"></i></a></li>
                 <li><a href="@Url.Action("Report", "Attendence")">Trucks <i class="fa fa-fw fa-lg fa-truck"></i></a></li>
                 <li><a href="@Url.Action("Report", "Attendence")">Attendence <i class="fa fa-fw fa-lg fa-group"></i></a></li>
-                <li><a href="@Url.Action("Profile", "User")">JRF Ibanez <i class="fa fa-fw fa-lg fa-user"></i></a></li>
+                <li><a href="@Url.Action("Profile", "User")">@User.Identity.Name<i class="fa fa-fw fa-lg fa-user"></i></a></li>
 
                 <li><a href="@Url.Action("SignIn", "Auth")">Sign In <i class="fa fa-fw fa-lg fa-sign-in"></i> </a></li>
                 <li><a href="@Url.Action("SignOut", "Auth")">Sign Out <i class="fa fa-fw fa-lg fa-sign-out"></i> </a></li>
