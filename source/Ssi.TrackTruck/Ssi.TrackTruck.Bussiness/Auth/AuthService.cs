@@ -43,7 +43,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         {
             if (request.Validate())
             {
-                if (FindByUsername(request.Username) != null)
+                if (FindByUsername(request.Username) == null)
                 {
                     var user = new User
                     {
