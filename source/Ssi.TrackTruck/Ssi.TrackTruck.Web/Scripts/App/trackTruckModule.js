@@ -6,3 +6,5 @@ trackTruck.config([
         $locationProvider.html5Mode(false);
     }
 ]);
+
+trackTruck.value('_', window._);

@@ -6,6 +6,10 @@
     min-height: 25px
 }
 
+.hover-only-parent:not(:hover) .hover-only {
+    visibility: hidden;
+}
+
 .fa.space-left {
     margin-left: 2px;
 }

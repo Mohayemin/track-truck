@@ -8,5 +8,12 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult GetCurrentStatus()
+        {
+            var data = System.IO.File.ReadAllText(@"F:\UpWork\track-truck\data\truck-status.json");
+
+            return Content(data, "Application/Json");
+        }
 	}
 }
