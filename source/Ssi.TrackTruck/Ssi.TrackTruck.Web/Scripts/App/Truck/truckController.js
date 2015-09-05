@@ -17,10 +17,12 @@ function truckController($scope, truckService, truckStatus) {
     $scope.trucks = [];
     $scope.summary = {};
 
-    truckService.getCurrentStatus().then(function (trucks) {
-        $scope.trucks = trucks;
-        $scope.summary = truckService.calculateReportSummary(trucks);
-    });
+    $scope.loadReport = function() {
+        truckService.getCurrentStatus().then(function(trucks) {
+            $scope.trucks = trucks;
+            $scope.summary = truckService.calculateReportSummary(trucks);
+        });
+    };
     
     $scope.getStatusClass = function (truck) {
         return truckStatus[truck.Status].cssClass;
@@ -35,4 +37,6 @@ function truckController($scope, truckService, truckStatus) {
             $scope.sort.Reverse = false;
         }
     };
+
+    $scope.loadReport();
 }

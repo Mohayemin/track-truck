@@ -2,7 +2,9 @@
     ViewBag.Title = "Trucks";
 }
 <div ng-controller="truckController">
-
+    <a href ng-click="loadReport()" class="btn btn-default btn-sm pull-right" title="refresh report">
+        <i class="fa fa-lg fa-refresh"></i>
+    </a>
     <div>
         <h3>Summary</h3>
         <table class="table table-responsive table-bordered">
