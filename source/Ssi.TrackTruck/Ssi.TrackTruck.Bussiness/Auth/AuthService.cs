@@ -50,7 +50,8 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                         Id = Guid.NewGuid().ToString().Replace("-", "").ToLower(),
                         Username = request.Username,
                         PasswordHash = _hasher.GenerateHash(request.InitialPassword),
-                        UsernameLowerCase = request.Username.ToLower()
+                        UsernameLowerCase = request.Username.ToLower(),
+                        Role = request.Role
                     };
 
                     _repository.Create(user);
