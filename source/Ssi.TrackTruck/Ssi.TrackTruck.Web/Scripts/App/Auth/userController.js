@@ -1,11 +1,11 @@
 ﻿trackTruck.controller('userController', [
     '$scope',
+    'authService',
     userController
 ]);
 
-function userController($scope) {
-    $scope.users = [
-        { Username: 'Admin', Role: 'admin' },
-        { Username: 'Store-1', Role: 'store' }
-    ];
+function userController($scope, authService) {
+    authService.getUserList().then(function(users) {
+        $scope.users = users;
+    });
 }

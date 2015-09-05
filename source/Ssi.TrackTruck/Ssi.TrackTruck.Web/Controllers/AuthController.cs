@@ -44,9 +44,17 @@ namespace Ssi.TrackTruck.Web.Controllers
             return Json(response);
         }
 
+        [HttpGet]
         public ActionResult Users()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetUserList()
+        {
+            var users = _authService.GetUserList();
+            return Json(users, JsonRequestBehavior.AllowGet);
         }
     }
 }
