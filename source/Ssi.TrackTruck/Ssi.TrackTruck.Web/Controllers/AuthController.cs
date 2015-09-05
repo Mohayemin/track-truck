@@ -30,5 +30,11 @@ namespace Ssi.TrackTruck.Web.Controllers
             }
             return Json(response);
         }
+
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect(Url.Content("~/"));
+        }
     }
 }
