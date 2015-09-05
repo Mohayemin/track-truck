@@ -11,7 +11,14 @@ function authService($http, url) {
         });
     }
 
+    function getUserList() {
+        return $http.get(url('Auth', 'GetUserList')).then(function(response) {
+            return response.data;
+        });
+    }
+
     return {
-        signIn: signIn
+        signIn: signIn,
+        getUserList: getUserList
     };
 }

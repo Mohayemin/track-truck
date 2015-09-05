@@ -37,9 +37,11 @@
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
+    <Compile Include="Models\UserListResponseItem.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ListStorageRepository.cs" />
+    <Compile Include="Models\CreateUserRequest.cs" />
     <Compile Include="Models\SignInRequest.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

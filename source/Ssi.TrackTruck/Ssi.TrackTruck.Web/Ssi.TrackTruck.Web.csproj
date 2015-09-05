@@ -106,6 +106,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\signInController.js" />
+    <Content Include="Scripts\App\Auth\userController.js" />
     <Content Include="Scripts\App\trackTruckController.js" />
     <Content Include="Scripts\App\trackTruckModule.js" />
     <Content Include="Scripts\App\url.js" />
@@ -139,6 +140,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Views\Auth\Users.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
