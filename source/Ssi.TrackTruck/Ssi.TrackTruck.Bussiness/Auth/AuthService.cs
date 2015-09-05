@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
@@ -62,6 +64,15 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             }
 
             return Response.Error("Validation", "Please fill up the required fields");
+        }
+
+        public IEnumerable<UserListResponseItem> GetUserList()
+        {
+            return _repository.GetAll<User>().Select(user => new UserListResponseItem
+            {
+                Username = user.Username,
+                Role = user.Role
+            });
         }
     }
 }
