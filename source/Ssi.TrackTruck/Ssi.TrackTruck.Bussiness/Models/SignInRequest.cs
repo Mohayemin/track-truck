@@ -1,6 +1,6 @@
 ﻿namespace Ssi.TrackTruck.Bussiness.Models
 {
-    public class LoginRequest
+    public class SignInRequest
     {
         public string Username { get; set; }
         public string Password { get; set; }

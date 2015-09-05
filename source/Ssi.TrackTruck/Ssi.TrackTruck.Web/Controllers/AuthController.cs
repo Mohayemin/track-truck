@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Models;
 
@@ -14,15 +15,26 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult SignIn()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(LoginRequest request)
+        public ActionResult SignIn(SignInRequest request)
         {
-            return Json(_authService.AuthenticateUser(request));
+            var response = _authService.AuthenticateUser(request);
+            if (!response.IsError)
+            {
+                FormsAuthentication.SetAuthCookie(request.Username, request.RememberMe);
+            }
+            return Json(response);
         }
-	}
+
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect(Url.Content("~/"));
+        }
+    }
 }
