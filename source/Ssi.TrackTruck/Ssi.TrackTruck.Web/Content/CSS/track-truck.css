@@ -1,0 +1,24 @@
+﻿.main-container {
+    margin-top: 50px;
+}
+
+.message-box {
+    min-height: 25px
+}
+
+.hover-only-parent:not(:hover) .hover-only {
+    visibility: hidden;
+}
+
+.fa.space-left {
+    margin-left: 2px;
+}
+
+.fa.space-right {
+    margin-right: 2px;
+}
+
+.fa.space {
+    margin-left: 2px;
+    margin-right: 2px;
+}
