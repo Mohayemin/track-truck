@@ -44,6 +44,13 @@ namespace Ssi.TrackTruck.Web
                     Username = "Mohayemin",
                     UsernameLowerCase = "mohayemin",
                     PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
+                },
+                new User
+                {
+                    Id = "2",
+                    Username = "JR",
+                    UsernameLowerCase = "jr",
+                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
                 }
             };
             container.RegisterType<IRepository, ListStorageRepository>(new InjectionConstructor(data));
