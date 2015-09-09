@@ -21,11 +21,11 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 
             var tripIds = allTrucks.Select(truck => truck.CurrentTripId);
 
-            var tripsByTruck =
+            var tripsById =
                 _repository.WhereIn<Trip, string>(trip => trip.Id, tripIds)
-                    .ToDictionary(trip => trip.TruckId, trip => trip);
+                    .ToDictionary(trip => trip.Id, trip => trip);
 
-            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsByTruck[truck.Id]));
+            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById[truck.CurrentTripId]));
         }
     }
 }
