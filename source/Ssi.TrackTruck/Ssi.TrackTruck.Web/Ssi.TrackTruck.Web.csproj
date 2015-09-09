@@ -116,7 +116,9 @@
     <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.13.4.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Lib\underscore-min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Auth\SignIn.cshtml" />
