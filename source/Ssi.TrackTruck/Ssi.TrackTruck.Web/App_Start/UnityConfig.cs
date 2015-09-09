@@ -57,7 +57,7 @@ namespace Ssi.TrackTruck.Web
 
             var random = new Random();
             var trips = Builder<Trip>.CreateListOfSize(100).Build();
-            var trucks = Builder<Truck>.CreateListOfSize(10).All().Do(truck => truck.CurrentTripId = trips[random.Next(99)].Id).Build();
+            var trucks = Builder<Truck>.CreateListOfSize(10).TheFirst(7).Do(truck => truck.CurrentTripId = trips[random.Next(99)].Id).Build();
 
             data[typeof (Trip)] = (IList) trips;
             data[typeof(Truck)] = (IList)trucks;

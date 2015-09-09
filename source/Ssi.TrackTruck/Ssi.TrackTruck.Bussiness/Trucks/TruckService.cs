@@ -2,6 +2,7 @@
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.Helpers;
 
 namespace Ssi.TrackTruck.Bussiness.Trucks
 {
@@ -25,7 +26,9 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
                 _repository.WhereIn<Trip, string>(trip => trip.Id, tripIds)
                     .ToDictionary(trip => trip.Id, trip => trip);
 
-            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById[truck.CurrentTripId]));
+            var defaultTrip = new Trip();
+
+            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById.GetOrDefault(truck.CurrentTripId) ?? defaultTrip));
         }
     }
 }
