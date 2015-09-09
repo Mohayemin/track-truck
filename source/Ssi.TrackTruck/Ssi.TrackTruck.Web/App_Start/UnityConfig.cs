@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FizzWare.NBuilder;
 using Microsoft.Practices.Unity;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
@@ -53,6 +54,14 @@ namespace Ssi.TrackTruck.Web
                     PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
                 }
             };
+
+            var random = new Random();
+            var trips = Builder<Trip>.CreateListOfSize(100).Build();
+            var trucks = Builder<Truck>.CreateListOfSize(10).All().Do(truck => truck.CurrentTripId = trips[random.Next(99)].Id).Build();
+
+            data[typeof (Trip)] = (IList) trips;
+            data[typeof(Truck)] = (IList)trucks;
+
             container.RegisterType<IRepository, ListStorageRepository>(new InjectionConstructor(data));
         }
     }
