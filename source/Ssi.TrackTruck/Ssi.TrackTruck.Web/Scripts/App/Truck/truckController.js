@@ -6,6 +6,8 @@
 ]);
 
 function truckController($scope, truckService, truckStatus) {
+    $scope.truckStatus = truckStatus;
+
     $scope.DetailReportHeaders = {
         'TruckId': 'Truck Number',
         'DriverName': 'Driver',
