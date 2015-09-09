@@ -7,11 +7,11 @@
 function truckService($http, url) {
     function calculateReportSummary(trucks) {
         var summary = {
-            trucks: { Total: trucks.length },
+            trucks: { total: trucks.length },
             items: {}
         };
 
-        ['Moving', 'Not In Use', 'Loading', 'Unloading'].forEach(function (status) {
+        [0, 1001, 1002, 1003].forEach(function (status) {
             var trucksWithStatus = _.filter(trucks, { Status: status });
             summary.trucks[status] = trucksWithStatus.length;
             summary.items[status] = trucksWithStatus.reduce(function (memo, truck) {
@@ -19,7 +19,7 @@ function truckService($http, url) {
             }, 0);
         });
 
-        summary.items.Total = trucks.reduce(function (memo, truck) {
+        summary.items.total = trucks.reduce(function (memo, truck) {
             return memo + truck.ItemsCarrying;
         }, 0);
 
@@ -38,16 +38,27 @@ function truckService($http, url) {
     }
 }
 
+// Map with Ssi.TrackTruck.Bussiness.DAL.Constants.TripStatus
 function truckStatusFactory() {
-    function obj(cssClass) {
+    function obj(id, cssClass, text) {
         return {
-            cssClass: cssClass
+            id: id,
+            cssClass: cssClass,
+            text: text
         };
     }
-    return {
-        'Moving': obj('success'),
-        'Not In Use': obj('danger'),
-        'Loading':obj('info'),
-        'Unloading': obj('warning')
-    }
+
+    var factory = {
+        0: obj(0, 'danger', 'Not In Use'),
+        1001: obj(1001, 'success', 'Moving'),
+        1002: obj(1002, 'info', 'Loading'),
+        1003: obj(1003, 'warning', 'Unloading')
+    };
+
+    factory.notInUse = factory[0];
+    factory.moving = factory[1001];
+    factory.loading = factory[1002];
+    factory.unloading = factory[1003];
+    
+    return factory;
 }

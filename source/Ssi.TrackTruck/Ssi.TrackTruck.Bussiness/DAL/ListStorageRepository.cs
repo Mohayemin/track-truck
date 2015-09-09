@@ -30,6 +30,12 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Query<T>();
         }
 
+        public IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values)
+        {
+            var valueList = values.ToList();
+            return Query<T>().Where(t => valueList.Contains(property.Compile().Invoke(t)));
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();

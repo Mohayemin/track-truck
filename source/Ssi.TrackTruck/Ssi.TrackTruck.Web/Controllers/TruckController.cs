@@ -1,9 +1,17 @@
 ﻿using System.Web.Mvc;
+using Ssi.TrackTruck.Bussiness.Trucks;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
     public class TruckController : Controller
     {
+        private readonly TruckService _truckService;
+
+        public TruckController(TruckService truckService)
+        {
+            _truckService = truckService;
+        }
+
         public ActionResult Report()
         {
             return View();
@@ -11,9 +19,9 @@ namespace Ssi.TrackTruck.Web.Controllers
 
         public ActionResult GetCurrentStatus()
         {
-            var data = System.IO.File.ReadAllText(@"F:\UpWork\track-truck\data\truck-status.json");
+            var data = _truckService.GetCurrentStatus();
 
-            return Content(data, "Application/Json");
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 	}
 }
