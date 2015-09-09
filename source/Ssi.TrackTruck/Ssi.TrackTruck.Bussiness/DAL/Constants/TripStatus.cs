@@ -2,8 +2,8 @@
 {
     public enum TripStatus
     {
-        OnTheWay = 10,
-        Loading = 20,
-        Unloading = 30
+        OnTheWay = 1001,
+        Loading = 1002,
+        Unloading = 1003
     }
 }
