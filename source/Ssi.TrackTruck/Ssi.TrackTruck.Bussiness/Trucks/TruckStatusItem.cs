@@ -1,4 +1,5 @@
-﻿using Ssi.TrackTruck.Bussiness.DAL.Entities;
+﻿using Ssi.TrackTruck.Bussiness.DAL.Constants;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.Trucks
 {
@@ -17,7 +18,7 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
         public string DriverId { get { return _trip.DriverId; } }
         public string DriverName { get { return null; } }
         public int ItemsCarrying { get { return _trip.NumberOfItems; } }
-        public string Status { get { return null; } }
+        public TripStatus Status { get { return _trip.Status; } }
         public string FromOutlet { get { return _trip.FromOutletId; } }
         public string ToOutlet { get { return _trip.ToOutletId; } }
     }
