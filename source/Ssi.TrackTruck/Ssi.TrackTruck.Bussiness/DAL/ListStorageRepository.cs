@@ -19,10 +19,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Query<T>().FirstOrDefault(condition);
         }
 
-        public T Create<T>(T user)
+        public T Create<T>(T item)
         {
-            List<T>().Add(user);
-            return user;
+            List<T>().Add(item);
+            return item;
         }
 
         public IQueryable<T> GetAll<T>()

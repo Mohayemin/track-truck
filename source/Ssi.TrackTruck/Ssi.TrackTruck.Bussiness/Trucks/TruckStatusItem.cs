@@ -19,7 +19,7 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
         public string DriverName { get { return null; } }
         public int ItemsCarrying { get { return _trip.NumberOfItems; } }
         public TripStatus Status { get { return _trip.Status; } }
-        public string FromOutlet { get { return _trip.FromOutletId; } }
-        public string ToOutlet { get { return _trip.ToOutletId; } }
+        public string FromOutlet { get { return _trip.FromWareHouseId; } }
+        public string ToOutlet { get { return _trip.ToBranchId; } }
     }
 }
