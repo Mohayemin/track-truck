@@ -16,17 +16,16 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 
         public IEnumerable<TruckStatusItem> GetCurrentStatus()
         {
-            var deliveries =
-                _repository.GetAll<Delivery>().Where(delivery => delivery.Status != DeliveryStatus.Delivered);
+            var allTrucks =
+                _repository.GetAll<Truck>();
 
-            return deliveries.Select(delivery => new TruckStatusItem
-            {
-                DriverName = delivery.DriverName,
-                Status = delivery.Status,
-                ItemsCarrying = delivery.ItemsToDeliver,
-                ToOutlet = delivery.ToOutlet,
-                FromOutlet = delivery.FromOutlet,
-            });
-        } 
+            var tripIds = allTrucks.Select(truck => truck.CurrentTripId);
+
+            var tripsByTruck =
+                _repository.WhereIn<Trip, string>(trip => trip.Id, tripIds)
+                    .ToDictionary(trip => trip.TruckId, trip => trip);
+
+            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsByTruck[truck.Id]));
+        }
     }
 }

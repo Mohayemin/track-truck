@@ -8,8 +8,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public int NumberOfItems { get; set; }
         public string TruckId { get; set; }
         public TripStatus Status { get; set; }
-        public string FromStoreId { get; set; }
-        public string ToStoreId { get; set; }
+        public string FromOutletId { get; set; }
+        public string ToOutletId { get; set; }
         public string DriverId { get; set; }
         public string CargoLoaderId { get; set; }
         public int BillInCents { get; set; }

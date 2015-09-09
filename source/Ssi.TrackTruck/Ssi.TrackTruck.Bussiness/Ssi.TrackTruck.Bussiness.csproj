@@ -39,10 +39,10 @@
     <Compile Include="Auth\IHasher.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\DeliveryStatus.cs" />
-    <Compile Include="DAL\Entities\Delivery.cs" />
     <Compile Include="DAL\Entities\Store.cs" />
     <Compile Include="DAL\Entities\Trip.cs" />
     <Compile Include="DAL\Entities\Truck.cs" />
+    <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Models\UserListResponseItem.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\IRepository.cs" />
