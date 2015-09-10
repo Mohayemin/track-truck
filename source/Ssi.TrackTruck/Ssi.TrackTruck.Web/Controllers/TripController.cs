@@ -21,5 +21,10 @@ namespace Ssi.TrackTruck.Web.Controllers
 
             return new JsonNetResult(trip);
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
 	}
 }

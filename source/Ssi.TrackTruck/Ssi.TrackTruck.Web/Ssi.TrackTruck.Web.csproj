@@ -112,17 +112,19 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\track-truck.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\signInController.js" />
     <Content Include="Scripts\App\Auth\userController.js" />
     <Content Include="Scripts\App\trackTruckController.js" />
     <Content Include="Scripts\App\trackTruckModule.js" />
+    <Content Include="Scripts\App\Trip\tripController.js" />
+    <Content Include="Scripts\App\Trip\tripService.js" />
     <Content Include="Scripts\App\Truck\truckController.js" />
     <Content Include="Scripts\App\Truck\truckService.js" />
     <Content Include="Scripts\App\url.js" />
     <Content Include="Scripts\Lib\angular.min.js" />
     <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.13.4.min.js" />
-    <Content Include="Global.asax" />
     <Content Include="Scripts\Lib\underscore-min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -160,6 +162,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Views\Auth\Users.cshtml" />
     <Content Include="Views\Truck\Report.cshtml" />
+    <Content Include="Views\Trip\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
