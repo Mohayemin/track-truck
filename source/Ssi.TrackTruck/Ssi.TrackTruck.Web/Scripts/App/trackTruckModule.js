@@ -8,6 +8,7 @@ trackTruck.config([
         $locationProvider.html5Mode(false);
         datepickerPopupConfig.datepickerPopup = 'MMMM dd, yyyy';
         datepickerConfig.showWeeks = false;
+        datepickerPopupConfig.appendToBody = true;
     }
 ]);
 
