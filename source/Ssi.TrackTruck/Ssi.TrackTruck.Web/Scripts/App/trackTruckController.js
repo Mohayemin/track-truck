@@ -1,9 +1,10 @@
 ﻿trackTruck.controller('trackTruckController', [
     '$scope',
+    'dateFormat',
     trackTruckController
 ]);
 
-function trackTruckController($scope) {
-
+function trackTruckController($scope, dateFormat) {
+    $scope.dateFormat = dateFormat;
 };
 
