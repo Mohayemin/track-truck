@@ -15,3 +15,4 @@ trackTruck.config([
 ]);
 
 trackTruck.value('_', window._);
+trackTruck.value('dateFormat', 'MMMM dd, yyyy');
