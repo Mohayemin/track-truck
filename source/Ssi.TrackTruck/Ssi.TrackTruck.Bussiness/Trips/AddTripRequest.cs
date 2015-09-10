@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
