@@ -2,6 +2,50 @@
     ViewBag.Title = "Trips";
 }
 
+<div ng-controller="tripController">
+    <form ng-submit="addTrip()" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="FromWareHouseId">From</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="FromWareHouseId"
+                       ng-model="addRequest.FromWareHouseId" placeholder="from which warehouse?" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="ToBranchId">To</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="ToBranchId"
+                       ng-model="addRequest.ToBranchId" placeholder="to which branch?" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="NumberOfItems">Items#</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number" min="0" name="NumberOfItems"
+                       ng-model="addRequest.NumberOfItems" placeholder="how many items?" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="DeliveryDate">Date</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="date" min="0" name="DeliveryDate"
+                       ng-model="addRequest.DeliveryDate" placeholder="on which day to deliver?" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="DeliveryTime">Time</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="time" min="0" name="DeliveryTime"
+                       ng-model="addRequest.DeliveryTime" placeholder="when to deliver?" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="btn btn-success btn-block" type="submit" value="Add"/>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script type="text/javascript" src="~/Scripts/App/Trip/tripService.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Trip/tripController.js"></script>
