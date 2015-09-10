@@ -28,16 +28,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Date</label>
             <div class="col-sm-10">
-                <div class="input-group">
+                <div class="input-group" ng-click="dateIsOpen=true">
                     <input class="form-control" type="text" is-open="dateIsOpen" datepicker-popup
                            ng-model="addRequest.DeliveryDate" ng-required="true" placeholder="on which day to deliver?" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="dateIsOpen=true"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>    
+                        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
                 </div>
-                @*
-                <input class="form-control" type="date" min="0" name="DeliveryDate"
-                       ng-model="addRequest.DeliveryDate"  />*@
             </div>
         </div>
         <div class="form-group">
