@@ -112,6 +112,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\track-truck.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\signInController.js" />
@@ -163,6 +164,10 @@
     <Content Include="Views\Auth\Users.cshtml" />
     <Content Include="Views\Truck\Report.cshtml" />
     <Content Include="Views\Trip\Index.cshtml" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
