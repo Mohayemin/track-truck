@@ -4,6 +4,5 @@
 ]);
 
 function trackTruckController($scope) {
-
 };
 
