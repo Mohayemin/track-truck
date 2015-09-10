@@ -1,4 +1,5 @@
-﻿using Ssi.TrackTruck.Bussiness.DAL.Constants;
+﻿using System;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
@@ -8,10 +9,12 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public int NumberOfItems { get; set; }
         public string TruckId { get; set; }
         public TripStatus Status { get; set; }
-        public string FromOutletId { get; set; }
-        public string ToOutletId { get; set; }
+        public string FromWareHouseId { get; set; }
+        public string ToBranchId { get; set; }
         public string DriverId { get; set; }
         public string CargoLoaderId { get; set; }
         public int BillInCents { get; set; }
+        public string ClientId { get; set; }
+        public DateTime DeliveryDueTime { get; set; }
     }
 }
