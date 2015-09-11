@@ -109,6 +109,28 @@
                                 <datetime model="drop.ExpectedDropTime" required="true"></datetime>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 hidden-xs"></label>
+                            <div class="col-sm-5 col-xs-6">
+                                <label class=" control-label">DR Number</label>
+                            </div>
+                            <div class="col-sm-5 col-xs-6">
+                                <label class="control-label">Number of Boxes</label>
+                            </div>
+                        </div>
+                        <div ng-repeat="dr in drop.DeliveryReceipts" class="form-group">
+                            <label class="col-sm-2 hidden-xs"></label>
+                            <div class="col-sm-5 col-xs-6">
+                                <input ng-model="dr.DrNumber" ng-required="true"
+                                       type="text" min="0" placeholder="DR Number"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-sm-5 col-xs-6">
+                                <input ng-model="dr.NumberOfBoxes" ng-required="true"
+                                       type="number" min="1" placeholder="Number of Boxes"
+                                       class="form-control" />
+                            </div>
+                        </div>
                         <hr />
                     </div>
                     <div class="form-group">
