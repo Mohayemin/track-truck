@@ -14,15 +14,22 @@ function orderTripController($scope, tripService, $filter, dateFormat) {
         Drops: []
     };
 
+    $scope.addDr = function (drop) {
+        drop.DeliveryReceipts.push({});
+    };
+
     $scope.addDrop = function () {
-        $scope.request.Drops.push({
+        var drop = {
             BranchId: null,
             ExpectedDropTime: {},
-            DeliveryReceipts: [{}]
-        });
+            DeliveryReceipts: []
+        };
+        $scope.addDr(drop);
+        $scope.request.Drops.push(drop);
     };
 
     $scope.addDrop();
+
 
     $scope.order = function () {
         $scope.request.DeliveryDate = $filter('date')($scope.request.DeliveryDate, dateFormat);
