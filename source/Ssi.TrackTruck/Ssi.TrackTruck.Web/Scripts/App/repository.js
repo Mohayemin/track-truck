@@ -11,7 +11,6 @@ function repository(url, $http) {
 
     return {
         get: function(controller, action, params) {
-            
             return $http.get(url.resolve(controller, action, params)).then(onSuccess);
         },
         post: function(controller, action, data) {

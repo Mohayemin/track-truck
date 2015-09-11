@@ -1,13 +1,12 @@
 ﻿trackTruck.factory('tripService', [
-    '$http',
-    'url',
+    'repository',
     tripService
 ]);
 
-function tripService($http, url) {
+function tripService(repository) {
     return {
         orderTrip: function (request) {
-            return $http.post(url.resolve('Trip', 'Order'), request);
+            return repository.post('Trip', 'Order', request);
         }
     };
 }
