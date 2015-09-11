@@ -127,6 +127,7 @@
     <Content Include="Scripts\App\Truck\truckController.js" />
     <Content Include="Scripts\App\Truck\truckService.js" />
     <Content Include="Scripts\App\url.js" />
+    <Content Include="Scripts\App\Wirehouse\wirehouseService.js" />
     <Content Include="Scripts\Lib\angular.js" />
     <Content Include="Scripts\Lib\angular.min.js" />
     <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.13.4.min.js" />

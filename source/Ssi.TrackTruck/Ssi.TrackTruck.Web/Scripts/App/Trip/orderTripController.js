@@ -2,10 +2,11 @@
     '$scope',
     'clientService',
     'tripService',
+    'wirehouseService',
     orderTripController
 ]);
 
-function orderTripController($scope, clientService, tripService) {
+function orderTripController($scope, clientService, tripService, wirehouseService) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -41,6 +42,12 @@ function orderTripController($scope, clientService, tripService) {
         $scope.clients = clients;
     }).catch(function() {
         console.error('could not load clients');
+    });
+
+    wirehouseService.getAll().then(function(wirehouses) {
+        $scope.wirehouses = wirehouses;
+    }).catch(function() {
+        console.error('could not load wirehouses');
     });
 
     $scope.order = function () {
