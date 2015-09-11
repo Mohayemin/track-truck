@@ -1,10 +1,11 @@
 ﻿trackTruck.controller('orderTripController', [
     '$scope',
+    'clientService',
     'tripService',
     orderTripController
 ]);
 
-function orderTripController($scope, tripService) {
+function orderTripController($scope, clientService, tripService) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -35,6 +36,12 @@ function orderTripController($scope, tripService) {
             return isNaN(v) ? oldV : (v + oldV);
         }, 0);
     };
+
+    clientService.getAll().then(function(clients) {
+        $scope.clients = clients;
+    }).catch(function() {
+        console.error('could not load clients');
+    });
 
     $scope.order = function () {
         tripService.orderTrip($scope.request).then(function () {
