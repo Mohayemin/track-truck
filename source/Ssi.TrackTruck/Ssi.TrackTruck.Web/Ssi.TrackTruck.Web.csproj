@@ -118,6 +118,7 @@
     <Content Include="Scripts\App\Auth\signInController.js" />
     <Content Include="Scripts\App\Auth\userController.js" />
     <Content Include="Scripts\App\datetimeDirective.js" />
+    <Content Include="Scripts\App\repository.js" />
     <Content Include="Scripts\App\trackTruckController.js" />
     <Content Include="Scripts\App\trackTruckModule.js" />
     <Content Include="Scripts\App\Trip\orderTripController.js" />
