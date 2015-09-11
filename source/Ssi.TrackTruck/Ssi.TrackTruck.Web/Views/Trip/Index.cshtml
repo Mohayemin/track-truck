@@ -2,8 +2,8 @@
     ViewBag.Title = "Trips";
 }
 
-<div ng-controller="tripController">
-    <form ng-submit="addTrip()" class="form-horizontal">
+<div ng-controller="orderTripController">
+    <form ng-submit="order()" class="form-horizontal">
         <fieldset>
             <legend>
                 <span class="col-sm-offset-2">Order a trip</span>
@@ -12,21 +12,21 @@
                 <label class="col-sm-2 control-label" for="FromWareHouseId">From</label>
                 <div class="col-sm-10">
                     <input class="form-control" type="text" name="FromWareHouseId"
-                           ng-model="addRequest.FromWareHouseId" placeholder="from which warehouse?" />
+                           ng-model="request.FromWareHouseId" placeholder="from which warehouse?" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="ToBranchId">To</label>
                 <div class="col-sm-10">
                     <input class="form-control" type="text" name="ToBranchId"
-                           ng-model="addRequest.ToBranchId" placeholder="to which branch?" />
+                           ng-model="request.ToBranchId" placeholder="to which branch?" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="NumberOfItems">Items#</label>
                 <div class="col-sm-10">
                     <input class="form-control" type="number" min="0" name="NumberOfItems"
-                           ng-model="addRequest.NumberOfItems" placeholder="how many items?" />
+                           ng-model="request.NumberOfItems" placeholder="how many items?" />
                 </div>
             </div>
             <div class="form-group">
@@ -34,7 +34,7 @@
                 <div class="col-sm-10">
                     <div class="input-group" ng-click="dateIsOpen=true">
                         <input class="form-control" type="text" is-open="dateIsOpen" datepicker-popup
-                               ng-model="addRequest.DeliveryDate" ng-required="true" placeholder="on which day to deliver?" />
+                               ng-model="request.DeliveryDate" ng-required="true" placeholder="on which day to deliver?" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
@@ -44,8 +44,8 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Time</label>
                 <div class="col-sm-10">
-                    <input class="form-control time-picker-input" type="number" min="0" max="23" ng-model="addRequest.DeliveryHour" placeholder="hour"/>
-                    <input class="form-control time-picker-input" type="number" min="0" max="59" ng-model="addRequest.DeliveryMinute" placeholder="minute" />
+                    <input class="form-control time-picker-input" type="number" min="0" max="23" ng-model="request.DeliveryHour" placeholder="hour" />
+                    <input class="form-control time-picker-input" type="number" min="0" max="59" ng-model="request.DeliveryMinute" placeholder="minute" />
                 </div>
             </div>
             <div class="form-group">
@@ -58,4 +58,4 @@
 </div>
 
 <script type="text/javascript" src="~/Scripts/App/Trip/tripService.js"></script>
-<script type="text/javascript" src="~/Scripts/App/Trip/tripController.js"></script>
+<script type="text/javascript" src="~/Scripts/App/Trip/orderTripController.js"></script>

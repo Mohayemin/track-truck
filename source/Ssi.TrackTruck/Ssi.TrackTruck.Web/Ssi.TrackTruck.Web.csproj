@@ -119,7 +119,7 @@
     <Content Include="Scripts\App\Auth\userController.js" />
     <Content Include="Scripts\App\trackTruckController.js" />
     <Content Include="Scripts\App\trackTruckModule.js" />
-    <Content Include="Scripts\App\Trip\tripController.js" />
+    <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\tripService.js" />
     <Content Include="Scripts\App\Truck\truckController.js" />
     <Content Include="Scripts\App\Truck\truckService.js" />
