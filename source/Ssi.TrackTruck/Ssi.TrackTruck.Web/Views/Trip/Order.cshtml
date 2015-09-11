@@ -43,6 +43,23 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">What is Driver's Payment?</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input ng-model="request.DriverAllowance" ng-required="true"
+                                   type="number" min="0" placeholder="Allowance"
+                                   class="form-control" />
+                        </div>
+                        <div class="col-xs-6">
+                            <input ng-model="request.DriverSalary" ng-required="true"
+                                   type="number" min="0" placeholder="Salary"
+                                   class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-sm-2 control-label">Who will be helper?</label>
                 <div class="col-sm-10">
                     <select ng-model="helper" ng-required="true"
@@ -52,8 +69,8 @@
                     </select>
                 </div>
             </div>
-            
-@*****************************@
+
+            @*****************************@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="FromWareHouseId">From</label>
                 <div class="col-sm-10">
@@ -76,24 +93,24 @@
                 </div>
             </div>
             @*<div class="form-group">
-                <label class="col-sm-2 control-label">Date</label>
-                <div class="col-sm-10">
-                    <div class="input-group" ng-click="dateIsOpen=true">
-                        <input class="form-control" type="text" is-open="dateIsOpen" datepicker-popup
-                               ng-model="request.DeliveryDate" ng-required="true" placeholder="on which day to deliver?" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
+                    <label class="col-sm-2 control-label">Date</label>
+                    <div class="col-sm-10">
+                        <div class="input-group" ng-click="dateIsOpen=true">
+                            <input class="form-control" type="text" is-open="dateIsOpen" datepicker-popup
+                                   ng-model="request.DeliveryDate" ng-required="true" placeholder="on which day to deliver?" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Time</label>
-                <div class="col-sm-10">
-                    <input class="form-control time-picker-input" type="number" min="0" max="23" ng-model="request.DeliveryHour" placeholder="hour" />
-                    <input class="form-control time-picker-input" type="number" min="0" max="59" ng-model="request.DeliveryMinute" placeholder="minute" />
-                </div>
-            </div>*@
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Time</label>
+                    <div class="col-sm-10">
+                        <input class="form-control time-picker-input" type="number" min="0" max="23" ng-model="request.DeliveryHour" placeholder="hour" />
+                        <input class="form-control time-picker-input" type="number" min="0" max="59" ng-model="request.DeliveryMinute" placeholder="minute" />
+                    </div>
+                </div>*@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input class="btn btn-success btn-block" type="submit" value="Put Order" />
