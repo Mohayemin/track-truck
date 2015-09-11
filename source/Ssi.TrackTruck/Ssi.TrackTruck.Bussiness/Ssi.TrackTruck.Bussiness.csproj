@@ -42,6 +42,7 @@
     <Compile Include="DAL\Entities\Store.cs" />
     <Compile Include="DAL\Entities\Trip.cs" />
     <Compile Include="DAL\Entities\Truck.cs" />
+    <Compile Include="DAL\Entities\Wirehouse.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Models\UserListResponseItem.cs" />
     <Compile Include="DAL\Entities\User.cs" />
