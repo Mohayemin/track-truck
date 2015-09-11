@@ -10,7 +10,8 @@ function orderTripController($scope, tripService, $filter, dateFormat) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
-        ExpectedPickupTime: {}
+        ExpectedPickupTime: {},
+        Drops: [{}]
     };
     $scope.order = function () {
         $scope.request.DeliveryDate = $filter('date')($scope.request.DeliveryDate, dateFormat);
