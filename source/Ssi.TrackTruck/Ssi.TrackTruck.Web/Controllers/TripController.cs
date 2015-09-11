@@ -14,7 +14,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(AddTripRequest request)
+        public ActionResult Order(AddTripRequest request)
         {
             request.ClientId = User.Identity.Name;
             var trip = _tripService.AddTrip(request);
@@ -22,7 +22,8 @@ namespace Ssi.TrackTruck.Web.Controllers
             return new JsonNetResult(trip);
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Order()
         {
             return View();
         }
