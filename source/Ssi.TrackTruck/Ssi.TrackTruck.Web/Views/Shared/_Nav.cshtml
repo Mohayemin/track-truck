@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("", "")">TrackTruck</a>
+            <a class="navbar-brand" href="@Url.Action("", "")">SSI Logistics</a>
         </div>
         <div collapse="navCollapsed" class="collapse navbar-collapse" >
             <ul class="nav navbar-nav navbar-right">
@@ -24,10 +24,17 @@
                         <i class="fa fa-fw fa-lg fa-upload"></i>
                     </a>
                 </li>
-                <li>
-                    <a href="@Url.Action("Index", "Trip")">
-                        Trips <i class="fa fa-fw fa-lg fa-gift"></i>
+                <li dropdown>
+                    <a href dropdown-toggle>
+                        Trips <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="{{url.resolve('Trip', 'Order')}}">
+                                <i class="fa fa-fw fa-lg fa-plus"></i>  Order
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="@Url.Action("Report", "Truck")">
