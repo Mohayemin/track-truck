@@ -1,8 +1,10 @@
 ﻿trackTruck.controller('trackTruckController', [
     '$scope',
+    'url',
     trackTruckController
 ]);
 
-function trackTruckController($scope) {
+function trackTruckController($scope, url) {
+    $scope.url = url;
 };
 

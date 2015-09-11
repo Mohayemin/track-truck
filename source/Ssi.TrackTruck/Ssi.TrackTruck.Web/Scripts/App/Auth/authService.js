@@ -6,13 +6,13 @@
 
 function authService($http, url) {
     function signIn(request) {
-        return $http.post(url('Auth', 'SignIn'), request).then(function(response) {
+        return $http.post(url.resolve('Auth', 'SignIn'), request).then(function(response) {
             return response.data;
         });
     }
 
     function getUserList() {
-        return $http.get(url('Auth', 'GetUserList')).then(function(response) {
+        return $http.get(url.resolve('Auth', 'GetUserList')).then(function (response) {
             return response.data;
         });
     }

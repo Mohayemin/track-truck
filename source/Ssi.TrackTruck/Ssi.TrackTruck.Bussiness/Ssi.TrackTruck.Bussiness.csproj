@@ -38,9 +38,11 @@
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
-    <Compile Include="DAL\Entities\Store.cs" />
+    <Compile Include="DAL\Entities\Client.cs" />
+    <Compile Include="DAL\Entities\Branch.cs" />
     <Compile Include="DAL\Entities\Trip.cs" />
     <Compile Include="DAL\Entities\Truck.cs" />
+    <Compile Include="DAL\Entities\Wirehouse.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Models\UserListResponseItem.cs" />
     <Compile Include="DAL\Entities\User.cs" />

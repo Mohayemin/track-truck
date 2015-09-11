@@ -27,7 +27,7 @@ function truckService($http, url) {
     }
 
     function getCurrentStatus() {
-        return $http.get(url('Truck', 'GetCurrentStatus')).then(function(respoonse) {
+        return $http.get(url.resolve('Truck', 'GetCurrentStatus')).then(function (respoonse) {
             return respoonse.data;
         });
     }
