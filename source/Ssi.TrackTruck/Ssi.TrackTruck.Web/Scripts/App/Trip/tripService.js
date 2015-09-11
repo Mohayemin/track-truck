@@ -7,7 +7,7 @@
 function tripService($http, url) {
     return {
         orderTrip: function (request) {
-            return $http.post(url('Trip', 'Order'), request);
+            return $http.post(url.resolve('Trip', 'Order'), request);
         }
     };
 }

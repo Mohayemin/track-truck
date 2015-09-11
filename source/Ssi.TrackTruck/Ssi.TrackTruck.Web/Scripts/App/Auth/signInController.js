@@ -18,7 +18,7 @@ function signInController($scope, $location, $window, authService, url) {
             $scope.response = response;
 
             if (!response.IsError) {
-                $window.location.href = url();
+                $window.location.href = url.resolve();
             }
         });
     };
