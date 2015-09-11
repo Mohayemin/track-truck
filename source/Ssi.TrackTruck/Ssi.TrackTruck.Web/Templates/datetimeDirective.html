@@ -1,0 +1,20 @@
+﻿<div class="col-sm-5">
+    <div class="input-group" ng-click="dateIsOpen=true">
+        <input ng-model="datePickerDate" ng-required="required" ng-change="dateChanged()"
+               type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
+               class="form-control" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </span>
+    </div>
+</div>
+<div class="col-sm-5">
+    <input ng-model="model.hour" ng-required="required"
+           type="number" min="0" max="23" placeholder="hour"
+           class="form-control time-picker-input" />
+    <input ng-model="model.minute" ng-required="required"
+           type="number" min="0" max="59" placeholder="minute"
+           class="form-control time-picker-input" />
+</div>
