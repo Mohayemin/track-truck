@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">From where to pick</label>
+                <label class="col-sm-2 control-label">From where to pickup?</label>
                 <div class="col-sm-10">
                     <select ng-model="wirehouse" ng-required="true"
                             ng-options="wirehouse.Name for wirehouse in wirehouses"
@@ -87,7 +87,29 @@
                 </div>
             </div>
             <div class="form-group">
-                
+                <label class="col-sm-2 control-label">Set up drops (<span ng-bind="request.Drops.length"></span>)</label>
+
+                <div class="col-sm-10">
+                    <div ng-repeat="drop in request.Drops">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Where to drop?</label>
+                            <div class="col-sm-10">
+                                <select ng-model="drop.BranchId" ng-required="true"
+                                        ng-options="branch.Id as branch.Name for branch in client.Branches"
+                                        class="form-control">
+                                    <option value=""> -- Choose Branch -- </option>
+                                </select>
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">When to drop?</label>
+                            <div class="col-sm-10 row">
+                                <datetime model="drop.ExpectedDropTime" required="true"></datetime>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-group">
