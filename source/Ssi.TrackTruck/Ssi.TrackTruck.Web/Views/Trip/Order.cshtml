@@ -9,26 +9,48 @@
                 <span class="col-sm-offset-2">Order a trip</span>
             </legend>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Client</label>
+                <label class="col-sm-2 control-label">Who is the client?</label>
                 <div class="col-sm-10">
                     <select ng-model="request.ClientId" ng-required="true"
                             ng-options="client.Id as client.Name for client in clients track by client.Id"
                             class="form-control">
-                        <option value="">-- who is the client? --</option>
+                        <option value=""> -- Choose client -- </option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Wirehouse</label>
+                <label class="col-sm-2 control-label">From where to pick</label>
                 <div class="col-sm-10">
-                    <select ng-model="request.ClientId" ng-required="true"
+                    <select ng-model="request.WirehouseId" ng-required="true"
                             ng-options="wirehouse.Id as wirehouse.Name for wirehouse in wirehouses track by wirehouse.Id"
                             class="form-control">
-                        <option value="">-- from which wirehouse to pickup? --</option>
+                        <option value=""> -- Choose 3PW -- </option>
                     </select>
                 </div>
             </div>
-            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">When to pickup?</label>
+                <div class="col-sm-5">
+                    <div class="input-group" ng-click="dateIsOpen=true">
+                        <input ng-model="request.PickupDate" ng-required="true"
+                               type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
+                               class="form-control" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <input ng-model="request.PickupHour" ng-required="true"
+                           type="number" min="0" max="23" placeholder="hour"
+                           class="form-control time-picker-input" />
+                    <input ng-model="request.PickupMinute" ng-required="true"
+                           type="number" min="0" max="59" placeholder="minute"
+                           class="form-control time-picker-input" />
+                </div>
+            </div>
             
             
             
@@ -54,7 +76,7 @@
                            ng-model="request.NumberOfItems" placeholder="how many items?" />
                 </div>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label class="col-sm-2 control-label">Date</label>
                 <div class="col-sm-10">
                     <div class="input-group" ng-click="dateIsOpen=true">
@@ -72,7 +94,7 @@
                     <input class="form-control time-picker-input" type="number" min="0" max="23" ng-model="request.DeliveryHour" placeholder="hour" />
                     <input class="form-control time-picker-input" type="number" min="0" max="59" ng-model="request.DeliveryMinute" placeholder="minute" />
                 </div>
-            </div>
+            </div>*@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input class="btn btn-success btn-block" type="submit" value="Put Order" />
