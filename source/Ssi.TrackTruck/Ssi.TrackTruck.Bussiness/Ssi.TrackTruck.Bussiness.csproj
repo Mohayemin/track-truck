@@ -57,6 +57,7 @@
     <Compile Include="Trips\TripService.cs" />
     <Compile Include="Trucks\TruckService.cs" />
     <Compile Include="Trucks\TruckStatusItem.cs" />
+    <Compile Include="Wirehouses\WirehouseService.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
