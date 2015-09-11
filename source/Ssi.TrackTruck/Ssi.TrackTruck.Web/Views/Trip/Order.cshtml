@@ -112,10 +112,10 @@
                         <div class="form-group">
                             <label class="col-sm-2 hidden-xs"></label>
                             <div class="col-sm-5 col-xs-6">
-                                <label class=" control-label">DR Number</label>
+                                <label class=" control-label">DR Number (Total <span ng-bind="drop.DeliveryReceipts.length"></span>)</label>
                             </div>
                             <div class="col-sm-5 col-xs-6">
-                                <label class="control-label">Number of Boxes</label>
+                                <label class="control-label">Number of Boxes (Total <span ng-bind="getTotalBoxes(drop)"></span>)</label>
                             </div>
                         </div>
                         <div ng-repeat="dr in drop.DeliveryReceipts" class="form-group">

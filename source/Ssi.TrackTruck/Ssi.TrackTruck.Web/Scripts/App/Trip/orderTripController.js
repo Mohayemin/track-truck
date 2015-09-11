@@ -1,12 +1,10 @@
 ﻿trackTruck.controller('orderTripController', [
     '$scope',
     'tripService',
-    '$filter',
-    'dateFormat',
     orderTripController
 ]);
 
-function orderTripController($scope, tripService, $filter, dateFormat) {
+function orderTripController($scope, tripService) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -30,10 +28,15 @@ function orderTripController($scope, tripService, $filter, dateFormat) {
 
     $scope.addDrop();
 
+    $scope.getTotalBoxes = function(drop) {
+        return drop.DeliveryReceipts.map(function(dr) {
+            return dr.NumberOfBoxes;
+        }).reduce(function (oldV, v) {
+            return isNaN(v) ? oldV : (v + oldV);
+        }, 0);
+    };
 
     $scope.order = function () {
-        $scope.request.DeliveryDate = $filter('date')($scope.request.DeliveryDate, dateFormat);
-
         tripService.orderTrip($scope.request).then(function () {
 
         }).catch(function () {
