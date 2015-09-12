@@ -63,7 +63,7 @@ function orderTripController($scope, clientService, tripService, wirehouseServic
         tripService.orderTrip($scope.request).then(function () {
 
         }).catch(function () {
-
+            console.error('could not save the order');
         });
     };
 }
