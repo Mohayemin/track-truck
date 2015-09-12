@@ -1,13 +1,27 @@
 ﻿trackTruck.factory('tripService', [
-    '$http',
-    'url',
+    'repository',
     tripService
 ]);
 
-function tripService($http, url) {
+function tripService(repository) {
     return {
-        addTrip: function (request) {
-            return $http.post(url('Trip', 'Add'), request);
+        orderTrip: function (request) {
+            var flatProperties = ['ExpectedPickupTime', 'ExpectedPickupTime',
+                'DriverAllowance', 'DriverSalary', 'HelperAllowance', 'HelperSalary',
+                'Drops', 'WirehouseId', 'DriverId', 'HelperId'];
+            var idProeprties = ['Client'];
+
+            var foramtterRequest = {
+            };
+
+            flatProperties.forEach(function (prop) {
+                foramtterRequest[prop] = request[prop];
+            });
+            idProeprties.forEach(function (prop) {
+                foramtterRequest[prop + "Id"] = request[prop].Id;
+            });
+
+            return repository.post('Trip', 'Order', foramtterRequest);
         }
     };
 }

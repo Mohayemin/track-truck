@@ -1,20 +1,15 @@
 ﻿trackTruck.factory('authService', [
-    '$http',
-    'url',
+    'repository',
     authService
 ]);
 
-function authService($http, url) {
+function authService(repository) {
     function signIn(request) {
-        return $http.post(url('Auth', 'SignIn'), request).then(function(response) {
-            return response.data;
-        });
+        return repository.post('Auth', 'SignIn', request);
     }
 
     function getUserList() {
-        return $http.get(url('Auth', 'GetUserList')).then(function(response) {
-            return response.data;
-        });
+        return repository.get('Auth', 'GetUserList');
     }
 
     return {

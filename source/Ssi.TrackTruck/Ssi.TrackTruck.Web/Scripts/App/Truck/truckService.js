@@ -1,10 +1,9 @@
 ﻿trackTruck.factory('truckService', [
-    '$http',
-    'url',
+    'repository',
     truckService
 ]).factory('truckStatus', truckStatusFactory);
 
-function truckService($http, url) {
+function truckService(repository) {
     function calculateReportSummary(trucks) {
         var summary = {
             trucks: { total: trucks.length },
@@ -27,9 +26,7 @@ function truckService($http, url) {
     }
 
     function getCurrentStatus() {
-        return $http.get(url('Truck', 'GetCurrentStatus')).then(function(respoonse) {
-            return respoonse.data;
-        });
+        return repository.get('Truck', 'GetCurrentStatus');
     }
 
     return {
