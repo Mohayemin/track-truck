@@ -1,4 +1,4 @@
-﻿namespace Ssi.TrackTruck.Bussiness.DAL.Entities
+﻿namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
     public class Branch
     {

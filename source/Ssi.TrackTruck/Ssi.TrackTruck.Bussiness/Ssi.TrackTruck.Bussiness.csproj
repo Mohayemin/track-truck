@@ -51,8 +51,8 @@
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
-    <Compile Include="DAL\Entities\Client.cs" />
-    <Compile Include="DAL\Entities\Branch.cs" />
+    <Compile Include="DAL\Clients\Client.cs" />
+    <Compile Include="DAL\Clients\Branch.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
