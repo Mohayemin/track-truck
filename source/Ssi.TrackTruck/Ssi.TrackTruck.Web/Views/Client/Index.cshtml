@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Clients";
+}
+
+<div>
+    <table class="table table-hover table-responsive" ts-wrapper>
+        <thead>
+            <tr>
+                <th ts-criteria="Name|lowercase">Name</th>
+                <th ts-criteria="TrucksPerDay|parseInt">Trucks per day</th>
+                <th ts-criteria="BranchCount|parseInt">Branches</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="client in clients track by client.Id" ts-repeat>
+                <td ng-bind="client.Name"></td>
+                <td ng-bind="client.TrucksPerDay"></td>
+                <td ng-bind="client.BranchCount"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
