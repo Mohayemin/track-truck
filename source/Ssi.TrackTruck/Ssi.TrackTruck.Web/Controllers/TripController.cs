@@ -14,10 +14,10 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Order(AddTripRequest request)
+        public ActionResult Order(TripOrderRequest orderRequest)
         {
-            request.ClientId = User.Identity.Name;
-            var trip = _tripService.AddTrip(request);
+            orderRequest.ClientId = User.Identity.Name;
+            var trip = _tripService.AddTrip(orderRequest);
 
             return new JsonNetResult(trip);
         }

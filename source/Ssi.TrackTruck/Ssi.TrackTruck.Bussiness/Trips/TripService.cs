@@ -12,9 +12,9 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             _repository = repository;
         }
 
-        public Trip AddTrip(AddTripRequest request)
+        public Trip AddTrip(TripOrderRequest orderRequest)
         {
-            var trip = request.ToTrip();
+            var trip = orderRequest.ToTrip();
             return _repository.Create(trip);
         }
     }

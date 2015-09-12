@@ -4,7 +4,7 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
 {
-    public class AddTripRequest
+    public class TripOrderRequest
     {
         public int NumberOfItems { get; set; }
         public string ClientId { get; set; }
