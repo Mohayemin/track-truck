@@ -3,10 +3,12 @@
     'clientService',
     'tripService',
     'wirehouseService',
+    'employeeService',
+    'designation',
     orderTripController
 ]);
 
-function orderTripController($scope, clientService, tripService, wirehouseService) {
+function orderTripController($scope, clientService, tripService, wirehouseService, employeeService,designation) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -48,6 +50,13 @@ function orderTripController($scope, clientService, tripService, wirehouseServic
         $scope.wirehouses = wirehouses;
     }).catch(function() {
         console.error('could not load wirehouses');
+    });
+
+    employeeService.getTruckEmployees().then(function(employeeGroups) {
+        $scope.drivers = employeeGroups[designation.driver];
+        $scope.helpers = employeeGroups[designation.helper];
+    }).catch(function() {
+        console.error('could not load drivers and helpers');
     });
 
     $scope.order = function () {
