@@ -1,4 +1,6 @@
-﻿namespace Ssi.TrackTruck.Bussiness.Helpers
+﻿using System;
+
+namespace Ssi.TrackTruck.Bussiness.Helpers
 {
     public class DateTimeModel
     {
@@ -7,5 +9,15 @@
         public int Date { get; set; }
         public int Hour { get; set; }
         public int Minute { get; set; }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="utcOffset">Time offset from UTC</param>
+        /// <returns></returns>
+        public DateTime ToDateTime(TimeSpan utcOffset)
+        {
+            var dateTime = new DateTimeOffset(Year, Month, Date, Hour, Minute, 0, utcOffset);
+            return dateTime.DateTime;
+        }
     }
 }

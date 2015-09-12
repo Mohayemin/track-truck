@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
@@ -6,15 +7,17 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
     public class Trip
     {
         public string Id { get; set; }
-        public int NumberOfItems { get; set; }
-        public string TruckId { get; set; }
         public TripStatus Status { get; set; }
-        public string FromWareHouseId { get; set; }
-        public string ToBranchId { get; set; }
-        public string DriverId { get; set; }
-        public string CargoLoaderId { get; set; }
-        public int BillInCents { get; set; }
         public string ClientId { get; set; }
-        public DateTime DeliveryDueTime { get; set; }
+        public DateTime ExpectedPickupTime { get; set; }
+        public string DriverId { get; set; }
+        public string WirehouseId { get; set; }
+        public long DriverAllowanceInCentavos { get; set; }
+        public long DriverSalaryInCentavos { get; set; }
+        public string HelperId { get; set; }
+        public long HelperAllowanceInCentavos { get; set; }
+        public long HelperSalaryInCentavos { get; set; }
+
+        public IList<Drop> Drops { get; set; }
     }
 }

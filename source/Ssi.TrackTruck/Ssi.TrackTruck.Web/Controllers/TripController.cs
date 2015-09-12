@@ -16,7 +16,6 @@ namespace Ssi.TrackTruck.Web.Controllers
         [HttpPost]
         public ActionResult Order(TripOrderRequest orderRequest)
         {
-            orderRequest.ClientId = User.Identity.Name;
             var trip = _tripService.AddTrip(orderRequest);
 
             return new JsonNetResult(trip);
