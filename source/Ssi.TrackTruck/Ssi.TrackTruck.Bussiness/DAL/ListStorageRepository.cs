@@ -36,6 +36,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Query<T>().Where(t => valueList.Contains(property.Compile().Invoke(t)));
         }
 
+        public IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property)
+        {
+            return GetAll<T>();
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();
