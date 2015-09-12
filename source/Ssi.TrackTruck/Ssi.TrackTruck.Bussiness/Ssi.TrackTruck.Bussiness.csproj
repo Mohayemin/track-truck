@@ -47,6 +47,7 @@
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
+    <Compile Include="Clients\AddClientRequest.cs" />
     <Compile Include="Clients\ClientService.cs" />
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
