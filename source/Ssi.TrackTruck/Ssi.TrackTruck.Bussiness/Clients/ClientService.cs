@@ -25,7 +25,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             if (request.Validate())
             {
                 var client = _repository.Create(request.ToClient());
-                return Response.Success(client);
+                return Response.Success(new ClientSummary(client));
             }
 
             return Response.Error("Validation");
