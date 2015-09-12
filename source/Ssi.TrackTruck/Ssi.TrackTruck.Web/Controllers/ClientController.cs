@@ -13,6 +13,12 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult All()
         {
             return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);

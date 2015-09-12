@@ -1,4 +1,4 @@
-﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap']);
+﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap', 'tableSort']);
 
 trackTruck.config([
     '$locationProvider',
