@@ -30,32 +30,8 @@ namespace Ssi.TrackTruck.Web
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            RegisterRepository(container);
             container.RegisterType<IHasher, Pbkdf2Hasher>();
-        }
-
-        private static void RegisterRepository(IUnityContainer container)
-        {
-            var data = new Dictionary<Type, IList>();
-            data[typeof (User)] = new List<User>
-            {
-                new User
-                {
-                    Id = "1",
-                    Username = "Mohayemin",
-                    UsernameLowerCase = "mohayemin",
-                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
-                },
-                new User
-                {
-                    Id = "2",
-                    Username = "JR",
-                    UsernameLowerCase = "jr",
-                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
-                }
-            };
-
-            container.RegisterType<IRepository, DummyRepository>(new InjectionConstructor(data));
+            container.RegisterType<IRepository, DummyRepository>();
         }
     }
 }
