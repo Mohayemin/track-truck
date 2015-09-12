@@ -5,10 +5,11 @@
     'wirehouseService',
     'employeeService',
     'designation',
+    'globalMessage',
     orderTripController
 ]);
 
-function orderTripController($scope, clientService, tripService, wirehouseService, employeeService,designation) {
+function orderTripController($scope, clientService, tripService, wirehouseService, employeeService, designation, globalMessage) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -60,10 +61,11 @@ function orderTripController($scope, clientService, tripService, wirehouseServic
     });
 
     $scope.order = function () {
+        globalMessage.info('Creating Order...');
         tripService.orderTrip($scope.request).then(function () {
-
+            globalMessage.success('Order Created.');
         }).catch(function () {
-            console.error('could not save the order');
+            globalMessage.error('Could not create order, please try again.');
         });
     };
 }

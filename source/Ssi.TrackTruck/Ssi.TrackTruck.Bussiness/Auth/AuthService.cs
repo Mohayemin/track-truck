@@ -29,7 +29,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                     return Response.Success(null, "Verified, redirecting...");
                 }
 
-                return Response.Error("InvalidCredentials", "Username an password does not match");
+                return Response.Error("InvalidCredentials", "Username and password does not match");
             }
             return Response.Error("Validation", "Please enter both username and password");
         }
