@@ -24,7 +24,7 @@ function globalMessageService($timeout) {
 
     var factory = {
         error: function (message) {
-            setMessage('error', message);
+            setMessage('danger', message);
         },
         success: function (message) {
             setMessage('success', message);
