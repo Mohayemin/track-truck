@@ -16,7 +16,7 @@ namespace Ssi.TrackTruck.Web.Controllers
 
         public ActionResult All()
         {
-            return Json(_tripService.GetAll().Count(), JsonRequestBehavior.AllowGet);
+            return Json(_tripService.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
