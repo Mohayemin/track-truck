@@ -10,6 +10,9 @@ function clientService(repository) {
         },
         getAllSummary: function() {
             return repository.get('Client', 'AllSummary');
+        },
+        addClient: function(request) {
+            return repository.post('Client', 'Add', request);
         }
     };
 }

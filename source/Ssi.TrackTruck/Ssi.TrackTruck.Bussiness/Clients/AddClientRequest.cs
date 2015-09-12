@@ -7,7 +7,6 @@ namespace Ssi.TrackTruck.Bussiness.Clients
     {
         public string Name { get; set; }
         public int TrucksPerDay { get; set; }
-
         public bool Validate()
         {
             return !string.IsNullOrWhiteSpace(Name)

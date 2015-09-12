@@ -8,11 +8,11 @@
         <form ng-submit="addClient()">
             <div class="form-group">
                 <label class="control-label">Client's Name</label>
-                <input ng-model="addRequest.Name" class="form-control" placeholder="Client's Name" />
+                <input ng-model="addRequest.Name" type="text" class="form-control" placeholder="Client's Name" required/>
             </div>
             <div class="form-group">
                 <label class="control-label">Trucks per day</label>
-                <input ng-model="addRequest.TrucksPerDay" class="form-control" placeholder="Trucks allocated per day" />
+                <input ng-model="addRequest.TrucksPerDay" type="number" class="form-control" placeholder="Trucks allocated per day" required />
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-lg fa-plus"></i> Add Client</button>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-8 col-lg-9">
         <h3>List of Clients</h3>
-        <table class="table table-hover table-responsive table-bordered table-striped" ts-wrapper>
+        <table class="table table-hover table-responsive table-bordered" ts-wrapper>
             <thead>
                 <tr>
                     <th ts-criteria="Name|lowercase">Name</th>
