@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Utils;
 
@@ -11,6 +12,11 @@ namespace Ssi.TrackTruck.Web.Controllers
         public TripController(TripService tripService)
         {
             _tripService = tripService;
+        }
+
+        public ActionResult All()
+        {
+            return Json(_tripService.GetAll().Count(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

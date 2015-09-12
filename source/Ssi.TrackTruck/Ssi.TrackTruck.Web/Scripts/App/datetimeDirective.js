@@ -13,18 +13,17 @@ function datetimeDirective() {
             function ($scope) {
                 var model = $scope.model;
 
-                $scope.dateChanged = function () {
-                    var dpd = $scope.datePickerDate;
+                $scope.$watch('datePickerDate', function (dpd) {
                     if (dpd) {
-                        model.year = dpd.getYear();
-                        model.month = dpd.getYear();
+                        model.year = dpd.getFullYear();
+                        model.month = dpd.getMonth();
                         model.day = dpd.getDate();
                     } else {
                         model.year = null;
                         model.month = null;
                         model.day = null;
                     }
-                };
+                });
             }
         ]
     };

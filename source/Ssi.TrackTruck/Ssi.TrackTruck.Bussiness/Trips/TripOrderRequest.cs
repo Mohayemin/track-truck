@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
@@ -36,6 +35,5 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 Drops = Drops.Select(request => request.ToDrop()).ToList()
             };
         }
-
     }
 }

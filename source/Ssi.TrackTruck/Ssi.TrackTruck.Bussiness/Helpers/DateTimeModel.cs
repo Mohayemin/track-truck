@@ -6,7 +6,7 @@ namespace Ssi.TrackTruck.Bussiness.Helpers
     {
         public int Year { get; set; }
         public int Month { get; set; }
-        public int Date { get; set; }
+        public int Day { get; set; }
         public int Hour { get; set; }
         public int Minute { get; set; }
 
@@ -16,7 +16,7 @@ namespace Ssi.TrackTruck.Bussiness.Helpers
         /// <returns></returns>
         public DateTime ToDateTime(TimeSpan utcOffset)
         {
-            var dateTime = new DateTimeOffset(Year, Month, Date, Hour, Minute, 0, utcOffset);
+            var dateTime = new DateTimeOffset(Year, Month, Day, Hour, Minute, 0, utcOffset);
             return dateTime.DateTime;
         }
     }
