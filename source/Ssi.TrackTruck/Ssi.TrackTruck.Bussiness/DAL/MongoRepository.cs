@@ -44,5 +44,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             return Collection<T>().Find(Query<T>.In(property, values)).AsQueryable();
         }
+
+        public IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property)
+        {
+            return Collection<T>().FindAll().SetFields(Fields<T>.Include(property)).AsQueryable();
+        }
     }
 }
