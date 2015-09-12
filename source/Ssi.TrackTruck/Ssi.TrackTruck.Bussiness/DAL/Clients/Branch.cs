@@ -2,16 +2,16 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
-namespace Ssi.TrackTruck.Bussiness.DAL.Trips
+namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
-    public class DeliveryReceipt : IEntity
+    public class Branch : IEntity
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string DrNumber { get; set; }
-        public int NumberOfBoxes { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
 
-        public DeliveryReceipt()
+        public Branch()
         {
             Id = ObjectId.GenerateNewId().ToString();
         }
