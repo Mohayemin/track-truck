@@ -13,15 +13,9 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
-                    <a href="@Url.Action("Report", "Attendence")">
-                        Load Items
-                        <i class="fa fa-fw fa-lg fa-download"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Report", "Attendence")">
-                        Unload Items
-                        <i class="fa fa-fw fa-lg fa-upload"></i>
+                    <a ng-href="{{url.resolve('Client', '')}}">
+                        Clients
+                        <i class="fa fa-fw fa-lg fa-briefcase"></i>
                     </a>
                 </li>
                 <li dropdown>
