@@ -120,6 +120,7 @@
     <Content Include="Scripts\App\Client\clientService.js" />
     <Content Include="Scripts\App\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
+    <Content Include="Scripts\App\globalMessageDirective.js" />
     <Content Include="Scripts\App\repository.js" />
     <Content Include="Scripts\App\trackTruckController.js" />
     <Content Include="Scripts\App\trackTruckModule.js" />
