@@ -19,8 +19,9 @@
         <div class="container main-container">
             @RenderBody()
             <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - SSI Group of Companies</p>
+            <footer class="small">
+                <span class="small">&copy; @DateTime.Now.Year - SSI Group of Companies</span>
+                <span class="small pull-right">Version @typeof(MvcApplication).Assembly.GetName().Version</span>
             </footer>
         </div>
         
