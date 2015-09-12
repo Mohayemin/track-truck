@@ -1,5 +1,4 @@
 ﻿using Ssi.TrackTruck.Bussiness.DAL;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
 
 namespace Ssi.TrackTruck.Bussiness.Trips

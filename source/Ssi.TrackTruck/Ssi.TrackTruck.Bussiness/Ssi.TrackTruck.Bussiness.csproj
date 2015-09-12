@@ -38,11 +38,14 @@
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
     <Compile Include="Clients\ClientService.cs" />
+    <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\Entities\Client.cs" />
     <Compile Include="DAL\Entities\Branch.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
+    <Compile Include="DAL\Trips\DeliveryReceipt.cs" />
+    <Compile Include="DAL\Trips\Drop.cs" />
     <Compile Include="DAL\Trips\Trip.cs" />
     <Compile Include="DAL\Entities\Truck.cs" />
     <Compile Include="DAL\Entities\Wirehouse.cs" />

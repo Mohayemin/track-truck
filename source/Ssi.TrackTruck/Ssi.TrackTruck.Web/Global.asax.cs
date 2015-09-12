@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ssi.TrackTruck.Web.Utils;
@@ -13,9 +12,6 @@ namespace Ssi.TrackTruck.Web
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            ValueProviderFactories.Factories.Remove(ValueProviderFactories.Factories.OfType<JsonValueProviderFactory>().FirstOrDefault());
-            ValueProviderFactories.Factories.Add(new JsonDotNetValueProviderFactory());
-            
             ModelBinders.Binders.Add(typeof(IList<string>), new ListModelBinder<string>());
         }
     }
