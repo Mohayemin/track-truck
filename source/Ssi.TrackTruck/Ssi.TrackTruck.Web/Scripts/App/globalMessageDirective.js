@@ -1,15 +1,23 @@
 ﻿trackTruck
     .factory('globalMessage', [
+        '$timeout',
         globalMessageService
     ])
     .directive('globalMessage', [
         globalMessageDirective
     ]);
 
-function globalMessageService() {
+function globalMessageService($timeout) {
+    var lastTimeoutPromise = null;
     function setMessage(type, message) {
+        lastTimeoutPromise && $timeout.cancel(lastTimeoutPromise);
+
         messageObject.message = message;
         messageObject.type = type;
+
+        lastTimeoutPromise = $timeout(function() {
+            factory.clear();
+        }, 2000);
     }
 
     var messageObject = {};
@@ -20,6 +28,9 @@ function globalMessageService() {
         },
         success: function (message) {
             setMessage('success', message);
+        },
+        info: function(message) {
+            setMessage('info', message);
         },
         clear: function () {
             setMessage(null, null);
@@ -34,7 +45,7 @@ function globalMessageService() {
 function globalMessageDirective() {
     return {
         template: '<div ng-style="style"> ' +
-            '<alert ng-show="messageObject.message" close="close()" type="{{messageObject.type}}" dismiss-on-timeout="5000">{{messageObject.message}}</alert>' +
+            '<alert ng-show="messageObject.message" close="close()" type="{{messageObject.type}}">{{messageObject.message}}</alert>' +
             '</div>',
         scope: {},
         controller: [
