@@ -147,6 +147,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
@@ -186,6 +187,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Client\" />
+    <Folder Include="Views\Employee\" />
     <Folder Include="Views\Wirehouse\" />
   </ItemGroup>
   <ItemGroup>
