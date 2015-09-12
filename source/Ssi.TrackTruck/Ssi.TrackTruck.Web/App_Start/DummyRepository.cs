@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FizzWare.NBuilder;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
@@ -56,7 +57,6 @@ namespace Ssi.TrackTruck.Web
                     PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
                 }
             };
-
 
             Data[typeof(Trip)] = (IList)trips;
             Data[typeof(Truck)] = (IList)trucks;
