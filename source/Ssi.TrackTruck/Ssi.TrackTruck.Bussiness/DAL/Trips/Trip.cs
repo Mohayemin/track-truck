@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
     public class Trip
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public TripStatus Status { get; set; }
         public string ClientId { get; set; }
