@@ -1,7 +1,7 @@
 ﻿using System;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
-namespace Ssi.TrackTruck.Bussiness.DAL.Entities
+namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
     public class Trip
     {
