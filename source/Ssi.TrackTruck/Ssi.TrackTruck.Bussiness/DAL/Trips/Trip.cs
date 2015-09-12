@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class Trip
+    public class Trip : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

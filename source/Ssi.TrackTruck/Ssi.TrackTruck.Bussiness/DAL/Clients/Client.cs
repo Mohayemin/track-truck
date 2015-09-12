@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
-    public class Client
+    public class Client : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
