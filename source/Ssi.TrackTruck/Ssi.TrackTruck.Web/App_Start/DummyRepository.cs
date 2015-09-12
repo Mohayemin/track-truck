@@ -12,8 +12,11 @@ namespace Ssi.TrackTruck.Web
 {
     public class DummyRepository : ListStorageRepository
     {
-        public DummyRepository(IDictionary<Type, IList> data) : base(data)
+        private static readonly IDictionary<Type, IList> Data;
+
+        static DummyRepository()
         {
+            Data = new Dictionary<Type, IList>();
             var random = new Random();
             var trips = Builder<Trip>.CreateListOfSize(100).Build();
             var trucks = Builder<Truck>.CreateListOfSize(10).Random(random.Next(5, 9)).Do(truck => truck.CurrentTripId = trips[random.Next(99)].Id).Build();
@@ -36,11 +39,36 @@ namespace Ssi.TrackTruck.Web
                 }
             };
 
-            data[typeof(Trip)] = (IList)trips;
-            data[typeof(Truck)] = (IList)trucks;
-            data[typeof (Wirehouse)] = (IList) wirehouses;
-            data[typeof(Employee)] = employees;
-            data[typeof(Client)] = clients;
+            var users = new List<User>
+            {
+                new User
+                {
+                    Id = "1",
+                    Username = "Mohayemin",
+                    UsernameLowerCase = "mohayemin",
+                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
+                },
+                new User
+                {
+                    Id = "2",
+                    Username = "JR",
+                    UsernameLowerCase = "jr",
+                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
+                }
+            };
+
+
+            Data[typeof(Trip)] = (IList)trips;
+            Data[typeof(Truck)] = (IList)trucks;
+            Data[typeof(Wirehouse)] = (IList)wirehouses;
+            Data[typeof(Employee)] = employees;
+            Data[typeof(Client)] = clients;
+            Data[typeof (User)] = users;
+        }
+
+        public DummyRepository() : base(Data)
+        {
+            
         }
     }
 }
