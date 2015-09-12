@@ -20,9 +20,13 @@ function clientController($scope, clientService) {
         });
     };
 
-    clientService.getAllSummary().then(function(clients) {
-        $scope.clients = clients;
-    }).catch(function() {
-        console.error('could not load clients');
-    });
+    $scope.loadClients = function() {
+        clientService.getAllSummary().then(function (clients) {
+            $scope.clients = clients;
+        }).catch(function () {
+            console.error('could not load clients');
+        });
+    };
+
+    $scope.loadClients();
 }
