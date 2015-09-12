@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Employees;
 
 namespace Ssi.TrackTruck.Web.Controllers
@@ -13,9 +14,10 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult All()
+        public ActionResult GetByDesignations(IList<string> designations)
         {
-            return Json(_employeeService.GetAll(), JsonRequestBehavior.AllowGet);
+            var employees = _employeeService.GetByDesignations(designations);
+            return Json(employees, JsonRequestBehavior.AllowGet);
         }
 	}
 }
