@@ -57,7 +57,6 @@ namespace Ssi.TrackTruck.Web
                 }
             };
 
-
             Data[typeof(Trip)] = (IList)trips;
             Data[typeof(Truck)] = (IList)trucks;
             Data[typeof(Wirehouse)] = (IList)wirehouses;
