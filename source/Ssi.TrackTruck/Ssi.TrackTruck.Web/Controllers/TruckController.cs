@@ -12,6 +12,11 @@ namespace Ssi.TrackTruck.Web.Controllers
             _truckService = truckService;
         }
 
+        public ActionResult Index()
+        {
+            return View("Truck");
+        }
+
         public ActionResult Report()
         {
             return View();
@@ -23,5 +28,11 @@ namespace Ssi.TrackTruck.Web.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-	}
+
+        [HttpPost]
+        public ActionResult Add(AddTruckRequest request)
+        {
+            return Json(_truckService.Add(request));
+        }
+    }
 }

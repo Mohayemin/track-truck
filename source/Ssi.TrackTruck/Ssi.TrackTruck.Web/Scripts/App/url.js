@@ -4,6 +4,9 @@
 
 function urlFactory() {
     return {
+        resolveTemplate: function(module, feature) {
+            return '/Scripts/App/' + module + '/' + feature + '.html';
+        },
         resolve: function (controller, action, params) {
             if (!controller) {
                 return '/';

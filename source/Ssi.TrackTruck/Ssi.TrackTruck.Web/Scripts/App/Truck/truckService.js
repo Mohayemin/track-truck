@@ -29,9 +29,14 @@ function truckService(repository) {
         return repository.get('Truck', 'GetCurrentStatus');
     }
 
+    function add(request) {
+        return repository.post('Truck', 'Add', request);
+    }
+
     return {
         calculateReportSummary: calculateReportSummary,
-        getCurrentStatus: getCurrentStatus
+        getCurrentStatus: getCurrentStatus,
+        add: add
     }
 }
 
