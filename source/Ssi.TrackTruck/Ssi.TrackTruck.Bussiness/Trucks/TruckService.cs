@@ -4,6 +4,7 @@ using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
 using Ssi.TrackTruck.Bussiness.Helpers;
+using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trucks
 {
@@ -30,6 +31,16 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             var defaultTrip = new Trip();
 
             return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById.GetOrDefault(truck.CurrentTripId) ?? defaultTrip));
+        }
+
+        public Response Add(AddTruckRequest request)
+        {
+            if (request.Validate())
+            {
+                var truck = _repository.Create(request.ToTruck());
+                return Response.Success(truck);
+            }
+            return Response.Error("Validation");
         }
     }
 }
