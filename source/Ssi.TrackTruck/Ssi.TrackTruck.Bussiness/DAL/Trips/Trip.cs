@@ -30,7 +30,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string HelperId { get; set; }
         public long HelperAllowanceInCentavos { get; set; }
         public long HelperSalaryInCentavos { get; set; }
+        public IEnumerable<Drop> Drops { get; set; }
 
-        public IList<Drop> Drops { get; set; }
+        public Trip()
+        {
+            Drops = new List<Drop>();
+        }
     }
 }
