@@ -1,6 +1,7 @@
 ﻿trackTruck.directive('truckStatusReport', [
     'url',
     'truckService',
+    'truckStatus',
     truckStatusReportDirective
 ]);
 

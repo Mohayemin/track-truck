@@ -12,5 +12,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string CurrentTripId { get; set; }
+
+        [BsonExtraElements]
+        public BsonDocument ExtraElements_ { get; set; }
     }
 }
