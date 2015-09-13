@@ -22,8 +22,8 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">From where to pickup?</label>
                     <div class="col-sm-10">
-                        <select ng-model="request.WirehouseId" ng-required="true"
-                                ng-options="wirehouse.Id as wirehouse.Name for wirehouse in wirehouses"
+                        <select ng-model="request.WarehouseId" ng-required="true"
+                                ng-options="warehouse.Id as warehouse.Name for warehouse in warehouses"
                                 class="form-control">
                             <option value=""> -- Choose 3PW -- </option>
                         </select>
@@ -163,7 +163,7 @@
 </div>
 
 <script type="text/javascript" src="~/Scripts/App/Employee/employeeService.js"></script>
-<script type="text/javascript" src="~/Scripts/App/Wirehouse/wirehouseService.js"></script>
+<script type="text/javascript" src="~/Scripts/App/Warehouse/warehouseService.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Client/clientService.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Trip/tripService.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Trip/orderTripController.js"></script>

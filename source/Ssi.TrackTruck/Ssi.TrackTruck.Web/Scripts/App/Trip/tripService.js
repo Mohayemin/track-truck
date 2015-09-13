@@ -8,7 +8,7 @@ function tripService(repository) {
         orderTrip: function (request) {
             var flatProperties = ['ExpectedPickupTime', 'ExpectedPickupTime',
                 'DriverAllowance', 'DriverSalary', 'HelperAllowance', 'HelperSalary',
-                'Drops', 'WirehouseId', 'DriverId', 'HelperId'];
+                'Drops', 'WarehouseId', 'DriverId', 'HelperId'];
             var idProeprties = ['Client'];
 
             var foramtterRequest = {

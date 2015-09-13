@@ -18,7 +18,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 {typeof(Employee), "employees"},
                 {typeof(Truck), "trucks"},
                 {typeof(User), "users"},
-                {typeof(Wirehouse), "wirehouses"},
+                {typeof(Warehouse), "warehouses"},
                 {typeof(Trip), "trips"},
             };
         }

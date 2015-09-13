@@ -139,7 +139,7 @@
     <Content Include="Scripts\App\Truck\truckController.js" />
     <Content Include="Scripts\App\Truck\truckService.js" />
     <Content Include="Scripts\App\url.js" />
-    <Content Include="Scripts\App\Wirehouse\wirehouseService.js" />
+    <Content Include="Scripts\App\Warehouse\warehouseService.js" />
     <Content Include="Scripts\Lib\angular-tablesort.js" />
     <Content Include="Scripts\Lib\angular.js" />
     <Content Include="Scripts\Lib\angular.min.js" />
@@ -164,7 +164,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
-    <Compile Include="Controllers\WirehouseController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,7 +202,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Employee\" />
-    <Folder Include="Views\Wirehouse\" />
+    <Folder Include="Views\Warehouse\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ssi.TrackTruck.Bussiness\Ssi.TrackTruck.Bussiness.csproj">
