@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Trucks";
+}
+<div ng-controller="truckController">
+    <a href ng-click="loadReport()" class="btn btn-default btn-sm pull-right" title="refresh report">
+        <i class="fa fa-lg fa-refresh"></i>
+    </a>
+    <div>
+        <h3>Summary</h3>
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Moving</th>
+                    <th>Not In Use</th>
+                    <th>Unloading</th>
+                    <th>Loading</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Trucks</th>
+                    <td ng-bind="summary.trucks[truckStatus.moving.id]"></td>
+                    <td ng-bind="summary.trucks[truckStatus.notInUse.id]"></td>
+                    <td ng-bind="summary.trucks[truckStatus.unloading.id]"></td>
+                    <td ng-bind="summary.trucks[truckStatus.loading.id]"></td>
+                    <th ng-bind="summary.trucks.total"></th>
+                </tr>
+                <tr>
+                    <th>Items</th>
+                    <td ng-bind="summary.items[truckStatus.moving.id]"></td>
+                    <td ng-bind="summary.items[truckStatus.notInUse.id]"></td>
+                    <td ng-bind="summary.items[truckStatus.unloading.id]"></td>
+                    <td ng-bind="summary.items[truckStatus.loading.id]"></td>
+                    <th ng-bind="summary.items.total"></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h3>Detail</h3>
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th ng-repeat="(id, name) in DetailReportHeaders" ng-class="{'hover-only-parent':sort.Id!=id}">
+                        <span ng-bind="name"></span>
+                        <a class="pull-right" ng-show="sort.Id===id" ng-click="updateSort(id)" href="">
+                            <i class="fa fa-caret-down" ng-show="!sort.Reverse"></i>
+                            <i class="fa fa-caret-up" ng-show="sort.Reverse"></i>
+                        </a>
+                        <a class="pull-right hover-only" ng-show="sort.Id!==id" ng-click="updateSort(id)" href="">
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-class="getStatusClass(truck)" ng-repeat="truck in trucks| orderBy:sort.Id:sort.Reverse">
+                    <td ng-bind="truck.TruckNumber"></td>
+                    <td><a href="" ng-bind="truck.DriverName" title="We can show driver's details when clicked here"></a></td>
+                    <td ng-bind="truck.ItemsCarrying"></td>
+                    <td ng-bind="truckStatus[truck.Status].text"></td>
+                    <td ng-bind="truck.FromOutlet"></td>
+                    <td ng-bind="truck.ToOutlet"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/App/Truck/truckService.js"></script>
+<script type="text/javascript" src="~/Scripts/App/Truck/truckController.js"></script>
