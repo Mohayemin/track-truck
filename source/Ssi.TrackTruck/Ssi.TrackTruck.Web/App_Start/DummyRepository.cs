@@ -21,7 +21,7 @@ namespace Ssi.TrackTruck.Web
             var random = new Random();
             var trips = Builder<Trip>.CreateListOfSize(5).Build();
             var trucks = Builder<Truck>.CreateListOfSize(10).Random(random.Next(5, 9)).Do(truck => truck.CurrentTripId = trips[random.Next(trips.Count)].Id).Build();
-            var wirehouses = Builder<Wirehouse>.CreateListOfSize(8).Build();
+            var warehouses = Builder<Warehouse>.CreateListOfSize(8).Build();
             var employees = Builder<Employee>.CreateListOfSize(4).All().Do(e => e.Designation = EmployeDesignations.Driver).Build().ToList();
             employees.AddRange(Builder<Employee>.CreateListOfSize(5).All().Do(e => e.Designation = EmployeDesignations.Helper).Build());
 
@@ -60,7 +60,7 @@ namespace Ssi.TrackTruck.Web
 
             Data[typeof(Trip)] = (IList)trips;
             Data[typeof(Truck)] = (IList)trucks;
-            Data[typeof(Wirehouse)] = (IList)wirehouses;
+            Data[typeof(Warehouse)] = (IList)warehouses;
             Data[typeof(Employee)] = employees;
             Data[typeof(Client)] = clients;
             Data[typeof (User)] = users;
