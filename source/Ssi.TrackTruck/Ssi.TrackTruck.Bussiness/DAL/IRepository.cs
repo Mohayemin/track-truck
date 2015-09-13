@@ -11,5 +11,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         T Create<T>(T item);
         IQueryable<T> GetAll<T>();
         IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values);
+        IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property);
     }
 }

@@ -1,4 +1,4 @@
-﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap']);
+﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap', 'tableSort']);
 
 trackTruck.config([
     '$locationProvider',
@@ -16,3 +16,7 @@ trackTruck.config([
 
 trackTruck.value('_', window._);
 trackTruck.value('dateFormat', 'MMMM dd, yyyy');
+trackTruck.value('designation', {
+    driver: 'driver',
+    helper: 'helper'
+});

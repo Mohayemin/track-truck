@@ -1,12 +1,15 @@
 ﻿trackTruck.controller('orderTripController', [
     '$scope',
+    'clientService',
     'tripService',
-    '$filter',
-    'dateFormat',
+    'wirehouseService',
+    'employeeService',
+    'designation',
+    'globalMessage',
     orderTripController
 ]);
 
-function orderTripController($scope, tripService, $filter, dateFormat) {
+function orderTripController($scope, clientService, tripService, wirehouseService, employeeService, designation, globalMessage) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -14,22 +17,55 @@ function orderTripController($scope, tripService, $filter, dateFormat) {
         Drops: []
     };
 
-    $scope.addDrop = function() {
-        $scope.request.Drops.push({
+    $scope.addDr = function (drop) {
+        drop.DeliveryReceipts.push({});
+    };
+
+    $scope.addDrop = function () {
+        var drop = {
             BranchId: null,
-            ExpectedDropTime: {}
-        });
+            ExpectedDropTime: {},
+            DeliveryReceipts: []
+        };
+        $scope.addDr(drop);
+        $scope.request.Drops.push(drop);
     };
 
     $scope.addDrop();
-    
+
+    $scope.getTotalBoxes = function(drop) {
+        return drop.DeliveryReceipts.map(function(dr) {
+            return dr.NumberOfBoxes;
+        }).reduce(function (oldV, v) {
+            return isNaN(v) ? oldV : (v + oldV);
+        }, 0);
+    };
+
+    clientService.getAll().then(function(clients) {
+        $scope.clients = clients;
+    }).catch(function() {
+        console.error('could not load clients');
+    });
+
+    wirehouseService.getAll().then(function(wirehouses) {
+        $scope.wirehouses = wirehouses;
+    }).catch(function() {
+        console.error('could not load wirehouses');
+    });
+
+    employeeService.getTruckEmployees().then(function(employeeGroups) {
+        $scope.drivers = employeeGroups[designation.driver];
+        $scope.helpers = employeeGroups[designation.helper];
+    }).catch(function() {
+        console.error('could not load drivers and helpers');
+    });
+
     $scope.order = function () {
-        $scope.request.DeliveryDate = $filter('date')($scope.request.DeliveryDate, dateFormat);
-
+        globalMessage.info('Creating Order...');
         tripService.orderTrip($scope.request).then(function () {
-
+            globalMessage.success('Order Created.');
         }).catch(function () {
-
+            globalMessage.error('Could not create order, please try again.');
         });
     };
 }

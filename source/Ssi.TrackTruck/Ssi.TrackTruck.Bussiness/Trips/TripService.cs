@@ -1,5 +1,6 @@
-﻿using Ssi.TrackTruck.Bussiness.DAL;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
+﻿using System.Collections.Generic;
+using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Trips;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
 {
@@ -12,10 +13,15 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             _repository = repository;
         }
 
-        public Trip AddTrip(AddTripRequest request)
+        public Trip AddTrip(TripOrderRequest orderRequest)
         {
-            var trip = request.ToTrip();
+            var trip = orderRequest.ToTrip();
             return _repository.Create(trip);
+        }
+
+        public IEnumerable<Trip> GetAll()
+        {
+            return _repository.GetAll<Trip>();
         }
     }
 }
