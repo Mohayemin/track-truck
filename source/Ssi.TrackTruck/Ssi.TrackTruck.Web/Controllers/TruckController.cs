@@ -12,6 +12,11 @@ namespace Ssi.TrackTruck.Web.Controllers
             _truckService = truckService;
         }
 
+        public ActionResult Index()
+        {
+            return View("Truck");
+        }
+
         public ActionResult Report()
         {
             return View();
