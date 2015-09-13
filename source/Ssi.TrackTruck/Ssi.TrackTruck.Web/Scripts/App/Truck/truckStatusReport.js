@@ -12,6 +12,8 @@ function truckStatusReportDirective(url, truckService, truckStatus) {
         controller: [
             '$scope',
             function ($scope) {
+                $scope.truckStatus = truckStatus;
+
                 $scope.trucks = [];
                 $scope.summary = {};
 
