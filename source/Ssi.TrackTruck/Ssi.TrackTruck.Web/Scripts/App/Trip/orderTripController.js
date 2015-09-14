@@ -2,14 +2,14 @@
     '$scope',
     'clientService',
     'tripService',
-    'wirehouseService',
+    'warehouseService',
     'employeeService',
     'designation',
     'globalMessage',
     orderTripController
 ]);
 
-function orderTripController($scope, clientService, tripService, wirehouseService, employeeService, designation, globalMessage) {
+function orderTripController($scope, clientService, tripService, warehouseService, employeeService, designation, globalMessage) {
     $scope.request = {
         DeliveryHour: 15,
         DeliveryMinute: 30,
@@ -47,10 +47,10 @@ function orderTripController($scope, clientService, tripService, wirehouseServic
         console.error('could not load clients');
     });
 
-    wirehouseService.getAll().then(function(wirehouses) {
-        $scope.wirehouses = wirehouses;
+    warehouseService.getAll().then(function(warehouses) {
+        $scope.warehouses = warehouses;
     }).catch(function() {
-        console.error('could not load wirehouses');
+        console.error('could not load warehouses');
     });
 
     employeeService.getTruckEmployees().then(function(employeeGroups) {
