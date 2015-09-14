@@ -1,0 +1,17 @@
+﻿<form ng-submit="add()">
+    <div class="form-group">
+        <label class="control-label">Client's Name</label>
+        <input ng-model="model.Name" type="text" class="form-control" 
+               placeholder="Client's Name" required />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Trucks per day</label>
+        <input ng-model="model.TrucksPerDay" type="number" class="form-control"
+               placeholder="Trucks allocated per day" required />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success btn-block">
+            <i class="fa fa-fw fa-lg fa-plus"></i> Add Client
+        </button>
+    </div>
+</form>
