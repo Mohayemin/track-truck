@@ -11,9 +11,15 @@ function addClientDirective(url, clientService) {
         controller: [
             '$scope',
             function ($scope) {
-                $scope.model = {};
+                $scope.model = {
+                    Branches: [{}]
+                };
                 $scope.add = function () {
                     clientService.add($scope.model);
+                };
+
+                $scope.addBranch = function() {
+                    $scope.model.Branches.push({});
                 };
             }
         ]
