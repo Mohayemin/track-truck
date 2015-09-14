@@ -16,7 +16,7 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             _trip = trip;
         }
 
-        public string TruckNumber { get { return _truck.Number; } }
+        public string TruckNumber { get { return _truck.RegistrationNumber; } }
         public string DriverId { get { return _trip.DriverId; } }
         public string DriverName { get { return null; } }
         public int ItemsCarrying { get { return _trip.Drops.SelectMany(drop => drop.DeliveryReceipts).Sum(dr => dr.NumberOfBoxes); } }

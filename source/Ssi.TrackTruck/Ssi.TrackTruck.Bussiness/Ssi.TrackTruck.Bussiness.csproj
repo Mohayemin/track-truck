@@ -63,7 +63,7 @@
     <Compile Include="DAL\Trips\Drop.cs" />
     <Compile Include="DAL\Trips\Trip.cs" />
     <Compile Include="DAL\Entities\Truck.cs" />
-    <Compile Include="DAL\Entities\Wirehouse.cs" />
+    <Compile Include="DAL\Entities\Warehouse.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
@@ -79,13 +79,15 @@
     <Compile Include="Trips\TripDropRequest.cs" />
     <Compile Include="Trips\TripOrderRequest.cs" />
     <Compile Include="Trips\TripService.cs" />
+    <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
     <Compile Include="Trucks\TruckStatusItem.cs" />
-    <Compile Include="Wirehouses\WirehouseService.cs" />
+    <Compile Include="Warehouses\WarehouseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
