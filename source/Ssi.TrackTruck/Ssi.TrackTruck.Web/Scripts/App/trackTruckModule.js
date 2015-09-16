@@ -1,16 +1,21 @@
-﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap', 'tableSort']);
+﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap', 'tableSort', 'ngRoute']);
 
 trackTruck.config([
     '$locationProvider',
     'datepickerPopupConfig',
     'datepickerConfig',
     'timepickerConfig',
-    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig) {
+    '$routeProvider',
+    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig, $routeProvider) {
         $locationProvider.html5Mode(false);
         datepickerPopupConfig.datepickerPopup = 'MMMM dd, yyyy';
         datepickerConfig.showWeeks = false;
         datepickerPopupConfig.appendToBody = true;
         timepickerConfig.showSpinners = false;
+
+        $routeProvider.when('/hello', {
+            template: '<div>hello</div>'
+        });
     }
 ]);
 
