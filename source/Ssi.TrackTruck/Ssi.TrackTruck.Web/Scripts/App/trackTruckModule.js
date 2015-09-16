@@ -13,9 +13,13 @@ trackTruck.config([
         datepickerPopupConfig.appendToBody = true;
         timepickerConfig.showSpinners = false;
 
-        $routeProvider.when('/hello', {
-            template: '<div>hello</div>'
-        });
+        $routeProvider
+            .when('/hello', {
+                template: '<div>hello</div>'
+            })
+            .when('/truck/add', {
+                template: '<add-truck></add-truck>'
+            });
     }
 ]);
 
