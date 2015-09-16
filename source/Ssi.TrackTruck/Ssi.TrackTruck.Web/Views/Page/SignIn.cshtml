@@ -2,6 +2,14 @@
     ViewBag.Title = "Sign In";
 }
 
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="@Url.Action("", "")">SSI Logistics</a>
+        </div>
+    </div>
+</nav>
+
 <div ng-controller="signInController">
     <form class="form-horizontal" ng-submit="signIn()">
 
@@ -9,7 +17,7 @@
             <legend class="text-center"> Sign In</legend>
 
             <div class="col-md-offset-3 col-md-6">
-                
+
                 <div class="form-group">
                     <input ng-model="model.Username" type="text" class="form-control" name="Username" placeholder="Username" autofocus>
                 </div>
@@ -26,7 +34,7 @@
                         <button type="submit" class="btn btn-primary pull-right">Sign In</button>
                     </div>
                 </div>
-                
+
             </div>
         </fieldset>
     </form>
