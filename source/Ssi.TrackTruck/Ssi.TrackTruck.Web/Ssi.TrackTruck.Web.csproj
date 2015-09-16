@@ -144,6 +144,7 @@
     <Content Include="Scripts\App\Truck\truckStatusReport.js" />
     <Content Include="Scripts\App\url.js" />
     <Content Include="Scripts\App\Warehouse\warehouseService.js" />
+    <Content Include="Scripts\Lib\angular-route.js" />
     <Content Include="Scripts\Lib\angular-tablesort.js" />
     <Content Include="Scripts\Lib\angular.js" />
     <Content Include="Scripts\Lib\angular.min.js" />
@@ -198,6 +199,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Truck\Truck.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -208,7 +210,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Employee\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Warehouse\" />
   </ItemGroup>
   <ItemGroup>
