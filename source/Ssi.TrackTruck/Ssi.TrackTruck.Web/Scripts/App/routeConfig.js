@@ -19,6 +19,7 @@
             .when('/client/list', defaultRoute('client-list'))
             .when('/client/add', defaultRoute('add-client'))
             .when('/trip/order', defaultRoute('order-trip'))
+            .when('/user/list', defaultRoute('user-list'))
         ;
     }
 ]);
