@@ -12,11 +12,18 @@
         <div collapse="navCollapsed" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
 
-                <li>
-                    <a ng-href="{{url.resolve('Client', '')}}">
+                <li dropdown>
+                    <a href dropdown-toggle>
                         Clients
-                        <i class="fa fa-fw fa-lg fa-briefcase"></i>
+                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="{{url.route('Client', 'List')}}">
+                                <i class="fa fa-fw fa-lg fa-list"></i>  List
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li dropdown>
                     <a href dropdown-toggle>

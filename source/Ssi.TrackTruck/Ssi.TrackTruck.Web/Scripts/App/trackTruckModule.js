@@ -2,6 +2,7 @@
     'navigation',
     'utilModule',
     'truck',
+    'client',
     'ui.bootstrap',
     'tableSort',
     'ngRoute']);

@@ -6,16 +6,17 @@
             return '<' + tagName + '>' + '</' + tagName + '>';
         }
 
+        function defaultRoute(directiveTag) {
+            return {
+                template: createClosedTag(directiveTag),
+                caseInsensitiveMatch: true
+            };
+        }
+
         $routeProvider
-            .when('/hello', {
-                template: '<div>hello</div>',
-                caseInsensitiveMatch: true
-            }).when('/truck/add', {
-                template: createClosedTag('add-truck'),
-                caseInsensitiveMatch: true
-            }).when('/truck/report', {
-                template: createClosedTag('truck-status-report'),
-                caseInsensitiveMatch: true
-            });
+            .when('/truck/add', defaultRoute('add-truck'))
+            .when('/truck/report', defaultRoute('truck-status-report'))
+            .when('/client/list', defaultRoute('client-list'))
+        ;
     }
 ]);
