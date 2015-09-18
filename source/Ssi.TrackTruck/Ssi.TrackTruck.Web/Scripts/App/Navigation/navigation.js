@@ -3,7 +3,9 @@
     function(url) {
         return {
             templateUrl: url.template('Navigation', 'navigation'),
-            scope: {},
+            scope: {
+                username : '='
+            },
             controller: [
                 '$scope',
                 function($scope) {
