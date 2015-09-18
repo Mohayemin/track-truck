@@ -5,29 +5,14 @@ trackTruck.config([
     'datepickerPopupConfig',
     'datepickerConfig',
     'timepickerConfig',
-    '$routeProvider',
-    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig, $routeProvider) {
+    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig) {
+        console.log('configuring app');
+
         $locationProvider.html5Mode(false);
         datepickerPopupConfig.datepickerPopup = 'MMMM dd, yyyy';
         datepickerConfig.showWeeks = false;
         datepickerPopupConfig.appendToBody = true;
         timepickerConfig.showSpinners = false;
-
-        function createClosedTag(tagName) {
-            return '<' + tagName + '>' + '</' + tagName + '>';
-        }
-
-        $routeProvider
-            .when('/hello', {
-                template: '<div>hello</div>'
-                , caseInsensitiveMatch: true
-            }).when('/truck/add', {
-                template: createClosedTag('add-truck')
-                , caseInsensitiveMatch: true
-            }).when('/truck/report', {
-                template: createClosedTag('truck-status-report')
-                , caseInsensitiveMatch: true
-            });
     }
 ]);
 
