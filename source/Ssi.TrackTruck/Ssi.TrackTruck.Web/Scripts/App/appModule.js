@@ -1,11 +1,24 @@
-﻿var trackTruck = angular.module('trackTruck', ['ui.bootstrap', 'tableSort']);
+﻿var appModule = angular.module('trackTruck', [
+    'navigation',
+    'utilModule',
+    'truck',
+    'client',
+    'trip',
+    'employee',
+    'warehouse',
+    'user',
+    'ui.bootstrap',
+    'tableSort',
+    'ngRoute']);
 
-trackTruck.config([
+appModule.config([
     '$locationProvider',
     'datepickerPopupConfig',
     'datepickerConfig',
     'timepickerConfig',
     function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig) {
+        console.log('configuring app');
+
         $locationProvider.html5Mode(false);
         datepickerPopupConfig.datepickerPopup = 'MMMM dd, yyyy';
         datepickerConfig.showWeeks = false;
@@ -14,9 +27,9 @@ trackTruck.config([
     }
 ]);
 
-trackTruck.value('_', window._);
-trackTruck.value('dateFormat', 'MMMM dd, yyyy');
-trackTruck.value('designation', {
+appModule.value('_', window._);
+appModule.value('dateFormat', 'MMMM dd, yyyy');
+appModule.value('designation', {
     driver: 'driver',
     helper: 'helper'
 });
