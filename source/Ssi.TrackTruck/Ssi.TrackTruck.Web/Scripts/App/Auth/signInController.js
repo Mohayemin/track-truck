@@ -1,6 +1,5 @@
 ﻿trackTruck.controller('signInController', [
     '$scope',
-    '$location',
     '$window',
     'authService',
     'url',
@@ -8,7 +7,7 @@
     signInController
 ]);
 
-function signInController($scope, $location, $window, authService, url, globalMessage) {
+function signInController($scope, $window, authService, url, globalMessage) {
     $scope.model = {};
 
     $scope.signIn = function () {
@@ -20,7 +19,7 @@ function signInController($scope, $location, $window, authService, url, globalMe
 
             if (!response.IsError) {
                 globalMessage.success(response.Message);
-                $window.location.href = url.resolve();
+                $window.location.reload();
             } else {
                 globalMessage.error(response.Message);
             }

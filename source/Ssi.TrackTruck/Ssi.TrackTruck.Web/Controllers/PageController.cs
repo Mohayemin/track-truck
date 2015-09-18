@@ -7,13 +7,11 @@ namespace Ssi.TrackTruck.Web.Controllers
         [Route("")]
         public ActionResult App()
         {
-            return View();
-        }
-
-        [Route("signin")]
-        public ActionResult SignIn()
-        {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("App");
+            }
+            return View("SignIn");
         }
 	}
 }
