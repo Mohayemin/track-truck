@@ -7,9 +7,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("", "")">SSI Logistics</a>
+            <a class="navbar-brand" href="/">SSI Logistics</a>
         </div>
-        <div collapse="navCollapsed" class="collapse navbar-collapse" >
+        <div collapse="navCollapsed" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
@@ -48,22 +48,22 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="@Url.Action("Report", "Attendence")">
+                    <a href="@Url.Action(" report", "Attendence" )">
                         Attendence <i class="fa fa-fw fa-lg fa-group"></i>
                     </a>
                 </li>
                 <li dropdown>
-                    <a dropdown-toggle href="@Url.Action("Profile", "User")">
-                        @User.Identity.Name<i class="fa fa-fw fa-lg fa-caret-down"></i>
+                    <a href dropdown-toggle>
+                        [[user name]]<i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="@Url.Action("ChangePassword", "Auth")">
+                            <a href="url.Action(" changepassword", "Auth" )">
                                 <i class="fa fa-fw fa-lg fa-key"></i>  Change Password
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("SignOut", "Auth")">
+                            <a ng-href="{{url.server('auth','signout')}}">
                                 <i class="fa fa-fw fa-lg fa-sign-out"></i> Sign Out
                             </a>
                         </li>
