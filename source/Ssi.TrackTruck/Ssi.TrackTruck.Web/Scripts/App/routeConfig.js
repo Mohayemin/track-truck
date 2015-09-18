@@ -14,12 +14,14 @@
         }
 
         $routeProvider
+            .when('/', defaultRoute('home'))
             .when('/truck/add', defaultRoute('add-truck'))
             .when('/truck/report', defaultRoute('truck-status-report'))
             .when('/client/list', defaultRoute('client-list'))
             .when('/client/add', defaultRoute('add-client'))
             .when('/trip/order', defaultRoute('order-trip'))
             .when('/user/list', defaultRoute('user-list'))
+            .otherwise({redirectTo: '/'})
         ;
     }
 ]);
