@@ -5,5 +5,5 @@
 ]);
 
 function clientController($scope, clientService) {
-    
+      
 }

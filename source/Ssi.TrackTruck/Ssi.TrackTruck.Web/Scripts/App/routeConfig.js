@@ -17,6 +17,7 @@
             .when('/truck/add', defaultRoute('add-truck'))
             .when('/truck/report', defaultRoute('truck-status-report'))
             .when('/client/list', defaultRoute('client-list'))
+            .when('/client/add', defaultRoute('add-client'))
         ;
     }
 ]);

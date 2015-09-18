@@ -124,6 +124,11 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\App\Auth\authService.js" />
+    <Content Include="Scripts\App\Client\addClient.html" />
+    <Content Include="Scripts\App\Client\addClient.js" />
+    <Content Include="Scripts\App\Client\clientList.html" />
+    <Content Include="Scripts\App\Client\clientList.js" />
+    <Content Include="Scripts\App\Client\clientModule.js" />
     <Content Include="Scripts\App\Navigation\navigation.html" />
     <Content Include="Scripts\App\Navigation\navigation.js" />
     <Content Include="Scripts\App\Navigation\navigationModule.js" />
