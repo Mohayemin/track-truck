@@ -1,4 +1,4 @@
-﻿trackTruck.controller('orderTripController', [
+﻿appModule.controller('orderTripController', [
     
     orderTripController
 ]);

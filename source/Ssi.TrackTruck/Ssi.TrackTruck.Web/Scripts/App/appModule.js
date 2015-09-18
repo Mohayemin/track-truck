@@ -1,4 +1,4 @@
-﻿var trackTruck = angular.module('trackTruck', [
+﻿var appModule = angular.module('trackTruck', [
     'navigation',
     'utilModule',
     'truck',
@@ -11,7 +11,7 @@
     'tableSort',
     'ngRoute']);
 
-trackTruck.config([
+appModule.config([
     '$locationProvider',
     'datepickerPopupConfig',
     'datepickerConfig',
@@ -27,9 +27,9 @@ trackTruck.config([
     }
 ]);
 
-trackTruck.value('_', window._);
-trackTruck.value('dateFormat', 'MMMM dd, yyyy');
-trackTruck.value('designation', {
+appModule.value('_', window._);
+appModule.value('dateFormat', 'MMMM dd, yyyy');
+appModule.value('designation', {
     driver: 'driver',
     helper: 'helper'
 });

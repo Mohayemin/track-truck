@@ -1,4 +1,4 @@
-﻿trackTruck.controller('clientController', [
+﻿appModule.controller('clientController', [
     '$scope',
     'clientService',
     clientController
