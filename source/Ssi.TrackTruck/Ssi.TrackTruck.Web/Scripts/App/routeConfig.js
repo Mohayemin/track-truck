@@ -1,4 +1,4 @@
-﻿trackTruck.config([
+﻿appModule.config([
     '$routeProvider',
     function ($routeProvider) {
         console.log('configuring routes');
