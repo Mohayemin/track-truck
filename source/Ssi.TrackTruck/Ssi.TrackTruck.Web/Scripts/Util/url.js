@@ -2,7 +2,8 @@
     function url() {
         return {
             template: function(module, feature) {
-                return '/Scripts/App/' + module + '/' + feature + '.html';
+                var root = '/Scripts/App/';
+                return root + module + '/' + feature + '.html';
             },
             route: function() {
                 var paths = Array.prototype.slice.call(arguments);
