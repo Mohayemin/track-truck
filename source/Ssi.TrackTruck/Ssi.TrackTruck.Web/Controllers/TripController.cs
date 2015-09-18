@@ -26,11 +26,5 @@ namespace Ssi.TrackTruck.Web.Controllers
 
             return new JsonNetResult(trip);
         }
-
-        [HttpGet]
-        public ActionResult Order()
-        {
-            return View();
-        }
 	}
 }

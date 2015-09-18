@@ -11,13 +11,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             _clientService = clientService;
         }
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         [HttpGet]
         public ActionResult All()
         {
