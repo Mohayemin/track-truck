@@ -6,6 +6,7 @@
     'trip',
     'employee',
     'warehouse',
+    'user',
     'ui.bootstrap',
     'tableSort',
     'ngRoute']);
