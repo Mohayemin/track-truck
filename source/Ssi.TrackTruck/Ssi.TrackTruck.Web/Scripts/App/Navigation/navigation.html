@@ -60,7 +60,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="@Url.Action(" report", "Attendence" )">
+                    <a ng-href="{{url.route('Attendence', 'report')}}">
                         Attendence <i class="fa fa-fw fa-lg fa-group"></i>
                     </a>
                 </li>
@@ -70,7 +70,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="url.Action(" changepassword", "Auth" )">
+                            <a ng-href="{{url.route('auth', 'changepassword')}}">
                                 <i class="fa fa-fw fa-lg fa-key"></i>  Change Password
                             </a>
                         </li>
