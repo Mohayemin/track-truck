@@ -13,12 +13,20 @@ trackTruck.config([
         datepickerPopupConfig.appendToBody = true;
         timepickerConfig.showSpinners = false;
 
+        function createClosedTag(tagName) {
+            return '<' + tagName + '>' + '</' + tagName + '>';
+        }
+
         $routeProvider
             .when('/hello', {
                 template: '<div>hello</div>'
-            })
-            .when('/truck/add', {
-                template: '<add-truck></add-truck>'
+                , caseInsensitiveMatch: true
+            }).when('/truck/add', {
+                template: createClosedTag('add-truck')
+                , caseInsensitiveMatch: true
+            }).when('/truck/report', {
+                template: createClosedTag('truck-status-report')
+                , caseInsensitiveMatch: true
             });
     }
 ]);

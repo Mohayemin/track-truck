@@ -4,10 +4,14 @@
 
 function urlFactory() {
     return {
-        resolveTemplate: function(module, feature) {
+        template: function(module, feature) {
             return '/Scripts/App/' + module + '/' + feature + '.html';
         },
-        resolve: function (controller, action, params) {
+        route: function () {
+            var paths = Array.prototype.slice.call(arguments);
+            return '#/' + paths.join('/');
+        },
+        server: function (controller, action, params) {
             if (!controller) {
                 return '/';
             }

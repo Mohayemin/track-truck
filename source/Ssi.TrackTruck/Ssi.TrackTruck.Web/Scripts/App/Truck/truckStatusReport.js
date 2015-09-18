@@ -7,7 +7,7 @@
 
 function truckStatusReportDirective(url, truckService, truckStatus) {
     return {
-        templateUrl: url.resolveTemplate('Truck', 'truckStatusReport'),
+        templateUrl: url.template('Truck', 'truckStatusReport'),
         scope: {},
         controller: [
             '$scope',

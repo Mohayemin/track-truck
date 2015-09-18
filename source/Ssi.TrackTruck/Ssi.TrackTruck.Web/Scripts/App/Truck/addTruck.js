@@ -6,7 +6,7 @@
 
 function addTruckDirective(url, truckService) {
     return {
-        templateUrl: url.resolveTemplate('Truck', 'addTruck'),
+        templateUrl: url.template('Truck', 'addTruck'),
         scope: {},
         controller: [
             '$scope',
