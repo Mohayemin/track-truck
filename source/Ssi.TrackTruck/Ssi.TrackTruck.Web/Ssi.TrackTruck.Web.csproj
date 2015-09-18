@@ -132,6 +132,7 @@
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\App\globalMessageDirective.js" />
     <Content Include="Scripts\App\repository.js" />
+    <Content Include="Scripts\App\routeConfig.js" />
     <Content Include="Scripts\App\trackTruckController.js" />
     <Content Include="Scripts\App\trackTruckModule.js" />
     <Content Include="Scripts\App\Trip\orderTripController.js" />
