@@ -3,6 +3,9 @@
     'utilModule',
     'truck',
     'client',
+    'trip',
+    'employee',
+    'warehouse',
     'ui.bootstrap',
     'tableSort',
     'ngRoute']);

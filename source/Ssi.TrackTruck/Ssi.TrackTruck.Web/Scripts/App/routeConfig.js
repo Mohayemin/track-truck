@@ -18,6 +18,7 @@
             .when('/truck/report', defaultRoute('truck-status-report'))
             .when('/client/list', defaultRoute('client-list'))
             .when('/client/add', defaultRoute('add-client'))
+            .when('/trip/order', defaultRoute('order-trip'))
         ;
     }
 ]);
