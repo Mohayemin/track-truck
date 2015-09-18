@@ -30,10 +30,22 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a ng-href="{{url.resolve('Truck', '')}}">
-                        Trucks <i class="fa fa-fw fa-lg fa-truck"></i>
+                <li dropdown>
+                    <a href dropdown-toggle>
+                        Trucks <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="{{url.route('Truck', 'Report')}}">
+                                <i class="fa fa-fw fa-lg fa-list"></i> Report
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-href="{{url.route('Truck', 'Add')}}">
+                                <i class="fa fa-fw fa-lg fa-plus"></i> Add
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="@Url.Action("Report", "Attendence")">

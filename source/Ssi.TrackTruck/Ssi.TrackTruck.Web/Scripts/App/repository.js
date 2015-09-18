@@ -11,10 +11,10 @@ function repository(url, $http) {
 
     return {
         get: function(controller, action, params) {
-            return $http.get(url.resolve(controller, action, params)).then(onSuccess);
+            return $http.get(url.server(controller, action, params)).then(onSuccess);
         },
         post: function(controller, action, data) {
-            return $http.post(url.resolve(controller, action), data).then(onSuccess);
+            return $http.post(url.server(controller, action), data).then(onSuccess);
         }
     }
 }
