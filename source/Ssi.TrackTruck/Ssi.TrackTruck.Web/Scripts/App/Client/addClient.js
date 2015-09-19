@@ -1,6 +1,6 @@
 ﻿clientModule.directive('addClient', [
-    'url',
-    function (url) {
+    'url', '_',
+    function (url, _) {
         return {
             templateUrl: url.template('Client', 'addClient'),
             scope: {},
@@ -27,6 +27,10 @@
 
                     $scope.addBranch = function() {
                         $scope.request.Branches.push({});
+                    };
+
+                    $scope.deleteBranch = function(index) {
+                        $scope.request.Branches.splice(index, 1);
                     };
                 }
             ]
