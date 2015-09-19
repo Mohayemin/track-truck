@@ -8,8 +8,8 @@
                 '$scope',
                 'clientService',
                 function ($scope, clientService) {
-                    $scope.addClient = function () {
-                        clientService.addClient($scope.addRequest).then(function (response) {
+                    $scope.add = function () {
+                        clientService.add($scope.addRequest).then(function (response) {
                             if (response.IsError) {
                                 console.error('could not add client');
                             } else {
