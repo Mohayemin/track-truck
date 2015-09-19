@@ -8,7 +8,9 @@
                 '$scope',
                 'clientService',
                 function ($scope, clientService) {
-                    $scope.request = {};
+                    $scope.request = {
+                        Branches : []
+                    };
 
                     $scope.add = function () {
                         clientService.add($scope.request).then(function (response) {
@@ -21,6 +23,10 @@
                         }).catch(function () {
                             console.error('could not add client');
                         });
+                    };
+
+                    $scope.addBranch = function() {
+                        $scope.request.Branches.push({});
                     };
                 }
             ]
