@@ -1,6 +1,6 @@
 ﻿clientModule.factory('clientService', [
-    'repository',
-    function clientService(repository) {
+    'repository', '_',
+    function clientService(repository, _) {
         var _clients = [];
         var _loaded = false;
         
@@ -22,6 +22,9 @@
                 return repository.post('Client', 'Add', request).then(function(client) {
                     _clients.push(client);
                 });
+            },
+            get: function(id) {
+                return _.find(_clients, { Id: id });
             }
         };
     }
