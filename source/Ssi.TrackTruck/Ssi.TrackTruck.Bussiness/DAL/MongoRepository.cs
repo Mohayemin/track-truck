@@ -49,5 +49,15 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             return Collection<T>().FindAll().SetFields(Fields<T>.Include(property)).AsQueryable();
         }
+
+        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        {
+            return Collection<T>().Find(Query<T>.Where(condition)).SetFields("_id").Any();
+        }
+
+        public void CreateAll<T>(IEnumerable<T> items)
+        {
+            Collection<T>().InsertBatch(items);
+        }
     }
 }
