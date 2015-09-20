@@ -34,26 +34,30 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             {
                 return Response.Error("", "Client with same name already exists");
             }
-            if (BranchNameHasDuplicate(request))
+
+            if (request.Branches.Any())
             {
-                return Response.Error("", "Two or more branches has the same name");
-            }
-            if (BranchUsernameTaken(request))
-            {
-                return Response.Error("", "One or more branch usernames are already taken");
+                if (BranchNameHasDuplicate(request))
+                {
+                    return Response.Error("", "Two or more branches has the same name");
+                }
+                if (BranchUsernameTaken(request))
+                {
+                    return Response.Error("", "One or more branch usernames are already taken");
+                }
+                var users = request.Branches.Select(b => _authService.CreateUserObject(b.Username, b.Password, Role.BranchCustodian));
+                _repository.CreateAll(users);
             }
 
-            var users = request.Branches.Select(b => _authService.CreateUserObject(b.Username, b.Password, Role.BranchCustodian));
             var branches = request.Branches.Select(b => b.ToBranch());
 
             var client = new Client
             {
                 Name = request.Name,
                 TrucksPerDay = request.TrucksPerDay,
-                Branches =  branches
+                Branches = branches
             };
 
-            _repository.CreateAll(users);
             _repository.Create(client);
 
             return Response.Success(client);
