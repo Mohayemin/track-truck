@@ -3,8 +3,9 @@
     function clientService(repository, _) {
         var _clients = [];
         var _loaded = false;
-        
-        return {
+        var _loadPromise;
+
+        var service = {
             load: function() {
                 return repository.get('Client', 'All').then(function (clients) {
                     _clients.push.apply(_clients, clients);
@@ -13,19 +14,24 @@
                 });
             },
             getAll: function () {
-                if (!_loaded) {
-                    this.load();
-                }
-                return _clients;
+                return _loadPromise.then(function() {
+                    return _clients;
+                });
             },
             add: function (request) {
                 return repository.post('Client', 'Add', request).then(function(client) {
                     _clients.push(client);
                 });
             },
-            get: function(id) {
-                return _.find(_clients, { Id: id });
+            get: function (id) {
+                return _loadPromise.then(function() {
+                    return _.find(_clients, { Id: id });
+                });
             }
         };
+
+        _loadPromise = service.load();
+
+        return service;
     }
 ]);

@@ -9,7 +9,10 @@
                 '$routeParams',
                 'clientService',
                 function ($scope, $routeParams, clientService) {
-                    $scope.client = clientService.get($routeParams['id']);
+                    clientService.get($routeParams['id']).then(function(client) {
+                        $scope.client = client;
+                    });
+                    
                 }
             ]
         }
