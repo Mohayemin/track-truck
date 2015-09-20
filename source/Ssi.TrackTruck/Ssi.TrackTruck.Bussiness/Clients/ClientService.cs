@@ -56,7 +56,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             _repository.CreateAll(users);
             _repository.Create(client);
 
-            return Response.Success(new ClientSummary(client));
+            return Response.Success(client);
         }
 
         private bool ClientNameIsDuplicate(AddClientRequest request)
