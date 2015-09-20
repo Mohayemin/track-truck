@@ -10,15 +10,11 @@
                 function($scope,
                     clientService) {
 
-                    $scope.loadClients = function () {
-                        clientService.getAllSummary().then(function(clients) {
-                            $scope.clients = clients;
-                        }).catch(function() {
-                            console.error('could not load clients');
-                        });
-                    };
+                    $scope.clients = clientService.getAll();
 
-                    $scope.loadClients();
+                    $scope.loadClients = function () {
+                        clientService.load();
+                    };
                 }
             ]
         };

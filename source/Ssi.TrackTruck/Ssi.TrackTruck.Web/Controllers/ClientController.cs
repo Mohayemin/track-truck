@@ -17,13 +17,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);
         }
-
-        [HttpGet]
-        public ActionResult AllSummary()
-        {
-            return Json(_clientService.GetAllSummary(), JsonRequestBehavior.AllowGet);
-        }
-
+        
         [HttpPost]
         public ActionResult Add(AddClientRequest request)
         {

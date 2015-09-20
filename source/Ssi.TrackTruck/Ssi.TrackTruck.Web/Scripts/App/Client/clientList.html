@@ -12,14 +12,14 @@
             <tr>
                 <th ts-criteria="Name|lowercase">Name</th>
                 <th ts-criteria="TrucksPerDay|parseInt">Trucks per day</th>
-                <th ts-criteria="NumberOfBranches|parseInt">Branches</th>
+                <th ts-criteria="Branches.length|parseInt">Branches</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="client in clients track by client.Id" ts-repeat>
                 <td ng-bind="client.Name"></td>
                 <td ng-bind="client.TrucksPerDay"></td>
-                <td ng-bind="client.NumberOfBranches"></td>
+                <td ng-bind="client.Branches.length"></td>
             </tr>
         </tbody>
     </table>
