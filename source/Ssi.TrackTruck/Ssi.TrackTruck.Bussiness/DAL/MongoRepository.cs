@@ -54,5 +54,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             return Collection<T>().Find(Query<T>.Where(condition)).SetFields("_id").Any();
         }
+
+        public void CreateAll<T>(IEnumerable<T> items)
+        {
+            Collection<T>().InsertBatch(items);
+        }
     }
 }
