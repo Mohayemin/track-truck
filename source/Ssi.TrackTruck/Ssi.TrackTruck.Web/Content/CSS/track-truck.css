@@ -35,3 +35,7 @@ table.table.table-bordered th, table.table.table-bordered td {
     margin-right: 3px;
     text-align: center;
 }
+
+.pad-left {
+    padding-left: 15px;
+}
