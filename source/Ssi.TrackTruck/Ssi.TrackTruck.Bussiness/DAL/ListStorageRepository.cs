@@ -41,6 +41,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return GetAll<T>();
         }
 
+        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        {
+            return Query<T>().Any(condition);
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();
