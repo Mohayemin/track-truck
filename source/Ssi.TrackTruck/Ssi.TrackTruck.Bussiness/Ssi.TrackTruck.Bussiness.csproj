@@ -49,6 +49,7 @@
     <Compile Include="Auth\IHasher.cs" />
     <Compile Include="Auth\Role.cs" />
     <Compile Include="Clients\AddClientRequest.cs" />
+    <Compile Include="Clients\AddBranchRequest.cs" />
     <Compile Include="Clients\ClientService.cs" />
     <Compile Include="Clients\ClientSummary.cs" />
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />

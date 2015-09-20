@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
@@ -7,20 +8,17 @@ namespace Ssi.TrackTruck.Bussiness.Clients
     {
         public string Name { get; set; }
         public int TrucksPerDay { get; set; }
+
+        public IList<AddBranchRequest> Branches { get; set; }
+
         public bool Validate()
         {
-            return !string.IsNullOrWhiteSpace(Name)
+            var valid = !string.IsNullOrWhiteSpace(Name)
                    && TrucksPerDay >= 0;
-        }
 
-        public Client ToClient()
-        {
-            return new Client
-            {
-                Name = Name,
-                TrucksPerDay = TrucksPerDay,
-                Branches = new List<Branch>()
-            };
+            valid = valid && Branches.All(branch => branch.Validate());
+
+            return valid;
         }
     }
 }

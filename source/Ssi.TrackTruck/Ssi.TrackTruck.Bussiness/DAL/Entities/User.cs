@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Ssi.TrackTruck.Bussiness.Auth;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
@@ -12,6 +13,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public string Username { get; set; }
         public string UsernameLowerCase { get; set; }
         public string PasswordHash { get; set; }
-        public string Role { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public Role Role { get; set; }
     }
 }
