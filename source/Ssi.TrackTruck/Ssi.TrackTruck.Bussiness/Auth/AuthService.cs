@@ -63,7 +63,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         {
             var user = new User
             {
-                Id = Guid.NewGuid().ToString().Replace("-", "").ToLower(),
                 Username = username,
                 PasswordHash = _hasher.GenerateHash(password),
                 UsernameLowerCase = username.ToLower(),
