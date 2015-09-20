@@ -16,10 +16,7 @@
                         clientService.add($scope.request).then(function (response) {
                             if (response.IsError) {
                                 console.error('could not add client');
-                            } else {
-                                $scope.clients.push(response.Data);
                             }
-
                         }).catch(function () {
                             console.error('could not add client');
                         });
