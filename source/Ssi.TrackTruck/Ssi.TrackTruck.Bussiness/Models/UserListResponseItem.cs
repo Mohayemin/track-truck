@@ -1,4 +1,4 @@
-﻿using Ssi.TrackTruck.Bussiness.DAL.Entities;
+﻿using Ssi.TrackTruck.Bussiness.Auth;
 
 namespace Ssi.TrackTruck.Bussiness.Models
 {
@@ -6,6 +6,6 @@ namespace Ssi.TrackTruck.Bussiness.Models
     {
         public string Username { get; set; }
 
-        public string Role { get; set; }
+        public Role Role { get; set; }
     }
 }

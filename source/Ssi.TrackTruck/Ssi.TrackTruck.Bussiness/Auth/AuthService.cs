@@ -47,14 +47,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             {
                 if (FindByUsername(request.Username) == null)
                 {
-                    var user = new User
-                    {
-                        Id = Guid.NewGuid().ToString().Replace("-", "").ToLower(),
-                        Username = request.Username,
-                        PasswordHash = _hasher.GenerateHash(request.InitialPassword),
-                        UsernameLowerCase = request.Username.ToLower(),
-                        Role = request.Role
-                    };
+                    var user = CreateUserObject(request.Username, request.InitialPassword, request.Role);
 
                     _repository.Create(user);
                     return Response.Success(user, "User Added");
@@ -64,6 +57,19 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             }
 
             return Response.Error("Validation", "Please fill up the required fields");
+        }
+
+        public User CreateUserObject(string username, string password, Role roles)
+        {
+            var user = new User
+            {
+                Id = Guid.NewGuid().ToString().Replace("-", "").ToLower(),
+                Username = username,
+                PasswordHash = _hasher.GenerateHash(password),
+                UsernameLowerCase = username.ToLower(),
+                Role = roles
+            };
+            return user;
         }
 
         public IEnumerable<UserListResponseItem> GetUserList()
