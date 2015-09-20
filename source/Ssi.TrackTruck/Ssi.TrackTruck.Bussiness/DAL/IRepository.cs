@@ -12,5 +12,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         IQueryable<T> GetAll<T>();
         IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values);
         IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property);
+        bool Exists<T>(Expression<Func<T, bool>> condition);
     }
 }
