@@ -2,6 +2,7 @@
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Employees
 {
@@ -19,6 +20,11 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             return _repository.WhereIn<Employee, string>(employee => employee.Designation, designations)
                 .GroupBy(employee => employee.Designation)
                 .ToDictionary(group => group.Key, group => group.ToList());
+        }
+
+        public Response Add(Employee request)
+        {
+            return Response.Success(request);
         }
     }
 }
