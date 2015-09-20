@@ -9,7 +9,7 @@
                 'clientService',
                 function($scope,
                     clientService) {
-
+                    $scope.url = url;
                     clientService.getAll().then(function(clients) {
                         $scope.clients = clients;
                     });
