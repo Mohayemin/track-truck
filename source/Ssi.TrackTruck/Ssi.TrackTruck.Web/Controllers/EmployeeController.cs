@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Employees;
 
 namespace Ssi.TrackTruck.Web.Controllers
@@ -18,6 +19,13 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             var employees = _employeeService.GetByDesignations(designations);
             return Json(employees, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Add(Employee request)
+        {
+            var response = _employeeService.Add(request);
+            return Json(response);
         }
 	}
 }
