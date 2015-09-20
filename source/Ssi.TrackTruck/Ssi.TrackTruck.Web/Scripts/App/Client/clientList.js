@@ -9,7 +9,6 @@
                 'clientService',
                 function($scope,
                     clientService) {
-                    $scope.addRequest = {};
 
                     $scope.loadClients = function () {
                         clientService.getAllSummary().then(function(clients) {

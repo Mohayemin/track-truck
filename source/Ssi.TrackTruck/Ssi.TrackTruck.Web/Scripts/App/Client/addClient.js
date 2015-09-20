@@ -1,6 +1,6 @@
 ﻿clientModule.directive('addClient', [
-    'url',
-    function (url) {
+    'url', '_',
+    function (url, _) {
         return {
             templateUrl: url.template('Client', 'addClient'),
             scope: {},
@@ -8,17 +8,26 @@
                 '$scope',
                 'clientService',
                 function ($scope, clientService) {
-                    $scope.addClient = function () {
-                        clientService.addClient($scope.addRequest).then(function (response) {
+                    $scope.request = {
+                        Branches : []
+                    };
+
+                    $scope.add = function () {
+                        clientService.add($scope.request).then(function (response) {
                             if (response.IsError) {
                                 console.error('could not add client');
-                            } else {
-                                $scope.clients.push(response.Data);
                             }
-
                         }).catch(function () {
                             console.error('could not add client');
                         });
+                    };
+
+                    $scope.addBranch = function() {
+                        $scope.request.Branches.push({});
+                    };
+
+                    $scope.deleteBranch = function(index) {
+                        $scope.request.Branches.splice(index, 1);
                     };
                 }
             ]

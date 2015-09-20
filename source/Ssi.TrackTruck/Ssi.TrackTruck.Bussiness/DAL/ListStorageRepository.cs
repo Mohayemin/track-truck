@@ -41,12 +41,22 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return GetAll<T>();
         }
 
+        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        {
+            return Query<T>().Any(condition);
+        }
+
+        public void CreateAll<T>(IEnumerable<T> items)
+        {
+            List<T>().AddRange(items);
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();
         }
 
-        private IList<T> List<T>()
+        private List<T> List<T>()
         {
             var type = typeof(T);
             if (!_data.ContainsKey(type))
@@ -54,7 +64,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 _data[type] = new List<T>();
             }
 
-            return (IList<T>) _data[type];
+            return (List<T>)_data[type];
         }
     }
 }
