@@ -10,7 +10,9 @@
                 function($scope,
                     clientService) {
 
-                    $scope.clients = clientService.getAll();
+                    clientService.getAll().then(function(clients) {
+                        $scope.clients = clients;
+                    });
 
                     $scope.loadClients = function () {
                         clientService.load();
