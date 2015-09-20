@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Ssi.TrackTruck.Bussiness.DAL.Clients;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
 {
@@ -11,12 +10,20 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public IList<AddBranchRequest> Branches { get; set; }
 
+        public AddClientRequest()
+        {
+            Branches = new List<AddBranchRequest>();
+        }
+
         public bool Validate()
         {
             var valid = !string.IsNullOrWhiteSpace(Name)
                    && TrucksPerDay >= 0;
 
-            valid = valid && Branches.All(branch => branch.Validate());
+            if (valid)
+            {
+                valid = Branches.Count == 0 || Branches.All(branch => branch.Validate());
+            }
 
             return valid;
         }
