@@ -59,6 +59,24 @@
                         </li>
                     </ul>
                 </li>
+                <li dropdown>
+                    <a href dropdown-toggle>
+                        Employees
+                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="{{url.route('Employee', 'List')}}">
+                                <i class="fa fa-fw fa-lg fa-list"></i>  List
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-href="{{url.route('Employee', 'Add')}}">
+                                <i class="fa fa-fw fa-lg fa-plus"></i>  Add
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a ng-href="{{url.route('Attendence', 'report')}}">
                         Attendence <i class="fa fa-fw fa-lg fa-group"></i>

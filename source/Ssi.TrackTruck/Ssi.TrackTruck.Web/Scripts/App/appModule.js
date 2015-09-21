@@ -29,7 +29,3 @@ appModule.config([
 
 appModule.value('_', window._);
 appModule.value('dateFormat', 'MMMM dd, yyyy');
-appModule.value('designation', {
-    driver: 'driver',
-    helper: 'helper'
-});
