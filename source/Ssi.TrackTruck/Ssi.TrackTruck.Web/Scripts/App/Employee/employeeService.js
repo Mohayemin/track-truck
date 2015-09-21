@@ -15,6 +15,9 @@
                     _employees.push(client);
                     return client;
                 });
+            },
+            isDesignationEmpty: function(designation) {
+                return designation === undefined || designation === '';
             }
         }
     }

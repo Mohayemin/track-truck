@@ -28,6 +28,10 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             {
                 return Response.Error("Validation");
             }
+            if (IsDesignationEmpty(request.Designation))
+            {
+                return Response.Error("Validation");
+            }
             if (IsDuplicateEmployeeName(request))
             {
                 return Response.Error("", "Employee with same name already exists");
@@ -46,6 +50,11 @@ namespace Ssi.TrackTruck.Bussiness.Employees
         {
             var nameTaken = _repository.Exists<Employee>(e => e.Name == request.Name);
             return nameTaken;
+        }
+
+        private bool IsDesignationEmpty(string designation)
+        {
+            return string.IsNullOrWhiteSpace(designation);
         }
     }
 }
