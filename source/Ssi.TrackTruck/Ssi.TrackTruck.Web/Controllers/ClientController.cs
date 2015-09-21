@@ -11,18 +11,23 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             _clientService = clientService;
         }
-        
+
         [HttpGet]
         public ActionResult All()
         {
             return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);
         }
-        
+
         [HttpPost]
         public ActionResult Add(AddClientRequest request)
         {
             var response = _clientService.Add(request);
             return Json(response);
         }
-	}
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            return Json(new { IsError = false, Deleted = true, id = id });
+        }
+    }
 }
