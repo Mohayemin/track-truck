@@ -22,7 +22,11 @@
                 });
             },
             add: function (request) {
-                return repository.post('Client', 'Add', request).then(function (client) {
+                return repository.post('Client', 'Add', request).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not add client');
+                    }
+                    var client = response.Data;
                     _clients.push(client);
                     return client;
                 });
