@@ -1,6 +1,10 @@
 ﻿clientModule.directive('addClient', [
-    'url', '_',
-    function (url, _) {
+    'url',
+    '_',
+    '$location',
+    function (url,
+        _,
+        $location) {
         return {
             templateUrl: url.template('Client', 'addClient'),
             scope: {},
@@ -13,10 +17,8 @@
                     };
 
                     $scope.add = function () {
-                        clientService.add($scope.request).then(function (response) {
-                            if (response.IsError) {
-                                console.error('could not add client');
-                            }
+                        clientService.add($scope.request).then(function () {
+                            $location.url('client/list');
                         }).catch(function () {
                             console.error('could not add client');
                         });

@@ -5,7 +5,7 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
-    public class Client : IEntity
+    public class Client : IEntity, ISoftDeletable
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -13,5 +13,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Clients
         public string Name { get; set; }
         public int TrucksPerDay { get; set; }
         public IEnumerable<Branch> Branches { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
