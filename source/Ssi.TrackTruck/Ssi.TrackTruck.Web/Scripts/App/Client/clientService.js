@@ -2,14 +2,13 @@
     'repository', '_',
     function clientService(repository, _) {
         var _clients = [];
-        var _loaded = false;
         var _loadPromise;
 
         var service = {
             load: function () {
                 return repository.get('Client', 'All').then(function (clients) {
+                    _clients.length = 0;
                     _clients.push.apply(_clients, clients);
-                    _loaded = true;
                     return clients;
                 });
             },
