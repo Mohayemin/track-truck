@@ -21,11 +21,20 @@
             add: function (request) {
                 return repository.post('Client', 'Add', request).then(function(client) {
                     _clients.push(client);
+                    return client;
                 });
             },
             get: function (id) {
                 return _loadPromise.then(function() {
                     return _.find(_clients, { Id: id });
+                });
+            },
+            'delete': function(client) {
+                return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
+                    if (!response.IsError) {
+                        client.IsDeleted = true;
+                    }
+                    return response;
                 });
             }
         };
