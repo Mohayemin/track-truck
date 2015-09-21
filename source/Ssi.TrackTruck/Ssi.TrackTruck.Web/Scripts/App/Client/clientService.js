@@ -35,11 +35,11 @@
             'delete': function (client) {
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
-                        client.IsDeleted = true;
+                        service.load();
                         return response;
                     }
 
-                    return $q.reject(response.Message || response.status);
+                    return $q.reject(response.Message || response.status || 'could not delete client');
                 });
             }
         };
