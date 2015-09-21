@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL
 {
@@ -58,6 +60,23 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         public void CreateAll<T>(IEnumerable<T> items)
         {
             Collection<T>().InsertBatch(items);
+        }
+
+        public T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable
+        {
+            var item = FindOne<T>(e => e.Id == id && !e.IsDeleted);
+            if (item != null)
+            {
+                item.IsDeleted = true;
+                Collection<T>().Save(item);
+            }
+
+            return item;
+        }
+
+        public IQueryable<T> GetAllUndeleted<T>() where T : ISoftDeletable
+        {
+            return Collection<T>().Find(Query<T>.EQ(e => e.IsDeleted, false)).AsQueryable();
         }
     }
 }

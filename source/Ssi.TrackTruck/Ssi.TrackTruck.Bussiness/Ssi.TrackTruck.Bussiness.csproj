@@ -51,7 +51,6 @@
     <Compile Include="Clients\AddClientRequest.cs" />
     <Compile Include="Clients\AddBranchRequest.cs" />
     <Compile Include="Clients\ClientService.cs" />
-    <Compile Include="Clients\ClientSummary.cs" />
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
@@ -59,6 +58,7 @@
     <Compile Include="DAL\Clients\Branch.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
+    <Compile Include="DAL\Entities\ISoftDeletable.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DeliveryReceipt.cs" />
