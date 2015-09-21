@@ -58,6 +58,7 @@
     <Compile Include="DAL\Clients\Branch.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
+    <Compile Include="DAL\Entities\ISoftDeletable.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DeliveryReceipt.cs" />
