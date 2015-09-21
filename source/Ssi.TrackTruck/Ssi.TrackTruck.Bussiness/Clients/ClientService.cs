@@ -21,7 +21,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public IEnumerable<Client> GetAll()
         {
-            return _repository.GetAll<Client>();
+            return _repository.GetAllUndeleted<Client>();
         }
 
         public Response Add(AddClientRequest request)
