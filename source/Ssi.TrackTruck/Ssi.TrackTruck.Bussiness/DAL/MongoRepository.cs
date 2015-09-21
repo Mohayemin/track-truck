@@ -73,5 +73,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL
 
             return item;
         }
+
+        public IQueryable<T> GetAllUndeleted<T>() where T : ISoftDeletable
+        {
+            return Collection<T>().Find(Query<T>.EQ(e => e.IsDeleted, false)).AsQueryable();
+        }
     }
 }
