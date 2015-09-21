@@ -6,7 +6,7 @@
         var _loadPromise;
 
         var service = {
-            load: function() {
+            load: function () {
                 return repository.get('Client', 'All').then(function (clients) {
                     _clients.push.apply(_clients, clients);
                     _loaded = true;
@@ -14,22 +14,22 @@
                 });
             },
             getAll: function () {
-                return _loadPromise.then(function() {
+                return _loadPromise.then(function () {
                     return _clients;
                 });
             },
             add: function (request) {
-                return repository.post('Client', 'Add', request).then(function(client) {
+                return repository.post('Client', 'Add', request).then(function (client) {
                     _clients.push(client);
                     return client;
                 });
             },
             get: function (id) {
-                return _loadPromise.then(function() {
+                return _loadPromise.then(function () {
                     return _.find(_clients, { Id: id });
                 });
             },
-            'delete': function(client) {
+            'delete': function (client) {
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
                         client.IsDeleted = true;

@@ -16,7 +16,7 @@
 
                         $scope.deleteClient = function () {
                             if ($window.confirm('Are you sure you want to delete this client?')) {
-                                clientService.delete($scope);
+                                clientService.delete($scope.client);
                             }
                         };
                     }
