@@ -24,7 +24,28 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
         public Response Add(Employee request)
         {
+            if (IsEmployeeNameEmpty(request.Name))
+            {
+                return Response.Error("Validation");
+            }
+            if (IsDuplicateEmployeeName(request))
+            {
+                return Response.Error("", "Employee with same name already exists");
+            }
+
+            _repository.Create(request);
             return Response.Success(request);
+        }
+
+        private bool IsEmployeeNameEmpty(string name)
+        {
+            return string.IsNullOrWhiteSpace(name);
+        }
+
+        private bool IsDuplicateEmployeeName(Employee request)
+        {
+            var nameTaken = _repository.Exists<Employee>(e => e.Name == request.Name);
+            return nameTaken;
         }
     }
 }

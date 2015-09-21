@@ -13,6 +13,7 @@
             add: function (request) {
                 return repository.post('Employee', 'Add', request).then(function (client) {
                     _employees.push(client);
+                    return client;
                 });
             }
         }
