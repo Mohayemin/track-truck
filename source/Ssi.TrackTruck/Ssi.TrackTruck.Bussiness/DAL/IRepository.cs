@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL
 {
@@ -14,5 +15,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property);
         bool Exists<T>(Expression<Func<T, bool>> condition);
         void CreateAll<T>(IEnumerable<T> items);
+        T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable;
+        IQueryable<T> GetAllUndeleted<T>() where T:ISoftDeletable;
     }
 }

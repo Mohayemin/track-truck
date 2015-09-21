@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL
 {
@@ -49,6 +50,21 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         public void CreateAll<T>(IEnumerable<T> items)
         {
             List<T>().AddRange(items);
+        }
+
+        public T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable
+        {
+            var item = FindOne<T>(e => e.Id == id);
+            if (item != null)
+            {
+                item.IsDeleted = true;
+            }
+            return item;
+        }
+
+        public IQueryable<T> GetAllUndeleted<T>() where T : ISoftDeletable
+        {
+            return GetAll<T>().Where(e => !e.IsDeleted);
         }
 
         private IQueryable<T> Query<T>()
