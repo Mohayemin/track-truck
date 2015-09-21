@@ -125,6 +125,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\App\Client\clientDetail.html" />
     <Content Include="Scripts\App\Client\clientDetail.js" />
+    <Content Include="Scripts\App\Employee\addEmployee.html" />
+    <Content Include="Scripts\App\Employee\addEmployee.js" />
     <Content Include="Scripts\App\home.html" />
     <Content Include="Scripts\App\home.js" />
     <Content Include="Scripts\App\User\userList.html" />
