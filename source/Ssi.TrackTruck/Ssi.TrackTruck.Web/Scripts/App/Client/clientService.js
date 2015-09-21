@@ -1,6 +1,10 @@
 ﻿clientModule.factory('clientService', [
-    'repository', '_',
-    function clientService(repository, _) {
+    'repository',
+    '_',
+    '$q',
+    function clientService(repository,
+        _,
+        $q) {
         var _clients = [];
         var _loadPromise;
 
@@ -32,8 +36,10 @@
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
                         client.IsDeleted = true;
+                        return response;
                     }
-                    return response;
+
+                    return $q.reject(response.Message || response.status);
                 });
             }
         };
