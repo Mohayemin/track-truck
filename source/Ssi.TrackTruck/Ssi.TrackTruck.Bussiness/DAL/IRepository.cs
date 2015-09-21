@@ -16,5 +16,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         bool Exists<T>(Expression<Func<T, bool>> condition);
         void CreateAll<T>(IEnumerable<T> items);
         T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable;
+        IQueryable<T> GetAllUndeleted<T>() where T:ISoftDeletable;
     }
 }
