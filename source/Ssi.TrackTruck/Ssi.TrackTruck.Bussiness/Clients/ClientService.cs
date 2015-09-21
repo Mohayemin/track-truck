@@ -21,7 +21,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public IEnumerable<Client> GetAll()
         {
-            return _repository.GetAll<Client>();
+            return _repository.GetAllUndeleted<Client>();
         }
 
         public Response Add(AddClientRequest request)
@@ -83,15 +83,14 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             return usernameTaken;
         }
 
-        public IEnumerable<ClientSummary> GetAllSummary()
+        public Response Delete(string id)
         {
-            // TODO: performance, projecting all branches
-            var clients = _repository
-                .GetAllProjected<Client>(c => c.Id, c => c.Name, c => c.TrucksPerDay, c => c.Branches);
-            var clientSummaries = clients
-                .Select(c => new ClientSummary(c));
-
-            return clientSummaries;
+            var client = _repository.SoftDelete<Client>(id);
+            if (client != null)
+            {
+                return Response.Success();
+            }
+            return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
         }
     }
 }
