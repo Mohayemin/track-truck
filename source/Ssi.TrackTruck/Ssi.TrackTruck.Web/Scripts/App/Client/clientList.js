@@ -9,16 +9,14 @@
                 'clientService',
                 function($scope,
                     clientService) {
+                    $scope.url = url;
+                    clientService.getAll().then(function(clients) {
+                        $scope.clients = clients;
+                    });
 
                     $scope.loadClients = function () {
-                        clientService.getAllSummary().then(function(clients) {
-                            $scope.clients = clients;
-                        }).catch(function() {
-                            console.error('could not load clients');
-                        });
+                        clientService.load();
                     };
-
-                    $scope.loadClients();
                 }
             ]
         };

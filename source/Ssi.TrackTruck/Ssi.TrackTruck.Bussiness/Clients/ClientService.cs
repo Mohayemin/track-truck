@@ -82,16 +82,5 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             var usernameTaken = _repository.WhereIn<User, string>(u => u.Username, branchUsernames).Any();
             return usernameTaken;
         }
-
-        public IEnumerable<ClientSummary> GetAllSummary()
-        {
-            // TODO: performance, projecting all branches
-            var clients = _repository
-                .GetAllProjected<Client>(c => c.Id, c => c.Name, c => c.TrucksPerDay, c => c.Branches);
-            var clientSummaries = clients
-                .Select(c => new ClientSummary(c));
-
-            return clientSummaries;
-        }
     }
 }
