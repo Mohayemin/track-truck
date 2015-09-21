@@ -9,11 +9,17 @@
                 'employeeService',
                 'designation',
                 function ($scope, employeeService, designation) {
-                    $scope.request = {
-                        Designation: designation.driver
+                    $scope.designations = {
+                        values: [designation.driver, designation.helper],
+                        selected: ''
                     };
 
-                    $scope.add= function() {
+                    $scope.add = function () {
+                        if (employeeService.isDesignationEmpty($scope.designations.selected)) {
+                            console.log('designation cannot be empty');
+                            return;
+                        }
+                        $scope.request.Designation = $scope.designations.selected;
                         employeeService.add($scope.request).then(function (response) {
                             if (response.IsError) {
                                 console.error('could not add employee');
