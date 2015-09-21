@@ -27,7 +27,8 @@ namespace Ssi.TrackTruck.Web.Controllers
         [HttpPost]
         public ActionResult Delete(string id)
         {
-            return Json(new { IsError = false, Deleted = true, id = id });
+            var response = _clientService.Delete(id);
+            return Json(response);
         }
     }
 }
