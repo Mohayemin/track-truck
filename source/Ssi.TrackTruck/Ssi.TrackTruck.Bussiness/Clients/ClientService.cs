@@ -82,5 +82,15 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             var usernameTaken = _repository.WhereIn<User, string>(u => u.Username, branchUsernames).Any();
             return usernameTaken;
         }
+
+        public Response Delete(string id)
+        {
+            var client = _repository.SoftDelete<Client>(id);
+            if (client != null)
+            {
+                return Response.Success();
+            }
+            return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
+        }
     }
 }
