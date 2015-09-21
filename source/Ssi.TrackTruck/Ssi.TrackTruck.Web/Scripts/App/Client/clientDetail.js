@@ -1,8 +1,10 @@
 ﻿clientModule.directive('clientDetail', [
     'url',
     '$window',
+    '$location',
     function (url,
-        $window) {
+        $window,
+        $location) {
         return {
             templateUrl: url.template('Client', 'clientDetail'),
             scope: {},
@@ -17,9 +19,9 @@
                         $scope.deleteClient = function () {
                             if ($window.confirm('Are you sure you want to delete this client?')) {
                                 clientService.delete($scope.client).then(function() {
-                                    
-                                }).catch(function() {
-                                    console.log('failed');
+                                    $location.url('client/list');
+                                }).catch(function(message) {
+                                    $window.alert(message);
                                 });
                             }
                         };
