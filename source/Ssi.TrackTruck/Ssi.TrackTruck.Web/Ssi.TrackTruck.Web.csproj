@@ -145,6 +145,8 @@
     <Content Include="Scripts\App\Trip\orderTrip.html" />
     <Content Include="Scripts\App\Trip\orderTrip.js" />
     <Content Include="Scripts\App\Trip\tripModule.js" />
+    <Content Include="Scripts\App\Warehouse\addWarehouse.html" />
+    <Content Include="Scripts\App\Warehouse\addWarehouse.js" />
     <Content Include="Scripts\App\Warehouse\warehouseModule.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\signInModule.js" />
