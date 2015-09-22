@@ -22,6 +22,11 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 .ToDictionary(group => group.Key, group => group.ToList());
         }
 
+        public IEnumerable<Employee> GetAll()
+        {
+            return _repository.GetAll<Employee>();
+        }
+
         public Response Add(Employee request)
         {
             if (IsEmployeeNameEmpty(request.Name))
