@@ -69,6 +69,7 @@
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
+    <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="Models\UserListResponseItem.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\IRepository.cs" />
