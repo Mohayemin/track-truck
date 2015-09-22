@@ -9,8 +9,13 @@
             messageObject.message = message;
             messageObject.type = type;
 
-            durationInSecond = durationInSecond || 600;
-            lastTimeoutPromise = $timeout(function() {
+            if (isNaN(durationInSecond)) {
+                durationInSecond = 5;
+            } else if (durationInSecond == 0) {
+                durationInSecond = 99999999; // Almost INFINITY
+            }
+
+            lastTimeoutPromise = $timeout(function () {
                 factory.clear();
             }, durationInSecond * 1000);
         }
@@ -27,12 +32,12 @@
             info: function (message, durationInSecond) {
                 setMessage('info', message, durationInSecond);
             },
-            clear: function() {
+            clear: function () {
                 messageObject.message = null;
                 messageObject.type = null;
                 lastTimeoutPromise && $timeout.cancel(lastTimeoutPromise);
             },
-            getMessageObject: function() {
+            getMessageObject: function () {
                 return messageObject;
             }
         };
@@ -50,10 +55,10 @@ utilModule.directive('globalMessage', [
             controller: [
                 '$scope',
                 'globalMessage',
-                function($scope, globalMessage) {
+                function ($scope, globalMessage) {
                     $scope.messageObject = globalMessage.getMessageObject();
 
-                    $scope.close = function() {
+                    $scope.close = function () {
                         globalMessage.clear();
                     };
 
