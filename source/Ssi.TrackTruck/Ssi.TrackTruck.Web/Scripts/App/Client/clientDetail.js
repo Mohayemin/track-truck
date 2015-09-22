@@ -2,9 +2,11 @@
     'url',
     '$window',
     '$location',
+    'globalMessage',
     function (url,
         $window,
-        $location) {
+        $location,
+        globalMessage) {
         return {
             templateUrl: url.template('Client', 'clientDetail'),
             scope: {},
@@ -20,8 +22,9 @@
                             if ($window.confirm('Are you sure you want to delete this client?')) {
                                 clientService.delete($scope.client).then(function() {
                                     $location.url('client/list');
+                                    globalMessage.warning('client deleted');
                                 }).catch(function(message) {
-                                    $window.alert(message);
+                                    globalMessage.error(message);
                                 });
                             }
                         };
