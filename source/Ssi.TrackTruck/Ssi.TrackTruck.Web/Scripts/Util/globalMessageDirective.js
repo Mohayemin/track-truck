@@ -48,7 +48,7 @@
 utilModule.directive('globalMessage', [
     function globalMessageDirective() {
         return {
-            template: '<div ng-style="style"> ' +
+            template: '<div class="global-message"> ' +
                 '<alert ng-show="messageObject.message" close="close()" type="{{messageObject.type}}">{{messageObject.message}}</alert>' +
                 '</div>',
             scope: {},
@@ -60,14 +60,6 @@ utilModule.directive('globalMessage', [
 
                     $scope.close = function () {
                         globalMessage.clear();
-                    };
-
-                    $scope.style = {
-                        position: 'fixed',
-                        top: '40px',
-                        left: 0,
-                        right: 0,
-                        'text-align': 'center'
                     };
                 }
             ]
