@@ -3,31 +3,34 @@
     function globalMessageService($timeout) {
         var lastTimeoutPromise = null;
 
-        function setMessage(type, message) {
+        function setMessage(type, message, durationInSecond) {
             lastTimeoutPromise && $timeout.cancel(lastTimeoutPromise);
 
             messageObject.message = message;
             messageObject.type = type;
 
+            durationInSecond = durationInSecond || 600;
             lastTimeoutPromise = $timeout(function() {
                 factory.clear();
-            }, 2000);
+            }, durationInSecond * 1000);
         }
 
         var messageObject = {};
 
         var factory = {
-            error: function(message) {
-                setMessage('danger', message);
+            error: function (message, durationInSecond) {
+                setMessage('danger', message, durationInSecond);
             },
-            success: function(message) {
-                setMessage('success', message);
+            success: function (message, durationInSecond) {
+                setMessage('success', message, durationInSecond);
             },
-            info: function(message) {
-                setMessage('info', message);
+            info: function (message, durationInSecond) {
+                setMessage('info', message, durationInSecond);
             },
             clear: function() {
-                setMessage(null, null);
+                messageObject.message = null;
+                messageObject.type = null;
+                lastTimeoutPromise && $timeout.cancel(lastTimeoutPromise);
             },
             getMessageObject: function() {
                 return messageObject;
