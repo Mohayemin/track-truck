@@ -123,6 +123,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\App\Auth\authModule.js" />
     <Content Include="Scripts\App\Client\clientDetail.html" />
     <Content Include="Scripts\App\Client\clientDetail.js" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
@@ -131,6 +132,8 @@
     <Content Include="Scripts\App\Employee\employeeList.js" />
     <Content Include="Scripts\App\home.html" />
     <Content Include="Scripts\App\home.js" />
+    <Content Include="Scripts\App\Auth\changePassword.html" />
+    <Content Include="Scripts\App\Auth\changePassword.js" />
     <Content Include="Scripts\App\User\userList.html" />
     <Content Include="Scripts\App\User\userList.js" />
     <Content Include="Scripts\App\User\userModule.js" />
