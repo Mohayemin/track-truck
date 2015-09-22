@@ -1,0 +1,26 @@
+﻿<div>
+    <h3>
+        List of Warehouses
+        <button type="button" ng-click="loadWarehouses()" class="btn btn-default btn-sm pull-right"
+                title="refresh Warehouses' list">
+            <i class="fa fa-lg fa-refresh"></i>
+        </button>
+    </h3>
+
+    <table class="table table-hover table-responsive table-bordered" ts-wrapper>
+        <thead>
+            <tr>
+                <th ts-criteria="Name|lowercase">Name</th>
+                <th ts-criteria="Address|parseInt">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="warehouse in warehouses track by warehouse.Id" ts-repeat>
+                <td>
+                    <a ng-href="{{url.route('warehouse', warehouse.Id)}}" ng-bind="warehouse.Name"></a>
+                </td>
+                <td ng-bind="warehouse.Address"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
