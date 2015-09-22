@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Ssi.TrackTruck.Bussiness.Auth;
 
 namespace Ssi.TrackTruck.Bussiness.Models
 {
@@ -6,11 +8,11 @@ namespace Ssi.TrackTruck.Bussiness.Models
     {
         public string Username { get; set; }
         public string InitialPassword { get; set; }
-        public string Role { get; set; }
+        public Role Role { get; set; }
 
         public bool Validate()
         {
-            var nonNullables = new[] {Username, InitialPassword, Role};
+            var nonNullables = new[] { Username, InitialPassword };
 
             var hasNull = nonNullables.Any(string.IsNullOrEmpty);
 

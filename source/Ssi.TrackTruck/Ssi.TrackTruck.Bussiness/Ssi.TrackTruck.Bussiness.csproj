@@ -47,9 +47,10 @@
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
+    <Compile Include="Auth\Role.cs" />
     <Compile Include="Clients\AddClientRequest.cs" />
+    <Compile Include="Clients\AddBranchRequest.cs" />
     <Compile Include="Clients\ClientService.cs" />
-    <Compile Include="Clients\ClientSummary.cs" />
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="DAL\Clients\Branch.cs" />
     <Compile Include="DAL\Entities\Employee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
+    <Compile Include="DAL\Entities\ISoftDeletable.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DeliveryReceipt.cs" />
@@ -79,8 +81,10 @@
     <Compile Include="Trips\TripDropRequest.cs" />
     <Compile Include="Trips\TripOrderRequest.cs" />
     <Compile Include="Trips\TripService.cs" />
+    <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
     <Compile Include="Trucks\TruckStatusItem.cs" />
+    <Compile Include="Warehouses\AddWarehouseRequest.cs" />
     <Compile Include="Warehouses\WarehouseService.cs" />
   </ItemGroup>
   <ItemGroup>

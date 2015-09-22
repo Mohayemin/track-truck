@@ -17,29 +17,63 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public IEnumerable<Client> GetAll()
         {
-            return _repository.GetAll<Client>();
+            return _repository.GetAllUndeleted<Client>();
         }
 
         public Response Add(AddClientRequest request)
         {
-            if (request.Validate())
+            if (!request.Validate())
             {
-                var client = _repository.Create(request.ToClient());
-                return Response.Success(new ClientSummary(client));
+                return Response.Error("Validation");
+            }
+            if (ClientNameIsDuplicate(request))
+            {
+                return Response.Error("", "Client with same name already exists");
             }
 
-            return Response.Error("Validation");
+            if (request.Branches.Any())
+            {
+                if (BranchNameHasDuplicate(request))
+                {
+                    return Response.Error("", "Two or more branches has the same name");
+                }
+            }
+
+            var branches = request.Branches.Select(b => b.ToBranch());
+
+            var client = new Client
+            {
+                Name = request.Name,
+                TrucksPerDay = request.TrucksPerDay,
+                Branches = branches
+            };
+
+            _repository.Create(client);
+
+            return Response.Success(client);
         }
 
-        public IEnumerable<ClientSummary> GetAllSummary()
+        private bool ClientNameIsDuplicate(AddClientRequest request)
         {
-            // TODO: performance, projecting all branches
-            var clients = _repository
-                .GetAllProjected<Client>(c => c.Id, c => c.Name, c => c.TrucksPerDay, c => c.Branches);
-            var clientSummaries = clients
-                .Select(c => new ClientSummary(c));
+            var nameTaken = _repository.Exists<Client>(c => c.Name == request.Name);
+            return nameTaken;
+        }
 
-            return clientSummaries;
+        private static bool BranchNameHasDuplicate(AddClientRequest request)
+        {
+            var branchNames = request.Branches.Select(b => b.Name).ToList();
+            var branchNameDuplicate = branchNames.Distinct().Count() != branchNames.Count;
+            return branchNameDuplicate;
+        }
+        
+        public Response Delete(string id)
+        {
+            var client = _repository.SoftDelete<Client>(id);
+            if (client != null)
+            {
+                return Response.Success();
+            }
+            return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
         }
     }
 }
