@@ -6,9 +6,9 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
     {
         public string RegistrationNumber { get; set; }
 
-        public Truck ToTruck()
+        public DbTruck ToTruck()
         {
-            return new Truck { CurrentTripId = null, RegistrationNumber = RegistrationNumber };
+            return new DbTruck { CurrentTripId = null, RegistrationNumber = RegistrationNumber };
         }
 
         public bool Validate()

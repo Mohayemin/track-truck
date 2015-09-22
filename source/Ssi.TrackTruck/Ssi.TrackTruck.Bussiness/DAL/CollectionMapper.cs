@@ -14,12 +14,12 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             _mapping = new Dictionary<Type, string>
             {
-                {typeof(Client), "clients"},
-                {typeof(Employee), "employees"},
-                {typeof(Truck), "trucks"},
+                {typeof(DbClient), "clients"},
+                {typeof(DbEmployee), "employees"},
+                {typeof(DbTruck), "trucks"},
                 {typeof(User), "users"},
-                {typeof(Warehouse), "warehouses"},
-                {typeof(Trip), "trips"},
+                {typeof(DbWarehouse), "warehouses"},
+                {typeof(DbTrip), "trips"},
             };
         }
 

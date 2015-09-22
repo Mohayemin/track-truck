@@ -4,14 +4,14 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class DeliveryReceipt : IEntity
+    public class DbDeliveryReceipt : IEntity
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string DrNumber { get; set; }
         public int NumberOfBoxes { get; set; }
 
-        public DeliveryReceipt()
+        public DbDeliveryReceipt()
         {
             Id = ObjectId.GenerateNewId().ToString();
         }

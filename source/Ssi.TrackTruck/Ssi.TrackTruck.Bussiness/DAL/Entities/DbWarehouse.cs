@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
-    public class Warehouse : IEntity
+    public class DbWarehouse : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

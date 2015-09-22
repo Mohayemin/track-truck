@@ -15,19 +15,19 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             _repository = repository;
         }
 
-        public IDictionary<string, List<Employee>> GetByDesignations(IEnumerable<string> designations)
+        public IDictionary<string, List<DbEmployee>> GetByDesignations(IEnumerable<string> designations)
         {
-            return _repository.WhereIn<Employee, string>(employee => employee.Designation, designations)
+            return _repository.WhereIn<DbEmployee, string>(employee => employee.Designation, designations)
                 .GroupBy(employee => employee.Designation)
                 .ToDictionary(group => group.Key, group => group.ToList());
         }
 
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<DbEmployee> GetAll()
         {
-            return _repository.GetAll<Employee>();
+            return _repository.GetAll<DbEmployee>();
         }
 
-        public Response Add(Employee request)
+        public Response Add(DbEmployee request)
         {
             if (IsEmployeeNameEmpty(request.Name))
             {
@@ -51,9 +51,9 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             return string.IsNullOrWhiteSpace(name);
         }
 
-        private bool IsDuplicateEmployeeName(Employee request)
+        private bool IsDuplicateEmployeeName(DbEmployee request)
         {
-            var nameTaken = _repository.Exists<Employee>(e => e.Name == request.Name);
+            var nameTaken = _repository.Exists<DbEmployee>(e => e.Name == request.Name);
             return nameTaken;
         }
 

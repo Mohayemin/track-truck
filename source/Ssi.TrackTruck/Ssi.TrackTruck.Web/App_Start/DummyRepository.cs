@@ -19,23 +19,23 @@ namespace Ssi.TrackTruck.Web
         {
             Data = new Dictionary<Type, IList>();
             var random = new Random();
-            var trips = Builder<Trip>.CreateListOfSize(5).Build();
-            var trucks = Builder<Truck>.CreateListOfSize(10).Random(random.Next(5, 9)).Do(truck => truck.CurrentTripId = trips[random.Next(trips.Count)].Id).Build();
-            var warehouses = Builder<Warehouse>.CreateListOfSize(8).Build();
-            var employees = Builder<Employee>.CreateListOfSize(4).All().Do(e => e.Designation = EmployeDesignations.Driver).Build().ToList();
-            employees.AddRange(Builder<Employee>.CreateListOfSize(5).All().Do(e => e.Designation = EmployeDesignations.Helper).Build());
+            var trips = Builder<DbTrip>.CreateListOfSize(5).Build();
+            var trucks = Builder<DbTruck>.CreateListOfSize(10).Random(random.Next(5, 9)).Do(truck => truck.CurrentTripId = trips[random.Next(trips.Count)].Id).Build();
+            var warehouses = Builder<DbWarehouse>.CreateListOfSize(8).Build();
+            var employees = Builder<DbEmployee>.CreateListOfSize(4).All().Do(e => e.Designation = EmployeDesignations.Driver).Build().ToList();
+            employees.AddRange(Builder<DbEmployee>.CreateListOfSize(5).All().Do(e => e.Designation = EmployeDesignations.Helper).Build());
 
-            var clients = new List<Client>
+            var clients = new List<DbClient>
             {
-                new Client
+                new DbClient
                 {
                     Id = "C1",
                     Name = "Avon",
                     TrucksPerDay = 15,
-                    Branches = new List<Branch>
+                    Branches = new List<DbBranch>
                     {
-                        new Branch{Id = "B1", Name = "Condon", Address = "Condon, Philippines"},
-                        new Branch{Id = "B2", Name = "Quezon", Address = "Quezon, Philippines"}
+                        new DbBranch{Id = "B1", Name = "Condon", Address = "Condon, Philippines"},
+                        new DbBranch{Id = "B2", Name = "Quezon", Address = "Quezon, Philippines"}
                     }
                 }
             };
@@ -58,11 +58,11 @@ namespace Ssi.TrackTruck.Web
                 }
             };
 
-            Data[typeof(Trip)] = (IList)trips;
-            Data[typeof(Truck)] = (IList)trucks;
-            Data[typeof(Warehouse)] = (IList)warehouses;
-            Data[typeof(Employee)] = employees;
-            Data[typeof(Client)] = clients;
+            Data[typeof(DbTrip)] = (IList)trips;
+            Data[typeof(DbTruck)] = (IList)trucks;
+            Data[typeof(DbWarehouse)] = (IList)warehouses;
+            Data[typeof(DbEmployee)] = employees;
+            Data[typeof(DbClient)] = clients;
             Data[typeof (User)] = users;
         }
 
