@@ -32,6 +32,9 @@
             info: function (message, durationInSecond) {
                 setMessage('info', message, durationInSecond);
             },
+            warning: function (message, durationInSecond) {
+                setMessage('warning', message, durationInSecond);
+            },
             clear: function () {
                 messageObject.message = null;
                 messageObject.type = null;

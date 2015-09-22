@@ -37,9 +37,11 @@
                 });
             },
             'delete': function (client) {
+                if (!client) {
+                    return $q.reject('client does not exist');
+                }
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
-                        service.load();
                         return response;
                     }
 
