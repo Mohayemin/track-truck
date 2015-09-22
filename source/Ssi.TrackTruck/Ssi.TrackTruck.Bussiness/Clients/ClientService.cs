@@ -15,9 +15,9 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             _repository = repository;
         }
 
-        public IEnumerable<Client> GetAll()
+        public IEnumerable<DbClient> GetAll()
         {
-            return _repository.GetAllUndeleted<Client>();
+            return _repository.GetAllUndeleted<DbClient>();
         }
 
         public Response Add(AddClientRequest request)
@@ -41,7 +41,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
             var branches = request.Branches.Select(b => b.ToBranch());
 
-            var client = new Client
+            var client = new DbClient
             {
                 Name = request.Name,
                 TrucksPerDay = request.TrucksPerDay,
@@ -55,7 +55,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         private bool ClientNameIsDuplicate(AddClientRequest request)
         {
-            var nameTaken = _repository.Exists<Client>(c => c.Name == request.Name);
+            var nameTaken = _repository.Exists<DbClient>(c => c.Name == request.Name);
             return nameTaken;
         }
 
@@ -68,7 +68,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         
         public Response Delete(string id)
         {
-            var client = _repository.SoftDelete<Client>(id);
+            var client = _repository.SoftDelete<DbClient>(id);
             if (client != null)
             {
                 return Response.Success();

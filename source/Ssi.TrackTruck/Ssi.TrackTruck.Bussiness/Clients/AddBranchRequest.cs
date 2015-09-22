@@ -17,9 +17,9 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             return valid;
         }
 
-        public Branch ToBranch()
+        public DbBranch ToBranch()
         {
-            return new Branch { Name = Name, Address = Address };
+            return new DbBranch { Name = Name, Address = Address };
         }
 
     }
