@@ -17,5 +17,11 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             return Json(_warehouseService.GetAll(), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Add(AddWarehouseRequest request)
+        {
+            return Json(_warehouseService.AddWarehouse(request));
+        }
 	}
 }
