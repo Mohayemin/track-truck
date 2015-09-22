@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
@@ -78,6 +77,34 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 Username = user.Username,
                 Role = user.Role
             });
+        }
+
+        public Response ChangePassword(ChangePasswordRequest request, string username)
+        {
+            var response = request.Validate();
+            if (response.IsError)
+            {
+                return response;
+            }
+
+            var user = _repository.FindOne<User>(u => u.UsernameLowerCase == username.ToLower());
+            if (user == null)
+            {
+                return Response.ValidationError("User not found");                
+            }
+            if (!IsValidCurrentPassword(request.CurrentPassword, username))
+            {
+                return Response.ValidationError("Provided current password is invalid");
+            }
+
+            user.PasswordHash = _hasher.GenerateHash(request.NewPassword);
+            _repository.Save(user);
+            return Response.Success();
+        }
+
+        private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
+        {
+            return _hasher.Match(currentPassword, dbPassword);
         }
     }
 }
