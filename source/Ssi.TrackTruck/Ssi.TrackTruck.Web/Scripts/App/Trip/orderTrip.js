@@ -64,7 +64,7 @@
                     });
 
                     $scope.order = function() {
-                        globalMessage.info('Creating Order...');
+                        globalMessage.info('Creating Order...', 0);
                         tripService.orderTrip($scope.request).then(function() {
                             globalMessage.success('Order Created.');
                         }).catch(function() {

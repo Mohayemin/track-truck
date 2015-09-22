@@ -2,9 +2,11 @@
     'url',
     '_',
     '$location',
+    'globalMessage',
     function (url,
         _,
-        $location) {
+        $location,
+        globalMessage) {
         return {
             templateUrl: url.template('Client', 'addClient'),
             scope: {},
@@ -17,10 +19,12 @@
                     };
 
                     $scope.add = function () {
+                        globalMessage.info('adding client', 0);
                         clientService.add($scope.request).then(function () {
                             $location.url('client/list');
-                        }).catch(function () {
-                            console.error('could not add client');
+                            globalMessage.success('client added');
+                        }).catch(function (message) {
+                            globalMessage.error(message);
                         });
                     };
 

@@ -19,12 +19,30 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a ng-href="{{url.route('Client', 'List')}}">
+                            <a ng-href="{{url.route('client', 'list')}}">
                                 <i class="fa fa-fw fa-lg fa-list"></i>  List
                             </a>
                         </li>
                         <li>
-                            <a ng-href="{{url.route('Client', 'Add')}}">
+                            <a ng-href="{{url.route('client', 'add')}}">
+                                <i class="fa fa-fw fa-lg fa-plus"></i>  Add
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li dropdown>
+                    <a href dropdown-toggle>
+                        3PW
+                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="{{url.route('warehouse', 'list')}}">
+                                <i class="fa fa-fw fa-lg fa-list"></i>  List
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-href="{{url.route('warehouse', 'add')}}">
                                 <i class="fa fa-fw fa-lg fa-plus"></i>  Add
                             </a>
                         </li>
@@ -36,7 +54,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a ng-href="{{url.route('Trip', 'Order')}}">
+                            <a ng-href="{{url.route('trip', 'order')}}">
                                 <i class="fa fa-fw fa-lg fa-plus"></i>  Order
                             </a>
                         </li>
@@ -48,12 +66,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a ng-href="{{url.route('Truck', 'Report')}}">
+                            <a ng-href="{{url.route('truck', 'report')}}">
                                 <i class="fa fa-fw fa-lg fa-list"></i> Report
                             </a>
                         </li>
                         <li>
-                            <a ng-href="{{url.route('Truck', 'Add')}}">
+                            <a ng-href="{{url.route('truck', 'add')}}">
                                 <i class="fa fa-fw fa-lg fa-plus"></i> Add
                             </a>
                         </li>
@@ -66,19 +84,19 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a ng-href="{{url.route('Employee', 'List')}}">
+                            <a ng-href="{{url.route('employee', 'list')}}">
                                 <i class="fa fa-fw fa-lg fa-list"></i>  List
                             </a>
                         </li>
                         <li>
-                            <a ng-href="{{url.route('Employee', 'Add')}}">
+                            <a ng-href="{{url.route('employee', 'add')}}">
                                 <i class="fa fa-fw fa-lg fa-plus"></i>  Add
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a ng-href="{{url.route('Attendence', 'report')}}">
+                    <a ng-href="{{url.route('attendence', 'report')}}">
                         Attendence <i class="fa fa-fw fa-lg fa-group"></i>
                     </a>
                 </li>
@@ -97,7 +115,6 @@
                                 <i class="fa fa-fw fa-lg fa-sign-out"></i> Sign Out
                             </a>
                         </li>
-
                     </ul>
                 </li>
             </ul>

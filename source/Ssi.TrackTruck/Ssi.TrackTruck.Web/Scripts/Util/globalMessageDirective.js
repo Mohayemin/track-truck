@@ -3,33 +3,44 @@
     function globalMessageService($timeout) {
         var lastTimeoutPromise = null;
 
-        function setMessage(type, message) {
+        function setMessage(type, message, durationInSecond) {
             lastTimeoutPromise && $timeout.cancel(lastTimeoutPromise);
 
             messageObject.message = message;
             messageObject.type = type;
 
-            lastTimeoutPromise = $timeout(function() {
+            if (isNaN(durationInSecond)) {
+                durationInSecond = 5;
+            } else if (durationInSecond == 0) {
+                durationInSecond = 99999999; // Almost INFINITY
+            }
+
+            lastTimeoutPromise = $timeout(function () {
                 factory.clear();
-            }, 2000);
+            }, durationInSecond * 1000);
         }
 
         var messageObject = {};
 
         var factory = {
-            error: function(message) {
-                setMessage('danger', message);
+            error: function (message, durationInSecond) {
+                setMessage('danger', message, durationInSecond);
             },
-            success: function(message) {
-                setMessage('success', message);
+            success: function (message, durationInSecond) {
+                setMessage('success', message, durationInSecond);
             },
-            info: function(message) {
-                setMessage('info', message);
+            info: function (message, durationInSecond) {
+                setMessage('info', message, durationInSecond);
             },
-            clear: function() {
-                setMessage(null, null);
+            warning: function (message, durationInSecond) {
+                setMessage('warning', message, durationInSecond);
             },
-            getMessageObject: function() {
+            clear: function () {
+                messageObject.message = null;
+                messageObject.type = null;
+                lastTimeoutPromise && $timeout.cancel(lastTimeoutPromise);
+            },
+            getMessageObject: function () {
                 return messageObject;
             }
         };
@@ -40,26 +51,18 @@
 utilModule.directive('globalMessage', [
     function globalMessageDirective() {
         return {
-            template: '<div ng-style="style"> ' +
+            template: '<div class="global-message"> ' +
                 '<alert ng-show="messageObject.message" close="close()" type="{{messageObject.type}}">{{messageObject.message}}</alert>' +
                 '</div>',
             scope: {},
             controller: [
                 '$scope',
                 'globalMessage',
-                function($scope, globalMessage) {
+                function ($scope, globalMessage) {
                     $scope.messageObject = globalMessage.getMessageObject();
 
-                    $scope.close = function() {
+                    $scope.close = function () {
                         globalMessage.clear();
-                    };
-
-                    $scope.style = {
-                        position: 'fixed',
-                        top: '40px',
-                        left: 0,
-                        right: 0,
-                        'text-align': 'center'
                     };
                 }
             ]

@@ -13,7 +13,7 @@
                 return repository.get('Client', 'All').then(function (clients) {
                     _clients.length = 0;
                     _clients.push.apply(_clients, clients);
-                    return clients;
+                    return _clients;
                 });
             },
             getAll: function () {
@@ -37,9 +37,11 @@
                 });
             },
             'delete': function (client) {
+                if (!client) {
+                    return $q.reject('client does not exist');
+                }
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
-                        service.load();
                         return response;
                     }
 

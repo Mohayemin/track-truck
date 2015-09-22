@@ -24,6 +24,8 @@
             .when('/user/list', defaultRoute('user-list'))
             .when('/employee/list', defaultRoute('employee-list'))
             .when('/employee/add', defaultRoute('add-employee'))
+            .when('/warehouse/add', defaultRoute('add-warehouse'))
+            .when('/warehouse/list', defaultRoute('warehouse-list'))
             .otherwise({redirectTo: '/'})
         ;
     }

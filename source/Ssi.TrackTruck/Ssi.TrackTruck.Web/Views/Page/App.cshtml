@@ -19,10 +19,13 @@
 
 <script type="text/javascript" src="~/Scripts/App/Employee/employeeModule.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Employee/employeeService.js"></script>
+<script type="text/javascript" src="~/Scripts/App/Employee/employeeList.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Employee/addEmployee.js"></script>
 
 <script type="text/javascript" src="~/Scripts/App/Warehouse/warehouseModule.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Warehouse/warehouseService.js"></script>
+<script type="text/javascript" src="~/Scripts/App/Warehouse/addWarehouse.js"></script>
+<script type="text/javascript" src="~/Scripts/App/Warehouse/warehouseList.js"></script>
 
 <script type="text/javascript" src="~/Scripts/App/Trip/tripModule.js"></script>
 <script type="text/javascript" src="~/Scripts/App/Trip/tripService.js"></script>
@@ -39,6 +42,6 @@
 
 <div ng-app="trackTruck">
     <navigation username="'@User.Identity.Name'"></navigation>
-
+    <global-message></global-message>
     <ng-view></ng-view>
 </div>
