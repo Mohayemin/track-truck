@@ -1,16 +1,12 @@
 ﻿employeeModule.factory('employeeService', [
     'repository',
     'designation',
-    function employeeService(repository, designation) {
+    '$q',
+    function employeeService(repository, designation, $q) {
         var _employees = [];
         var _loadPromise;
 
         var service = {
-            getTruckEmployees: function () {
-                return repository.get('Employee', 'GetByDesignations', {
-                    Designations: [designation.driver, designation.helper]
-                });
-            },
             load: function () {
                 return repository.get('Employee', 'All').then(function (employees) {
                     _employees.length = 0;
@@ -23,8 +19,17 @@
                     return _employees;
                 });
             },
+            getTruckEmployees: function () {
+                return repository.get('Employee', 'GetByDesignations', {
+                    Designations: [designation.driver, designation.helper]
+                });
+            },
             add: function (request) {
-                return repository.post('Employee', 'Add', request).then(function (employee) {
+                return repository.post('Employee', 'Add', request).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not add employee');
+                    }
+                    var employee = response.Data;
                     _employees.push(employee);
                     return employee;
                 });
