@@ -14,7 +14,7 @@
                     globalMessage) {
                     $scope.request = {};
                     $scope.add = function () {
-                        globalMessage.info('adding warehouse');
+                        globalMessage.info('adding warehouse', 0);
                         warehouseService.add($scope.request).then(function () {
                             $location.url('warehouse/list');
                             globalMessage.success('warehouse added');
