@@ -12,6 +12,10 @@
     opacity: .9;
 }
 
+.btn:focus {
+    outline: none;
+}
+
 .message-box {
     min-height: 25px;
 }
