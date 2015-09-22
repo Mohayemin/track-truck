@@ -84,6 +84,7 @@
     <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
     <Compile Include="Trucks\TruckStatusItem.cs" />
+    <Compile Include="Warehouses\AddWarehouseRequest.cs" />
     <Compile Include="Warehouses\WarehouseService.cs" />
   </ItemGroup>
   <ItemGroup>
