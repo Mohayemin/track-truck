@@ -2,6 +2,16 @@
     margin-top: 50px;
 }
 
+.global-message {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    -ms-opacity: .9;
+    opacity: .9;
+}
+
 .message-box {
     min-height: 25px;
 }
