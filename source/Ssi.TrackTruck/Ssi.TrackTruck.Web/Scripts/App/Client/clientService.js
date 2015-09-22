@@ -13,7 +13,7 @@
                 return repository.get('Client', 'All').then(function (clients) {
                     _clients.length = 0;
                     _clients.push.apply(_clients, clients);
-                    return clients;
+                    return _clients;
                 });
             },
             getAll: function () {
