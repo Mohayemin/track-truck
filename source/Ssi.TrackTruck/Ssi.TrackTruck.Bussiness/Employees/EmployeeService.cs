@@ -22,9 +22,14 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 .ToDictionary(group => group.Key, group => group.ToList());
         }
 
+        public IEnumerable<Employee> GetAll()
+        {
+            return _repository.GetAll<Employee>();
+        }
+
         public Response Add(Employee request)
         {
-            if (IsEmployeeNameEmpty(request.Name))
+            if (IsEmployeeNameEmpty(request.FirstName) || IsEmployeeNameEmpty(request.LastName))
             {
                 return Response.Error("Validation");
             }
@@ -48,7 +53,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
         private bool IsDuplicateEmployeeName(Employee request)
         {
-            var nameTaken = _repository.Exists<Employee>(e => e.Name == request.Name);
+            var nameTaken = _repository.Exists<Employee>(e => e.FirstName == request.FirstName);
             return nameTaken;
         }
 
