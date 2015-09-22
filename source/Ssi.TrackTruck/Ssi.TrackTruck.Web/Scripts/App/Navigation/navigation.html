@@ -32,6 +32,24 @@
                 </li>
                 <li dropdown>
                     <a href dropdown-toggle>
+                        3PW
+                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="{{url.route('warehouse', 'list')}}">
+                                <i class="fa fa-fw fa-lg fa-list"></i>  List
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-href="{{url.route('warehouse', 'add')}}">
+                                <i class="fa fa-fw fa-lg fa-plus"></i>  Add
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li dropdown>
+                    <a href dropdown-toggle>
                         Trips <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu">
