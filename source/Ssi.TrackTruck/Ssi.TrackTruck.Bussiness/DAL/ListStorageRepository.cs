@@ -67,6 +67,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return GetAll<T>().Where(e => !e.IsDeleted);
         }
 
+        public T Save<T>(T item)
+        {
+            return item;
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();
