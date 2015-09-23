@@ -17,5 +17,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         void CreateAll<T>(IEnumerable<T> items);
         T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable;
         IQueryable<T> GetAllUndeleted<T>() where T:ISoftDeletable;
+        T Save<T>(T item);
     }
 }

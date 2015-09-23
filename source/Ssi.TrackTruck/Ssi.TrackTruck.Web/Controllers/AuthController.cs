@@ -44,5 +44,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var users = _authService.GetUserList();
             return Json(users, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordRequest request)
+        {
+            var response = _authService.ChangePassword(request, User.Identity.Name);
+            return Json(response);
+        }
     }
 }

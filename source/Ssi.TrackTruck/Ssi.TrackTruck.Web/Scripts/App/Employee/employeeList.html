@@ -10,13 +10,15 @@
     <table class="table table-hover table-responsive table-bordered" ts-wrapper>
         <thead>
             <tr>
-                <th ts-criteria="Name|lowercase">Name</th>
-                <th ts-criteria="NumberOfBranches|parseInt">Designation</th>
+                <th ts-criteria="FirstName|lowercase">First Name</th>
+                <th ts-criteria="LastName|lowercase">Last Name</th>
+                <th ts-criteria="Designation|lowercase">Designation</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="employee in employees track by employee.Id" ts-repeat>
-                <td ng-bind="employee.Name"></td>
+                <td ng-bind="employee.FirstName"></td>
+                <td ng-bind="employee.LastName"></td>
                 <td ng-bind="employee.Designation"></td>
             </tr>
         </tbody>
