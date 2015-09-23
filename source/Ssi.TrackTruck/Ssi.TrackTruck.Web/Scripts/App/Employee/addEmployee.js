@@ -1,7 +1,9 @@
 ﻿employeeModule.directive('addEmployee', [
     'url',
-    function(url) {
-        return {
+    '$location',
+    function (url,
+        $location) {
+            return {
             templateUrl: url.template('Employee', 'addEmployee'),
             scope: {},
             controller: [
@@ -14,19 +16,23 @@
                         selected: ''
                     };
 
-                    $scope.add = function () {
+                    function isValid() {
                         if (employeeService.isDesignationEmpty($scope.designations.selected)) {
                             console.log('designation cannot be empty');
-                            return;
+                            return false;
                         }
                         $scope.request.Designation = $scope.designations.selected;
-                        employeeService.add($scope.request).then(function (response) {
-                            if (response.IsError) {
+                        return true;
+                    }
+
+                    $scope.add = function () {
+                        if (isValid()) {
+                            employeeService.add($scope.request).then(function () {
+                                $location.url('employee/list');
+                            }).catch(function () {
                                 console.error('could not add employee');
-                            }
-                        }).catch(function () {
-                            console.error('could not add employee');
-                        });
+                            });
+                        }
                     }
                 }
             ]
