@@ -92,7 +92,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             {
                 return Response.ValidationError("User not found");                
             }
-            if (!IsValidCurrentPassword(request.CurrentPassword, username))
+            if (!IsValidCurrentPassword(request.CurrentPassword, user.PasswordHash))
             {
                 return Response.ValidationError("Provided current password is invalid");
             }
