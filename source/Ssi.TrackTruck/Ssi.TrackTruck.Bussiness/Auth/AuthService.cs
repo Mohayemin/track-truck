@@ -33,10 +33,10 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return Response.Error("Validation", "Please enter both username and password");
         }
 
-        private User FindByUsername(string username)
+        private DbUser FindByUsername(string username)
         {
             var usernameLower = username.ToLower();
-            var user = _repository.FindOne<User>(u => u.UsernameLowerCase == usernameLower);
+            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == usernameLower);
             return user;
         }
 
@@ -58,9 +58,9 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return Response.Error("Validation", "Please fill up the required fields");
         }
 
-        public User CreateUserObject(string username, string password, Role roles)
+        public DbUser CreateUserObject(string username, string password, Role roles)
         {
-            var user = new User
+            var user = new DbUser
             {
                 Username = username,
                 PasswordHash = _hasher.GenerateHash(password),
@@ -72,7 +72,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public IEnumerable<UserListResponseItem> GetUserList()
         {
-            return _repository.GetAll<User>().Select(user => new UserListResponseItem
+            return _repository.GetAll<DbUser>().Select(user => new UserListResponseItem
             {
                 Username = user.Username,
                 Role = user.Role
@@ -87,7 +87,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 return response;
             }
 
-            var user = _repository.FindOne<User>(u => u.UsernameLowerCase == username.ToLower());
+            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
             if (user == null)
             {
                 return Response.ValidationError("User not found");                
