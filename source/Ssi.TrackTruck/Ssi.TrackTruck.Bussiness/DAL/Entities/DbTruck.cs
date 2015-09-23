@@ -9,10 +9,12 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string RegistrationNumber { get; set; }
-
         [BsonRepresentation(BsonType.ObjectId)]
         public string CurrentTripId { get; set; }
-
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string DriverId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string HelperId { get; set; }
         [BsonExtraElements]
         public BsonDocument ExtraElements_ { get; set; }
     }
