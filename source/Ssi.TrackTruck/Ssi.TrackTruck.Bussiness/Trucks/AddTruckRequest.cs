@@ -1,4 +1,5 @@
 ﻿using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trucks
 {
@@ -19,9 +20,13 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             };
         }
 
-        public bool Validate()
+        public Response Validate()
         {
-            return !string.IsNullOrWhiteSpace(RegistrationNumber);
+            if (string.IsNullOrWhiteSpace(RegistrationNumber))
+            {
+                return Response.ValidationError("Registration number must be specified");
+            }
+            return Response.Success();
         }
     }
 }
