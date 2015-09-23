@@ -78,5 +78,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             return Collection<T>().Find(Query<T>.EQ(e => e.IsDeleted, false)).AsQueryable();
         }
+
+        public T Save<T>(T item)
+        {
+            Collection<T>().Save(item);
+            return item;
+        }
     }
 }

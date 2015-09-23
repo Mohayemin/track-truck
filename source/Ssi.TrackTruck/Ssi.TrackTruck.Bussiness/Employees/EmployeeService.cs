@@ -29,7 +29,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
         public Response Add(DbEmployee request)
         {
-            if (IsEmployeeNameEmpty(request.Name))
+            if (IsEmployeeNameEmpty(request.FirstName) || IsEmployeeNameEmpty(request.LastName))
             {
                 return Response.Error("Validation");
             }
@@ -53,7 +53,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
         private bool IsDuplicateEmployeeName(DbEmployee request)
         {
-            var nameTaken = _repository.Exists<DbEmployee>(e => e.Name == request.Name);
+            var nameTaken = _repository.Exists<DbEmployee>(e => e.FirstName == request.FirstName);
             return nameTaken;
         }
 

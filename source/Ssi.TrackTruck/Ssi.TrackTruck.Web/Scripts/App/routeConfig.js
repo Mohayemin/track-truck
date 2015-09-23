@@ -26,7 +26,8 @@
             .when('/employee/add', defaultRoute('add-employee'))
             .when('/warehouse/add', defaultRoute('add-warehouse'))
             .when('/warehouse/list', defaultRoute('warehouse-list'))
-            .otherwise({redirectTo: '/'})
+            .when('/auth/changepassword', defaultRoute('change-password'))
+            .otherwise({ redirectTo: '/' })
         ;
     }
 ]);
