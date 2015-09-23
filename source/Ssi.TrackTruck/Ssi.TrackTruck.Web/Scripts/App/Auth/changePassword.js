@@ -1,16 +1,22 @@
 ﻿authModule.directive('changePassword', [
     'url',
-    function(url) {
+    '$location',
+    function (url, $location) {
         return {
             templateUrl: url.template('Auth', 'changePassword'),
             scope: {},
             controller: [
                 '$scope',
-                function ($scope) {
+                'authService',
+                function ($scope, authService) {
                     $scope.request = {};
 
                     $scope.changePassword = function() {
-
+                        authService.changePassword($scope.request).then(function(response) {
+                            if (!response.IsError) {
+                                $location.path('/');
+                            }
+                        });
                     };
                 }
             ]
