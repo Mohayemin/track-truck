@@ -40,16 +40,16 @@ namespace Ssi.TrackTruck.Web
                 }
             };
 
-            var users = new List<User>
+            var users = new List<DbUser>
             {
-                new User
+                new DbUser
                 {
                     Id = "1",
                     Username = "Mohayemin",
                     UsernameLowerCase = "mohayemin",
                     PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
                 },
-                new User
+                new DbUser
                 {
                     Id = "2",
                     Username = "JR",
@@ -63,7 +63,7 @@ namespace Ssi.TrackTruck.Web
             Data[typeof(DbWarehouse)] = (IList)warehouses;
             Data[typeof(DbEmployee)] = employees;
             Data[typeof(DbClient)] = clients;
-            Data[typeof (User)] = users;
+            Data[typeof (DbUser)] = users;
         }
 
         public DummyRepository() : base(Data)
