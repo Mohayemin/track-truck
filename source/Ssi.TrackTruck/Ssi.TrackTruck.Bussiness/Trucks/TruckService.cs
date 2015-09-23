@@ -35,12 +35,17 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 
         public Response Add(AddTruckRequest request)
         {
-            if (request.Validate())
+            var validation = request.Validate();
+            if (validation.IsError)
             {
-                var truck = _repository.Create(request.ToTruck());
-                return Response.Success(truck);
+                return validation;
             }
-            return Response.Error("Validation");
+            if (_repository.Exists<DbTruck>(dbTruck => dbTruck.RegistrationNumber == request.RegistrationNumber))
+            {
+                return Response.DuplicacyError("A truck with this registration number already exists");
+            }
+            var truck = _repository.Create(request.ToTruck());
+            return Response.Success(truck);
         }
     }
 }
