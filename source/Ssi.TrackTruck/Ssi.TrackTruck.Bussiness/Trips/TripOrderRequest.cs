@@ -19,9 +19,9 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public double HelperSalary { get; set; }
         public IList<TripDropRequest> Drops { get; set; }
 
-        public Trip ToTrip()
+        public DbTrip ToTrip()
         {
-            return new Trip
+            return new DbTrip
             {
                 ClientId = ClientId,
                 WarehouseId = WarehouseId,

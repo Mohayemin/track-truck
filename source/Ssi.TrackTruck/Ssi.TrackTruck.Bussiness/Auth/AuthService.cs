@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
@@ -34,10 +33,10 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return Response.Error("Validation", "Please enter both username and password");
         }
 
-        private User FindByUsername(string username)
+        private DbUser FindByUsername(string username)
         {
             var usernameLower = username.ToLower();
-            var user = _repository.FindOne<User>(u => u.UsernameLowerCase == usernameLower);
+            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == usernameLower);
             return user;
         }
 
@@ -59,9 +58,9 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return Response.Error("Validation", "Please fill up the required fields");
         }
 
-        public User CreateUserObject(string username, string password, Role roles)
+        public DbUser CreateUserObject(string username, string password, Role roles)
         {
-            var user = new User
+            var user = new DbUser
             {
                 Username = username,
                 PasswordHash = _hasher.GenerateHash(password),
@@ -73,11 +72,39 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public IEnumerable<UserListResponseItem> GetUserList()
         {
-            return _repository.GetAll<User>().Select(user => new UserListResponseItem
+            return _repository.GetAll<DbUser>().Select(user => new UserListResponseItem
             {
                 Username = user.Username,
                 Role = user.Role
             });
+        }
+
+        public Response ChangePassword(ChangePasswordRequest request, string username)
+        {
+            var response = request.Validate();
+            if (response.IsError)
+            {
+                return response;
+            }
+
+            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
+            if (user == null)
+            {
+                return Response.ValidationError("User not found");                
+            }
+            if (!IsValidCurrentPassword(request.CurrentPassword, user.PasswordHash))
+            {
+                return Response.ValidationError("Provided current password is invalid");
+            }
+
+            user.PasswordHash = _hasher.GenerateHash(request.NewPassword);
+            _repository.Save(user);
+            return Response.Success();
+        }
+
+        private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
+        {
+            return _hasher.Match(currentPassword, dbPassword);
         }
     }
 }

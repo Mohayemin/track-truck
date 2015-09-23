@@ -7,6 +7,7 @@
     'employee',
     'warehouse',
     'user',
+    'auth',
     'ui.bootstrap',
     'tableSort',
     'ngRoute']);

@@ -7,7 +7,7 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class Trip : IEntity
+    public class DbTrip : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -30,11 +30,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string HelperId { get; set; }
         public long HelperAllowanceInCentavos { get; set; }
         public long HelperSalaryInCentavos { get; set; }
-        public IEnumerable<Drop> Drops { get; set; }
+        public IEnumerable<DbDrop> Drops { get; set; }
 
-        public Trip()
+        public DbTrip()
         {
-            Drops = new List<Drop>();
+            Drops = new List<DbDrop>();
         }
     }
 }

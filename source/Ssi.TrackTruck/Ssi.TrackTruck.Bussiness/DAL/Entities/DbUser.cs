@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.Auth;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
-    public class User : IEntity
+    public class DbUser : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

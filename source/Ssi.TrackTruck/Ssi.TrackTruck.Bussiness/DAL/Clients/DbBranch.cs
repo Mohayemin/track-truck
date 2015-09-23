@@ -1,14 +1,14 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
-namespace Ssi.TrackTruck.Bussiness.DAL.Entities
+namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
-    public class Employee : IEntity
+    public class DbBranch : IEntity
     {
-        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Designation { get; set; }
+        public string Address { get; set; }
     }
 }
