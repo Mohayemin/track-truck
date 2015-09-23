@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7DC7460-0A7A-4235-A010-4EC89101C76B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ssi.TrackTruck.Bussiness</RootNamespace>
+    <AssemblyName>Ssi.TrackTruck.Bussiness</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MongoDB.Bson, Version=1.10.1.73, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <HintPath>..\packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.10.1.73, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <HintPath>..\packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\AuthService.cs" />
+    <Compile Include="Auth\Pbkdf2Hasher.cs" />
+    <Compile Include="Auth\IHasher.cs" />
+    <Compile Include="Auth\Role.cs" />
+    <Compile Include="Clients\AddClientRequest.cs" />
+    <Compile Include="Clients\AddBranchRequest.cs" />
+    <Compile Include="Clients\ClientService.cs" />
+    <Compile Include="DAL\Constants\DateTimeConstants.cs" />
+    <Compile Include="DAL\Constants\EmployeDesignations.cs" />
+    <Compile Include="DAL\Constants\TripStatus.cs" />
+    <Compile Include="DAL\Clients\DbClient.cs" />
+    <Compile Include="DAL\Clients\DbBranch.cs" />
+    <Compile Include="DAL\Entities\DbEmployee.cs" />
+    <Compile Include="DAL\CollectionMapper.cs" />
+    <Compile Include="DAL\Entities\ISoftDeletable.cs" />
+    <Compile Include="DAL\Entities\IEntity.cs" />
+    <Compile Include="DAL\MongoRepository.cs" />
+    <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />
+    <Compile Include="DAL\Trips\DbDrop.cs" />
+    <Compile Include="DAL\Trips\DbTrip.cs" />
+    <Compile Include="DAL\Entities\DbTruck.cs" />
+    <Compile Include="DAL\Entities\DbWarehouse.cs" />
+    <Compile Include="Employees\EmployeeService.cs" />
+    <Compile Include="Helpers\CollectionExtension.cs" />
+    <Compile Include="Helpers\DateTimeModel.cs" />
+    <Compile Include="Models\ChangePasswordRequest.cs" />
+    <Compile Include="Models\UserListResponseItem.cs" />
+    <Compile Include="DAL\Entities\DbUser.cs" />
+    <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\ListStorageRepository.cs" />
+    <Compile Include="Models\CreateUserRequest.cs" />
+    <Compile Include="Models\SignInRequest.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trips\DeliveryReceiptRequest.cs" />
+    <Compile Include="Trips\TripDropRequest.cs" />
+    <Compile Include="Trips\TripOrderRequest.cs" />
+    <Compile Include="Trips\TripService.cs" />
+    <Compile Include="Trucks\AddTruckRequest.cs" />
+    <Compile Include="Trucks\TruckService.cs" />
+    <Compile Include="Trucks\TruckStatusItem.cs" />
+    <Compile Include="Warehouses\AddWarehouseRequest.cs" />
+    <Compile Include="Warehouses\WarehouseService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
