@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Ssi.TrackTruck.Bussiness.Clients;
 using Ssi.TrackTruck.Bussiness.DAL;
-using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
 
@@ -10,12 +10,14 @@ namespace Ssi.TrackTruck.Bussiness.Auth
     public class AuthService
     {
         private readonly IRepository _repository;
+        private readonly ClientService _clientService;
         private readonly IHasher _hasher;
 
-        public AuthService(IRepository repository, IHasher hasher)
+        public AuthService(IRepository repository, IHasher hasher, ClientService clientService)
         {
             _repository = repository;
             _hasher = hasher;
+            _clientService = clientService;
         }
 
         public Response AuthenticateUser(SignInRequest request)
@@ -54,10 +56,8 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             }
             if (request.Role == Role.BranchCustodian)
             {
-                var client =
-                    _repository.GetAllUndeleted<DbClient>()
-                    .FirstOrDefault(dbClient => dbClient.Id == request.ClientId);
-
+                var client = _clientService.GetClient(request.ClientId);
+                    
                 if (client == null)
                 {
                     return Response.ValidationError("The client you specified does not exist");
