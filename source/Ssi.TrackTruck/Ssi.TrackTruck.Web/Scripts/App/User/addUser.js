@@ -24,9 +24,13 @@
                         InitialPassword: userService.generateInitialPassword()
                     };
 
+                    $scope.isUsernameReadonly = true;
+
                     $scope.setUsername = function () {
-                        $scope.request.Username = ($scope.request.FirstName || '') +
-                            ($scope.request.LastName || '');
+                        if ($scope.isUsernameReadonly) {
+                            $scope.request.Username = ($scope.request.FirstName || '') +
+                                ($scope.request.LastName || '');
+                        }
                     };
 
                     $scope.add = function () {

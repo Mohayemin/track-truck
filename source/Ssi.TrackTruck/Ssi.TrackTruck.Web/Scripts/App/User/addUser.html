@@ -29,14 +29,15 @@
                     </label>
                     <div class="col-sm-10">
                         <div class="input-group">
-                            <span class="input-group-btn" title="edit username manually">
-                                <a class="btn btn-primary">
+                            <span class="input-group-btn" title="toggle edit username" 
+                                  ng-click="isUsernameReadonly=!isUsernameReadonly">
+                                <a class="btn btn-primary" ng-class="{'active':!isUsernameReadonly}">
                                     <i class="fa fa-lg fa-fw fa-edit"></i>
                                 </a>
                             </span>
                             <input ng-model="request.Username" type="text" class="form-control"
                                    name="last-name"
-                                   placeholder="Username" required />
+                                   placeholder="Username" required ng-readonly="isUsernameReadonly"/>
                         </div>
                     </div>
                 </div>
