@@ -8,17 +8,23 @@
             scope: {},
             controller: [
                 '$scope',
+                'clientService',
                 'userService',
                 'userRoles',
                 '$location',
                 'globalMessage',
                 function ($scope
+                    , clientService
                     , userService
                     , userRoles
                     , $location
                     , globalMessage) {
 
                     $scope.userRoles = userRoles;
+
+                    $scope.showBranchSelect = function() {
+                        return $scope.request.Role == userRoles.branchCustodian;
+                    };
 
                     $scope.request = {
                         InitialPassword: userService.generateInitialPassword()
