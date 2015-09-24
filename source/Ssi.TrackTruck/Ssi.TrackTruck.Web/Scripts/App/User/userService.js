@@ -1,12 +1,12 @@
 ﻿userModule.factory('userService', [
     'repository',
     function userService(repository) {
-        function getUserList() {
-            return repository.get('Auth', 'GetUserList');
+        function getAll() {
+            return repository.get('User', 'All');
         }
 
         return {
-            getUserList: getUserList
+            getAll: getAll
         };
     }
 ]);

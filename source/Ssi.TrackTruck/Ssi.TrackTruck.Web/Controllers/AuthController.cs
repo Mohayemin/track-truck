@@ -31,13 +31,6 @@ namespace Ssi.TrackTruck.Web.Controllers
             return Redirect(Url.Content("~/"));
         }
         
-        [HttpGet]
-        public ActionResult GetUserList()
-        {
-            var users = _authService.GetUserList();
-            return Json(users, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordRequest request)
         {
