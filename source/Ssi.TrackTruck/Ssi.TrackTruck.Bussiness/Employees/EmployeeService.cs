@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
@@ -13,13 +12,6 @@ namespace Ssi.TrackTruck.Bussiness.Employees
         public EmployeeService(IRepository repository)
         {
             _repository = repository;
-        }
-
-        public IDictionary<string, List<DbEmployee>> GetByDesignations(IEnumerable<string> designations)
-        {
-            return _repository.WhereIn<DbEmployee, string>(employee => employee.Designation, designations)
-                .GroupBy(employee => employee.Designation)
-                .ToDictionary(group => group.Key, group => group.ToList());
         }
 
         public IEnumerable<DbEmployee> GetAll()

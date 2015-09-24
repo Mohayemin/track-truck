@@ -15,13 +15,6 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetByDesignations(IList<string> designations)
-        {
-            var employees = _employeeService.GetByDesignations(designations);
-            return Json(employees, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
         public ActionResult All()
         {
             return Json(_employeeService.GetAll(), JsonRequestBehavior.AllowGet);

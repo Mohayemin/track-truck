@@ -1,40 +1,29 @@
 ﻿employeeModule.factory('employeeService', [
     'repository',
-    'designation',
     '$q',
-    function employeeService(repository, designation, $q) {
+    '_',
+    function employeeService(
+        repository,
+        $q,
+        _) {
         var _employees = [];
         var _loadPromise;
 
         var service = {
-            load: function () {
-                return repository.get('Employee', 'All').then(function (employees) {
-                    _employees.length = 0;
-                    _employees.push.apply(_employees, employees);
-                    return employees;
+            getAllByDesignation: function(designation) {
+                return service.getAll().then(function() {
+                    return _.where(_employees, { Designation: designation });
                 });
             },
-            getAll: function () {
-                return _loadPromise.then(function () {
-                    return _employees;
-                });
-            },
-            getTruckEmployees: function () {
-                return repository.get('Employee', 'GetByDesignations', {
-                    Designations: [designation.driver, designation.helper]
-                });
-            },
-            load: function () {
-                return repository.get('Employee', 'All').then(function (employees) {
-                    _employees.length = 0;
-                    _employees.push.apply(_employees, employees);
-                    return employees;
-                });
-            },
-            getAll: function () {
-                return _loadPromise.then(function () {
-                    return _employees;
-                });
+            getAll: function (force) {
+                if (!_loadPromise || force) {
+                    _loadPromise = repository.get('Employee', 'All').then(function (employees) {
+                        _employees.length = 0;
+                        _employees.push.apply(_employees, employees);
+                        return employees;
+                    });
+                }
+                return _loadPromise;
             },
             add: function (request) {
                 return repository.post('Employee', 'Add', request).then(function (response) {
@@ -50,8 +39,6 @@
                 return designation === undefined || designation === '';
             }
         }
-
-        _loadPromise = service.load();
 
         return service;
     }
