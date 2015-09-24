@@ -8,7 +8,7 @@
                 '$scope',
                 'userService',
                 function ($scope, userService) {
-                    userService.getUserList().then(function (users) {
+                    userService.getAll().then(function (users) {
                         $scope.users = users;
                     });
                 }

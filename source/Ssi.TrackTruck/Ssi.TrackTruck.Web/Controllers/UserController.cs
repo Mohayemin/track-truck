@@ -18,5 +18,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _authService.CreateUser(request);
             return Json(response);
         }
+
+        [HttpGet]
+        public ActionResult All()
+        {
+            var users = _authService.GetUserList();
+            return Json(users, JsonRequestBehavior.AllowGet);
+        }
 	}
 }
