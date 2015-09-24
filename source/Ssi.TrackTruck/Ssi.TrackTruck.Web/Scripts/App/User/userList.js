@@ -7,7 +7,11 @@
             controller: [
                 '$scope',
                 'userService',
-                function ($scope, userService) {
+                'userRoles',
+                function ($scope
+                    , userService
+                    , userRoles) {
+                    $scope.roleMap = userRoles.map;
                     $scope.url = url;
                     userService.getAll().then(function (users) {
                         $scope.users = users;
