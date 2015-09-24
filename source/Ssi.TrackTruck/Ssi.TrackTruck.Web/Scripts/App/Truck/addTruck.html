@@ -1,20 +1,46 @@
-﻿<form ng-submit="add()" class="form-horizontal">
-    <fieldset>
-        <legend>Add a Truck</legend>
-        <div class="row">
-            <div class="form-group col-sm-8">
-                <label class="col-sm-3 control-label">Registration Number</label>
-                <div class="col-sm-9">
-                    <input ng-model="model.RegistrationNumber" type="text" class="form-control" placeholder="Registration Number" required />
+﻿<div>
+    <form ng-submit="add()" class="form-horizontal">
+        <fieldset>
+            <legend>
+                <span class="col-sm-offset-2">Add a Truck</span>
+            </legend>
+            <div class="well">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Registration Number</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.RegistrationNumber" type="text" class="form-control" placeholder="Registration Number" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2">Driver</label>
+                    <div class="col-sm-10">
+                        <select ng-model="request.driver" 
+                                ng-options="driver.Name for driver in drivers"
+                                class="form-control">
+                            <option value="">Select a driver</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2">Helper</label>
+                    <div class="col-sm-10">
+                        <select ng-model="request.helper"
+                                ng-options="helper.Name for helper in helpers"
+                                class="form-control">
+                            <option value="">Select a helper</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="form-group col-sm-4">
-                <div class="col-xs-12">
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-success btn-block">
                         <i class="fa fa-fw fa-lg fa-plus"></i> Add Truck
                     </button>
                 </div>
             </div>
-        </div>
-    </fieldset>
-</form>
+
+        </fieldset>
+    </form>
+</div>

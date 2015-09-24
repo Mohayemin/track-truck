@@ -7,9 +7,9 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public string DrNumber { get; set; }
         public int NumberOfBoxes { get; set; }
 
-        public DeliveryReceipt ToDeliveryReceipt()
+        public DbDeliveryReceipt ToDeliveryReceipt()
         {
-            return new DeliveryReceipt
+            return new DbDeliveryReceipt
             {
                 DrNumber = DrNumber,
                 NumberOfBoxes = NumberOfBoxes

@@ -56,11 +56,11 @@
                         console.error('could not load warehouses');
                     });
 
-                    employeeService.getTruckEmployees().then(function(employeeGroups) {
-                        $scope.drivers = employeeGroups[designation.driver];
-                        $scope.helpers = employeeGroups[designation.helper];
-                    }).catch(function() {
-                        console.error('could not load drivers and helpers');
+                    employeeService.getAllByDesignation(designation.driver).then(function(drivers) {
+                        $scope.drivers = drivers;
+                    });
+                    employeeService.getAllByDesignation(designation.helper).then(function (helpers) {
+                        $scope.helpers = helpers;
                     });
 
                     $scope.order = function() {

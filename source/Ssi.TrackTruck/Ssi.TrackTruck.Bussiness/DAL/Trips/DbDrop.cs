@@ -6,7 +6,7 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class Drop : IEntity
+    public class DbDrop : IEntity
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
@@ -14,9 +14,9 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         [BsonRepresentation(BsonType.ObjectId)]
         public string BranchId { get; set; }
         public DateTime ExpectedDropTime { get; set; }
-        public IList<DeliveryReceipt> DeliveryReceipts { get; set; }
+        public IList<DbDeliveryReceipt> DeliveryReceipts { get; set; }
 
-        public Drop()
+        public DbDrop()
         {
             Id = ObjectId.GenerateNewId().ToString();
         }

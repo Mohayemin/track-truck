@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
@@ -15,21 +14,14 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             _repository = repository;
         }
 
-        public IDictionary<string, List<Employee>> GetByDesignations(IEnumerable<string> designations)
+        public IEnumerable<DbEmployee> GetAll()
         {
-            return _repository.WhereIn<Employee, string>(employee => employee.Designation, designations)
-                .GroupBy(employee => employee.Designation)
-                .ToDictionary(group => group.Key, group => group.ToList());
+            return _repository.GetAll<DbEmployee>();
         }
 
-        public IEnumerable<Employee> GetAll()
+        public Response Add(DbEmployee request)
         {
-            return _repository.GetAll<Employee>();
-        }
-
-        public Response Add(Employee request)
-        {
-            if (IsEmployeeNameEmpty(request.Name))
+            if (IsEmployeeNameEmpty(request.FirstName) || IsEmployeeNameEmpty(request.LastName))
             {
                 return Response.Error("Validation");
             }
@@ -51,9 +43,9 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             return string.IsNullOrWhiteSpace(name);
         }
 
-        private bool IsDuplicateEmployeeName(Employee request)
+        private bool IsDuplicateEmployeeName(DbEmployee request)
         {
-            var nameTaken = _repository.Exists<Employee>(e => e.Name == request.Name);
+            var nameTaken = _repository.Exists<DbEmployee>(e => e.FirstName == request.FirstName);
             return nameTaken;
         }
 

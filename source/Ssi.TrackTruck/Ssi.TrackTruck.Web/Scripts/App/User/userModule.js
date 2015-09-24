@@ -1,3 +1,4 @@
 ﻿var userModule = angular.module('user', [
-    'utilModule'
+    'utilModule',
+    'auth'
 ]);
