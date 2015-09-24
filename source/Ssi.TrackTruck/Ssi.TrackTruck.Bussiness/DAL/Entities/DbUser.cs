@@ -17,5 +17,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
+
+        public DbUser()
+        {
+            Id = ObjectId.GenerateNewId().ToString();
+        }
     }
 }
