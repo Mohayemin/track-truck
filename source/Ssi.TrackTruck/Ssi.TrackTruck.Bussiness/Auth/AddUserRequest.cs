@@ -6,8 +6,9 @@ namespace Ssi.TrackTruck.Bussiness.Auth
     {
         public string Username { get; set; }
         public string InitialPassword { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Role Role { get; set; }
-
         public bool Validate()
         {
             var nonNullables = new[] { Username, InitialPassword };
