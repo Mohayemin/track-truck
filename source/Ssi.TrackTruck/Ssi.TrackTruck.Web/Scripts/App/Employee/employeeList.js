@@ -9,6 +9,7 @@
                 'employeeService',
                 function ($scope,
                     employeeService) {
+                    $scope.url = url;
 
                     $scope.loadEmployees = function () {
                         employeeService.getAll().then(function (employees) {
