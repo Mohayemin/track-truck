@@ -42,20 +42,18 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public Response CreateUser(AddUserRequest request)
         {
-            if (request.Validate())
+            var validation = request.Validate();
+            if (validation.IsError)
             {
-                if (FindByUsername(request.Username) == null)
-                {
-                    var user = CreateUserObject(request.Username, request.InitialPassword, request.Role);
-
-                    _repository.Create(user);
-                    return Response.Success(user, "User Added");
-                }
-
-                return Response.Error("DuplicateUsername", "This username is already taken");
+                return validation;
             }
-
-            return Response.Error("Validation", "Please fill up the required fields");
+            if (FindByUsername(request.Username) != null)
+            {
+                return Response.DuplicacyError("A user with this name is already registered");
+            }
+            var user = CreateUserObject(request.Username, request.InitialPassword, request.Role);
+            _repository.Create(user);
+            return Response.Success(user, "User Added");
         }
 
         public DbUser CreateUserObject(string username, string password, Role roles)
@@ -90,7 +88,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
             if (user == null)
             {
-                return Response.ValidationError("User not found");                
+                return Response.ValidationError("User not found");
             }
             if (!IsValidCurrentPassword(request.CurrentPassword, user.PasswordHash))
             {
