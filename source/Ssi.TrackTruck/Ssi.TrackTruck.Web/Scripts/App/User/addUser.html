@@ -61,8 +61,26 @@
                     <label class="control-label col-sm-2">Role</label>
                     <div class="col-sm-10">
                         <div class="btn-group">
-                            <label class="btn btn-info" ng-repeat="role in userRoles"
+                            <label class="btn btn-info" ng-repeat="role in userRoles.roleList"
                                    ng-model="request.Role" btn-radio="role.value" uncheckable ng-required="true">{{role.label}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="showBranchSelect()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Client</label>
+                        <div class="col-sm-10">
+                            <select class="form-control">
+                                <option>Choose Client</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Branch</label>
+                        <div class="col-sm-10">
+                            <select class="form-control">
+                                <option>Choose Branch</option>
+                            </select>
                         </div>
                     </div>
                 </div>
