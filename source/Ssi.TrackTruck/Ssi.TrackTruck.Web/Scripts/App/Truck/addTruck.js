@@ -1,10 +1,14 @@
 ﻿truckModule.directive('addTruck', [
+    'globalMessage',
+    '$location',
     'url',
     'truckService',
     'employeeService',
     'designation',
     function addTruckDirective(
-        url
+        globalMessage
+        , $location
+        , url
         , truckService
         , employeeService
         , designation) {
@@ -14,12 +18,18 @@
             controller: [
                 '$scope',
                 function ($scope) {
-                    $scope.model = {};
+                    $scope.request = {};
                     $scope.add = function () {
-                        truckService.add($scope.model);
+                        globalMessage.info('adding truck', 0);
+                        truckService.add($scope.request).then(function () {
+                            globalMessage.success('truck added');
+                            $location.url('truck/list');
+                        }).catch(function (message) {
+                            globalMessage.error(message);
+                        });
                     };
 
-                    employeeService.getAllByDesignation(designation.driver).then(function(drivers) {
+                    employeeService.getAllByDesignation(designation.driver).then(function (drivers) {
                         $scope.drivers = drivers;
                     });
 

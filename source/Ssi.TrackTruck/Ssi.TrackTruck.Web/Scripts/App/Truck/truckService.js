@@ -1,6 +1,8 @@
 ﻿truckModule.factory('truckService', [
     'repository',
-    function truckService(repository) {
+    '$q',
+    function truckService(repository
+        , $q) {
         function calculateReportSummary(trucks) {
             var summary = {
                 trucks: { total: trucks.length },
@@ -27,7 +29,17 @@
         }
 
         function add(request) {
-            return repository.post('Truck', 'Add', request);
+            var formattedRequest = {
+                RegistrationNumber: request.RegistrationNumber,
+                DriverId: request.driver.Id,
+                HelperId: request.helper.Id
+            };
+            return repository.post('Truck', 'Add', formattedRequest).then(function(response) {
+                if (response.IsError) {
+                    return $q.reject(response.Message);
+                }
+                return response;
+            });
         }
 
         return {
