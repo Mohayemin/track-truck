@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Auth
@@ -47,5 +48,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             }
             return Response.Success();
         }
+
     }
 }
