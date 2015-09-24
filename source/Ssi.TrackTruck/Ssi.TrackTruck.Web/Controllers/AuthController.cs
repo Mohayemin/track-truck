@@ -30,21 +30,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             FormsAuthentication.SignOut();
             return Redirect(Url.Content("~/"));
         }
-
-        [HttpPost]
-        public ActionResult CreateUser(CreateUserRequest request)
-        {
-            var response = _authService.CreateUser(request);
-            return Json(response);
-        }
         
-        [HttpGet]
-        public ActionResult GetUserList()
-        {
-            var users = _authService.GetUserList();
-            return Json(users, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordRequest request)
         {
