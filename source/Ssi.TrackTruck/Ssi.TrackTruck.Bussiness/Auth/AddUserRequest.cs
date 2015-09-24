@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Ssi.TrackTruck.Bussiness.Auth;
+﻿using System.Linq;
 
-namespace Ssi.TrackTruck.Bussiness.Models
+namespace Ssi.TrackTruck.Bussiness.Auth
 {
-    public class CreateUserRequest
+    public class AddUserRequest
     {
         public string Username { get; set; }
         public string InitialPassword { get; set; }
