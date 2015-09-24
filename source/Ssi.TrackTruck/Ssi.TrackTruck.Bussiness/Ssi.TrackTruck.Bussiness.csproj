@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auth\AuthService.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
-    <Compile Include="Models\UserListResponseItem.cs" />
     <Compile Include="DAL\Entities\DbUser.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ListStorageRepository.cs" />

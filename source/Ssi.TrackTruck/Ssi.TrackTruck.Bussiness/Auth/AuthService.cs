@@ -43,6 +43,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return user;
         }
 
+        // TODO: refactor long method
         public Response CreateUser(AddUserRequest request)
         {
             var validation = request.Validate();
@@ -95,13 +96,9 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return user;
         }
 
-        public IEnumerable<UserListResponseItem> GetUserList()
+        public IEnumerable<DbUser> GetUserList()
         {
-            return _repository.GetAll<DbUser>().Select(user => new UserListResponseItem
-            {
-                Username = user.Username,
-                Role = user.Role
-            });
+            return _repository.GetAllProjected<DbUser>();
         }
 
         public Response ChangePassword(ChangePasswordRequest request, string username)
