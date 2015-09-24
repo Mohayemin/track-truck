@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
 
@@ -50,6 +51,22 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             if (FindByUsername(request.Username) != null)
             {
                 return Response.DuplicacyError("A user with this name is already registered");
+            }
+            if (request.Role == Role.BranchCustodian)
+            {
+                var client =
+                    _repository.GetAllUndeleted<DbClient>()
+                    .FirstOrDefault(dbClient => dbClient.Id == request.ClientId);
+
+                if (client == null)
+                {
+                    return Response.ValidationError("The client you specified does not exist");
+                }
+                var branch = client.Branches.FirstOrDefault(dbBranch => dbBranch.Id == request.BranchId);
+                if (branch == null)
+                {
+                    return Response.ValidationError("The branch you specified does not exist");
+                }
             }
             var user = CreateUserObject(request.Username, request.InitialPassword, request.Role);
             _repository.Create(user);
