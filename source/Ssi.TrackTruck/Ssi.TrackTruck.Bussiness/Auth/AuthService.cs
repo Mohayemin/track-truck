@@ -40,7 +40,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return user;
         }
 
-        public Response CreateUser(CreateUserRequest request)
+        public Response CreateUser(AddUserRequest request)
         {
             if (request.Validate())
             {
