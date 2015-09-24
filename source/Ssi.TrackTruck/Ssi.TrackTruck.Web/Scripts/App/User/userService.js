@@ -27,7 +27,16 @@
                 return _loadPromise;
             },
             add: function (request) {
-                return repository.post('User', 'Add', request).then(function (response) {
+                var formatterRequest = {
+                    FirstName: request.FirstName,
+                    LastName: request.LastName,
+                    Username: request.Username,
+                    InitialPassword: request.InitialPassword,
+                    Role: request.Role,
+                    ClientId: request.client.Id,
+                    BranchId: request.branch.Id
+                };
+                return repository.post('User', 'Add', formatterRequest).then(function (response) {
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
