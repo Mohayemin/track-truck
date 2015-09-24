@@ -5,8 +5,17 @@
         , $q) {
         var _loadPromise = null;
         var _users = [];
+        var _alphaNumbers = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
         var service = {
+            generateInitialPassword: function () {
+                var text = '';
+                for (var i = 0; i < 6; i++) {
+                    text += _alphaNumbers[Math.floor(Math.random() * _alphaNumbers.length)];
+                }
+
+                return text;
+            },
             getAll: function (force) {
                 if (!_loadPromise || force) {
                     _loadPromise = repository.get('User', 'All').then(function (users) {
@@ -17,8 +26,8 @@
                 }
                 return _loadPromise;
             },
-            add: function(request) {
-                return repository.post('User', 'Add', request).then(function(response) {
+            add: function (request) {
+                return repository.post('User', 'Add', request).then(function (response) {
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
