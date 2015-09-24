@@ -27,7 +27,7 @@
                 <td ng-bind="user.FirstName"></td>
                 <td ng-bind="user.LastName"></td>
                 <td ng-bind="user.Username"></td>
-                <td ng-bind="user.Role"></td>
+                <td ng-bind="roleMap[user.Role]"></td>
             </tr>
         </tbody>
     </table>
