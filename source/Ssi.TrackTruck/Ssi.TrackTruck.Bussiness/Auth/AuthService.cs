@@ -54,6 +54,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             {
                 return Response.DuplicacyError("A user with this name is already registered");
             }
+
             if (request.Role == Role.BranchCustodian)
             {
                 var client = _clientService.GetClient(request.ClientId);
@@ -67,20 +68,25 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 {
                     return Response.ValidationError("The branch you specified does not exist");
                 }
+
+                // TODO: create custodian
             }
-            var user = CreateUserObject(request.Username, request.InitialPassword, request.Role);
+
+            var user = CreateUserObject(request);
             _repository.Create(user);
             return Response.Success(user, "User Added");
         }
 
-        public DbUser CreateUserObject(string username, string password, Role roles)
+        public DbUser CreateUserObject(AddUserRequest request)
         {
             var user = new DbUser
             {
-                Username = username,
-                PasswordHash = _hasher.GenerateHash(password),
-                UsernameLowerCase = username.ToLower(),
-                Role = roles
+                Username = request.Username,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                PasswordHash = _hasher.GenerateHash(request.InitialPassword),
+                UsernameLowerCase = request.Username.ToLower(),
+                Role = request.Role
             };
             return user;
         }
