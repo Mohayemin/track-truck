@@ -3,12 +3,17 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
-    public class Employee : IEntity
+    [BsonIgnoreExtraElements]
+    public class DbEmployee : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Designation { get; set; }
+
+        [BsonIgnore]
+        public string Name { get { return FirstName + " " + LastName; } }
     }
 }

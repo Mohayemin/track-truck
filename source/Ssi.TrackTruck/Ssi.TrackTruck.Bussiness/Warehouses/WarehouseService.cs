@@ -14,9 +14,9 @@ namespace Ssi.TrackTruck.Bussiness.Warehouses
             _repository = repository;
         }
 
-        public IEnumerable<Warehouse> GetAll()
+        public IEnumerable<DbWarehouse> GetAll()
         {
-            return _repository.GetAll<Warehouse>();
+            return _repository.GetAll<DbWarehouse>();
         }
 
         public Response AddWarehouse(AddWarehouseRequest request)
@@ -26,13 +26,13 @@ namespace Ssi.TrackTruck.Bussiness.Warehouses
             {
                 return response;
             }
-            var isDuplicate = _repository.Exists<Warehouse>(wh => wh.Name == request.Name);
+            var isDuplicate = _repository.Exists<DbWarehouse>(wh => wh.Name == request.Name);
             if (isDuplicate)
             {
                 return Response.Error("", "Another warehouse with same name already exists");
             }
             
-            var warehouse = new Warehouse
+            var warehouse = new DbWarehouse
             {
                 Name = request.Name,
                 Address = request.Address
