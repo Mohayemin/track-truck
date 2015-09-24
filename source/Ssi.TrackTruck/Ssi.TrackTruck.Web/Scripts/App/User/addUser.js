@@ -22,6 +22,11 @@
 
                     $scope.userRoles = userRoles;
 
+                    clientService.getAll().then(function(clients) {
+                        $scope.clients = clients;
+                        console.log(clients);
+                    });
+
                     $scope.showBranchSelect = function() {
                         return $scope.request.Role == userRoles.branchCustodian;
                     };
