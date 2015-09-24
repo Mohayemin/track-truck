@@ -1,0 +1,60 @@
+﻿<div>
+    <form ng-submit="add()" class="form-horizontal">
+        <fieldset>
+            <legend>
+                <span class="col-sm-offset-2">Add New User</span>
+            </legend>
+            <div class="well">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">First Name</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.FirstName" type="text" class="form-control"
+                               name="first-name"
+                               placeholder="First Name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Last Name</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.LastName" type="text" class="form-control"
+                               name="last-name"
+                               placeholder="Last Name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Username</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.Username" type="text" class="form-control"
+                               name="last-name"
+                               placeholder="Username" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Initial Password</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.InitialPassword" type="text" class="form-control"
+                               name="initial-password"
+                               placeholder="Initial Password" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Role</label>
+                    <div class="col-sm-10">
+                        <div class="btn-group">
+                            <label class="btn btn-info" ng-repeat="role in userRoles"
+                                   ng-model="request.Role" btn-radio="role.value" uncheckable ng-required="true">{{role.label}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fa fa-fw fa-lg fa-plus"></i> Add User
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

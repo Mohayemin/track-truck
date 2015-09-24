@@ -136,6 +136,7 @@
     <Content Include="Scripts\App\home.js" />
     <Content Include="Scripts\App\Auth\changePassword.html" />
     <Content Include="Scripts\App\Auth\changePassword.js" />
+    <Content Include="Scripts\App\User\addUser.html" />
     <Content Include="Scripts\App\User\addUser.js" />
     <Content Include="Scripts\App\User\userList.html" />
     <Content Include="Scripts\App\User\userList.js" />
