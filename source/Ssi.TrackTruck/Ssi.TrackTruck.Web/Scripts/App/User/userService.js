@@ -22,11 +22,8 @@
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
-                    return service.getAll().then(function(users) {
-                        var user = response.Data;
-                        users.push(user);
-                        return user;
-                    });
+                    _users.push(response.Data);
+                    return response.Data;
                 });
             }
         };

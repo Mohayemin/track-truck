@@ -10,10 +10,12 @@
                 '$scope',
                 'userService',
                 'userRoles',
+                '$location',
                 'globalMessage',
                 function ($scope
                     , userService
                     , userRoles
+                    , $location
                     , globalMessage) {
 
                     $scope.userRoles = userRoles;

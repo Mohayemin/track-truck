@@ -30,7 +30,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             }
             if (Role == 0)
             {
-                return Response.Error("Please choose a role");
+                return Response.ValidationError("Please choose a role");
             }
             return Response.Success();
         }
