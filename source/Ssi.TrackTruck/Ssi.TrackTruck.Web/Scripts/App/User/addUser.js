@@ -9,10 +9,14 @@
             controller: [
                 '$scope',
                 'userService',
+                'userRoles',
                 'globalMessage',
                 function ($scope
                     , userService
+                    , userRoles
                     , globalMessage) {
+
+                    $scope.userRoles = userRoles;
 
                     $scope.request = {
                         
