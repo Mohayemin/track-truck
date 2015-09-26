@@ -11,91 +11,32 @@
         </div>
         <div collapse="navCollapsed" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li dropdown>
+                <li ng-repeat="group in navGroups" dropdown ng-class="{'active': group == activeGroup}">
                     <a href dropdown-toggle>
-                        New Trip Order
+                        <span ng-bind="group.text"></span>
                         <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="{{url.route('trip', 'order')}}">
-                                <i class="fa fa-fw fa-lg fa-plus"></i>  New Trip
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.route('trip', 'transactions')}}">
-                                <i class="fa fa-fw fa-lg fa-cubes"></i>  Transactions
+                        <li ng-repeat="nav in group.navs" ng-class="{'active': nav == activeNav}">
+                            <a ng-href="{{nav.url}}">
+                                <i ng-class="nav.iconClass"></i>
+                                <span ng-bind="nav.text"></span>
                             </a>
                         </li>
                     </ul>
                 </li>
+                
                 <li dropdown>
-                    <a href dropdown-toggle>
-                        Database
-                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
-                    </a>
+                    
                     <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="{{url.route('employee', 'list')}}">
-                                <i class="fa fa-fw fa-lg fa-group"></i>  Employees
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.route('truck', 'list')}}">
-                                <i class="fa fa-fw fa-lg fa-truck"></i>  Trucks
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.route('client', 'list')}}">
-                                <i class="fa fa-fw fa-lg fa-shopping-cart"></i>  Clients
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.route('warehouse', 'list')}}">
-                                <i class="fa fa-fw fa-lg fa-home"></i>  3PW
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.route('user', 'list')}}">
-                                <i class="fa fa-fw fa-lg fa-user"></i>  Users
-                            </a>
-                        </li>
+                        
                     </ul>
                 </li>
                 <li dropdown>
-                    <a href dropdown-toggle>
-                        Reports
-                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="{{url.route('trip', 'report')}}">
-                                <i class="fa fa-fw fa-lg fa-cubes"></i> Trips
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.route('attendence', 'report')}}">
-                                <i class="fa fa-fw fa-lg fa-group"></i> Attendence 
-                            </a>
-                        </li>
-                    </ul>
+                    
                 </li>
                 <li dropdown>
-                    <a href dropdown-toggle>
-                        <span ng-bind="username"></span><i class="fa fa-fw fa-lg fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="{{url.route('auth', 'changepassword')}}">
-                                <i class="fa fa-fw fa-lg fa-key"></i>  Change Password
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-href="{{url.server('auth','signout')}}">
-                                <i class="fa fa-fw fa-lg fa-sign-out"></i> Sign Out
-                            </a>
-                        </li>
-                    </ul>
+                    
                 </li>
             </ul>
         </div>
