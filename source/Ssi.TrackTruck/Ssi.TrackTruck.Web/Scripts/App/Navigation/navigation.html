@@ -13,30 +13,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-repeat="group in navGroups" dropdown ng-class="{'active': group == activeGroup}">
                     <a href dropdown-toggle>
-                        <span ng-bind="group.text"></span>
+                        <span ng-bind="group.text"></span>&nbsp;
                         <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="nav in group.navs" ng-class="{'active': nav == activeNav}">
                             <a ng-href="{{nav.url}}">
-                                <i ng-class="nav.iconClass"></i>
+                                <i ng-class="nav.iconClass"></i>&nbsp;
                                 <span ng-bind="nav.text"></span>
                             </a>
                         </li>
                     </ul>
-                </li>
-                
-                <li dropdown>
-                    
-                    <ul class="dropdown-menu">
-                        
-                    </ul>
-                </li>
-                <li dropdown>
-                    
-                </li>
-                <li dropdown>
-                    
                 </li>
             </ul>
         </div>
