@@ -10,6 +10,7 @@
     text-align: center;
     -ms-opacity: .9;
     opacity: .9;
+    z-index: 100;
 }
 
 .btn:focus {
