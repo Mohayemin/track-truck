@@ -1,9 +1,11 @@
-﻿using MongoDB.Bson;
+﻿using System.Web.Script.Serialization;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.Auth;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
+    [BsonIgnoreExtraElements(true)]
     public class DbUser : IEntity
     {
         [BsonId]
@@ -11,8 +13,16 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public string Id { get; set; }
         public string Username { get; set; }
         public string UsernameLowerCase { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        [ScriptIgnore]
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
+
+        public DbUser()
+        {
+            Id = ObjectId.GenerateNewId().ToString();
+        }
     }
 }

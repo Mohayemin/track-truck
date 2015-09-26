@@ -75,5 +75,10 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             }
             return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
         }
+
+        public DbClient GetClient(string clientId)
+        {
+            return GetAll().FirstOrDefault(client => client.Id == clientId);
+        }
     }
 }

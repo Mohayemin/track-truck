@@ -7,8 +7,13 @@
             controller: [
                 '$scope',
                 'userService',
-                function ($scope, userService) {
-                    userService.getUserList().then(function (users) {
+                'userRoles',
+                function ($scope
+                    , userService
+                    , userRoles) {
+                    $scope.roleMap = userRoles.map;
+                    $scope.url = url;
+                    userService.getAll().then(function (users) {
                         $scope.users = users;
                     });
                 }

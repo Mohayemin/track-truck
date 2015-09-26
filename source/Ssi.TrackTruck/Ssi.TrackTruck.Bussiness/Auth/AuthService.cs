@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Ssi.TrackTruck.Bussiness.Clients;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
@@ -9,12 +10,14 @@ namespace Ssi.TrackTruck.Bussiness.Auth
     public class AuthService
     {
         private readonly IRepository _repository;
+        private readonly ClientService _clientService;
         private readonly IHasher _hasher;
 
-        public AuthService(IRepository repository, IHasher hasher)
+        public AuthService(IRepository repository, IHasher hasher, ClientService clientService)
         {
             _repository = repository;
             _hasher = hasher;
+            _clientService = clientService;
         }
 
         public Response AuthenticateUser(SignInRequest request)
@@ -40,43 +43,62 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return user;
         }
 
-        public Response CreateUser(CreateUserRequest request)
+        // TODO: refactor long method
+        public Response CreateUser(AddUserRequest request)
         {
-            if (request.Validate())
+            var validation = request.Validate();
+            if (validation.IsError)
             {
-                if (FindByUsername(request.Username) == null)
-                {
-                    var user = CreateUserObject(request.Username, request.InitialPassword, request.Role);
-
-                    _repository.Create(user);
-                    return Response.Success(user, "User Added");
-                }
-
-                return Response.Error("DuplicateUsername", "This username is already taken");
+                return validation;
+            }
+            if (FindByUsername(request.Username) != null)
+            {
+                return Response.DuplicacyError("A user with this name is already registered");
             }
 
-            return Response.Error("Validation", "Please fill up the required fields");
+            var user = CreateUserObject(request);
+
+            if (request.Role == Role.BranchCustodian)
+            {
+                var client = _clientService.GetClient(request.ClientId);
+                    
+                if (client == null)
+                {
+                    return Response.ValidationError("The client you specified does not exist");
+                }
+                var branch = client.Branches.FirstOrDefault(dbBranch => dbBranch.Id == request.BranchId);
+                if (branch == null)
+                {
+                    return Response.ValidationError("The branch you specified does not exist");
+                }
+
+                branch.CustodianUserId = user.Id;
+
+                _repository.Save(client);
+            }
+
+            _repository.Create(user);
+
+            return Response.Success(user, "User Added");
         }
 
-        public DbUser CreateUserObject(string username, string password, Role roles)
+        public DbUser CreateUserObject(AddUserRequest request)
         {
             var user = new DbUser
             {
-                Username = username,
-                PasswordHash = _hasher.GenerateHash(password),
-                UsernameLowerCase = username.ToLower(),
-                Role = roles
+                Username = request.Username,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                PasswordHash = _hasher.GenerateHash(request.InitialPassword),
+                UsernameLowerCase = request.Username.ToLower(),
+                Role = request.Role
             };
             return user;
         }
 
-        public IEnumerable<UserListResponseItem> GetUserList()
+        public IEnumerable<DbUser> GetUserList()
         {
-            return _repository.GetAll<DbUser>().Select(user => new UserListResponseItem
-            {
-                Username = user.Username,
-                Role = user.Role
-            });
+            return _repository.GetAllProjected<DbUser>();
         }
 
         public Response ChangePassword(ChangePasswordRequest request, string username)
@@ -90,7 +112,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
             if (user == null)
             {
-                return Response.ValidationError("User not found");                
+                return Response.ValidationError("User not found");
             }
             if (!IsValidCurrentPassword(request.CurrentPassword, user.PasswordHash))
             {
