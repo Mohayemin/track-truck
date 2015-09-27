@@ -197,6 +197,7 @@
     <Content Include="Views\Page\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\DailyHitLogAttribute.cs" />
     <Compile Include="App_Start\DummyRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
