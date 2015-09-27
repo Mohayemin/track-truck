@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Ssi.TrackTruck.Bussiness.Auth;
+using Ssi.TrackTruck.Bussiness.Attendances;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Web.ActionFilters
@@ -19,7 +19,7 @@ namespace Ssi.TrackTruck.Web.ActionFilters
 
             var currentTime = DateTime.UtcNow;
             var lastLoggedHit = filterContext.HttpContext.Session[_sessionVariable] as DateTime?;
-            var authService = DependencyResolver.Current.GetService<AuthService>();
+            var authService = DependencyResolver.Current.GetService<AttendanceService>();
 
             if (!lastLoggedHit.HasValue)
             {

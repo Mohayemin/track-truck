@@ -38,7 +38,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             return Response.Error("Validation", "Please enter both username and password");
         }
 
-        private DbUser FindByUsername(string username)
+        public DbUser FindByUsername(string username)
         {
             var usernameLower = username.ToLower();
             var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == usernameLower);
@@ -136,35 +136,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
         {
             return _hasher.Match(currentPassword, dbPassword);
-        }
-
-        public bool UpdateDailyHit(string username, DateTime time)
-        {
-            var user = FindByUsername(username);
-            if (user != null)
-            {
-                user.DailyHitLog.Add(time);
-                _repository.Save(user);
-                return true;
-            }
-
-            return false;
-        }
-
-        public DateTime? GetLastDailyHit(string username)
-        {
-            var user = FindByUsername(username);
-            if (user == null)
-            {
-                throw new Exception("No user found: " + username);
-            }
-
-            if (user.DailyHitLog.Count == 0)
-            {
-                return null;
-            }
-
-            return user.DailyHitLog.OrderBy(time => time).Last();
         }
     }
 }
