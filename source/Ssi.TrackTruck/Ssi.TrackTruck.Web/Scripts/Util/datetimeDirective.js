@@ -3,7 +3,8 @@
         return {
             templateUrl: '/Templates/datetimeDirective.html',
             scope: {
-                model: '='
+                model: '=',
+                hideTime: '='
             },
             controller: [
                 '$scope',
