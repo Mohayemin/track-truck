@@ -29,15 +29,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="row in reportRows">
                     <td>
                         Client
                     </td>
                     <td>
                         Branch
                     </td>
-                    <td>
-                        Custodian
+                    <td ng-bind="row.Username">
                     </td>
                 </tr>
             </tbody>

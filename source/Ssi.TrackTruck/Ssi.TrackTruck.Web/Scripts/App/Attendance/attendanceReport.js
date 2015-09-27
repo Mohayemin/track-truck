@@ -19,7 +19,7 @@
 
                     $scope.loadReport = function () {
                         attendanceService.getReport($scope.filter).then(function(data) {
-                            console.log(data);
+                            $scope.reportRows = data;
                         });
                     };
                 }

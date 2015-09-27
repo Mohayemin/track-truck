@@ -72,6 +72,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return item;
         }
 
+        public IQueryable<T> GetWhere<T>(Expression<Func<T, bool>> condition)
+        {
+            return GetAll<T>().Where(condition);
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();
