@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
 
 namespace Ssi.TrackTruck.Bussiness.DAL
 {

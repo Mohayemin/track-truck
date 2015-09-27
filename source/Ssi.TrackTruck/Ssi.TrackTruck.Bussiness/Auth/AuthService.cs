@@ -3,6 +3,7 @@ using System.Linq;
 using Ssi.TrackTruck.Bussiness.Clients;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Auth
