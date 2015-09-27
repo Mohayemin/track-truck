@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.Clients;
 using Ssi.TrackTruck.Bussiness.DAL;
@@ -92,7 +93,8 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 LastName = request.LastName,
                 PasswordHash = _hasher.GenerateHash(request.InitialPassword),
                 UsernameLowerCase = request.Username.ToLower(),
-                Role = request.Role
+                Role = request.Role,
+                DailyHitTimes = new List<DateTime>()
             };
             return user;
         }
@@ -134,6 +136,19 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
         {
             return _hasher.Match(currentPassword, dbPassword);
+        }
+
+        public bool UpdateDailyHit(string username, DateTime time)
+        {
+            var user = FindByUsername(username);
+            if (user != null)
+            {
+                user.DailyHitTimes.Add(time);
+                _repository.Save(user);
+                return true;
+            }
+
+            return false;
         }
     }
 }
