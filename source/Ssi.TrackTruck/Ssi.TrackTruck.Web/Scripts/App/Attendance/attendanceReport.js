@@ -7,10 +7,13 @@
             templateUrl: url.template('Attendance', 'attendanceReport'),
             scope: {},
             controller: [
+                '$scope',
                 'attendanceService',
-                function (
+                function ($scope,
                     attendanceService
                     ) {
+                    $scope.fromDate = {};
+                    $scope.toDate = {};
 
                     console.log(attendanceService);
                 }
