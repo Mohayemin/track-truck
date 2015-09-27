@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
@@ -83,6 +82,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             Collection<T>().Save(item);
             return item;
+        }
+
+        public IQueryable<T> GetWhere<T>(Expression<Func<T, bool>> condition)
+        {
+            return Collection<T>().Find(Query<T>.Where(condition)).AsQueryable();
         }
     }
 }

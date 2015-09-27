@@ -2,6 +2,8 @@
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
+using Ssi.TrackTruck.Bussiness.Helpers;
 
 namespace Ssi.TrackTruck.Bussiness.Attendances
 {
@@ -43,6 +45,13 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
             }
 
             return user.DailyHitLog.OrderBy(time => time).Last();
+        }
+
+        public IQueryable<DbUser> GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        {
+            // TODO: work with bit wise operator
+            var custodians = _repository.GetWhere<DbUser>(user => user.Role == Role.BranchCustodian);
+            return custodians;
         }
     }
 }
