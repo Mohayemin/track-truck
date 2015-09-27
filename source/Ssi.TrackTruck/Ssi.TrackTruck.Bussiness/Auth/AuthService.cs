@@ -62,7 +62,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             if (request.Role == Role.BranchCustodian)
             {
                 var client = _clientService.GetClient(request.ClientId);
-                    
+
                 if (client == null)
                 {
                     return Response.ValidationError("The client you specified does not exist");
@@ -99,7 +99,13 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public IEnumerable<DbUser> GetUserList()
         {
-            return _repository.GetAllProjected<DbUser>();
+            return _repository.GetAllProjected<DbUser>(
+                user => user.Id,
+                user => user.FirstName,
+                user => user.LastName,
+                user => user.Role,
+                user => user.Username
+                );
         }
 
         public Response ChangePassword(ChangePasswordRequest request, string username)
