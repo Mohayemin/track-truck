@@ -11,11 +11,17 @@
                 'attendanceService',
                 function ($scope,
                     attendanceService
-                    ) {
-                    $scope.fromDate = {};
-                    $scope.toDate = {};
+                ) {
+                    $scope.filter = {
+                        fromDate: {},
+                        toDate: {}
+                    };
 
-                    console.log(attendanceService);
+                    $scope.loadReport = function () {
+                        attendanceService.getReport($scope.filter).then(function(data) {
+                            console.log(data);
+                        });
+                    };
                 }
             ]
         };
