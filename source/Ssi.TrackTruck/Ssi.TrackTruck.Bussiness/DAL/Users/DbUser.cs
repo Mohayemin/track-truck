@@ -2,8 +2,9 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.Auth;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
-namespace Ssi.TrackTruck.Bussiness.DAL.Entities
+namespace Ssi.TrackTruck.Bussiness.DAL.Users
 {
     [BsonIgnoreExtraElements(true)]
     public class DbUser : IEntity
@@ -19,7 +20,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
-
+        
         public DbUser()
         {
             Id = ObjectId.GenerateNewId().ToString();
