@@ -22,7 +22,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Users
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
-        public IList<DateTime> DailyHitTimes { get; set; }
+        public IList<DateTime> DailyHitLog { get; set; }
         public DbUser()
         {
             Id = ObjectId.GenerateNewId().ToString();
