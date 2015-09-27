@@ -94,7 +94,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 PasswordHash = _hasher.GenerateHash(request.InitialPassword),
                 UsernameLowerCase = request.Username.ToLower(),
                 Role = request.Role,
-                DailyHitTimes = new List<DateTime>()
+                DailyHitLog = new List<DateTime>()
             };
             return user;
         }
@@ -143,12 +143,28 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             var user = FindByUsername(username);
             if (user != null)
             {
-                user.DailyHitTimes.Add(time);
+                user.DailyHitLog.Add(time);
                 _repository.Save(user);
                 return true;
             }
 
             return false;
+        }
+
+        public DateTime? GetLastDailyHit(string username)
+        {
+            var user = FindByUsername(username);
+            if (user == null)
+            {
+                throw new Exception("No user found: " + username);
+            }
+
+            if (user.DailyHitLog.Count == 0)
+            {
+                return null;
+            }
+
+            return user.DailyHitLog.OrderBy(time => time).Last();
         }
     }
 }
