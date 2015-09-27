@@ -123,6 +123,10 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\App\Attendance\attendanceModule.js" />
+    <Content Include="Scripts\App\Attendance\attendanceReport.html" />
+    <Content Include="Scripts\App\Attendance\attendanceReport.js" />
+    <Content Include="Scripts\App\Attendance\attendanceService.js" />
     <Content Include="Scripts\App\Auth\authModule.js" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\userRoles.js" />
