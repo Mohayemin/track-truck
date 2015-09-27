@@ -1,4 +1,6 @@
-﻿using System.Web.Script.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.Auth;
@@ -20,7 +22,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Users
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
-        
+        public IEnumerable<DateTime> DailyHitTimes { get; set; }
         public DbUser()
         {
             Id = ObjectId.GenerateNewId().ToString();
