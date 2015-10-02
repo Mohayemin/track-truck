@@ -29,7 +29,8 @@ namespace Ssi.TrackTruck.Web.ActionFilters
                 Month = ct.Month,
                 Day = ct.Day,
                 Hour = ct.Hour,
-                Minute = ct.Minute
+                Minute = ct.Minute,
+                Second = ct.Second
             };
 
             var attendanceService = DependencyResolver.Current.GetService<AttendanceService>();
