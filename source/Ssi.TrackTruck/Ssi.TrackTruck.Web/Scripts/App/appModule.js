@@ -1,6 +1,7 @@
 ﻿var appModule = angular.module('trackTruck', [
     'navigation',
     'utilModule',
+    'attendance',
     'truck',
     'client',
     'trip',
