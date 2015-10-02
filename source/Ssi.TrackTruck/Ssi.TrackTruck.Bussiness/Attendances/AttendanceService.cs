@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
-using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Helpers;
 
 namespace Ssi.TrackTruck.Bussiness.Attendances
@@ -38,11 +36,24 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
             return true;
         }
 
-        public IQueryable<DbUser> GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        public object GetReport(DateTimeModel fromDate, DateTimeModel toDate)
         {
-            // TODO: work with bit wise operator
-            var custodians = _repository.GetWhere<DbUser>(user => user.Role == Role.BranchCustodian);
-            return custodians;
+            var report = _repository
+                .GetWhere<DbDailyHit>(hit => hit.Date >= fromDate.DateInt && hit.Date <= toDate.DateInt)
+                .Select(hit => new
+                {
+                    UserId = hit.UserId,
+                    Date = hit.Date,
+                    HasHit = hit.HitTimes.Count != 0
+                })
+                .GroupBy(t => t.UserId)
+                .Select(g =>
+                new {
+                    UserId = g.Key,
+                    Attendance = g.ToDictionary(arg => arg.Date.ToString(), arg => arg.HasHit)
+                });
+
+            return report;
         }
     }
 }
