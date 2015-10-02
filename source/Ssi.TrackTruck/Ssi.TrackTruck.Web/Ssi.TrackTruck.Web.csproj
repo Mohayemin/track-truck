@@ -164,6 +164,7 @@
     <Content Include="Scripts\App\Warehouse\warehouseList.html" />
     <Content Include="Scripts\App\Warehouse\warehouseList.js" />
     <Content Include="Scripts\App\Warehouse\warehouseModule.js" />
+    <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\signInModule.js" />
     <Content Include="Scripts\App\Client\clientController.js" />
