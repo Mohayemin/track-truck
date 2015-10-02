@@ -18,5 +18,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable;
         IQueryable<T> GetAllUndeleted<T>() where T:ISoftDeletable;
         T Save<T>(T item);
+        IQueryable<T> GetWhere<T>(Expression<Func<T, bool>> condition);
     }
 }
