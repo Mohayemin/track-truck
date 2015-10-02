@@ -17,6 +17,8 @@
                         toDate: {}
                     };
 
+                    
+
                     $scope.loadReport = function () {
                         attendanceService.getReport($scope.filter).then(function(data) {
                             $scope.reportRows = data;

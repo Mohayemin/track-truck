@@ -18,26 +18,18 @@
             <thead>
                 <tr>
                     <th>
-                        Client
+                        User
                     </th>
                     <th>
-                        Branch
-                    </th>
-                    <th>
-                        Custodian
+                        Date
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="row in reportRows">
-                    <td>
-                        Client
+                    <td ng-bind="row.FullName">
                     </td>
-                    <td>
-                        Branch
-                    </td>
-                    <td ng-bind="row.Username">
-                    </td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
