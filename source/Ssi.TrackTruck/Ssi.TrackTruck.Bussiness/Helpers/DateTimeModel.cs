@@ -19,5 +19,15 @@ namespace Ssi.TrackTruck.Bussiness.Helpers
             var dateTime = new DateTimeOffset(Year, Month, Day, Hour, Minute, 0, utcOffset);
             return dateTime.DateTime;
         }
+
+        public int DateInt
+        {
+            get { return int.Parse(string.Format("{0}{1}{2}", Year, Month.ToString("D2"), Day.ToString("D2"))); }
+        }
+
+        public int TimeInt
+        {
+            get { return int.Parse(string.Format("{0}{1}00", Hour.ToString("D2"), Minute.ToString("D2"))); }
+        }
     }
 }
