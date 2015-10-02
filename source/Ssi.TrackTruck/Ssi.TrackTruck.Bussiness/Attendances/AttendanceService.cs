@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Helpers;
 
@@ -18,33 +20,22 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
             _authService = authService;
         }
 
-        public bool UpdateDailyHit(string username, DateTime time)
+        public bool UpdateDailyHit(string username, DateTimeModel time)
         {
             var user = _authService.FindByUsername(username);
-            if (user != null)
-            {
-                user.DailyHitLog.Add(time);
-                _repository.Save(user);
-                return true;
-            }
 
-            return false;
-        }
-
-        public DateTime? GetLastDailyHit(string username)
-        {
-            var user = _authService.FindByUsername(username);
             if (user == null)
             {
-                throw new Exception("No user found: " + username);
+                return false;
             }
 
-            if (user.DailyHitLog.Count == 0)
-            {
-                return null;
-            }
+            var log = _repository.FindOne<DbDailyHit>(hit => hit.UserId == user.Id && hit.Date == time.DateInt) ??
+                      new DbDailyHit { UserId = user.Id, Date = time.DateInt, HitTimes = new List<int>() };
 
-            return user.DailyHitLog.OrderBy(time => time).Last();
+            log.HitTimes.Add(time.TimeInt);
+            _repository.Save(log);
+
+            return true;
         }
 
         public IQueryable<DbUser> GetReport(DateTimeModel fromDate, DateTimeModel toDate)

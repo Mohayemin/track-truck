@@ -93,8 +93,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 LastName = request.LastName,
                 PasswordHash = _hasher.GenerateHash(request.InitialPassword),
                 UsernameLowerCase = request.Username.ToLower(),
-                Role = request.Role,
-                DailyHitLog = new List<DateTime>()
+                Role = request.Role
             };
             return user;
         }

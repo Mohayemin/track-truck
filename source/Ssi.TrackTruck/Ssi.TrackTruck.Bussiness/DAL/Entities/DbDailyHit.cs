@@ -7,7 +7,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
     public class DbDailyHit
     {
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public int Date { get; set; }
         public string UserId { get; set; }
