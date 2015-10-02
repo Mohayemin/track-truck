@@ -20,8 +20,7 @@
                     <th>
                         User
                     </th>
-                    <th>
-                        Date
+                    <th ng-repeat="date in dates" ng-bind="date.label">
                     </th>
                 </tr>
             </thead>
@@ -29,7 +28,10 @@
                 <tr ng-repeat="row in reportRows">
                     <td ng-bind="row.FullName">
                     </td>
-                    <td></td>
+                    <td ng-repeat="date in dates" class="attendance" ng-class="{present:row.Attendance[date.value]}">
+                        <!--<i class="fa fa-lg"
+                           ng-class="{'fa-check': row.Attendance[date.value], 'fa-close': !row.Attendance[date.value]}"></i>-->
+                    </td>
                 </tr>
             </tbody>
         </table>
