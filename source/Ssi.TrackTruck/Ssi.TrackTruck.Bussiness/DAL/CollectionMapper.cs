@@ -21,6 +21,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 {typeof(DbUser), "users"},
                 {typeof(DbWarehouse), "warehouses"},
                 {typeof(DbTrip), "trips"},
+                {typeof(DbDailyHit), "dailyHit"}
             };
         }
 

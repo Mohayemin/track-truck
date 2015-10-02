@@ -68,6 +68,7 @@
     <Compile Include="DAL\Trips\DbTrip.cs" />
     <Compile Include="DAL\Entities\DbTruck.cs" />
     <Compile Include="DAL\Entities\DbWarehouse.cs" />
+    <Compile Include="DAL\Entities\DbDailyHit.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
