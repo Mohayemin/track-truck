@@ -54,3 +54,14 @@ table.table.table-bordered th, table.table.table-bordered td {
 .pad-left {
     padding-left: 15px;
 }
+
+.attendance {
+    /*Color based on bootstrap superhero theme*/
+    background-color: #d9534f;
+    text-align: center;
+}
+
+.attendance.present{
+    /*Color based on bootstrap superhero theme*/
+    background-color: #5cb85c; 
+}

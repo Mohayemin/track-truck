@@ -60,7 +60,7 @@
                                 iconClass: 'fa fa-fw fa-lg fa-cubes',
                                 text: 'Trips'
                             }, {
-                                url: url.route('attendence', 'report'),
+                                url: url.route('attendance', 'report'),
                                 iconClass: 'fa fa-fw fa-lg fa-group',
                                 text: 'Attendence'
                             }],
