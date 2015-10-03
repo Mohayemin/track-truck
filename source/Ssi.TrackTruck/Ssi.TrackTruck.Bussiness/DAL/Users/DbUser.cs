@@ -22,6 +22,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Users
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime CreationTime { get; set; }
 
         [BsonIgnore]
         public string FullName { get { return FirstName + " " + LastName; }}
