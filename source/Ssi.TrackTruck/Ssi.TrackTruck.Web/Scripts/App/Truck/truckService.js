@@ -48,8 +48,8 @@
             return repository.get('Truck', 'All').then(function(trucks) {
                 employeeService.getIndexedEmployees().then(function(employees) {
                     trucks.forEach(function(truck) {
-                        truck.DriverName = (employees[truck.DriverId] || {}).Name;
-                        truck.HelperName = (employees[truck.HelperId] || {}).Name;
+                        truck.DriverName = (employees[truck.DriverId] || {}).FullName;
+                        truck.HelperName = (employees[truck.HelperId] || {}).FullName;
                     });
                 });
                 return trucks;
