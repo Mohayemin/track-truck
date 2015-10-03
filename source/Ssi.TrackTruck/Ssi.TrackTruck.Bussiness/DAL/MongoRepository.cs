@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
@@ -65,6 +66,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         public IQueryable<T> GetAll<T>()
         {
             return Collection<T>().AsQueryable();
+        }
+
+        public T GetById<T>(string id) where T : IEntity
+        {
+            return Collection<T>().FindOneById(ObjectId.Parse(id));
         }
 
         public IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values)
