@@ -4,7 +4,8 @@
             templateUrl: '/Templates/datetimeDirective.html',
             scope: {
                 model: '=',
-                hideTime: '='
+                hideTime: '=',
+                options: '='
             },
             controller: [
                 '$scope',
