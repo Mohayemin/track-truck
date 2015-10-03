@@ -96,8 +96,8 @@
             </div>
             <div class="well">
                 <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Truck Number</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-1 control-label">Truck</label>
+                    <div class="col-sm-11">
                         <select ng-model="request.Truck" ng-required="true"
                                 ng-options="truck as truck.RegistrationNumber for truck in trucks"
                                 class="form-control">
@@ -108,8 +108,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label">Fuel</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 control-label">Fuel</label>
+                            <div class="col-sm-10">
                                 <input ng-model="request.FuelCost" required
                                        type="number" min="0" placeholder="Fuel Cost"
                                        class="form-control" />
@@ -118,8 +118,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label">Toll</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 control-label">Toll</label>
+                            <div class="col-sm-10">
                                 <input ng-model="request.TollCost" required
                                        type="number" min="0" placeholder="Toll Cost"
                                        class="form-control" />
@@ -130,8 +130,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label">Parking</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 control-label">Parking</label>
+                            <div class="col-sm-10">
                                 <input ng-model="request.ParkingCost" required
                                        type="number" min="0" placeholder="Parking Cost"
                                        class="form-control" />
@@ -140,8 +140,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label">Miscellaneous</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 control-label">Misc</label>
+                            <div class="col-sm-10">
                                 <input ng-model="request.MiscellaneousCost" required
                                        type="number" min="0" placeholder="Miscellaneous Cost"
                                        class="form-control" />
@@ -149,20 +149,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Driver</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.DriverId" ng-required="true"
-                                ng-options="driver.Id as driver.FullName for driver in drivers"
-                                class="form-control">
-                            <option value=""> -- Choose Driver -- </option>
-                        </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Driver</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.DriverId" ng-required="true"
+                                        ng-options="driver.Id as driver.FullName for driver in drivers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Driver -- </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Driver's Payment</label>
-                    <div class="col-sm-10">
-                        <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
                             <div class="col-xs-6">
                                 <input ng-model="request.DriverAllowance" ng-required="true"
                                        type="number" min="0" placeholder="Driver's Allowance"
@@ -176,20 +177,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Helper</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.HelperId" ng-required="true"
-                                ng-options="helper.Id as helper.FullName for helper in helpers"
-                                class="form-control">
-                            <option value=""> -- Choose Helper -- </option>
-                        </select>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Helper</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.HelperId" ng-required="true"
+                                        ng-options="helper.Id as helper.FullName for helper in helpers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Helper -- </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Helpers's Payment</label>
-                    <div class="col-sm-10">
-                        <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
                             <div class="col-xs-6">
                                 <input ng-model="request.HelperAllowance" ng-required="true"
                                        type="number" min="0" placeholder="Helper's Allowance"
@@ -203,24 +206,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Supervisor</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.SupervisorId" ng-required="true"
-                                ng-options="supervisor.Id as supervisor.Fullname for supervisor in supervisors"
-                                class="form-control">
-                            <option value=""> -- Choose Supervisor -- </option>
-                        </select>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Supervisor</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.SupervisorId" ng-required="true"
+                                        ng-options="supervisor.Id as supervisor.Fullname for supervisor in supervisors"
+                                        class="form-control">
+                                    <option value=""> -- Choose Supervisor -- </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group form-group-sm">
-                    <label class="col-sm-2 control-label">Checker</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.CheckerId" ng-required="true"
-                                ng-options="checker.Id as checker.Fullname for checker in checkers"
-                                class="form-control">
-                            <option value=""> -- Choose Supervisor -- </option>
-                        </select>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Checker</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.CheckerId" ng-required="true"
+                                        ng-options="checker.Id as checker.Fullname for checker in checkers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Supervisor -- </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
