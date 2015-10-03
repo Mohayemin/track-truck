@@ -6,7 +6,7 @@
                 var flatProperties = [
                     'ExpectedPickupTime', 'ExpectedPickupTime',
                     'DriverAllowance', 'DriverSalary', 'HelperAllowance', 'HelperSalary',
-                    'Drops', 'WarehouseId', 'DriverId', 'HelperId'
+                    'Drops', 'PickupAddress', 'DriverId', 'HelperId'
                 ];
                 var idProeprties = ['Client'];
 
