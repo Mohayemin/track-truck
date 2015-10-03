@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using Ssi.TrackTruck.Bussiness.Auth;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Web.Controllers
@@ -17,10 +18,11 @@ namespace Ssi.TrackTruck.Web.Controllers
         [HttpPost]
         public ActionResult SignIn(SignInRequest request)
         {
-            var response = _authService.AuthenticateUser(request);
+            DbUser user;
+            var response = _authService.AuthenticateUser(request, out user);
             if (!response.IsError)
             {
-                FormsAuthentication.SetAuthCookie(request.Username, request.RememberMe);
+                FormsAuthentication.SetAuthCookie(user.Id, request.RememberMe);
             }
             return Json(response);
         }
