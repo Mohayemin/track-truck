@@ -69,6 +69,12 @@
                     employeeService.getAllByDesignation(designation.helper).then(function (helpers) {
                         $scope.helpers = helpers;
                     });
+                    employeeService.getAllByDesignation(designation.supervisor).then(function (supervisors) {
+                        $scope.supervisors = supervisors;
+                    });
+                    employeeService.getAllByDesignation(designation.checker).then(function (checkers) {
+                        $scope.checkers = checkers;
+                    });
 
                     $scope.$watch('request.Truck', function () {
                         var truck = $scope.request.Truck;
