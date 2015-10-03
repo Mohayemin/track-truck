@@ -22,11 +22,11 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             _clientService = clientService;
         }
 
-        public Response AuthenticateUser(SignInRequest request)
+        public Response AuthenticateUser(SignInRequest request, out DbUser user)
         {
             if (request.Validate())
             {
-                var user = FindByUsername(request.Username);
+                user = FindByUsername(request.Username);
                 var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
                 if (valid)
                 {
@@ -35,6 +35,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
                 return Response.Error("InvalidCredentials", "Username and password does not match");
             }
+            user = null;
             return Response.Error("Validation", "Please enter both username and password");
         }
 
@@ -109,7 +110,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 );
         }
 
-        public Response ChangePassword(ChangePasswordRequest request, string username)
+        public Response ChangePassword(ChangePasswordRequest request, string userId)
         {
             var response = request.Validate();
             if (response.IsError)
@@ -117,7 +118,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 return response;
             }
 
-            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
+            var user = _repository.GetById<DbUser>(userId);
             if (user == null)
             {
                 return Response.ValidationError("User not found");
@@ -129,7 +130,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
             user.PasswordHash = _hasher.GenerateHash(request.NewPassword);
             _repository.Save(user);
-            return Response.Success();
+            return Response.Success(null, "Password changed");
         }
 
         private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
