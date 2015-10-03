@@ -31,6 +31,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Query<T>();
         }
 
+        public T GetById<T>(string id) where T : IEntity
+        {
+            return Query<T>().FirstOrDefault(arg => arg.Id == id);
+        }
+
         public IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values)
         {
             var valueList = values.ToList();
