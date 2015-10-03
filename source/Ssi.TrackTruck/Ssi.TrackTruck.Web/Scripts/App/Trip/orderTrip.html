@@ -38,7 +38,7 @@
                     <label class="col-sm-2 control-label">Who will drive?</label>
                     <div class="col-sm-10">
                         <select ng-model="request.DriverId" ng-required="true"
-                                ng-options="driver.Id as driver.Name for driver in drivers"
+                                ng-options="driver.Id as driver.FullName for driver in drivers"
                                 class="form-control">
                             <option value=""> -- Choose Driver -- </option>
                         </select>
@@ -65,7 +65,7 @@
                     <label class="col-sm-2 control-label">Who will be helper?</label>
                     <div class="col-sm-10">
                         <select ng-model="request.HelperId" ng-required="true"
-                                ng-options="helper.Id as helper.Name for helper in helpers"
+                                ng-options="helper.Id as helper.FullName for helper in helpers"
                                 class="form-control">
                             <option value=""> -- Choose Helper -- </option>
                         </select>
