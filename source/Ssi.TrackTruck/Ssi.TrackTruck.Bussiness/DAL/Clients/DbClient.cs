@@ -14,6 +14,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Clients
         public int TrucksPerDay { get; set; }
         public IEnumerable<DbBranch> Branches { get; set; }
         public bool IsDeleted { get; set; }
-        public List<string> Address { get; set; }
+        public List<string> Addresses { get; set; }
     }
 }
