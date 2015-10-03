@@ -42,10 +42,15 @@
             });
         }
 
+        function getAll() {
+            return repository.get('Truck', 'All');
+        }
+
         return {
             calculateReportSummary: calculateReportSummary,
             getCurrentStatus: getCurrentStatus,
-            add: add
+            add: add,
+            getAll: getAll
         }
     }
 ]);

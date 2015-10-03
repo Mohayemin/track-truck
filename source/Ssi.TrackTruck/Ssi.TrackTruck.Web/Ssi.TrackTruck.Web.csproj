@@ -141,6 +141,8 @@
     <Content Include="Scripts\App\Auth\changePassword.html" />
     <Content Include="Scripts\App\Auth\changePassword.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
+    <Content Include="Scripts\App\Truck\truckList.html" />
+    <Content Include="Scripts\App\Truck\truckList.js" />
     <Content Include="Scripts\App\User\addUser.html" />
     <Content Include="Scripts\App\User\addUser.js" />
     <Content Include="Scripts\App\User\userList.html" />

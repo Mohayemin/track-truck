@@ -17,6 +17,7 @@
             .when('/', defaultRoute('home'))
             .when('/truck/add', defaultRoute('add-truck'))
             .when('/truck/report', defaultRoute('truck-status-report'))
+            .when('/truck/list', defaultRoute('truck-list'))
             .when('/client/list', defaultRoute('client-list'))
             .when('/client/add', defaultRoute('add-client'))
             .when('/client/:id', defaultRoute('client-detail'))
