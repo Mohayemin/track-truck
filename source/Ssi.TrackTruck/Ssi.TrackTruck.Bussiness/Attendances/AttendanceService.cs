@@ -3,6 +3,7 @@ using System.Linq;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Helpers;
 
 namespace Ssi.TrackTruck.Bussiness.Attendances
@@ -18,9 +19,9 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
             _authService = authService;
         }
 
-        public bool UpdateDailyHit(string username, DateTimeModel time)
+        public bool UpdateDailyHit(string userId, DateTimeModel time)
         {
-            var user = _authService.FindByUsername(username);
+            var user = _repository.GetById<DbUser>(userId);
 
             if (user == null)
             {
