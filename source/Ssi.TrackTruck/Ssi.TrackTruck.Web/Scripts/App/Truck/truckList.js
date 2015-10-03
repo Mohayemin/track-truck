@@ -10,6 +10,8 @@
                 function($scope,
                     truckService) {
 
+                    $scope.url = url;
+
                     truckService.getAll().then(function(trucks) {
                         $scope.trucks = trucks;
                     });
