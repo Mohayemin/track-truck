@@ -13,15 +13,15 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             _repository = repository;
         }
 
-        public Trip AddTrip(TripOrderRequest orderRequest)
+        public DbTrip AddTrip(TripOrderRequest orderRequest)
         {
             var trip = orderRequest.ToTrip();
             return _repository.Create(trip);
         }
 
-        public IEnumerable<Trip> GetAll()
+        public IEnumerable<DbTrip> GetAll()
         {
-            return _repository.GetAll<Trip>();
+            return _repository.GetAll<DbTrip>();
         }
     }
 }

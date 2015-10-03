@@ -1,19 +1,10 @@
-﻿trackTruck.factory('authService', [
+﻿authModule.factory('authService', [
     'repository',
-    authService
+    function (repository) {
+        return {
+            changePassword: function (request) {
+                return repository.post('Auth', 'ChangePassword', request);
+            }
+        };
+    }
 ]);
-
-function authService(repository) {
-    function signIn(request) {
-        return repository.post('Auth', 'SignIn', request);
-    }
-
-    function getUserList() {
-        return repository.get('Auth', 'GetUserList');
-    }
-
-    return {
-        signIn: signIn,
-        getUserList: getUserList
-    };
-}

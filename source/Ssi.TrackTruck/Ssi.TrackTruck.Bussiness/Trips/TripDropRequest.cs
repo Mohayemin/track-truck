@@ -13,9 +13,9 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public IList<DeliveryReceiptRequest> DeliveryReceipts { get; set; }
 
 
-        public Drop ToDrop()
+        public DbDrop ToDrop()
         {
-            return new Drop
+            return new DbDrop
             {
                 BranchId = BranchId,
                 ExpectedDropTime = ExpectedDropTime.ToDateTime(DateTimeConstants.PhilippineOffset),
