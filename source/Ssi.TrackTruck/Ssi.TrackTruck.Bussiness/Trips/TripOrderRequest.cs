@@ -9,7 +9,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     public class TripOrderRequest
     {
         public string ClientId { get; set; }
-        public string WarehouseId { get; set; }
+        public string PickupAddress { get; set; }
         public DateTimeModel ExpectedPickupTime { get; set; }
         public string DriverId { get; set; }
         public double DriverAllowance { get; set; }
@@ -24,7 +24,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return new DbTrip
             {
                 ClientId = ClientId,
-                WarehouseId = WarehouseId,
+                PickupAddress = PickupAddress,
                 ExpectedPickupTime = ExpectedPickupTime.ToDateTime(DateTimeConstants.PhilippineOffset),
                 DriverId = DriverId,
                 DriverAllowanceInCentavos = (long)(DriverAllowance * 100),

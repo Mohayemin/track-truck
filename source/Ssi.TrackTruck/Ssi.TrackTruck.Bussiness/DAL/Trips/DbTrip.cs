@@ -20,9 +20,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         
         [BsonRepresentation(BsonType.ObjectId)]
         public string DriverId { get; set; }
-
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string WarehouseId { get; set; }
+        public string PickupAddress { get; set; }
         public long DriverAllowanceInCentavos { get; set; }
         public long DriverSalaryInCentavos { get; set; }
         
