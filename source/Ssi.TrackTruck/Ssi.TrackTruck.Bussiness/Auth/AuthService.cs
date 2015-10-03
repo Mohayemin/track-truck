@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.Clients;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Auth
@@ -20,11 +22,11 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             _clientService = clientService;
         }
 
-        public Response AuthenticateUser(SignInRequest request)
+        public Response AuthenticateUser(SignInRequest request, out DbUser user)
         {
             if (request.Validate())
             {
-                var user = FindByUsername(request.Username);
+                user = FindByUsername(request.Username);
                 var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
                 if (valid)
                 {
@@ -33,10 +35,11 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
                 return Response.Error("InvalidCredentials", "Username and password does not match");
             }
+            user = null;
             return Response.Error("Validation", "Please enter both username and password");
         }
 
-        private DbUser FindByUsername(string username)
+        public DbUser FindByUsername(string username)
         {
             var usernameLower = username.ToLower();
             var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == usernameLower);
@@ -61,7 +64,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             if (request.Role == Role.BranchCustodian)
             {
                 var client = _clientService.GetClient(request.ClientId);
-                    
+
                 if (client == null)
                 {
                     return Response.ValidationError("The client you specified does not exist");
@@ -98,10 +101,16 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public IEnumerable<DbUser> GetUserList()
         {
-            return _repository.GetAllProjected<DbUser>();
+            return _repository.GetAllProjected<DbUser>(
+                user => user.Id,
+                user => user.FirstName,
+                user => user.LastName,
+                user => user.Role,
+                user => user.Username
+                );
         }
 
-        public Response ChangePassword(ChangePasswordRequest request, string username)
+        public Response ChangePassword(ChangePasswordRequest request, string userId)
         {
             var response = request.Validate();
             if (response.IsError)
@@ -109,7 +118,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 return response;
             }
 
-            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
+            var user = _repository.GetById<DbUser>(userId);
             if (user == null)
             {
                 return Response.ValidationError("User not found");

@@ -5,7 +5,15 @@
         , $q) {
         var _loadPromise = null;
         var _users = [];
+        var _userById = {};
         var _alphaNumbers = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+        function buildIdMap() {
+            _userById = {};
+            _users.forEach(function(user) {
+                _userById[user.Id] = user;
+            });
+        }
 
         var service = {
             generateInitialPassword: function () {
@@ -21,6 +29,9 @@
                     _loadPromise = repository.get('User', 'All').then(function (users) {
                         _users.length = 0;
                         _users.push.apply(_users, users);
+
+                        buildIdMap();
+
                         return _users;
                     });
                 }
@@ -42,6 +53,11 @@
                     }
                     _users.push(response.Data);
                     return response.Data;
+                });
+            },
+            getIndexedUsers: function() {
+                return service.getAll().then(function() {
+                    return _userById;
                 });
             }
         };

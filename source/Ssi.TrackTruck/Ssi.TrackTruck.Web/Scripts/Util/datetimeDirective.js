@@ -3,7 +3,8 @@
         return {
             templateUrl: '/Templates/datetimeDirective.html',
             scope: {
-                model: '='
+                model: '=',
+                hideTime: '='
             },
             controller: [
                 '$scope',
@@ -13,7 +14,7 @@
                     $scope.$watch('datePickerDate', function(dpd) {
                         if (dpd) {
                             model.year = dpd.getFullYear();
-                            model.month = dpd.getMonth();
+                            model.month = dpd.getMonth() + 1;
                             model.day = dpd.getDate();
                         } else {
                             model.year = null;

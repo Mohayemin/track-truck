@@ -45,6 +45,7 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attendances\AttendanceService.cs" />
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
@@ -67,11 +68,12 @@
     <Compile Include="DAL\Trips\DbTrip.cs" />
     <Compile Include="DAL\Entities\DbTruck.cs" />
     <Compile Include="DAL\Entities\DbWarehouse.cs" />
+    <Compile Include="DAL\Entities\DbDailyHit.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
-    <Compile Include="DAL\Entities\DbUser.cs" />
+    <Compile Include="DAL\Users\DbUser.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ListStorageRepository.cs" />
     <Compile Include="Auth\AddUserRequest.cs" />
