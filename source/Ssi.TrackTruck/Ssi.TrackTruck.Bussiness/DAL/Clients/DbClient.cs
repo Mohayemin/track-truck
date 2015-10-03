@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
-    public class DbClient : IEntity, ISoftDeletable
+    public class DbClient : IEntity
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -14,5 +15,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Clients
         public int TrucksPerDay { get; set; }
         public IEnumerable<DbBranch> Branches { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }

@@ -57,8 +57,9 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Collection<T>().FindOne(Query<T>.Where(condition));
         }
 
-        public T Create<T>(T item)
+        public T Create<T>(T item) where T:IEntity
         {
+            item.CreationTime = DateTime.UtcNow;
             Collection<T>().Insert(item);
             return item;
         }
@@ -88,12 +89,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Collection<T>().Find(Query<T>.Where(condition)).SetFields("_id").Any();
         }
 
-        public void CreateAll<T>(IEnumerable<T> items)
-        {
-            Collection<T>().InsertBatch(items);
-        }
-
-        public T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable
+        public T SoftDelete<T>(string id) where T : IEntity
         {
             var item = FindOne<T>(e => e.Id == id && !e.IsDeleted);
             if (item != null)
@@ -105,7 +101,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return item;
         }
 
-        public IQueryable<T> GetAllUndeleted<T>() where T : ISoftDeletable
+        public IQueryable<T> GetAllUndeleted<T>() where T : IEntity
         {
             return Collection<T>().Find(Query<T>.EQ(e => e.IsDeleted, false)).AsQueryable();
         }
