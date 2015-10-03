@@ -130,7 +130,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
             user.PasswordHash = _hasher.GenerateHash(request.NewPassword);
             _repository.Save(user);
-            return Response.Success();
+            return Response.Success(null, "Password changed");
         }
 
         private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
