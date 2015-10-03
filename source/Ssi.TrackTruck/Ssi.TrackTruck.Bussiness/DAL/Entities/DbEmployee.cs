@@ -17,6 +17,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public DateTime CreationTime { get; set; }
 
         [BsonIgnore]
-        public string Name { get { return FirstName + " " + LastName; } }
+        public string FullName { get { return FirstName + " " + LastName; } }
     }
 }
