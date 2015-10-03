@@ -19,6 +19,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult All()
+        {
+            return Json(_truckService.GetAll(), JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Add(AddTruckRequest request)
         {

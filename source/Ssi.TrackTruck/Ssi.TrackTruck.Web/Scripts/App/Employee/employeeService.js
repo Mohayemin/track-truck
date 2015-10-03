@@ -7,7 +7,15 @@
         $q,
         _) {
         var _employees = [];
-        var _loadPromise;
+        var _employeeById = {};
+        var _loadPromise = null;
+
+        function buildIdMap() {
+            _employeeById = {};
+            _employees.forEach(function (employee) {
+                _employeeById[employee.Id] = employee;
+            });
+        }
 
         var service = {
             getAllByDesignation: function(designation) {
@@ -20,6 +28,9 @@
                     _loadPromise = repository.get('Employee', 'All').then(function (employees) {
                         _employees.length = 0;
                         _employees.push.apply(_employees, employees);
+
+                        buildIdMap();
+
                         return employees;
                     });
                 }
@@ -37,6 +48,11 @@
             },
             isDesignationEmpty: function(designation) {
                 return designation === undefined || designation === '';
+            },
+            getIndexedEmployees: function () {
+                return service.getAll().then(function () {
+                    return _employeeById;
+                });
             }
         }
 

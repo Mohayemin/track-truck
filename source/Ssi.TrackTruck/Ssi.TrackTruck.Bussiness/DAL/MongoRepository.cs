@@ -7,10 +7,12 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
+using Ssi.TrackTruck.Bussiness.DAL.Trips;
+using Ssi.TrackTruck.Bussiness.DAL.Users;
 
 namespace Ssi.TrackTruck.Bussiness.DAL
 {
-    public class MongoRepository: IRepository
+    public class MongoRepository : IRepository
     {
         private readonly MongoDatabase _db;
         private readonly Func<Type, string> _mapCollectionName;
@@ -21,10 +23,34 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             _mapCollectionName = mapCollectionName;
         }
 
+        public void BuildIndexes()
+        {
+            BuildIndex<DbUser>(user => user.UsernameLowerCase);
+            
+            BuildIndex<DbDailyHit>(
+                hit => hit.Date, 
+                hit => hit.UserId);
+
+            BuildIndex<DbTrip>(
+                trip => trip.ClientId,
+                trip => trip.DriverId, 
+                trip => trip.HelperId, 
+                trip => trip.Status);
+        }
+
+        private void BuildIndex<T>(params Expression<Func<T, object>>[] indexes)
+        {
+            foreach (var index in indexes)
+            {
+                Collection<T>().CreateIndex(IndexKeys<T>.Ascending(index));
+            }
+        }
+
+
         protected MongoCollection<T> Collection<T>()
         {
             return _db.GetCollection<T>(_mapCollectionName.Invoke(typeof(T)));
-        } 
+        }
 
         public T FindOne<T>(Expression<Func<T, bool>> condition)
         {
@@ -40,6 +66,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         public IQueryable<T> GetAll<T>()
         {
             return Collection<T>().AsQueryable();
+        }
+
+        public T GetById<T>(string id) where T : IEntity
+        {
+            return Collection<T>().FindOneById(ObjectId.Parse(id));
         }
 
         public IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values)
@@ -83,6 +114,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         {
             Collection<T>().Save(item);
             return item;
+        }
+
+        public IQueryable<T> GetWhere<T>(Expression<Func<T, bool>> condition)
+        {
+            return Collection<T>().Find(Query<T>.Where(condition)).AsQueryable();
         }
     }
 }

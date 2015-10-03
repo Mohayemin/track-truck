@@ -47,5 +47,10 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             var truck = _repository.Create(request.ToTruck());
             return Response.Success(truck);
         }
+
+        public IEnumerable<DbTruck> GetAll()
+        {
+            return _repository.GetAll<DbTruck>();
+        }
     }
 }
