@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
@@ -17,5 +18,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         public string HelperId { get; set; }
         [BsonExtraElements]
         public BsonDocument ExtraElements_ { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }
