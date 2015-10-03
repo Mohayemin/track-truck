@@ -17,5 +17,15 @@
         {
             return new Response { IsError = false, Status = status, Message = message, Data = data };
         }
+
+        public static Response DuplicacyError(string message)
+        {
+            return Error("Duplicate", message);
+        }
+
+        public static Response ValidationError(string message)
+        {
+            return Error("Validation", message);
+        }
     }
 }

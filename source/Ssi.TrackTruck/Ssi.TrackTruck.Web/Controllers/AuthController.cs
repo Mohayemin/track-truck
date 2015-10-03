@@ -13,13 +13,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             _authService = authService;
         }
-
-        [HttpGet]
-        public ActionResult SignIn()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
         public ActionResult SignIn(SignInRequest request)
         {
@@ -36,25 +30,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             FormsAuthentication.SignOut();
             return Redirect(Url.Content("~/"));
         }
-
+        
         [HttpPost]
-        public ActionResult CreateUser(CreateUserRequest request)
+        public ActionResult ChangePassword(ChangePasswordRequest request)
         {
-            var response = _authService.CreateUser(request);
+            var response = _authService.ChangePassword(request, User.Identity.Name);
             return Json(response);
-        }
-
-        [HttpGet]
-        public ActionResult Users()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult GetUserList()
-        {
-            var users = _authService.GetUserList();
-            return Json(users, JsonRequestBehavior.AllowGet);
         }
     }
 }

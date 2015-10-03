@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL
 {
@@ -36,12 +37,52 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Query<T>().Where(t => valueList.Contains(property.Compile().Invoke(t)));
         }
 
+        public IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property)
+        {
+            return GetAll<T>();
+        }
+
+        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        {
+            return Query<T>().Any(condition);
+        }
+
+        public void CreateAll<T>(IEnumerable<T> items)
+        {
+            List<T>().AddRange(items);
+        }
+
+        public T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable
+        {
+            var item = FindOne<T>(e => e.Id == id);
+            if (item != null)
+            {
+                item.IsDeleted = true;
+            }
+            return item;
+        }
+
+        public IQueryable<T> GetAllUndeleted<T>() where T : ISoftDeletable
+        {
+            return GetAll<T>().Where(e => !e.IsDeleted);
+        }
+
+        public T Save<T>(T item)
+        {
+            return item;
+        }
+
+        public IQueryable<T> GetWhere<T>(Expression<Func<T, bool>> condition)
+        {
+            return GetAll<T>().Where(condition);
+        }
+
         private IQueryable<T> Query<T>()
         {
             return List<T>().AsQueryable();
         }
 
-        private IList<T> List<T>()
+        private List<T> List<T>()
         {
             var type = typeof(T);
             if (!_data.ContainsKey(type))
@@ -49,7 +90,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 _data[type] = new List<T>();
             }
 
-            return (IList<T>) _data[type];
+            return (List<T>)_data[type];
         }
     }
 }

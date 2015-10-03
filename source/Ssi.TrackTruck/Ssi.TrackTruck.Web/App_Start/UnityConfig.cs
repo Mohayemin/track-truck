@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using FizzWare.NBuilder;
+using System.Configuration;
 using Microsoft.Practices.Unity;
+using MongoDB.Driver;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Web
 {
@@ -31,7 +29,23 @@ namespace Ssi.TrackTruck.Web
             // container.LoadConfiguration();
 
             container.RegisterType<IHasher, Pbkdf2Hasher>();
-            container.RegisterType<IRepository, DummyRepository>();
+            RegisterRepo(container);
+        }
+
+        private static void RegisterRepo(IUnityContainer container)
+        {
+            var connectionString = ConfigurationManager.AppSettings["MONGOLAB_URI"];
+            var mongoUrl = new MongoUrl(connectionString);
+            var mongoClient = new MongoClient(mongoUrl.Url);
+            var mongoDb = mongoClient.GetServer().GetDatabase(mongoUrl.DatabaseName);
+            var collectionMapper = new CollectionMapper();
+            var repository = new MongoRepository(mongoDb, collectionMapper.Map);
+            repository.BuildIndexes();
+
+            container.RegisterType<IRepository, MongoRepository>(
+                new InjectionFactory(c => repository));
+
+            //container.RegisterType<IRepository, DummyRepository>();
         }
     }
 }

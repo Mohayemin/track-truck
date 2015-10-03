@@ -7,19 +7,19 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 {
     public class TruckStatusItem
     {
-        private readonly Truck _truck;
-        private readonly Trip _trip;
+        private readonly DbTruck _dbTruck;
+        private readonly DbTrip _dbTrip;
 
-        public TruckStatusItem(Truck truck, Trip trip)
+        public TruckStatusItem(DbTruck dbTruck, DbTrip dbTrip)
         {
-            _truck = truck;
-            _trip = trip;
+            _dbTruck = dbTruck;
+            _dbTrip = dbTrip;
         }
 
-        public string TruckNumber { get { return _truck.Number; } }
-        public string DriverId { get { return _trip.DriverId; } }
+        public string TruckNumber { get { return _dbTruck.RegistrationNumber; } }
+        public string DriverId { get { return _dbTrip.DriverId; } }
         public string DriverName { get { return null; } }
-        public int ItemsCarrying { get { return _trip.Drops.SelectMany(drop => drop.DeliveryReceipts).Sum(dr => dr.NumberOfBoxes); } }
-        public TripStatus Status { get { return _trip.Status; } }
+        public int ItemsCarrying { get { return _dbTrip.Drops.SelectMany(drop => drop.DeliveryReceipts).Sum(dr => dr.NumberOfBoxes); } }
+        public TripStatus Status { get { return _dbTrip.Status; } }
     }
 }
