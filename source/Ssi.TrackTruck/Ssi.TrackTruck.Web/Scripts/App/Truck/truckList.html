@@ -1,17 +1,22 @@
 ﻿<div>
-    <table>
+    <h3>
+        List of Trucks
+    </h3>
+
+
+    <table class="table table-hover table-responsive table-bordered" ts-wrapper>
         <thead>
             <tr>
-                <th>Registration Number</th>
-                <th>Driver</th>
-                <th>Helper</th>
+                <th ts-criteria="RegistrationNumber|lowercase">Registration Number</th>
+                <th ts-criteria="DriverName|lowercase">Driver</th>
+                <th ts-criteria="HelperName|lowercase">Helper</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="truck in trucks">
-                <td>{{truck.RegistrationNumber}}</td>
-                <td>{{truck.DriverName}}</td>
-                <td>{{truck.HelperName}}</td>
+            <tr ng-repeat="truck in trucks track by truck.Id" ts-repeat>
+                <td ng-bind="truck.RegistrationNumber"></td>
+                <td ng-bind="truck.DriverName"></td>
+                <td ng-bind="truck.HelperName"></td>
             </tr>
         </tbody>
     </table>
