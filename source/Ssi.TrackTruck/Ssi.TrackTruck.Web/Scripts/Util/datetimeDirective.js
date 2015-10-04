@@ -9,9 +9,11 @@
             },
             controller: [
                 '$scope',
-                function($scope) {
+                '$filter',
+                function ($scope
+                    , $filter) {
                     var model = $scope.model;
-
+                    
                     $scope.$watch('datePickerDate', function(dpd) {
                         if (dpd) {
                             model.year = dpd.getFullYear();
@@ -22,6 +24,19 @@
                             model.month = null;
                             model.day = null;
                         }
+                    });
+
+                    $scope.$watch('timePickerTime', function (tpt) {
+                        if (tpt) {
+                            model.hour = tpt.getHours();
+                            model.minute = tpt.getMinutes();
+                            $scope.timeDisplay = model.hour + ":" + model.minute;
+                        } else {
+                            model.hour = null;
+                            model.minute = null;
+                            $scope.timeDisplay = null;
+                        }
+                        $scope.timeDisplay = $filter('date')(tpt, 'hh:mm a');
                     });
                 }
             ]
