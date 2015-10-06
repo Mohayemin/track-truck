@@ -137,5 +137,10 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         {
             return _hasher.Match(currentPassword, dbPassword);
         }
+
+        public DbUser GetUser(string userId)
+        {
+            return _repository.GetById<DbUser>(userId);
+        }
     }
 }
