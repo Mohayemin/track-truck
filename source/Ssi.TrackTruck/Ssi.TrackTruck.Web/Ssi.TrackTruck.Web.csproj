@@ -175,6 +175,8 @@
     <Content Include="Scripts\SignIn\signInService.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
+    <Content Include="Scripts\Util\deleteButton.html" />
+    <Content Include="Scripts\Util\deleteButtonDirective.js" />
     <Content Include="Scripts\Util\globalMessageDirective.js" />
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
