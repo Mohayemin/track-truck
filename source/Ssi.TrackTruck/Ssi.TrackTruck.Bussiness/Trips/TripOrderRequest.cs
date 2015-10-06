@@ -8,6 +8,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 {
     public class TripOrderRequest
     {
+        public string TripTicketNumber { get; set; }
         public string ClientId { get; set; }
         public string PickupAddress { get; set; }
         public DateTimeModel ExpectedPickupTime { get; set; }
@@ -17,6 +18,13 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public string HelperId { get; set; }
         public double HelperAllowance { get; set; }
         public double HelperSalary { get; set; }
+        public string TruckId { get; set; }
+        public string SupervisorId { get; set; }
+        public double MiscCost { get; set; }
+        public double TollCost { get; set; }
+        public double ParkingCost { get; set; }
+        public double FuelCost { get; set; }
+        public string CheckerId { get; set; }
         public IList<TripDropRequest> Drops { get; set; }
 
         public DbTrip ToTrip()
@@ -32,8 +40,18 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 HelperId = HelperId,
                 HelperAllowanceInCentavos = (long)(HelperAllowance * 100),
                 HelperSalaryInCentavos = (long)(HelperSalary * 100),
-                Drops = Drops.Select(request => request.ToDrop()).ToList()
+                SupervisorId = SupervisorId,
+                CheckerId = CheckerId,
+                FuelCostInCentavos = (long)(FuelCost * 100),
+                ParkingCostInCenvatos = (long)(ParkingCost * 100),
+                TollCostInCentavos = (long) (TollCost * 100),
+                MiscCostInCenvatos = (long) (MiscCost * 100),
+                TripTicketNumber = TripTicketNumber,
+                TruckId = TruckId,
+                Drops = Drops.Select(request => request.ToDrop()).ToList(),
+                Status = TripStatus.NotStarted
             };
         }
+
     }
 }

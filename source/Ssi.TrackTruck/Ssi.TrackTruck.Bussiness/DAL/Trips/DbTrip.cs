@@ -18,8 +18,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string TripTicketNumber { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string ClientId { get; set; }
-        public string PickupPoint { get; set; }
-        public DateTime PickupTime { get; set; }
+        public string PickupAddress { get; set; }
         public DateTime ExpectedPickupTime { get; set; }
         public IEnumerable<DbDrop> Drops { get; set; }
 
@@ -34,7 +33,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         
         [BsonRepresentation(BsonType.ObjectId)]
         public string DriverId { get; set; }
-        public string PickupAddress { get; set; }
         public long DriverAllowanceInCentavos { get; set; }
         public long DriverSalaryInCentavos { get; set; }
 
