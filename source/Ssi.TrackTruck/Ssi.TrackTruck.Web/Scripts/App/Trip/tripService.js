@@ -2,23 +2,12 @@
     'repository',
     function tripService(repository) {
         return {
-            orderTrip: function(request) {
-                var flatProperties = [
-                    'ExpectedPickupTime', 'ExpectedPickupTime',
-                    'DriverAllowance', 'DriverSalary', 'HelperAllowance', 'HelperSalary',
-                    'Drops', 'PickupAddress', 'DriverId', 'HelperId'
-                ];
-                var idProeprties = ['Client'];
+            orderTrip: function (request) {
+                var foramtterRequest = angular.extend({}, request);
 
-                var foramtterRequest = {
-            
-                };
-
-                flatProperties.forEach(function(prop) {
-                    foramtterRequest[prop] = request[prop];
-                });
-                idProeprties.forEach(function(prop) {
+                ['Client', 'Truck'].forEach(function (prop) {
                     foramtterRequest[prop + "Id"] = request[prop].Id;
+                    delete foramtterRequest[prop];
                 });
 
                 return repository.post('Trip', 'Order', foramtterRequest);
