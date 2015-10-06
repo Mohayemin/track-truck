@@ -20,7 +20,7 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
         public IEnumerable<TruckStatusItem> GetCurrentStatus()
         {
             var allTrucks =
-                _repository.GetAll<DbTruck>();
+                _repository.GetAllUndeleted<DbTruck>();
 
             var tripIds = allTrucks.Select(truck => truck.CurrentTripId);
 
@@ -50,7 +50,13 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 
         public IEnumerable<DbTruck> GetAll()
         {
-            return _repository.GetAll<DbTruck>();
+            return _repository.GetAllUndeleted<DbTruck>();
+        }
+
+        public Response Delete(string id)
+        {
+            _repository.SoftDelete<DbTruck>(id);
+            return Response.Success(null, "Successfully deleted");
         }
     }
 }
