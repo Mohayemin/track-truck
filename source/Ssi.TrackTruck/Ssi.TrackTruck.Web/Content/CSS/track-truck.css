@@ -2,8 +2,27 @@
     margin-top: 50px;
 }
 
+.global-message {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    -ms-opacity: .9;
+    opacity: .9;
+    z-index: 100;
+}
+
+.btn:focus {
+    outline: none;
+}
+
 .message-box {
-    min-height: 25px
+    min-height: 25px;
+}
+
+.hover-only-parent:not(:hover) .hover-only {
+    visibility: hidden;
 }
 
 .fa.space-left {
@@ -17,4 +36,32 @@
 .fa.space {
     margin-left: 2px;
     margin-right: 2px;
+}
+
+table.table.table-bordered th, table.table.table-bordered td {
+    border-color: #4e5d6c;
+    border-width: 1px;
+}
+
+.time-picker-input {
+    display: inline-block;
+    width: 100px;
+    float: left;
+    margin-right: 3px;
+    text-align: center;
+}
+
+.pad-left {
+    padding-left: 15px;
+}
+
+.attendance {
+    /*Color based on bootstrap superhero theme*/
+    background-color: #d9534f;
+    text-align: center;
+}
+
+.attendance.present{
+    /*Color based on bootstrap superhero theme*/
+    background-color: #5cb85c; 
 }
