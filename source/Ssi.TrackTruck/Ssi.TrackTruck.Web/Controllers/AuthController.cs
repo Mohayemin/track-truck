@@ -3,6 +3,7 @@ using System.Web.Security;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Models;
+using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -15,6 +16,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             _authService = authService;
         }
         
+        [ValidateModel]
         [HttpPost]
         public ActionResult SignIn(SignInRequest request)
         {

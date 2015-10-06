@@ -24,19 +24,14 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public Response AuthenticateUser(SignInRequest request, out DbUser user)
         {
-            if (request.Validate())
+            user = FindByUsername(request.Username);
+            var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
+            if (valid)
             {
-                user = FindByUsername(request.Username);
-                var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
-                if (valid)
-                {
-                    return Response.Success(null, "Verified, redirecting...");
-                }
-
-                return Response.Error("InvalidCredentials", "Username and password does not match");
+                return Response.Success(null, "Verified, redirecting...");
             }
-            user = null;
-            return Response.Error("Validation", "Please enter both username and password");
+
+            return Response.Error("InvalidCredentials", "Username and password does not match");
         }
 
         public DbUser FindByUsername(string username)
