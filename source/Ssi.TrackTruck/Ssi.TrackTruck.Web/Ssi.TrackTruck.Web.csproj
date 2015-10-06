@@ -179,7 +179,6 @@
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
     <Content Include="Scripts\App\appModule.js" />
-    <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\tripService.js" />
     <Content Include="Scripts\App\Truck\addTruck.html" />
     <Content Include="Scripts\App\Truck\addTruck.js" />
