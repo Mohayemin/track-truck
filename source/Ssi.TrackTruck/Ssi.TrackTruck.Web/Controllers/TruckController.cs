@@ -30,5 +30,12 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             return Json(_truckService.Add(request));
         }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var response = _truckService.Delete(id);
+            return Json(response);
+        }
     }
 }
