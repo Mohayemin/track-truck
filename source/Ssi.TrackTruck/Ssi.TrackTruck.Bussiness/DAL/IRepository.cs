@@ -14,7 +14,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         T GetById<T>(string id) where T : IEntity;
         IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values);
         IQueryable<T> GetAllProjected<T>(params Expression<Func<T, object>>[] property);
-        bool Exists<T>(Expression<Func<T, bool>> condition);
+        bool Exists<T>(Expression<Func<T, bool>> condition) where T : IEntity;
         T SoftDelete<T>(string id) where T : IEntity;
         IQueryable<T> GetAllUndeleted<T>() where T:IEntity;
         T Save<T>(T item);
