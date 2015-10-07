@@ -34,7 +34,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             BuildIndex<DbTrip>(
                 trip => trip.ClientId,
                 trip => trip.DriverId, 
-                trip => trip.HelperId, 
+                trip => trip.HelperIds, 
                 trip => trip.Status);
         }
 

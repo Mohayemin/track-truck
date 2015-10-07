@@ -39,7 +39,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
 
         [BsonRepresentation(BsonType.ObjectId)]
-        public string HelperId { get; set; }
+        public List<string> HelperIds { get; set; }
         public long HelperAllowanceInCentavos { get; set; }
         public long HelperSalaryInCentavos { get; set; }
         

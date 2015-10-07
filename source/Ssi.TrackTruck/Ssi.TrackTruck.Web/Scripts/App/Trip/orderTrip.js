@@ -26,7 +26,8 @@
                         DeliveryHour: 15,
                         DeliveryMinute: 30,
                         ExpectedPickupTime: {},
-                        Drops: []
+                        Drops: [],
+                        HelperIds: [undefined, undefined, undefined]
                     };
 
                     $scope.addDr = function(drop) {
