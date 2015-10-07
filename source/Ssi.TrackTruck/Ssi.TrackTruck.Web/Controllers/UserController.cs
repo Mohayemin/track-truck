@@ -27,5 +27,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var users = _authService.GetUserList();
             return Json(users, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var response = _authService.Delete(id, User.Identity.Name);
+            return Json(response);
+        }
 	}
 }
