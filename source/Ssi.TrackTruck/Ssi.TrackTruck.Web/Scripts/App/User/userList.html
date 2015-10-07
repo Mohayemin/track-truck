@@ -20,6 +20,7 @@
                 <th ts-criteria="LastName|lowercase">Last Name</th>
                 <th ts-criteria="Username|lowercase">Username</th>
                 <th ts-criteria="Role|lowercase">Roles</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                 <td ng-bind="user.LastName"></td>
                 <td ng-bind="user.Username"></td>
                 <td ng-bind="roleMap[user.Role]"></td>
+                <td><delete-button controller="'User'" list="users" index="$index"></delete-button></td>
             </tr>
         </tbody>
     </table>

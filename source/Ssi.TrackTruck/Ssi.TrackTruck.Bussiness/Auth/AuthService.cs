@@ -132,5 +132,24 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         {
             return _repository.GetById<DbUser>(userId);
         }
+
+        public Response Delete(string id, string loggedInUserId)
+        {
+            var user = GetUser(id);
+            if (user == null)
+            {
+                return Response.Error("", string.Format("The user you tried to delete does not exist"));                   
+            }
+            if (user.Role.HasFlag(Role.Admin))
+            {
+                return Response.Error("", string.Format("Cannot delete Admin"));                   
+            }
+            if (user.Id == loggedInUserId)
+            {
+                return Response.Error("", string.Format("Cannot delete You!"));
+            }
+            _repository.SoftDelete<DbUser>(id);
+            return Response.Success(null, "Successfully deleted");
+        }
     }
 }
