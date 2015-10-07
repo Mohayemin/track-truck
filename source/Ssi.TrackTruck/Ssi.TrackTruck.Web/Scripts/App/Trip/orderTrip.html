@@ -29,8 +29,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Pickup Point</label>
@@ -52,8 +50,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <fieldset ng-disabled="!request.Client">
                     <div ng-repeat="drop in request.Drops">
                         <hr class="no-margin-top" />
@@ -81,7 +77,8 @@
                         </div>
 
                         <div class="form-group form-group-sm">
-                            <div class="col-xs-5">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-6">
                                 <label class=" control-label">DR Number (Total <span ng-bind="drop.DeliveryReceipts.length"></span>)</label>
                             </div>
                             <div class="col-xs-5">
@@ -89,7 +86,16 @@
                             </div>
                         </div>
                         <div ng-repeat="dr in drop.DeliveryReceipts" class="form-group form-group-sm">
-                            <div class="col-xs-5">
+                            
+                            <div class="col-xs-1" ng-if="$last">
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-primary btn-xs" ng-click="addDr(drop)">
+                                        <i class="fa fa-lg fa-plus"></i>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div class="col-xs-6">
                                 <input ng-model="dr.DrNumber" ng-required="true"
                                        type="text" min="0" placeholder="DR Number"
                                        class="form-control" />
@@ -98,11 +104,6 @@
                                 <input ng-model="dr.NumberOfBoxes" ng-required="true"
                                        type="number" min="1" placeholder="Number of Boxes"
                                        class="form-control" />
-                            </div>
-                            <div class="col-xs-2" ng-if="$last">
-                                <button type="button" class="btn btn-primary btn-sm btn-block" ng-click="addDr(drop)">
-                                    <i class="fa fa-lg fa-plus"></i>
-                                </button>
                             </div>
                         </div>
 
