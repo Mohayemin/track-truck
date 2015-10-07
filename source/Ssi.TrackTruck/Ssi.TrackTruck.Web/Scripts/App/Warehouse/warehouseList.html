@@ -18,6 +18,7 @@
             <tr>
                 <th ts-criteria="Name|lowercase">Name</th>
                 <th ts-criteria="Address|parseInt">Address</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                     <a ng-href="{{url.route('warehouse', warehouse.Id)}}" ng-bind="warehouse.Name"></a>
                 </td>
                 <td ng-bind="warehouse.Address"></td>
+                <td><delete-button controller="'Warehouse'" list="warehouses" index="$index"></delete-button></td>
             </tr>
         </tbody>
     </table>
