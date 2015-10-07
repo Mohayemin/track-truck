@@ -7,12 +7,21 @@
             controller: [
                 '$scope',
                 'clientService',
+                'truckService',
                 'tripService',
                 'warehouseService',
                 'employeeService',
                 'designation',
                 'globalMessage',
-                function orderTripController($scope, clientService, tripService, warehouseService, employeeService, designation, globalMessage) {
+                function orderTripController(
+                    $scope,
+                    clientService,
+                    truckService,
+                    tripService,
+                    warehouseService,
+                    employeeService,
+                    designation,
+                    globalMessage) {
                     $scope.request = {
                         DeliveryHour: 15,
                         DeliveryMinute: 30,
@@ -50,10 +59,8 @@
                         console.error('could not load clients');
                     });
 
-                    warehouseService.getAll().then(function(warehouses) {
-                        $scope.warehouses = warehouses;
-                    }).catch(function() {
-                        console.error('could not load warehouses');
+                    truckService.getAll().then(function(trucks) {
+                        $scope.trucks = trucks;
                     });
 
                     employeeService.getAllByDesignation(designation.driver).then(function(drivers) {
@@ -61,6 +68,20 @@
                     });
                     employeeService.getAllByDesignation(designation.helper).then(function (helpers) {
                         $scope.helpers = helpers;
+                    });
+                    employeeService.getAllByDesignation(designation.supervisor).then(function (supervisors) {
+                        $scope.supervisors = supervisors;
+                    });
+                    employeeService.getAllByDesignation(designation.checker).then(function (checkers) {
+                        $scope.checkers = checkers;
+                    });
+
+                    $scope.$watch('request.Truck', function () {
+                        var truck = $scope.request.Truck;
+                        if (truck) {
+                            $scope.request.DriverId = truck.DriverId || $scope.request.DriverId;
+                            $scope.request.HelperId = truck.HelperId || $scope.request.HelperId;
+                        }
                     });
 
                     $scope.order = function() {

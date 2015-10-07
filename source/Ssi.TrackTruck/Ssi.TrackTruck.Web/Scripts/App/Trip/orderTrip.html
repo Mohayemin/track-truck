@@ -6,48 +6,190 @@
                 <span class="col-sm-offset-2">Order a trip</span>
             </legend>
             <div class="well">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Who is the client?</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.Client" ng-required="true"
-                                ng-options="client.Name for client in clients"
-                                class="form-control">
-                            <option value=""> -- Choose Client -- </option>
-                        </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Client</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.Client" ng-required="true"
+                                        ng-options="client.Name for client in clients"
+                                        class="form-control">
+                                    <option value=""> -- Choose Client -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Ticket Number</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.TicketNumber" required
+                                       type="text" placeholder="Trip Ticket Number"
+                                       class="form-control" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">From where to pickup?</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.WarehouseId" ng-required="true"
-                                ng-options="warehouse.Id as warehouse.Name for warehouse in warehouses"
-                                class="form-control">
-                            <option value=""> -- Choose 3PW -- </option>
-                        </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Pickup Point</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.PickupAddress" ng-required="true"
+                                        ng-options="address for address in request.Client.Addresses"
+                                        class="form-control">
+                                    <option value=""> -- Choose Pickup Point -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Pickup Time</label>
+                            <div class="col-sm-10">
+                                <datetime model="request.ExpectedPickupTime" required="true" options="{sm: true}"></datetime>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">When to pickup?</label>
-                    <div class="col-sm-10">
-                        <datetime model="request.ExpectedPickupTime" required="true"></datetime>
+                
+                
+                <fieldset ng-disabled="!request.Client">
+                    <div ng-repeat="drop in request.Drops">
+                        <hr class="no-margin-top" />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-2 control-label">Branch</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="drop.BranchId" ng-required="true"
+                                                ng-options="branch.Id as branch.Name for branch in request.Client.Branches"
+                                                class="form-control">
+                                            <option value=""> -- Choose Branch -- </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-2 control-label">Drop Time</label>
+                                    <div class="col-sm-10">
+                                        <datetime model="drop.ExpectedDropTime" required="true" options="{sm: true}"></datetime>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-group-sm">
+                            <div class="col-xs-5">
+                                <label class=" control-label">DR Number (Total <span ng-bind="drop.DeliveryReceipts.length"></span>)</label>
+                            </div>
+                            <div class="col-xs-5">
+                                <label class="control-label">Number of Boxes (Total <span ng-bind="getTotalBoxes(drop)"></span>)</label>
+                            </div>
+                        </div>
+                        <div ng-repeat="dr in drop.DeliveryReceipts" class="form-group form-group-sm">
+                            <div class="col-xs-5">
+                                <input ng-model="dr.DrNumber" ng-required="true"
+                                       type="text" min="0" placeholder="DR Number"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-xs-5">
+                                <input ng-model="dr.NumberOfBoxes" ng-required="true"
+                                       type="number" min="1" placeholder="Number of Boxes"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-xs-2" ng-if="$last">
+                                <button type="button" class="btn btn-primary btn-sm btn-block" ng-click="addDr(drop)">
+                                    <i class="fa fa-lg fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+
                     </div>
-                </div>
+                    <div class="form-group form-group-sm">
+                        <hr class="no-margin-top"/>
+                        <label class="col-sm-2 control-label">Total <span ng-bind="request.Drops.length"></span> drop(s)</label>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-info btn-sm" ng-click="addDrop()">
+                                <i class="fa fa-plus"></i>
+                                Add Another Drop
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
             <div class="well">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Who will drive?</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.DriverId" ng-required="true"
-                                ng-options="driver.Id as driver.FullName for driver in drivers"
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-1 control-label">Truck</label>
+                    <div class="col-sm-11">
+                        <select ng-model="request.Truck" ng-required="true"
+                                ng-options="truck as truck.RegistrationNumber for truck in trucks"
                                 class="form-control">
-                            <option value=""> -- Choose Driver -- </option>
+                            <option value=""> -- Choose Truck -- </option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">What is Driver's Payment?</label>
-                    <div class="col-sm-10">
-                        <div class="row">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Fuel</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.FuelCost" required
+                                       type="number" min="0" placeholder="Fuel Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Toll</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.TollCost" required
+                                       type="number" min="0" placeholder="Toll Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Parking</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.ParkingCost" required
+                                       type="number" min="0" placeholder="Parking Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Misc</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.MiscellaneousCost" required
+                                       type="number" min="0" placeholder="Miscellaneous Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Driver</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.DriverId" ng-required="true"
+                                        ng-options="driver.Id as driver.FullName for driver in drivers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Driver -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
                             <div class="col-xs-6">
                                 <input ng-model="request.DriverAllowance" ng-required="true"
                                        type="number" min="0" placeholder="Driver's Allowance"
@@ -61,20 +203,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Who will be helper?</label>
-                    <div class="col-sm-10">
-                        <select ng-model="request.HelperId" ng-required="true"
-                                ng-options="helper.Id as helper.FullName for helper in helpers"
-                                class="form-control">
-                            <option value=""> -- Choose Helper -- </option>
-                        </select>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Helper</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.HelperId" ng-required="true"
+                                        ng-options="helper.Id as helper.FullName for helper in helpers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Helper -- </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">What is Helpers's Payment?</label>
-                    <div class="col-sm-10">
-                        <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
                             <div class="col-xs-6">
                                 <input ng-model="request.HelperAllowance" ng-required="true"
                                        type="number" min="0" placeholder="Helper's Allowance"
@@ -88,69 +232,35 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="well">
-                <fieldset ng-disabled="!request.Client">
-                    <div ng-repeat="drop in request.Drops">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Where to drop?</label>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Supervisor</label>
                             <div class="col-sm-10">
-                                <select ng-model="drop.BranchId" ng-required="true"
-                                        ng-options="branch.Id as branch.Name for branch in request.Client.Branches"
+                                <select ng-model="request.SupervisorId" ng-required="true"
+                                        ng-options="supervisor.Id as supervisor.Fullname for supervisor in supervisors"
                                         class="form-control">
-                                    <option value=""> -- Choose Branch -- </option>
+                                    <option value=""> -- Choose Supervisor -- </option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">When to drop?</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Checker</label>
                             <div class="col-sm-10">
-                                <datetime model="drop.ExpectedDropTime" required="true"></datetime>
+                                <select ng-model="request.CheckerId" ng-required="true"
+                                        ng-options="checker.Id as checker.Fullname for checker in checkers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Supervisor -- </option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 hidden-xs"></label>
-                            <div class="col-sm-5 col-xs-6">
-                                <label class=" control-label">DR Number (Total <span ng-bind="drop.DeliveryReceipts.length"></span>)</label>
-                            </div>
-                            <div class="col-sm-5 col-xs-6">
-                                <label class="control-label">Number of Boxes (Total <span ng-bind="getTotalBoxes(drop)"></span>)</label>
-                            </div>
-                        </div>
-                        <div ng-repeat="dr in drop.DeliveryReceipts" class="form-group">
-                            <label class="col-sm-2 hidden-xs"></label>
-                            <div class="col-sm-5 col-xs-6">
-                                <input ng-model="dr.DrNumber" ng-required="true"
-                                       type="text" min="0" placeholder="DR Number"
-                                       class="form-control" />
-                            </div>
-                            <div class="col-sm-5 col-xs-6">
-                                <input ng-model="dr.NumberOfBoxes" ng-required="true"
-                                       type="number" min="1" placeholder="Number of Boxes"
-                                       class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-2 ">
-                                <button type="button" class="btn btn-primary btn-xs" ng-click="addDr(drop)">
-                                    <i class="fa fa-plus"></i> Add Another DR
-                                </button>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Total <span ng-bind="request.Drops.length"></span> drop(s)</label>
-                        <div class="col-sm-10">
-                            <button type="button" class="btn btn-info btn-sm" ng-click="addDrop()">
-                                <i class="fa fa-plus"></i>
-                                Add Another Drop
-                            </button>
                         </div>
                     </div>
-                </fieldset>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group form-group-sm">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input class="btn btn-success btn-block" type="submit" value="Put Order" />
                 </div>
