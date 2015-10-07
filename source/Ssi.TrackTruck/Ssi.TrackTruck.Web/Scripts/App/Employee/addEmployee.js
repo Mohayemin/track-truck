@@ -12,7 +12,7 @@
                 'designation',
                 function ($scope, employeeService, designation) {
                     $scope.designations = {
-                        values: [designation.driver, designation.helper],
+                        values: [designation.supervisor, designation.driver, designation.helper],
                         selected: ''
                     };
 
