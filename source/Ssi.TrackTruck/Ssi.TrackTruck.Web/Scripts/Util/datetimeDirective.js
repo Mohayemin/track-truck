@@ -16,12 +16,9 @@
 
                     if (model && model.year) {
                         $scope.datePickerDate = new Date(
-                            model.year || 0
-                            , model.month || 0
-                            , model.day || 0
-                            , model.hour || 0
-                            , model.minute || 0
-                            , 0);
+                            model.year || 0, model.month || 0, model.day || 0);
+
+                        $scope.timePickerTime = new Date(0, 0, 0, model.hour || 0, model.minute || 0, 0);
                     }
 
                     $scope.$watch('datePickerDate', function (dpd) {
