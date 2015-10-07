@@ -6,6 +6,7 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
+    [BsonIgnoreExtraElements]
     public class DbClient : IEntity
     {
         [BsonId]
