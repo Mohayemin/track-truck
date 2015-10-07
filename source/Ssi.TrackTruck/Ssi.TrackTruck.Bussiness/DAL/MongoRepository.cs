@@ -59,6 +59,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
 
         public T Create<T>(T item) where T:IEntity
         {
+            item.IsDeleted = false;
             item.CreationTime = DateTime.UtcNow;
             Collection<T>().Insert(item);
             return item;
