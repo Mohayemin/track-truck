@@ -46,7 +46,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         
         [BsonRepresentation(BsonType.ObjectId)]
         public string SupervisorId { get; set; }
-        [BsonRepresentation(BsonType.ObjectId)]
         
         public bool IsDeleted { get; set; }
         public DateTime CreationTime { get; set; }

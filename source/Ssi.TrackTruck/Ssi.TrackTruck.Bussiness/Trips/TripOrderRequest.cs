@@ -37,7 +37,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 DriverId = DriverId,
                 DriverAllowanceInCentavos = (long)(DriverAllowance * 100),
                 DriverSalaryInCentavos = (long)(DriverSalary * 100),
-                HelperIds = HelperIds,
+                HelperIds = HelperIds.Where(id => !string.IsNullOrWhiteSpace(id)).ToList(),
                 HelperAllowanceInCentavos = (long)(HelperAllowance * 100),
                 HelperSalaryInCentavos = (long)(HelperSalary * 100),
                 SupervisorId = SupervisorId,
