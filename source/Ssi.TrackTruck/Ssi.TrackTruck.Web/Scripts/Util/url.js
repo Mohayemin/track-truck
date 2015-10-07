@@ -1,5 +1,5 @@
 ﻿utilModule.factory('url', [
-    function url() {
+    function urlFactory() {
         return {
             template: function(module, feature) {
                 var root = '/Scripts/App/';
@@ -7,7 +7,9 @@
             },
             route: function() {
                 var paths = Array.prototype.slice.call(arguments);
-                return '#/' + paths.join('/');
+                var url = paths.join('/');
+                var prefix = url[0] == '/' ? '#' : '#/';
+                return prefix + url;
             },
             server: function(controller, action, params) {
                 if (!controller) {

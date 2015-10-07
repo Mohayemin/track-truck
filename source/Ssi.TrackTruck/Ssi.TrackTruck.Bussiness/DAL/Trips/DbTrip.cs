@@ -31,6 +31,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public long HelperAllowanceInCentavos { get; set; }
         public long HelperSalaryInCentavos { get; set; }
         public IEnumerable<DbDrop> Drops { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime CreationTime { get; set; }
 
         public DbTrip()
         {

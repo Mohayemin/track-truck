@@ -1,32 +1,32 @@
-﻿<div class="row">
-    <div class="col-sm-6 col-md-8">
-        <div class="input-group" ng-click="dateIsOpen=true">
-            <input ng-model="datePickerDate" ng-required="required" ng-change="dateChanged()"
-                   type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
-                   class="form-control" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-primary">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                </button>
-            </span>
+﻿<div class="date-time-picker form-horizontal">
+    <div ng-class="{'col-lg-12': hideTime, 'col-sm-6': !hideTime}" class="date-picker-container">
+        <div class="form-group">
+            <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="dateIsOpen=true">
+                <input ng-model="datePickerDate" ng-required="required"
+                       type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
+                       class="form-control" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-4">
-        
-        <div class="row">
-
-            <div class="col-xs-6">
-                
-                <input ng-model="model.hour" ng-required="required"
-                       type="number" min="0" max="23" placeholder="hour"
-                       class="form-control" />
-            </div>
-            <div class="col-xs-6">
-                <input ng-model="model.minute" ng-required="required"
-                       type="number" min="0" max="59" placeholder="minute"
-                       class="form-control" />
+    
+    <div ng-class="col-sm-6" ng-show="!hideTime">
+        <div class="input-group" ng-class="{'input-group-sm': options.sm}" dropdown auto-close="outsideClick">
+            <input ng-model="timeDisplay" ng-required="required" dropdown-toggle
+                   type="text" placeholder="time"
+                   class="form-control" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-primary" dropdown-toggle>
+                    <i class="fa fa-lg fa-clock-o"></i>
+                </button>
+            </span>
+            <div class="dropdown-menu">
+                <timepicker ng-model="timePickerTime" show-meridian="true"></timepicker>
             </div>
         </div>
-        
     </div>
 </div>

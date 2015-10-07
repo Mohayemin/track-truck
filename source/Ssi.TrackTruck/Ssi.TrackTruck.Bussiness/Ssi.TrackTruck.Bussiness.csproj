@@ -41,10 +41,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attendances\AttendanceService.cs" />
     <Compile Include="Auth\AuthService.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
@@ -59,7 +61,6 @@
     <Compile Include="DAL\Clients\DbBranch.cs" />
     <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
-    <Compile Include="DAL\Entities\ISoftDeletable.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />
@@ -67,11 +68,12 @@
     <Compile Include="DAL\Trips\DbTrip.cs" />
     <Compile Include="DAL\Entities\DbTruck.cs" />
     <Compile Include="DAL\Entities\DbWarehouse.cs" />
+    <Compile Include="DAL\Entities\DbDailyHit.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
-    <Compile Include="DAL\Entities\DbUser.cs" />
+    <Compile Include="DAL\Users\DbUser.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ListStorageRepository.cs" />
     <Compile Include="Auth\AddUserRequest.cs" />

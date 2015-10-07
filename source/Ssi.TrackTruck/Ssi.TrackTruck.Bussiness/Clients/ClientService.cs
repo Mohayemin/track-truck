@@ -22,23 +22,11 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public Response Add(AddClientRequest request)
         {
-            if (!request.Validate())
-            {
-                return Response.Error("Validation");
-            }
             if (ClientNameIsDuplicate(request))
             {
-                return Response.Error("", "Client with same name already exists");
+                return Response.DuplicacyError("Client with same name already exists");
             }
-
-            if (request.Branches.Any())
-            {
-                if (BranchNameHasDuplicate(request))
-                {
-                    return Response.Error("", "Two or more branches has the same name");
-                }
-            }
-
+            
             var branches = request.Branches.Select(b => b.ToBranch());
 
             var client = new DbClient
@@ -59,12 +47,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             return nameTaken;
         }
 
-        private static bool BranchNameHasDuplicate(AddClientRequest request)
-        {
-            var branchNames = request.Branches.Select(b => b.Name).ToList();
-            var branchNameDuplicate = branchNames.Distinct().Count() != branchNames.Count;
-            return branchNameDuplicate;
-        }
+        
         
         public Response Delete(string id)
         {
