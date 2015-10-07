@@ -43,7 +43,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 FuelCostInCentavos = (long)(FuelCost * 100),
                 ParkingCostInCenvatos = (long)(ParkingCost * 100),
                 TollCostInCentavos = (long) (TollCost * 100),
-                MiscCostInCenvatos = (long) (MiscCost * 100),
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
                 Drops = Drops.Select(request => request.ToDrop()).ToList(),
