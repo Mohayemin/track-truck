@@ -29,7 +29,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             };
 
             _repository.Create(employee);
-            return Response.Success(request);
+            return Response.Success(employee);
         }
 
         public Response Delete(string id)
