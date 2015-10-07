@@ -56,7 +56,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             {
                 return Response.Success(null, "Successfully deleted");
             }
-            return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
+            return Response.Error("", string.Format("The client you tried to delete does not exist"));
         }
 
         public DbClient GetClient(string clientId)

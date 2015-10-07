@@ -40,8 +40,12 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
         public Response Delete(string id)
         {
-            _repository.SoftDelete<DbEmployee>(id);
-            return Response.Success(null, "Successfully deleted");
+            var employee = _repository.SoftDelete<DbEmployee>(id);
+            if (employee != null)
+            {
+                return Response.Success(null, "Successfully deleted");
+            }
+            return Response.Error("", string.Format("The employee you tried to delete does not exist"));
         }
 
         private bool IsEmployeeNameEmpty(string name)
