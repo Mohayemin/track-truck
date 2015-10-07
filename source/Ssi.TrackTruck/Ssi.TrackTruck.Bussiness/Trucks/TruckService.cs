@@ -55,8 +55,12 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 
         public Response Delete(string id)
         {
-            _repository.SoftDelete<DbTruck>(id);
-            return Response.Success(null, "Successfully deleted");
+            var truck = _repository.SoftDelete<DbTruck>(id);
+            if (truck != null)
+            {
+                return Response.Success(null, "Successfully deleted");
+            }
+            return Response.Error("", string.Format("The truck you tried to delete does not exist"));
         }
     }
 }
