@@ -84,9 +84,9 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Collection<T>().FindAll().SetFields(Fields<T>.Include(property)).AsQueryable();
         }
 
-        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        public bool Exists<T>(Expression<Func<T, bool>> condition) where T : IEntity
         {
-            return Collection<T>().Find(Query<T>.Where(condition)).SetFields("_id").Any();
+            return Collection<T>().Find(Query.And(Query<T>.Where(condition), Query<T>.EQ(e => e.IsDeleted, false))).SetFields("_id").Any();
         }
 
         public T SoftDelete<T>(string id) where T : IEntity

@@ -48,7 +48,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return GetAll<T>();
         }
 
-        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        public bool Exists<T>(Expression<Func<T, bool>> condition) where T : IEntity
         {
             return Query<T>().Any(condition);
         }

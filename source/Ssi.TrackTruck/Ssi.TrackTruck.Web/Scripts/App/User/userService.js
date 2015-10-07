@@ -44,8 +44,8 @@
                     Username: request.Username,
                     InitialPassword: request.InitialPassword,
                     Role: request.Role,
-                    ClientId: request.client.Id,
-                    BranchId: request.branch.Id
+                    ClientId: request.client && request.client.Id,
+                    BranchId: request.branch && request.branch.Id
                 };
                 return repository.post('User', 'Add', formatterRequest).then(function (response) {
                     if (response.IsError) {
