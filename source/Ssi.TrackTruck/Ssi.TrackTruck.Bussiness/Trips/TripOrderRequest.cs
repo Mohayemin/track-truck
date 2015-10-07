@@ -20,10 +20,11 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public double HelperSalary { get; set; }
         public string TruckId { get; set; }
         public string SupervisorId { get; set; }
-        public double MiscCost { get; set; }
         public double TollCost { get; set; }
         public double ParkingCost { get; set; }
         public double FuelCost { get; set; }
+        public double BargeCost { get; set; }
+        public double BundleCost { get; set; }
         public IList<TripDropRequest> Drops { get; set; }
 
         public DbTrip ToTrip()
@@ -43,6 +44,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 FuelCostInCentavos = (long)(FuelCost * 100),
                 ParkingCostInCenvatos = (long)(ParkingCost * 100),
                 TollCostInCentavos = (long) (TollCost * 100),
+                BargeCostInCentavos = (long)(BargeCost * 100),
+                BundleCostInCentavos = (long)(BundleCost * 100),
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
                 Drops = Drops.Select(request => request.ToDrop()).ToList(),

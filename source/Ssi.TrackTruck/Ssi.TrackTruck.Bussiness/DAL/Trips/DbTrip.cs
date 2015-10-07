@@ -28,6 +28,9 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public long FuelCostInCentavos { get; set; }
         public long TollCostInCentavos { get; set; }
         public long ParkingCostInCenvatos { get; set; }
+        public long BargeCostInCentavos { get; set; }
+        public long BundleCostInCentavos { get; set; }
+
         
         [BsonRepresentation(BsonType.ObjectId)]
         public string DriverId { get; set; }
