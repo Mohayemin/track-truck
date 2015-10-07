@@ -44,11 +44,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         // TODO: refactor long method
         public Response CreateUser(AddUserRequest request)
         {
-            var validation = request.Validate();
-            if (validation.IsError)
-            {
-                return validation;
-            }
             if (FindByUsername(request.Username) != null)
             {
                 return Response.DuplicacyError("A user with this name is already registered");
