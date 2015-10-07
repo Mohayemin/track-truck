@@ -42,5 +42,15 @@ namespace Ssi.TrackTruck.Bussiness.Warehouses
 
             return Response.Success(warehouse);
         }
+
+        public Response Delete(string id)
+        {
+            var warehouse = _repository.SoftDelete<DbWarehouse>(id);
+            if (warehouse != null)
+            {
+                return Response.Success(null, "Successfully deleted");
+            }
+            return Response.Error("", string.Format("The warehouse you tried to delete does not exist"));
+        }
     }
 }
