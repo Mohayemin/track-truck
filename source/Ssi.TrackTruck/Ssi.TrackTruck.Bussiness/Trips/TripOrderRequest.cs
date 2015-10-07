@@ -15,7 +15,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public string DriverId { get; set; }
         public double DriverAllowance { get; set; }
         public double DriverSalary { get; set; }
-        public string HelperId { get; set; }
+        public List<string> HelperIds { get; set; }
         public double HelperAllowance { get; set; }
         public double HelperSalary { get; set; }
         public string TruckId { get; set; }
@@ -37,7 +37,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 DriverId = DriverId,
                 DriverAllowanceInCentavos = (long)(DriverAllowance * 100),
                 DriverSalaryInCentavos = (long)(DriverSalary * 100),
-                HelperId = HelperId,
+                HelperIds = HelperIds,
                 HelperAllowanceInCentavos = (long)(HelperAllowance * 100),
                 HelperSalaryInCentavos = (long)(HelperSalary * 100),
                 SupervisorId = SupervisorId,
