@@ -1,0 +1,37 @@
+﻿<div>
+    <h3>
+        List of Employees
+        <label class="btn-group btn-group-sm pull-right">
+            <a ng-href="{{url.route('employee', 'add')}}" class="btn btn-default"
+               title="add an employee">
+                <i class="fa fa-lg fa-plus"></i>
+            </a>
+            <a ng-click="loadEmployees()" class="btn btn-default btn-sm"
+               title="refresh employees' list">
+                <i class="fa fa-lg fa-refresh"></i>
+            </a>
+        </label>
+    </h3>
+
+    <table class="table table-hover table-responsive table-bordered" ts-wrapper>
+        <thead>
+            <tr>
+                <th ts-criteria="FirstName|lowercase">First Name</th>
+                <th ts-criteria="LastName|lowercase">Last Name</th>
+                <th ts-criteria="Designation|lowercase">Designation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="employee in employees track by employee.Id" ts-repeat>
+                <td ng-bind="employee.FirstName"></td>
+                <td ng-bind="employee.LastName"></td>
+                <td ng-bind="employee.Designation"></td>
+                <td>
+                    <edit-button module="'employee'" model="employee"></edit-button>
+                    <delete-button controller="'Employee'" list="employees" index="$index"></delete-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
