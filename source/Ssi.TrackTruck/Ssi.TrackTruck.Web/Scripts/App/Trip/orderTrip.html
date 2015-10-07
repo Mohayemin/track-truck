@@ -152,14 +152,32 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Parking</label>
                             <div class="col-sm-10">
                                 <input ng-model="request.ParkingCost" required
                                        type="number" min="0" placeholder="Parking Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Barge</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.BargeCost" required
+                                       type="number" min="0" placeholder="Barge Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Bundle</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.BundleCost" required
+                                       type="number" min="0" placeholder="Bundle Cost"
                                        class="form-control" />
                             </div>
                         </div>
