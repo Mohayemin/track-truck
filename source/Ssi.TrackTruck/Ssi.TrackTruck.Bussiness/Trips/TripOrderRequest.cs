@@ -24,7 +24,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public double TollCost { get; set; }
         public double ParkingCost { get; set; }
         public double FuelCost { get; set; }
-        public string CheckerId { get; set; }
         public IList<TripDropRequest> Drops { get; set; }
 
         public DbTrip ToTrip()
@@ -41,7 +40,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 HelperAllowanceInCentavos = (long)(HelperAllowance * 100),
                 HelperSalaryInCentavos = (long)(HelperSalary * 100),
                 SupervisorId = SupervisorId,
-                CheckerId = CheckerId,
                 FuelCostInCentavos = (long)(FuelCost * 100),
                 ParkingCostInCenvatos = (long)(ParkingCost * 100),
                 TollCostInCentavos = (long) (TollCost * 100),
