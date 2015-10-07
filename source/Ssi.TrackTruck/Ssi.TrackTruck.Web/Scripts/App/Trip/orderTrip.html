@@ -23,7 +23,7 @@
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Ticket Number</label>
                             <div class="col-sm-10">
-                                <input ng-model="request.TicketNumber" required
+                                <input ng-model="request.TripTicketNumber" required
                                        type="text" placeholder="Trip Ticket Number"
                                        class="form-control" />
                             </div>
@@ -277,7 +277,7 @@
                             <label class="col-sm-2 control-label">Released By</label>
                             <div class="col-sm-10">
                                 <select ng-model="request.SupervisorId" ng-required="true"
-                                        ng-options="supervisor.Id as supervisor.Fullname for supervisor in supervisors"
+                                        ng-options="supervisor.Id as supervisor.FullName for supervisor in supervisors"
                                         class="form-control">
                                     <option value=""> -- Choose Released By -- </option>
                                 </select>
