@@ -22,9 +22,8 @@
                     employeeService,
                     designation,
                     globalMessage) {
+
                     $scope.request = {
-                        DeliveryHour: 15,
-                        DeliveryMinute: 30,
                         ExpectedPickupTime: {},
                         Drops: [],
                         HelperIds: [undefined, undefined, undefined]
