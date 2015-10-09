@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class DbDrop : IEntity
+    [BsonIgnoreExtraElements]
+    public class DbDrop
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
@@ -15,8 +15,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string BranchId { get; set; }
         public DateTime ExpectedDropTime { get; set; }
         public IList<DbDeliveryReceipt> DeliveryReceipts { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime CreationTime { get; set; }
         public DbDrop()
         {
             Id = ObjectId.GenerateNewId().ToString();

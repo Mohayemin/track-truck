@@ -21,7 +21,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(DbEmployee request)
+        public ActionResult Add(AddEmployeeRequest request)
         {
             var response = _employeeService.Add(request);
             return Json(response);
