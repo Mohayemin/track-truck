@@ -49,6 +49,7 @@
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail'))
             .when('/trip/order', defaultRoute('trip', 'orderTrip'))
+            .when('/trip/transactions', defaultRoute('trip', 'tripTransaction'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport'))
             .otherwise({ redirectTo: '/' });
