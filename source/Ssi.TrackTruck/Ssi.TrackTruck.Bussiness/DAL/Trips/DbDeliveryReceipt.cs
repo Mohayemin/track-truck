@@ -5,14 +5,12 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class DbDeliveryReceipt : IEntity
+    public class DbDeliveryReceipt 
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string DrNumber { get; set; }
         public int NumberOfBoxes { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime CreationTime { get; set; }
 
         public DbDeliveryReceipt()
         {

@@ -8,12 +8,8 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Users
 {
-    [BsonIgnoreExtraElements(true)]
-    public class DbUser : IEntity
+    public class DbUser : Entity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         public string Username { get; set; }
         public string UsernameLowerCase { get; set; }
         public string FirstName { get; set; }
@@ -22,8 +18,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Users
         public string PasswordHash { get; set; }
         [BsonRepresentation(BsonType.String)]
         public Role Role { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime CreationTime { get; set; }
 
         [BsonIgnore]
         public string FullName { get { return FirstName + " " + LastName; }}
