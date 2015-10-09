@@ -45,13 +45,13 @@
 
         $routeProvider
             .when('/', {
-                templateUrl: urlProvider.template('', 'home'),
+                templateUrl: urlProvider.template('', 'home')
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail'))
             .when('/trip/order', defaultRoute('trip', 'orderTrip'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport'))
+            .when('/employee/edit/:id', defaultRoute('employee', 'addEmployee'))
             .otherwise({ redirectTo: '/' });
-            .when('/employee/edit/:id', defaultRoute('add-employee'))
     }
 ]);
