@@ -19,7 +19,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public DbTrip AddTrip(TripOrderRequest orderRequest)
         {
             var trip = orderRequest.ToTrip();
-            trip.CreatorId = _user.Id;
             return _repository.Create(trip);
         }
 
