@@ -16,7 +16,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
         public IEnumerable<DbEmployee> GetAll()
         {
-            return _repository.GetAll<DbEmployee>();
+            return _repository.GetAllUndeleted<DbEmployee>();
         }
 
         public Response Add(DbEmployee request)
@@ -36,6 +36,16 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
             _repository.Create(request);
             return Response.Success(request);
+        }
+
+        public Response Delete(string id)
+        {
+            var employee = _repository.SoftDelete<DbEmployee>(id);
+            if (employee != null)
+            {
+                return Response.Success(null, "Successfully deleted");
+            }
+            return Response.Error("", string.Format("The employee you tried to delete does not exist"));
         }
 
         private bool IsEmployeeNameEmpty(string name)

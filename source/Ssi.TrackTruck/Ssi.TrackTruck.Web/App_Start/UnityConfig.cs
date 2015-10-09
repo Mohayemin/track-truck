@@ -1,9 +1,11 @@
 using System;
 using System.Configuration;
+using System.Web;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web
 {
@@ -25,10 +27,11 @@ namespace Ssi.TrackTruck.Web
 
         public static void RegisterTypes(IUnityContainer container)
         {
-            // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
+            container.RegisterType<HttpContextBase>(new InjectionFactory(_ =>
+                new HttpContextWrapper(HttpContext.Current)));
 
             container.RegisterType<IHasher, Pbkdf2Hasher>();
+            container.RegisterType<ISignedInUser, SignedInUser>();
             RegisterRepo(container);
         }
 
