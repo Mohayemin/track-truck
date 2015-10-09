@@ -65,3 +65,7 @@ table.table.table-bordered th, table.table.table-bordered td {
     /*Color based on bootstrap superhero theme*/
     background-color: #5cb85c; 
 }
+
+.no-margin-top {
+    margin-top: 0;
+}

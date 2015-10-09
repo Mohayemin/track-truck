@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
 
@@ -7,15 +8,18 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     public class TripService
     {
         private readonly IRepository _repository;
+        private readonly ISignedInUser _user;
 
-        public TripService(IRepository repository)
+        public TripService(IRepository repository, ISignedInUser user)
         {
             _repository = repository;
+            _user = user;
         }
 
         public DbTrip AddTrip(TripOrderRequest orderRequest)
         {
             var trip = orderRequest.ToTrip();
+            trip.CreatorId = _user.Id;
             return _repository.Create(trip);
         }
 
