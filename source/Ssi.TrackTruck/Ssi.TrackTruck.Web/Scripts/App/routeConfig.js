@@ -31,10 +31,20 @@
             };
         }
 
+        function editRoute(module) {
+            var cappedModule = capitalizeFirstLetter(module);
+            return {
+                templateUrl: urlProvider.template(module, 'add' + cappedModule),
+                controller: module + 'EditController',
+                caseInsensitiveMatch: true
+            };
+        }
+
         ['truck', 'client', 'user', 'employee', 'warehouse'].forEach(function (module) {
             $routeProvider
                 .when('/' + module + '/add', addRoute(module))
-                .when('/' + module + '/list', listRoute(module));
+                .when('/' + module + '/list', listRoute(module))
+                .when('/' + module + '/:id/edit', editRoute(module));
         });
 
         $routeProvider
