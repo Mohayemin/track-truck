@@ -27,7 +27,10 @@
                 </td>
                 <td ng-bind="client.TrucksPerDay"></td>
                 <td ng-bind="client.Branches.length"></td>
-                <td><delete-button controller="'Client'" list="clients" index="$index"></delete-button></td>
+                <td>
+                    <edit-button module="'client'" model="client"></edit-button>
+                    <delete-button controller="'Client'" list="clients" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>
