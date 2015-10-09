@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.Runtime.CompilerServices;
 using System.Web;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
@@ -41,12 +42,9 @@ namespace Ssi.TrackTruck.Web
             var mongoUrl = new MongoUrl(connectionString);
             var mongoClient = new MongoClient(mongoUrl.Url);
             var mongoDb = mongoClient.GetServer().GetDatabase(mongoUrl.DatabaseName);
-            var collectionMapper = new CollectionMapper();
-            var repository = new MongoRepository(mongoDb, collectionMapper.Map);
-            repository.BuildIndexes();
 
-            container.RegisterType<IRepository, MongoRepository>(
-                new InjectionFactory(c => repository));
+            container.RegisterType<MongoDatabase>(new InjectionFactory(_ => mongoDb));
+            container.RegisterType<IRepository, MongoRepository>();
 
             //container.RegisterType<IRepository, DummyRepository>();
         }
