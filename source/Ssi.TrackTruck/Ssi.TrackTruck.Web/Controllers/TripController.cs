@@ -19,6 +19,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             return Json(_tripService.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateModel]
         [HttpPost]
         public ActionResult Order(TripOrderRequest orderRequest)
         {
