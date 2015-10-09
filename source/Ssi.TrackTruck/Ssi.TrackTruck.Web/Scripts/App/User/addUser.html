@@ -1,0 +1,100 @@
+﻿<div>
+    <form ng-submit="add()" class="form-horizontal">
+        <fieldset>
+            <legend>
+                <span class="col-sm-offset-2">Add New User</span>
+            </legend>
+            <div class="well">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">First Name</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.FirstName" type="text" class="form-control"
+                               name="first-name"
+                               placeholder="First Name" required
+                               ng-change="setUsername()" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Last Name</label>
+                    <div class="col-sm-10">
+                        <input ng-model="request.LastName" type="text" class="form-control"
+                               name="last-name"
+                               placeholder="Last Name" required
+                               ng-change="setUsername()" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        Username
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-btn" title="toggle edit username"
+                                  ng-click="isUsernameReadonly=!isUsernameReadonly">
+                                <a class="btn btn-primary" ng-class="{'active':!isUsernameReadonly}">
+                                    <i class="fa fa-lg fa-fw fa-edit"></i>
+                                </a>
+                            </span>
+                            <input ng-model="request.Username" type="text" class="form-control"
+                                   name="last-name"
+                                   placeholder="Username" required ng-readonly="isUsernameReadonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Initial Password</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-btn" title="regenerate password">
+                                <a class="btn btn-primary">
+                                    <i class="fa fa-lg fa-fw fa-refresh"></i>
+                                </a>
+                            </span>
+                            <input ng-model="request.InitialPassword" type="text" class="form-control"
+                                   name="initial-password"
+                                   placeholder="Initial Password" required />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Role</label>
+                    <div class="col-sm-10">
+                        <div class="btn-group">
+                            <label class="btn btn-info" ng-repeat="role in userRoles.roleList"
+                                   ng-model="request.Role" btn-radio="role.value" uncheckable ng-required="true">{{role.label}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="showBranchSelect()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Client</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" ng-options="client.Name for client in clients" 
+                                    ng-model="request.client" required>
+                                <option value="">Choose Client</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Branch</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" ng-options="branch.Name for branch in request.client.Branches"
+                                    ng-model="request.branch" required>
+                                <option value="">Choose Branch</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fa fa-fw fa-lg fa-plus"></i> Add User
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
