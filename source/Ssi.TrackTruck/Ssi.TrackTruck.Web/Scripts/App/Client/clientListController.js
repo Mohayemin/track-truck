@@ -1,11 +1,8 @@
 ﻿clientModule.controller('clientListController', [
     '$scope',
     'clientService',
-    'url',
     function($scope,
-        clientService,
-        url) {
-        $scope.url = url;
+        clientService) {
         clientService.getAll().then(function(clients) {
             $scope.clients = clients;
         });
