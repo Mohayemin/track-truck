@@ -5,6 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
+    [BsonIgnoreExtraElements]
     public class DbDrop
     {
         [BsonRepresentation(BsonType.ObjectId)]

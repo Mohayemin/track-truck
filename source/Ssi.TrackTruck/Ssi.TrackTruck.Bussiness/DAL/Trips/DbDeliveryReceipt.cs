@@ -1,10 +1,9 @@
-﻿using System;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
+    [BsonIgnoreExtraElements]
     public class DbDeliveryReceipt 
     {
         [BsonRepresentation(BsonType.ObjectId)]
