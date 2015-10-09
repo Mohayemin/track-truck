@@ -22,6 +22,7 @@
             .when('/client/add', defaultRoute('add-client'))
             .when('/client/:id', defaultRoute('client-detail'))
             .when('/trip/order', defaultRoute('order-trip'))
+            .when('/trip/report', defaultRoute('trip-report'))
             .when('/user/list', defaultRoute('user-list'))
             .when('/user/add', defaultRoute('add-user'))
             .when('/employee/list', defaultRoute('employee-list'))
