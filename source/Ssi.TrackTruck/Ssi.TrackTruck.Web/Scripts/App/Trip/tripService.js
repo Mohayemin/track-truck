@@ -11,6 +11,9 @@
                 });
 
                 return repository.post('Trip', 'Order', foramtterRequest);
+            },
+            getReport: function(filter) {
+                return repository.get('Trip', 'All');
             }
         };
     }
