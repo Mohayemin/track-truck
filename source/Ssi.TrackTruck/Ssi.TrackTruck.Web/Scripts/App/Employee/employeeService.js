@@ -31,7 +31,7 @@
 
                         buildIdMap();
 
-                        return employees;
+                        return _employees;
                     });
                 }
                 return _loadPromise;

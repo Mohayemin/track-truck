@@ -19,23 +19,17 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             return _repository.GetAllUndeleted<DbEmployee>();
         }
 
-        public Response Add(DbEmployee request)
+        public Response Add(AddEmployeeRequest request)
         {
-            if (IsEmployeeNameEmpty(request.FirstName) || IsEmployeeNameEmpty(request.LastName))
+            var employee = new DbEmployee
             {
-                return Response.Error("Validation");
-            }
-            if (IsDesignationEmpty(request.Designation))
-            {
-                return Response.Error("Validation");
-            }
-            if (IsDuplicateEmployeeName(request))
-            {
-                return Response.Error("", "Employee with same name already exists");
-            }
+                Designation = request.Designation,
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
 
-            _repository.Create(request);
-            return Response.Success(request);
+            _repository.Create(employee);
+            return Response.Success(employee);
         }
 
         public Response Delete(string id)
@@ -46,22 +40,6 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 return Response.Success(null, "Successfully deleted");
             }
             return Response.Error("", string.Format("The employee you tried to delete does not exist"));
-        }
-
-        private bool IsEmployeeNameEmpty(string name)
-        {
-            return string.IsNullOrWhiteSpace(name);
-        }
-
-        private bool IsDuplicateEmployeeName(DbEmployee request)
-        {
-            var nameTaken = _repository.Exists<DbEmployee>(e => e.FirstName == request.FirstName);
-            return nameTaken;
-        }
-
-        private bool IsDesignationEmpty(string designation)
-        {
-            return string.IsNullOrWhiteSpace(designation);
         }
     }
 }
