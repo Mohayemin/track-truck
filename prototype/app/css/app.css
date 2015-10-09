@@ -1,0 +1,3 @@
+.hover-only-parent:not(:hover) .hover-only {
+    visibility: hidden;
+}
