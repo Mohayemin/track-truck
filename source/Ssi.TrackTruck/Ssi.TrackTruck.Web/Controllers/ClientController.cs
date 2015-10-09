@@ -26,6 +26,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _clientService.Add(request);
             return Json(response);
         }
+
         [HttpPost]
         public ActionResult Delete(string id)
         {
