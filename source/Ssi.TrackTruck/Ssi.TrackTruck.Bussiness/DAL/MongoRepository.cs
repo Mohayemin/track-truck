@@ -36,6 +36,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
 
         public T Create<T>(T item) where T : IEntity
         {
+            item.IsDeleted = false;
             item.CreationTime = DateTime.UtcNow;
             item.CreatorId = _user.Id;
             Collection<T>().Insert(item);
