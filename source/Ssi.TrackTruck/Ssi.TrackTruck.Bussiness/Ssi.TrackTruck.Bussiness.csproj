@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Attendances\AttendanceService.cs" />
     <Compile Include="Auth\AuthService.cs" />
+    <Compile Include="Auth\ISignedInUser.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
     <Compile Include="Auth\Role.cs" />
@@ -59,8 +60,10 @@
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\Clients\DbClient.cs" />
     <Compile Include="DAL\Clients\DbBranch.cs" />
+    <Compile Include="DAL\DbIndexBuilder.cs" />
     <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
+    <Compile Include="DAL\Entities\Entity.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />

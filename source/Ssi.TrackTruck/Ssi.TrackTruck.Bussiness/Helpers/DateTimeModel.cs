@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Ssi.TrackTruck.Bussiness.Helpers
 {
@@ -34,6 +35,14 @@ namespace Ssi.TrackTruck.Bussiness.Helpers
             get
             {
                 return int.Parse(string.Format("{0}{1}{2}", Hour.ToString("D2"), Minute.ToString("D2"), Second.ToString("D2")));
+            }
+        }
+
+        public bool IsEmpty
+        {
+            get
+            {
+                return new[] { Year, Month, Day, Hour, Minute, Second }.All(val => val == 0);
             }
         }
     }
