@@ -137,6 +137,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\App\appController.js" />
     <Content Include="Scripts\App\Attendance\1.attendanceModule.js" />
     <Content Include="Scripts\App\Attendance\attendanceReport.html" />
     <Content Include="Scripts\App\Attendance\attendanceReportController.js" />

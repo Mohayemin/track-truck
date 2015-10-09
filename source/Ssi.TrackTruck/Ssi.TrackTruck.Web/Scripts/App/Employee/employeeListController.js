@@ -1,11 +1,8 @@
 ﻿employeeModule.controller('employeeListController', [
     '$scope',
     'employeeService',
-    'url',
     function($scope,
-        employeeService,
-        url) {
-        $scope.url = url;
+        employeeService) {
 
         $scope.loadEmployees = function() {
             employeeService.getAll().then(function(employees) {
