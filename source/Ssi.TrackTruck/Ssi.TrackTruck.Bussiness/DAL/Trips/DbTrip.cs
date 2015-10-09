@@ -49,6 +49,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         
         public bool IsDeleted { get; set; }
         public DateTime CreationTime { get; set; }
+        public string CreatorId { get; set; }
 
         public DbTrip()
         {
