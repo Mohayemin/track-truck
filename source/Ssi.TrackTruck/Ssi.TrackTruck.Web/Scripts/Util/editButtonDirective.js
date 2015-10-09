@@ -12,7 +12,7 @@
                 function ($scope,
                     $location) {
                     $scope.edit = function() {
-                        $location.url($scope.module + '/edit/' + $scope.model.Id);
+                        $location.url($scope.module + '/' + $scope.model.Id + '/edit');
                     }
                 }
             ]
