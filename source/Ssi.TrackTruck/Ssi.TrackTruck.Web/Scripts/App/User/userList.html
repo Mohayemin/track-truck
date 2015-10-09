@@ -25,7 +25,9 @@
                 <td ng-bind="user.LastName"></td>
                 <td ng-bind="user.Username"></td>
                 <td ng-bind="roleMap[user.Role]"></td>
-                <td><delete-button controller="'User'" list="users" index="$index"></delete-button></td>
+                <td>
+                    <delete-button controller="'User'" list="users" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>

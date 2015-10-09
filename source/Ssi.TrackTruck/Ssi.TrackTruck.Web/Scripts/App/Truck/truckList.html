@@ -24,7 +24,9 @@
                 <td ng-bind="truck.RegistrationNumber"></td>
                 <td ng-bind="truck.DriverName"></td>
                 <td ng-bind="truck.HelperName"></td>
-                <td><delete-button controller="'Truck'" list="trucks" index="$index"></delete-button></td>
+                <td>
+                    <delete-button controller="'Truck'" list="trucks" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>

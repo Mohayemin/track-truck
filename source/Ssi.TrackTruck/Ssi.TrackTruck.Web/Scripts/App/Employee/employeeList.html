@@ -23,7 +23,9 @@
                 <td ng-bind="employee.FirstName"></td>
                 <td ng-bind="employee.LastName"></td>
                 <td ng-bind="employee.Designation"></td>
-                <td><delete-button controller="'Employee'" list="employees" index="$index"></delete-button></td>
+                <td>
+                    <delete-button controller="'Employee'" list="employees" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>
