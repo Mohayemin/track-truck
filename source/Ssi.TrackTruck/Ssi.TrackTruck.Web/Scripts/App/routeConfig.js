@@ -52,5 +52,6 @@
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport'))
             .otherwise({ redirectTo: '/' });
+            .when('/employee/edit/:id', defaultRoute('add-employee'))
     }
 ]);
