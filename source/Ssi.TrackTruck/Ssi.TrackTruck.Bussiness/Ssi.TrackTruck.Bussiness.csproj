@@ -62,6 +62,7 @@
     <Compile Include="DAL\Clients\DbBranch.cs" />
     <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
+    <Compile Include="DAL\Entities\Entity.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />
