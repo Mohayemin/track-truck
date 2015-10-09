@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,29 +10,19 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/tablesort.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/css/track-truck.css" />
 </head>
-<body>
-    <script type="text/javascript" src="~/Scripts/Lib/angular.js"></script>
-    <script type="text/javascript" src="~/Scripts/Lib/angular-route.js"></script>
-    <script type="text/javascript" src="~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Lib/underscore-min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Lib/angular-tablesort.js"></script>
-    <script type="text/javascript" src="~/Scripts/Lib/moment.min.js"></script>
+    <body>
+        @Scripts.Render("~/js/lib")
+        @Scripts.Render("~/js/util")
 
-    <script type="text/javascript" src="~/Scripts/Util/_utilModule.js"></script>
-    <script type="text/javascript" src="~/Scripts/Util/url.js"></script>
-    <script type="text/javascript" src="~/Scripts/Util/repository.js"></script>
-    <script type="text/javascript" src="~/Scripts/Util/globalMessageDirective.js"></script>
-    <script type="text/javascript" src="~/Scripts/Util/datetimeDirective.js"></script>
+        <div class="container main-container">
+            @RenderBody()
+        </div>
 
-    <div class="container main-container">
-        @RenderBody()
-    </div>
-
-    <footer class="container small">
-        <hr />
-        <span class="small">&copy; @DateTime.Now.Year - SSI Group of Companies</span>
-        <span class="small pull-right">Version @typeof(MvcApplication).Assembly.GetName().Version</span>
-    </footer>
+        <footer class="container small">
+            <hr />
+            <span class="small">&copy; @DateTime.Now.Year - SSI Group of Companies</span>
+            <span class="small pull-right">Version @typeof(MvcApplication).Assembly.GetName().Version</span>
+        </footer>
     
-</body>
+    </body>
 </html>

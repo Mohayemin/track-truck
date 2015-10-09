@@ -1,10 +1,9 @@
-﻿@{
+﻿@using System.Web.Optimization
+@{
     ViewBag.Title = "Sign In";
 }
 
-<script type="text/javascript" src="~/Scripts/SignIn/_signinModule.js"></script>
-<script type="text/javascript" src="~/Scripts/SignIn/signInService.js"></script>
-<script type="text/javascript" src="~/Scripts/SignIn/signInController.js"></script>
+@Scripts.Render("~/js/signin")
 
 <div ng-app="signInModule">
     <global-message></global-message>
