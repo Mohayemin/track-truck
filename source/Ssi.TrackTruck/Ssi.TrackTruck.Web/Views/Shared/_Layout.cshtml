@@ -8,21 +8,22 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-superhero.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/css/tablesort.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animate.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/css/track-truck.css" />
 </head>
-    <body>
-        @Scripts.Render("~/js/lib")
-        @Scripts.Render("~/js/util")
+<body>
+    @Scripts.Render("~/js/lib")
+    @Scripts.Render("~/js/util")
 
-        <div class="container main-container">
-            @RenderBody()
-        </div>
+    <div class="container main-container">
+        @RenderBody()
+    </div>
 
-        <footer class="container small">
-            <hr />
-            <span class="small">&copy; @DateTime.Now.Year - SSI Group of Companies</span>
-            <span class="small pull-right">Version @typeof(MvcApplication).Assembly.GetName().Version</span>
-        </footer>
-    
-    </body>
+    <footer class="container small">
+        <hr />
+        <span class="small">&copy; @DateTime.Now.Year - SSI Group of Companies</span>
+        <span class="small pull-right">Version @typeof(MvcApplication).Assembly.GetName().Version</span>
+    </footer>
+
+</body>
 </html>
