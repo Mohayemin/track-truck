@@ -151,6 +151,7 @@
     <Content Include="Scripts\App\Client\clientForm.html" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
     <Content Include="Scripts\App\Employee\addEmployeeController.js" />
+    <Content Include="Scripts\App\Employee\employeeEditController.js" />
     <Content Include="Scripts\App\Employee\employeeForm.html" />
     <Content Include="Scripts\App\Employee\employeeList.html" />
     <Content Include="Scripts\App\Employee\employeeListController.js" />
