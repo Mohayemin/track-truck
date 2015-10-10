@@ -14,13 +14,14 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public DateTimeModel ExpectedDropTime { get; set; }
         public IList<DeliveryReceiptRequest> DeliveryReceipts { get; set; }
 
-        public DbDrop ToDrop()
+        public DbTripDrop ToDrop(string tripId)
         {
-            return new DbDrop
+            return new DbTripDrop
             {
+                TripId = tripId,
                 BranchId = BranchId,
                 ExpectedDropTime = ExpectedDropTime.ToDateTime(DateTimeConstants.PhilippineOffset),
-                DeliveryReceipts = DeliveryReceipts.Select(dr => dr.ToDeliveryReceipt()).ToList()
+                DeliveryReceipts = DeliveryReceipts.Select(dr => dr.ToDeliveryReceipt()).ToList(),
             };
         }
 

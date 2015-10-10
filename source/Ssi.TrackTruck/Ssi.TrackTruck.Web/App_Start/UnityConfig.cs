@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web
@@ -45,7 +46,7 @@ namespace Ssi.TrackTruck.Web
 
             container.RegisterType<MongoDatabase>(new InjectionFactory(_ => mongoDb));
             container.RegisterType<IRepository, MongoRepository>();
-
+            container.RegisterType<ITripRepository, TripMongoRepository>();
             //container.RegisterType<IRepository, DummyRepository>();
         }
     }

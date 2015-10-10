@@ -32,9 +32,8 @@
         }
 
         function editRoute(module) {
-            var cappedModule = capitalizeFirstLetter(module);
             return {
-                templateUrl: urlProvider.template(module, 'add' + cappedModule),
+                templateUrl: urlProvider.template(module, module + 'Edit'),
                 controller: module + 'EditController',
                 caseInsensitiveMatch: true
             };
@@ -53,6 +52,7 @@
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail'))
             .when('/trip/order', defaultRoute('trip', 'orderTrip'))
+            .when('/trip/transactions', defaultRoute('trip', 'tripTransaction'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport'))
             .otherwise({ redirectTo: '/' });
