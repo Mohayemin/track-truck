@@ -1,0 +1,16 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Home";
+}
+
+<!-- Truck -->
+
+@Scripts.Render("~/js/app")
+
+<!-- Base -->
+
+<div ng-app="trackTruck" ng-controller="appController">
+    <navigation username="'@User.Identity.Name'"></navigation>
+    <global-message></global-message>
+    <ng-view></ng-view>
+</div>

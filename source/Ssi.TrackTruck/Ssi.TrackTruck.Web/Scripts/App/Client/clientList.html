@@ -1,0 +1,36 @@
+﻿<div>
+    <h3>
+        List of Clients
+            
+        <label class="btn-group btn-group-sm pull-right">
+            <a ng-href="{{url.route('client', 'add')}}" class="btn btn-default"
+               title="add a client">
+                <i class="fa fa-lg fa-plus"></i>
+            </a>
+        </label>
+    </h3>
+    
+
+    <table class="table table-hover table-responsive table-bordered" ts-wrapper>
+        <thead>
+            <tr>
+                <th ts-criteria="Name|lowercase">Name</th>
+                <th ts-criteria="TrucksPerDay|parseInt">Trucks per day</th>
+                <th ts-criteria="Branches.length|parseInt">Branches</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="client in clients track by client.Id" ts-repeat>
+                <td>
+                    <a ng-href="{{url.route('client', client.Id)}}" ng-bind="client.Name"></a>
+                </td>
+                <td ng-bind="client.TrucksPerDay"></td>
+                <td ng-bind="client.Branches.length"></td>
+                <td>
+                    <delete-button controller="'Client'" list="clients" index="$index"></delete-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
