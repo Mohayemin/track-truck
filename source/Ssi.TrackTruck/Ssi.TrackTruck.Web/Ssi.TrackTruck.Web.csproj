@@ -130,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap-superhero.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\tablesort.css" />
@@ -183,6 +184,7 @@
     <Content Include="Scripts\App\Warehouse\warehouseList.html" />
     <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
     <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
+    <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />

@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <div class="col-md-6" ng-repeat="drop in drops" ng-if="!drop.IsReceived">
+    <div class="col-md-6 animatable" ng-repeat="drop in drops" ng-show="!drop.IsReceived">
         <form ng-submit="receive(drop)">
             <div class="panel panel-primary">
                 <div class="panel-heading">

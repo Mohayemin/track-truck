@@ -9,6 +9,7 @@ namespace Ssi.TrackTruck.Web
             var lib = new ScriptBundle("~/js/lib")
                 .Include("~/Scripts/Lib/angular.js")
                 .Include("~/Scripts/Lib/angular-route.js")
+                .Include("~/Scripts/Lib/angular-animate.js")
                 .Include("~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js")
                 .Include("~/Scripts/Lib/underscore-min.js")
                 .Include("~/Scripts/Lib/angular-tablesort.js")
