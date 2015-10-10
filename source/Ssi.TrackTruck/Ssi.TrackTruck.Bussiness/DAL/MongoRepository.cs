@@ -24,7 +24,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             _user = user;
         }
 
-        protected MongoCollection<T> Collection<T>()
+        public MongoCollection<T> Collection<T>()
         {
             return _db.GetCollection<T>(_mapper.Map(typeof(T)));
         }

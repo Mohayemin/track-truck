@@ -2,7 +2,6 @@
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
-using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
 
@@ -11,11 +10,13 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     public class TripService
     {
         private readonly IRepository _repository;
+        private readonly ITripRepository _tripMongoRepository;
         private readonly ISignedInUser _user;
 
-        public TripService(IRepository repository, ISignedInUser user)
+        public TripService(IRepository repository, ITripRepository tripMongoRepository, ISignedInUser user)
         {
             _repository = repository;
+            _tripMongoRepository = tripMongoRepository;
             _user = user;
         }
 
@@ -42,9 +43,10 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return activeTrips;
         }
 
-        public IEnumerable<string> GetMyActiveTrips()
+        public IQueryable<DbTripDrop> GetMyActiveDrops()
         {
-            return null;
+            var myDrops = _tripMongoRepository.GetUsersActiveDrops(_user.Id);
+            return myDrops;
         }
     }
 }
