@@ -181,6 +181,7 @@
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
     <Content Include="Scripts\App\Warehouse\addWarehouse.html" />
     <Content Include="Scripts\App\Warehouse\addWarehouseController.js" />
+    <Content Include="Scripts\App\Warehouse\warehouseForm.html" />
     <Content Include="Scripts\App\Warehouse\warehouseList.html" />
     <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
     <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
