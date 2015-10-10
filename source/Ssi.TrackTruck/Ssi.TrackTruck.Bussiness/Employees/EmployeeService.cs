@@ -41,5 +41,21 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             }
             return Response.Error("", string.Format("The employee you tried to delete does not exist"));
         }
+
+        public Response Save(EditEmployeeRequest request)
+        {
+            var employee = _repository.GetById<DbEmployee>(request.Id);
+            if (employee == null)
+            {
+                return Response.Error("", string.Format("The employee does not exist"));                
+            }
+
+            employee.Designation = request.Designation;
+            employee.FirstName = request.FirstName;
+            employee.LastName = request.LastName;
+
+            _repository.Save(employee);
+            return Response.Success(employee, "Successfully edited");
+        }
     }
 }
