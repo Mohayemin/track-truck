@@ -3,7 +3,9 @@
     'employeeService',
     'designation',
     '$location',
-    function($scope, employeeService, designation, $location) {
+    function ($scope, employeeService, designation, $location) {
+        $scope.request = {};
+
         $scope.designations = {
             values: [designation.supervisor, designation.driver, designation.helper],
             selected: ''
