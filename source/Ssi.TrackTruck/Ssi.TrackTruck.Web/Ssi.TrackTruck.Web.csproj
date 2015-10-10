@@ -150,6 +150,7 @@
     <Content Include="Scripts\App\Client\clientDetailController.js" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
     <Content Include="Scripts\App\Employee\addEmployeeController.js" />
+    <Content Include="Scripts\App\Employee\employeeForm.html" />
     <Content Include="Scripts\App\Employee\employeeList.html" />
     <Content Include="Scripts\App\Employee\employeeListController.js" />
     <Content Include="Scripts\App\home.html" />
