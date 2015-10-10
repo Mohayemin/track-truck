@@ -1,4 +1,5 @@
 ﻿var appModule = angular.module('trackTruck', [
+    'ngAnimate',
     'navigation',
     'utilModule',
     'attendance',
