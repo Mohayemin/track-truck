@@ -24,7 +24,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             _user = user;
         }
 
-        protected MongoCollection<T> Collection<T>()
+        public MongoCollection<T> Collection<T>()
         {
             return _db.GetCollection<T>(_mapper.Map(typeof(T)));
         }
@@ -36,11 +36,23 @@ namespace Ssi.TrackTruck.Bussiness.DAL
 
         public T Create<T>(T item) where T : IEntity
         {
+            UpdateForCreation(item);
+            Collection<T>().Insert(item);
+            return item;
+        }
+
+        private void UpdateForCreation<T>(T item) where T : IEntity
+        {
             item.IsDeleted = false;
             item.CreationTime = DateTime.UtcNow;
             item.CreatorId = _user.Id;
-            Collection<T>().Insert(item);
-            return item;
+        }
+
+        public void CreateAll<T>(IEnumerable<T> items) where T : IEntity
+        {
+            var list = items.ToList();
+            list.ForEach(UpdateForCreation);
+            Collection<T>().InsertBatch(list);
         }
 
         public IQueryable<T> GetAll<T>()

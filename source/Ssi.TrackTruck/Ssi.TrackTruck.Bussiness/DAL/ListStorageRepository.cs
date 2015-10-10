@@ -27,6 +27,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return item;
         }
 
+        public void CreateAll<T>(IEnumerable<T> items) where T : IEntity
+        {
+            List<T>().AddRange(items);
+        }
+
         public IQueryable<T> GetAll<T>()
         {
             return Query<T>();
