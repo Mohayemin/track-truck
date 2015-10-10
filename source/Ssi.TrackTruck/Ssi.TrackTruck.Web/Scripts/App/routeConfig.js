@@ -32,9 +32,8 @@
         }
 
         function editRoute(module) {
-            var cappedModule = capitalizeFirstLetter(module);
             return {
-                templateUrl: urlProvider.template(module, 'add' + cappedModule),
+                templateUrl: urlProvider.template(module, module + 'Edit'),
                 controller: module + 'EditController',
                 caseInsensitiveMatch: true
             };
