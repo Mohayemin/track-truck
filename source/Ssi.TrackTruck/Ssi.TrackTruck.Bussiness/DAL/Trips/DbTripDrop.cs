@@ -24,5 +24,9 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
                 return DeliveryReceipts != null ? DeliveryReceipts.Sum(receipt => receipt.NumberOfBoxes) : 0;
             }
         }
+
+        public bool IsReceived { get; set; }
+        public DateTime? ActualDropTime { get; set; }
+        public string ReceiverUserId { get; set; }
     }
 }

@@ -2,12 +2,10 @@
     'repository',
     'signedInUser',
     'buildIdMap',
-    'collection',
     function tripService(
         repository
         , signedInUser
         , buildIdMap
-        , collection
         ) {
         var _activeTrips = [];
         var _tripById = {};
@@ -43,6 +41,18 @@
                 return service.getAllActive().then(function() {
                     return repository.get('Trip', 'MyActiveDrops');
                 });
+            },
+            receiveDrop: function (drop) {
+                var formattedRequest = {
+                    DropId: drop.Id,
+                    DeliveryRejections: {}
+                };
+
+                drop.DeliveryReceipts.forEach(function(dr) {
+                    formattedRequest.DeliveryRejections[dr.Id] = dr.RejectedNumberOfBoxes;
+                });
+
+                return repository.post('Trip', 'Receive', formattedRequest);
             }
         };
 

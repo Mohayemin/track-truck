@@ -42,5 +42,12 @@ namespace Ssi.TrackTruck.Web.Controllers
 
             return new JsonNetResult(myActiveDrops);
         }
+
+        [HttpPost]
+        public ActionResult Receive(DropReceiveRequest request)
+        {
+            var response = _tripService.ReceiveDrop(request);
+            return new JsonNetResult(response);
+        }
 	}
 }
