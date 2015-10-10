@@ -67,7 +67,7 @@
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />
-    <Compile Include="DAL\Trips\DbDrop.cs" />
+    <Compile Include="DAL\Trips\DbTripDrop.cs" />
     <Compile Include="DAL\Trips\DbTrip.cs" />
     <Compile Include="DAL\Entities\DbTruck.cs" />
     <Compile Include="DAL\Entities\DbWarehouse.cs" />
@@ -90,7 +90,6 @@
     <Compile Include="Trips\TripService.cs" />
     <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
-    <Compile Include="Trucks\TruckStatusItem.cs" />
     <Compile Include="Warehouses\AddWarehouseRequest.cs" />
     <Compile Include="Warehouses\WarehouseService.cs" />
   </ItemGroup>

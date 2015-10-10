@@ -22,7 +22,12 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public DbTrip AddTrip(TripOrderRequest orderRequest)
         {
             var trip = orderRequest.ToTrip();
-            return _repository.Create(trip);
+            var drops = orderRequest.Drops.Select(request => request.ToDrop(trip.Id));
+            
+            _repository.Create(trip);            
+            _repository.CreateAll(drops);
+
+            return trip;
         }
 
         public IEnumerable<DbTrip> GetAll()
@@ -39,15 +44,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
         public IEnumerable<string> GetMyActiveTrips()
         {
-            var myBrancheIds =
-                _repository.GetWhere<DbClient>(
-                    client => client.Branches.Any(branch => branch.CustodianUserId == _user.Id))
-                    .SelectMany(client => client.Branches)
-                    .Select(branch => branch.Id);
-
-            return GetActiveTrips()
-                .Where(trip => trip.Drops.Any(drop => myBrancheIds.Contains(drop.BranchId)))
-                .Select(trip => trip.Id);
+            return null;
         }
     }
 }
