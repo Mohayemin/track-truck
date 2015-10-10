@@ -57,9 +57,8 @@
                         return $q.reject(response.Message || response.Status || 'Could not edit employee');
                     }
 
-                    var index = _.indexOf(_employees, { Id: request.Id });
-                    var employee = response.Data;
-                    _employees[index] = employee;
+                    var employee = _employeeById[request.Id];
+                    angular.extend(employee, response.Data);
                     return employee;
                 });
             },
