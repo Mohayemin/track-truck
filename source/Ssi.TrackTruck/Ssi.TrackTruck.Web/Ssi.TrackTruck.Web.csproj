@@ -163,6 +163,7 @@
     <Content Include="Scripts\App\Truck\truckListController.js" />
     <Content Include="Scripts\App\User\addUser.html" />
     <Content Include="Scripts\App\User\addUserController.js" />
+    <Content Include="Scripts\App\User\userForm.html" />
     <Content Include="Scripts\App\User\userList.html" />
     <Content Include="Scripts\App\User\userListController.js" />
     <Content Include="Scripts\App\User\1.userModule.js" />
