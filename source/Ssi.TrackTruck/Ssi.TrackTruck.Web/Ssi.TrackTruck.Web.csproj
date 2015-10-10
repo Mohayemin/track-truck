@@ -188,6 +188,7 @@
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
     <Content Include="Scripts\SignIn\signInService.js" />
+    <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\deleteButton.html" />
@@ -196,6 +197,7 @@
     <Content Include="Scripts\Util\editButtonDirective.js" />
     <Content Include="Scripts\Util\globalMessageDirective.js" />
     <Content Include="Scripts\Util\buildIdMap.js" />
+    <Content Include="Scripts\Util\philippineDateFilter.js" />
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
     <Content Include="Scripts\App\1.appModule.js" />
