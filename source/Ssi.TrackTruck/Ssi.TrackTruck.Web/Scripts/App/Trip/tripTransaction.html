@@ -1,4 +1,32 @@
-﻿<table class="table table-responsive table-bordered table-hover">
+﻿<div class="row">
+    <div class="col-md-6" ng-repeat="drop in drops">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Arriving at <span ng-bind="drop.ExpectedDropTime | philDate"></span>
+            </div>
+            <table class="table table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        <th>DR Number</th>
+                        <th>Boxes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dr in drop.DeliveryReceipts">
+                        <td ng-bind="dr.DrNumber"></td>
+                        <td ng-bind="dr.NumberOfBoxes"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-footer">
+                Total <span ng-bind="drop.TotalBoxes"></span> boxes in <span ng-bind="drop.DeliveryReceipts.length"></span> deliveries
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+
+<table class="table table-responsive table-bordered table-hover">
     <thead>
         <tr>
             <th>Arrival Time</th>
@@ -7,10 +35,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="drop in drops">
-            <td ng-bind="drop.ExpectedDropTime | philDate"></td>
-            <td ng-bind="drop.DeliveryReceipts.length"></td>
-            <td ng-bind="drop.TotalBoxes"></td>
+        <tr >
+
         </tr>
     </tbody>
-</table>
+</table>-->
