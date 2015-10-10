@@ -10,6 +10,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
     {
         T FindOne<T>(Expression<Func<T, bool>> condition);
         T Create<T>(T item) where T: IEntity;
+        void CreateAll<T>(IEnumerable<T> items) where T : IEntity;
         IQueryable<T> GetAll<T>();
         T GetById<T>(string id) where T : IEntity;
         IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values);
