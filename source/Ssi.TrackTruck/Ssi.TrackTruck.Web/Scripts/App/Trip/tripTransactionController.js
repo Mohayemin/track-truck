@@ -19,5 +19,9 @@
         $scope.totalAccepted = function(drop) {
             return drop.TotalBoxes - $scope.totalRejected(drop);
         };
+
+        $scope.receive = function(drop) {
+            console.log(drop);
+        };
     }
 ]);
