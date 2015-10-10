@@ -25,6 +25,7 @@
                 <td ng-bind="truck.DriverName"></td>
                 <td ng-bind="truck.HelperName"></td>
                 <td>
+                    <edit-button module="'truck'" model="truck"></edit-button>
                     <delete-button controller="'Truck'" list="trucks" index="$index"></delete-button>
                 </td>
             </tr>
