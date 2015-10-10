@@ -2,10 +2,12 @@
     '$scope',
     'tripService',
     'collection',
+    'globalMessage',
     function (
         $scope
         , tripService
         , collection
+        , globalMessage
         ) {
 
         tripService.getMyActiveDrops().then(function (drops) {
@@ -20,8 +22,12 @@
             return drop.TotalBoxes - $scope.totalRejected(drop);
         };
 
-        $scope.receive = function(drop) {
-            console.log(drop);
+        $scope.receive = function (drop) {
+            tripService.receiveDrop(drop).then(function() {
+                globalMessage.success('drop received');
+            }).catch(function(message) {
+                globalMessage.error(message);
+            });
         };
     }
 ]);
