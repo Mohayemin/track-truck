@@ -1,7 +1,32 @@
 ﻿tripModule.factory('tripService', [
     'repository',
-    function tripService(repository) {
-        return {
+    'signedInUser',
+    'buildIdMap',
+    function tripService(
+        repository
+        , signedInUser
+        , buildIdMap
+        ) {
+        var _activeTrips = [];
+        var _tripById = {};
+
+        var _loadActivePromise;
+        
+        var service = {
+            getAllActive: function () {
+                if (!_loadActivePromise) {
+                    _loadActivePromise = repository.get('Trip', 'Active').then(function (trips) {
+                        _activeTrips.length = 0;
+                        _activeTrips.push.apply(_activeTrips, trips);
+
+                        _tripById = buildIdMap(_activeTrips);
+
+                        return _activeTrips;
+                    });
+                }
+
+                return _loadActivePromise;
+            },
             orderTrip: function (request) {
                 var foramtterRequest = angular.extend({}, request);
 
@@ -11,7 +36,18 @@
                 });
 
                 return repository.post('Trip', 'Order', foramtterRequest);
+            },
+            getMyTrips: function () {
+                return service.getAllActive().then(function() {
+                    return repository.get('Trip', 'MyActiveIds').then(function (tripIds) {
+                        return tripIds.map(function(tripId) {
+                            return _tripById[tripId];
+                        });
+                    });
+                });
             }
         };
+
+        return service;
     }
 ]);

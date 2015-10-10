@@ -156,6 +156,8 @@
     <Content Include="Scripts\App\Auth\changePassword.html" />
     <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
+    <Content Include="Scripts\App\Trip\tripTransaction.html" />
+    <Content Include="Scripts\App\Trip\tripTransactionController.js" />
     <Content Include="Scripts\App\Truck\truckList.html" />
     <Content Include="Scripts\App\Truck\truckListController.js" />
     <Content Include="Scripts\App\User\addUser.html" />
@@ -193,6 +195,7 @@
     <Content Include="Scripts\Util\editButton.html" />
     <Content Include="Scripts\Util\editButtonDirective.js" />
     <Content Include="Scripts\Util\globalMessageDirective.js" />
+    <Content Include="Scripts\Util\buildIdMap.js" />
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
     <Content Include="Scripts\App\1.appModule.js" />
