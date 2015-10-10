@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-md-6" ng-repeat="drop in drops">
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 Arriving at <span ng-bind="drop.ExpectedDropTime | philDate"></span>
             </div>
@@ -9,17 +9,25 @@
                     <tr>
                         <th>DR Number</th>
                         <th>Boxes</th>
+                        <th>Reject</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="dr in drop.DeliveryReceipts">
                         <td ng-bind="dr.DrNumber"></td>
                         <td ng-bind="dr.NumberOfBoxes"></td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <input class="form-control input-sm" type="number" min="0" ng-attr-max="{{dr.NumberOfBoxes}}" ng-model="dr.RejectedNumberOfBoxes" />   
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
             <div class="panel-footer">
-                Total <span ng-bind="drop.TotalBoxes"></span> boxes in <span ng-bind="drop.DeliveryReceipts.length"></span> deliveries
+                Total <span ng-bind="drop.DeliveryReceipts.length"></span> deliveries, 
+                <span ng-bind="drop.TotalBoxes"></span> boxes, 
+                <span ng-bind="totalRejected(drop)"></span>
             </div>
         </div>
     </div>
