@@ -33,5 +33,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _employeeService.Delete(id);
             return Json(response);
         }
+
+        [HttpPost]
+        public ActionResult Save(EditEmployeeRequest request)
+        {
+            var response = _employeeService.Save(request);
+            return Json(response);
+        }
 	}
 }
