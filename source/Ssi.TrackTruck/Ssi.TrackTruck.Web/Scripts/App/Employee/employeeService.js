@@ -51,6 +51,18 @@
                     return employee;
                 });
             },
+            edit: function(request) {
+                return repository.post('Employee', 'Save', request).then(function(response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not edit employee');
+                    }
+
+                    var index = _.indexOf(_employees, { Id: request.Id });
+                    var employee = response.Data;
+                    _employees[index] = employee;
+                    return employee;
+                });
+            },
             isDesignationEmpty: function(designation) {
                 return designation === undefined || designation === '';
             },
