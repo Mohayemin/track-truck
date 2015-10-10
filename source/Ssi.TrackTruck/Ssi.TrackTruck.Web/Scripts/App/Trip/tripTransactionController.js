@@ -6,8 +6,8 @@
         , tripService
         ) {
 
-        tripService.getMyTrips().then(function (trips) {
-            $scope.trips = trips;
+        tripService.getMyActiveDrops().then(function (drops) {
+            $scope.drops = drops;
         });
     }
 ]);

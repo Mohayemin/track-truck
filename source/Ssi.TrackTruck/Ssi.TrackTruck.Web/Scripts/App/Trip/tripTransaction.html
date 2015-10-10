@@ -3,12 +3,14 @@
         <tr>
             <th>Arrival Time</th>
             <th>DR#</th>
-            <th>Boxes</th>
+            <th>Boxes#</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="trip in trips">
-            
+        <tr ng-repeat="drop in drops">
+            <td ng-bind="drop.ExpectedDropTime | philDate"></td>
+            <td ng-bind="drop.DeliveryReceipts.length"></td>
+            <td ng-bind="drop.TotalBoxes"></td>
         </tr>
     </tbody>
 </table>

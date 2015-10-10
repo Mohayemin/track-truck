@@ -2,10 +2,12 @@
     'repository',
     'signedInUser',
     'buildIdMap',
+    'collection',
     function tripService(
         repository
         , signedInUser
         , buildIdMap
+        , collection
         ) {
         var _activeTrips = [];
         var _tripById = {};
@@ -37,13 +39,9 @@
 
                 return repository.post('Trip', 'Order', foramtterRequest);
             },
-            getMyTrips: function () {
+            getMyActiveDrops: function () {
                 return service.getAllActive().then(function() {
-                    return repository.get('Trip', 'MyActiveIds').then(function (tripIds) {
-                        return tripIds.map(function(tripId) {
-                            return _tripById[tripId];
-                        });
-                    });
+                    return repository.get('Trip', 'MyActiveDrops');
                 });
             }
         };
