@@ -36,11 +36,11 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult MyActiveIds()
+        public ActionResult MyActiveDrops()
         {
-            var myActiveTrips = _tripService.GetMyActiveTrips();
+            var myActiveDrops = _tripService.GetMyActiveDrops();
 
-            return new JsonNetResult(myActiveTrips);
+            return new JsonNetResult(myActiveDrops);
         }
 	}
 }
