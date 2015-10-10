@@ -20,8 +20,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string ClientId { get; set; }
         public string PickupAddress { get; set; }
         public DateTime ExpectedPickupTime { get; set; }
-        public IEnumerable<DbDrop> Drops { get; set; }
-
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
@@ -50,10 +48,5 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public bool IsDeleted { get; set; }
         public DateTime CreationTime { get; set; }
         public string CreatorId { get; set; }
-
-        public DbTrip()
-        {
-            Drops = new List<DbDrop>();
-        }
     }
 }
