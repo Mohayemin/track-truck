@@ -36,6 +36,11 @@
                 }
                 return _loadPromise;
             },
+            get: function (id) {
+                return _loadPromise.then(function () {
+                    return _.find(_employees, { Id: id });
+                });
+            },
             add: function (request) {
                 return repository.post('Employee', 'Add', request).then(function (response) {
                     if (response.IsError) {
