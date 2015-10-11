@@ -12,7 +12,10 @@
 
         function path() {
             var paths = Array.prototype.slice.call(arguments);
-            var url = '/' + paths.join('/');
+            var url = paths.join('/');
+            if (url[0] !== '/') {
+                url = '/' + url;
+            }
             return url;
         }
 
