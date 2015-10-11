@@ -1,16 +1,26 @@
 ﻿@using System.Web.Optimization
-@{
-    ViewBag.Title = "Home";
-}
 
-<!-- Truck -->
+<!DOCTYPE html>
+<html ng-app="trackTruck" ng-controller="appController">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSI Logistics</title>
+</head>
+<body>
+    @Styles.Render("~/css")
+    @Scripts.Render("~/js/lib")
+    @Scripts.Render("~/js/util")
+    @Scripts.Render("~/js/app")
 
-@Scripts.Render("~/js/app")
+    <div class="container main-container">
+        <div>
+            <navigation username="'@User.Identity.Name'"></navigation>
+            <global-message></global-message>
+            <ng-view></ng-view>
+        </div>
+    </div>
 
-<!-- Base -->
-
-<div ng-app="trackTruck" ng-controller="appController">
-    <navigation username="'@User.Identity.Name'"></navigation>
-    <global-message></global-message>
-    <ng-view></ng-view>
-</div>
+    @Html.Partial("_Footer")
+</body>
+</html>
