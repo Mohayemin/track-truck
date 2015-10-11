@@ -26,6 +26,15 @@ namespace Ssi.TrackTruck.Web
             bundles.Add(signIn);
             bundles.Add(util);
             bundles.Add(app);
+
+            var css = new StyleBundle("~/css")
+                .Include("~/Content/css/bootstrap-superhero.min.css")
+                .Include("~/Content/css/font-awesome.min.css")
+                .Include("~/Content/css/tablesort.css")
+                .Include("~/Content/css/animate.css")
+                .Include("~/Content/css/track-truck.css");
+
+            bundles.Add(css);
         }
     }
 }
