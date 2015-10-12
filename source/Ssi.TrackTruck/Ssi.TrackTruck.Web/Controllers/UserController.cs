@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Auth;
+using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -12,6 +13,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             _authService = authService;
         }
 
+        [ValidateModel]
         [HttpPost]
         public ActionResult Add(AddUserRequest request)
         {
@@ -24,6 +26,13 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             var users = _authService.GetUserList();
             return Json(users, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var response = _authService.Delete(id, User.Identity.Name);
+            return Json(response);
         }
 	}
 }

@@ -1,4 +1,29 @@
-﻿.main-container {
+﻿
+.animate-out-right.ng-hide-add {
+    -webkit-animation: 0.5s fadeOutRight ease;
+    -moz-animation: 0.5s fadeOutRight ease;
+    -ms-animation: 0.5s fadeOutRight ease;
+    -o-animation: 0.5s fadeOutRight ease;
+    animation: 0.5s fadeOutRight ease;
+}
+
+.animate-fade.ng-hide-remove {
+    -webkit-animation: 0.5s fadeIn ease;
+    -moz-animation: 0.5s fadeIn ease;
+    -ms-animation: 0.5s fadeIn ease;
+    -o-animation: 0.5s fadeIn ease;
+    animation: 0.5s fadeIn ease;
+}
+
+.animate-fade.ng-hide-add {
+    -webkit-animation: 0.5s fadeOut ease;
+    -moz-animation: 0.5s fadeOut ease;
+    -ms-animation: 0.5s fadeOut ease;
+    -o-animation: 0.5s fadeOut ease;
+    animation: 0.5s fadeOut ease;
+}
+
+.main-container {
     margin-top: 50px;
 }
 
@@ -38,11 +63,6 @@
     margin-right: 2px;
 }
 
-table.table.table-bordered th, table.table.table-bordered td {
-    border-color: #4e5d6c;
-    border-width: 1px;
-}
-
 .time-picker-input {
     display: inline-block;
     width: 100px;
@@ -61,7 +81,11 @@ table.table.table-bordered th, table.table.table-bordered td {
     text-align: center;
 }
 
-.attendance.present{
-    /*Color based on bootstrap superhero theme*/
-    background-color: #5cb85c; 
+    .attendance.present {
+        /*Color based on bootstrap superhero theme*/
+        background-color: #5cb85c;
+    }
+
+.no-margin-top {
+    margin-top: 0;
 }

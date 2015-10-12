@@ -1,53 +1,43 @@
-﻿using System.Linq;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Auth
 {
-    public class AddUserRequest
+    public class AddUserRequest : IValidatableObject
     {
+        [Required(ErrorMessage = "Please enter a username")]
         public string Username { get; set; }
+
+        [Required(ErrorMessage = "Please enter first name")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter last name")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter a password")]
         public string InitialPassword { get; set; }
         public Role Role { get; set; }
         public string ClientId { get; set; }
         public string BranchId { get; set; }
-        public Response Validate()
+        
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrWhiteSpace(Username))
-            {
-                return Response.ValidationError("Please enter a username");
-            }
-            if (string.IsNullOrWhiteSpace(FirstName))
-            {
-                return Response.ValidationError("Please enter first name");
-            }
-            if (string.IsNullOrWhiteSpace(LastName))
-            {
-                return Response.ValidationError("Please enter last name");
-            }
-            if (string.IsNullOrWhiteSpace(InitialPassword))
-            {
-                return Response.ValidationError("Please enter a password");
-            }
             if (Role == 0)
             {
-                return Response.ValidationError("Please choose a role");
+                yield return new ValidationResult("Please choose a role");
             }
             if (Role == Role.BranchCustodian)
             {
                 if (string.IsNullOrWhiteSpace(ClientId))
                 {
-                    return Response.ValidationError("Please choose a client");
+                    yield return new ValidationResult("Please choose a client");
                 }
                 if (string.IsNullOrWhiteSpace(BranchId))
                 {
-                    return Response.ValidationError("Please choose a branch");
+                    yield return new ValidationResult("Please choose a branch");
                 }
             }
-            return Response.Success();
         }
-
     }
 }

@@ -22,20 +22,16 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             _clientService = clientService;
         }
 
-        public Response AuthenticateUser(SignInRequest request)
+        public Response AuthenticateUser(SignInRequest request, out DbUser user)
         {
-            if (request.Validate())
+            user = FindByUsername(request.Username);
+            var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
+            if (valid)
             {
-                var user = FindByUsername(request.Username);
-                var valid = user != null && _hasher.Match(request.Password, user.PasswordHash);
-                if (valid)
-                {
-                    return Response.Success(null, "Verified, redirecting...");
-                }
-
-                return Response.Error("InvalidCredentials", "Username and password does not match");
+                return Response.Success(null, "Verified, redirecting...");
             }
-            return Response.Error("Validation", "Please enter both username and password");
+
+            return Response.Error("InvalidCredentials", "Username and password does not match");
         }
 
         public DbUser FindByUsername(string username)
@@ -48,11 +44,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
         // TODO: refactor long method
         public Response CreateUser(AddUserRequest request)
         {
-            var validation = request.Validate();
-            if (validation.IsError)
-            {
-                return validation;
-            }
             if (FindByUsername(request.Username) != null)
             {
                 return Response.DuplicacyError("A user with this name is already registered");
@@ -109,7 +100,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 );
         }
 
-        public Response ChangePassword(ChangePasswordRequest request, string username)
+        public Response ChangePassword(ChangePasswordRequest request, string userId)
         {
             var response = request.Validate();
             if (response.IsError)
@@ -117,7 +108,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
                 return response;
             }
 
-            var user = _repository.FindOne<DbUser>(u => u.UsernameLowerCase == username.ToLower());
+            var user = _repository.GetById<DbUser>(userId);
             if (user == null)
             {
                 return Response.ValidationError("User not found");
@@ -129,12 +120,36 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
             user.PasswordHash = _hasher.GenerateHash(request.NewPassword);
             _repository.Save(user);
-            return Response.Success();
+            return Response.Success(null, "Password changed");
         }
 
         private bool IsValidCurrentPassword(string currentPassword, string dbPassword)
         {
             return _hasher.Match(currentPassword, dbPassword);
+        }
+
+        public DbUser GetUser(string userId)
+        {
+            return _repository.GetById<DbUser>(userId);
+        }
+
+        public Response Delete(string id, string loggedInUserId)
+        {
+            var user = GetUser(id);
+            if (user == null)
+            {
+                return Response.Error("", string.Format("The user you tried to delete does not exist"));                   
+            }
+            if (user.Role.HasFlag(Role.Admin))
+            {
+                return Response.Error("", string.Format("Cannot delete Admin"));                   
+            }
+            if (user.Id == loggedInUserId)
+            {
+                return Response.Error("", string.Format("Cannot delete You!"));
+            }
+            _repository.SoftDelete<DbUser>(id);
+            return Response.Success(null, "Successfully deleted");
         }
     }
 }

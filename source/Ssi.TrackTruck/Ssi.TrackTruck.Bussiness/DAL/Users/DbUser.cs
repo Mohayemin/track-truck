@@ -8,12 +8,8 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Users
 {
-    [BsonIgnoreExtraElements(true)]
-    public class DbUser : IEntity
+    public class DbUser : Entity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         public string Username { get; set; }
         public string UsernameLowerCase { get; set; }
         public string FirstName { get; set; }
@@ -25,9 +21,5 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Users
 
         [BsonIgnore]
         public string FullName { get { return FirstName + " " + LastName; }}
-        public DbUser()
-        {
-            Id = ObjectId.GenerateNewId().ToString();
-        }
     }
 }
