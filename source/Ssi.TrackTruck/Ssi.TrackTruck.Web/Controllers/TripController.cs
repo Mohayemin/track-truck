@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Utils;
 
@@ -19,12 +18,36 @@ namespace Ssi.TrackTruck.Web.Controllers
             return Json(_tripService.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateModel]
         [HttpPost]
         public ActionResult Order(TripOrderRequest orderRequest)
         {
             var trip = _tripService.AddTrip(orderRequest);
 
             return new JsonNetResult(trip);
+        }
+
+        [HttpGet]
+        public ActionResult Active()
+        {
+            var activeTrips = _tripService.GetActiveTrips();
+
+            return new JsonNetResult(activeTrips);
+        }
+
+        [HttpGet]
+        public ActionResult MyActiveDrops()
+        {
+            var myActiveDrops = _tripService.GetMyActiveDrops();
+
+            return new JsonNetResult(myActiveDrops);
+        }
+
+        [HttpPost]
+        public ActionResult Receive(DropReceiveRequest request)
+        {
+            var response = _tripService.ReceiveDrop(request);
+            return new JsonNetResult(response);
         }
 	}
 }

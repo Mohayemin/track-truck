@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
 {
-    public class AddClientRequest
+    public class AddClientRequest : IValidatableObject
     {
+        [Required(ErrorMessage = "Please specify client's name")]
         public string Name { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Truck per day cannot be less than zero")]
         public int TrucksPerDay { get; set; }
 
         public IList<AddBranchRequest> Branches { get; set; }
@@ -15,17 +19,20 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             Branches = new List<AddBranchRequest>();
         }
 
-        public bool Validate()
-        {
-            var valid = !string.IsNullOrWhiteSpace(Name)
-                   && TrucksPerDay >= 0;
 
-            if (valid)
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Branches.Any())
             {
-                valid = Branches.Count == 0 || Branches.All(branch => branch.Validate());
+                var branchNames = Branches.Select(b => b.Name).ToList();
+                var branchNameDuplicate = branchNames.Distinct().Count() != branchNames.Count;
+                if (branchNameDuplicate)
+                {
+                    yield return new ValidationResult("Two or more branches has the same name");
+                }
             }
 
-            return valid;
         }
     }
 }

@@ -17,22 +17,6 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             _repository = repository;
         }
 
-        public IEnumerable<TruckStatusItem> GetCurrentStatus()
-        {
-            var allTrucks =
-                _repository.GetAll<DbTruck>();
-
-            var tripIds = allTrucks.Select(truck => truck.CurrentTripId);
-
-            var tripsById =
-                _repository.WhereIn<DbTrip, string>(trip => trip.Id, tripIds)
-                    .ToDictionary(trip => trip.Id, trip => trip);
-
-            var defaultTrip = new DbTrip();
-
-            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById.GetOrDefault(truck.CurrentTripId) ?? defaultTrip));
-        }
-
         public Response Add(AddTruckRequest request)
         {
             var validation = request.Validate();
@@ -46,6 +30,21 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             }
             var truck = _repository.Create(request.ToTruck());
             return Response.Success(truck);
+        }
+
+        public IEnumerable<DbTruck> GetAll()
+        {
+            return _repository.GetAllUndeleted<DbTruck>();
+        }
+
+        public Response Delete(string id)
+        {
+            var truck = _repository.SoftDelete<DbTruck>(id);
+            if (truck != null)
+            {
+                return Response.Success(null, "Successfully deleted");
+            }
+            return Response.Error("", string.Format("The truck you tried to delete does not exist"));
         }
     }
 }

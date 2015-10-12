@@ -1,8 +1,10 @@
 ﻿truckModule.factory('truckService', [
     'repository',
     '$q',
+    'employeeService',
     function truckService(repository
-        , $q) {
+        , $q
+        , employeeService) {
         function calculateReportSummary(trucks) {
             var summary = {
                 trucks: { total: trucks.length },
@@ -42,10 +44,23 @@
             });
         }
 
+        function getAll() {
+            return repository.get('Truck', 'All').then(function(trucks) {
+                employeeService.getIndexedEmployees().then(function(employees) {
+                    trucks.forEach(function(truck) {
+                        truck.DriverName = (employees[truck.DriverId] || {}).FullName;
+                        truck.HelperName = (employees[truck.HelperId] || {}).FullName;
+                    });
+                });
+                return trucks;
+            });
+        }
+
         return {
             calculateReportSummary: calculateReportSummary,
             getCurrentStatus: getCurrentStatus,
-            add: add
+            add: add,
+            getAll: getAll
         }
     }
 ]);
