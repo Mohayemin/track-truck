@@ -2,9 +2,11 @@
     'url',
     'repository',
     'globalMessage',
-    function(url,
+    '$window',
+    function (url,
         repository,
-        globalMessage) {
+        globalMessage,
+        $window) {
         return {
             templateUrl: '/Scripts/Util/deleteButton.html',
             scope: {
@@ -18,18 +20,21 @@
                     $scope.delete = function () {
                         var action = 'Delete';
                         var data = {
-                            id : $scope.list[$scope.index].Id
+                            id: $scope.list[$scope.index].Id
                         };
-                        repository.post($scope.controller, action, data).then(function (response) {
-                            if (!response.IsError) {
-                                $scope.list.splice($scope.index, 1);
-                                globalMessage.success(response.Message);  
-                            } else {
-                                globalMessage.error(response.Message);
-                            }
-                        }).catch(function(message) {
-                            globalMessage.error(message);
-                        });
+
+                        if ($window.confirm('Are you sure you want to delete this item?')) {
+                            repository.post($scope.controller, action, data).then(function (response) {
+                                if (!response.IsError) {
+                                    $scope.list.splice($scope.index, 1);
+                                    globalMessage.success(response.Message);
+                                } else {
+                                    globalMessage.error(response.Message);
+                                }
+                            }).catch(function (message) {
+                                globalMessage.error(message);
+                            });
+                        }
                     }
                 }
             ]
