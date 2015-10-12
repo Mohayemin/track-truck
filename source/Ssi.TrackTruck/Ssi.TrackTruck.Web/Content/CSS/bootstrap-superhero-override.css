@@ -1,0 +1,21 @@
+﻿table.table.table-bordered th, table.table.table-bordered td {
+    border-color: #4e5d6c;
+    border-width: 1px;
+}
+
+table.table thead th {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.navbar, table.table td,.control-label {
+    font-size: 14px;
+}
+
+.dropdown-menu > li > a {
+    font-size: 13px;
+}
+
+.navbar-brand {
+    font-size: 27px;
+}
