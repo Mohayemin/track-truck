@@ -63,11 +63,6 @@
     margin-right: 2px;
 }
 
-table.table.table-bordered th, table.table.table-bordered td {
-    border-color: #4e5d6c;
-    border-width: 1px;
-}
-
 .time-picker-input {
     display: inline-block;
     width: 100px;

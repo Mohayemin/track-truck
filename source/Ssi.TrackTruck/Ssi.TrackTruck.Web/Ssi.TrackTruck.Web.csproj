@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap-superhero-override.css" />
     <Content Include="Content\css\bootstrap-superhero.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\tablesort.css" />
