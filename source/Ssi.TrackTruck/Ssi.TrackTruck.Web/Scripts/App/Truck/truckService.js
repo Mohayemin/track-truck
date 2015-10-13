@@ -88,7 +88,13 @@
                 });
             },
             edit: function (request) {
-                return repository.post('Truck', 'Save', request).then(function (response) {
+                var formattedRequest = {
+                    Id: request.Id,
+                    RegistrationNumber: request.RegistrationNumber,
+                    DriverId: request.driver.Id,
+                    HelperId: request.helper.Id
+                };
+                return repository.post('Truck', 'Save', formattedRequest).then(function (response) {
                     if (response.IsError) {
                         return $q.reject(response.Message || response.Status || 'Could not edit truck');
                     }
