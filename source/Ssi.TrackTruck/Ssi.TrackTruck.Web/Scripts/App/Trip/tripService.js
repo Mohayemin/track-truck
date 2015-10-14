@@ -73,10 +73,14 @@
                         .then(function (lists) {
                             var clientsById = lists[0];
                             var employeesById = lists[1];
+
                             report.Trips.forEach(function (trip) {
                                 var drops = _.where(report.Drops, { TripId: trip.Id });
                                 trip.Client = clientsById[trip.ClientId];
                                 trip.Driver = employeesById[trip.DriverId];
+                                trip.HelperNames = trip.HelperIds.map(function(hid) {
+                                    return (employeesById[hid] || {}).FullName;
+                                });
                             });
 
                             return report.Trips;
