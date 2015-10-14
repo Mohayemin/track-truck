@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
-using Ssi.TrackTruck.Bussiness.DAL.Trips;
-using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trucks
@@ -19,11 +16,6 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
 
         public Response Add(AddTruckRequest request)
         {
-            var validation = request.Validate();
-            if (validation.IsError)
-            {
-                return validation;
-            }
             if (_repository.Exists<DbTruck>(dbTruck => dbTruck.RegistrationNumber == request.RegistrationNumber))
             {
                 return Response.DuplicacyError("A truck with this registration number already exists");
@@ -53,6 +45,11 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             if (truck == null)
             {
                 return Response.Error("", string.Format("The truck does not exist"));
+            }
+
+            if (_repository.Exists<DbTruck>(dbTruck => dbTruck.RegistrationNumber == request.RegistrationNumber))
+            {
+                return Response.DuplicacyError("A truck with this registration number already exists");
             }
 
             truck.RegistrationNumber = request.RegistrationNumber;
