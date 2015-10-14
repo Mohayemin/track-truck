@@ -7,10 +7,6 @@
                title="add a client">
                 <i class="fa fa-lg fa-plus"></i>
             </a>
-            <a ng-click="loadClients()" class="btn btn-default"
-               title="refresh clients' list">
-                <i class="fa fa-lg fa-refresh"></i>
-            </a>
         </label>
     </h3>
     
@@ -31,7 +27,9 @@
                 </td>
                 <td ng-bind="client.TrucksPerDay"></td>
                 <td ng-bind="client.Branches.length"></td>
-                <td><delete-button controller="'Client'" list="clients" index="$index"></delete-button></td>
+                <td>
+                    <delete-button controller="'Client'" list="clients" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>

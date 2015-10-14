@@ -21,9 +21,5 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Users
 
         [BsonIgnore]
         public string FullName { get { return FirstName + " " + LastName; }}
-        public DbUser()
-        {
-            Id = ObjectId.GenerateNewId().ToString();
-        }
     }
 }

@@ -36,6 +36,11 @@
                 }
                 return _loadPromise;
             },
+            get: function (id) {
+                return _loadPromise.then(function () {
+                    return _.find(_employees, { Id: id });
+                });
+            },
             add: function (request) {
                 return repository.post('Employee', 'Add', request).then(function (response) {
                     if (response.IsError) {
@@ -43,6 +48,17 @@
                     }
                     var employee = response.Data;
                     _employees.push(employee);
+                    return employee;
+                });
+            },
+            edit: function(request) {
+                return repository.post('Employee', 'Save', request).then(function(response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not edit employee');
+                    }
+
+                    var employee = _employeeById[request.Id];
+                    angular.extend(employee, response.Data);
                     return employee;
                 });
             },

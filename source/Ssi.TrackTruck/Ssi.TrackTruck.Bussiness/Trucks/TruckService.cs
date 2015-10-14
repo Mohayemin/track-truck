@@ -17,22 +17,6 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             _repository = repository;
         }
 
-        public IEnumerable<TruckStatusItem> GetCurrentStatus()
-        {
-            var allTrucks =
-                _repository.GetAllUndeleted<DbTruck>();
-
-            var tripIds = allTrucks.Select(truck => truck.CurrentTripId);
-
-            var tripsById =
-                _repository.WhereIn<DbTrip, string>(trip => trip.Id, tripIds)
-                    .ToDictionary(trip => trip.Id, trip => trip);
-
-            var defaultTrip = new DbTrip();
-
-            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById.GetOrDefault(truck.CurrentTripId) ?? defaultTrip));
-        }
-
         public Response Add(AddTruckRequest request)
         {
             var validation = request.Validate();

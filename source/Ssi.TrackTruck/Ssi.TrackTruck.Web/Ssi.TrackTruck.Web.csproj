@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FizzWare.NBuilder, Version=3.0.1.0, Culture=neutral, PublicKeyToken=5651b03e12e42c12, processorArchitecture=MSIL">
       <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
       <Private>True</Private>
@@ -89,6 +94,10 @@
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
       <Private>True</Private>
@@ -105,6 +114,10 @@
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -117,6 +130,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap-superhero-override.css" />
     <Content Include="Content\css\bootstrap-superhero.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\tablesort.css" />
@@ -124,75 +139,90 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\App\Attendance\attendanceModule.js" />
+    <Content Include="Scripts\App\appController.js" />
+    <Content Include="Scripts\App\Attendance\1.attendanceModule.js" />
     <Content Include="Scripts\App\Attendance\attendanceReport.html" />
-    <Content Include="Scripts\App\Attendance\attendanceReport.js" />
+    <Content Include="Scripts\App\Attendance\attendanceReportController.js" />
     <Content Include="Scripts\App\Attendance\attendanceService.js" />
-    <Content Include="Scripts\App\Auth\authModule.js" />
+    <Content Include="Scripts\App\Auth\1.authModule.js" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\signedInUser.js" />
     <Content Include="Scripts\App\Auth\userRoles.js" />
     <Content Include="Scripts\App\Client\clientDetail.html" />
-    <Content Include="Scripts\App\Client\clientDetail.js" />
+    <Content Include="Scripts\App\Client\clientDetailController.js" />
+    <Content Include="Scripts\App\Client\clientForm.html" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
-    <Content Include="Scripts\App\Employee\addEmployee.js" />
+    <Content Include="Scripts\App\Employee\addEmployeeController.js" />
+    <Content Include="Scripts\App\Employee\employeeEdit.html" />
+    <Content Include="Scripts\App\Employee\employeeEditController.js" />
+    <Content Include="Scripts\App\Employee\employeeForm.html" />
     <Content Include="Scripts\App\Employee\employeeList.html" />
-    <Content Include="Scripts\App\Employee\employeeList.js" />
+    <Content Include="Scripts\App\Employee\employeeListController.js" />
     <Content Include="Scripts\App\home.html" />
-    <Content Include="Scripts\App\home.js" />
     <Content Include="Scripts\App\Auth\changePassword.html" />
-    <Content Include="Scripts\App\Auth\changePassword.js" />
+    <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
+    <Content Include="Scripts\App\Navigation\navs.js" />
+    <Content Include="Scripts\App\Trip\tripTransaction.html" />
     <Content Include="Scripts\App\Trip\tripReport.html" />
     <Content Include="Scripts\App\Trip\tripReport.js" />
+    <Content Include="Scripts\App\Truck\truckForm.html" />
+    <Content Include="Scripts\App\Trip\tripTransactionController.js" />
     <Content Include="Scripts\App\Truck\truckList.html" />
-    <Content Include="Scripts\App\Truck\truckList.js" />
+    <Content Include="Scripts\App\Truck\truckListController.js" />
     <Content Include="Scripts\App\User\addUser.html" />
-    <Content Include="Scripts\App\User\addUser.js" />
+    <Content Include="Scripts\App\User\addUserController.js" />
+    <Content Include="Scripts\App\User\userForm.html" />
     <Content Include="Scripts\App\User\userList.html" />
-    <Content Include="Scripts\App\User\userList.js" />
-    <Content Include="Scripts\App\User\userModule.js" />
+    <Content Include="Scripts\App\User\userListController.js" />
+    <Content Include="Scripts\App\User\1.userModule.js" />
     <Content Include="Scripts\App\User\userService.js" />
     <Content Include="Scripts\App\Client\addClient.html" />
-    <Content Include="Scripts\App\Client\addClient.js" />
+    <Content Include="Scripts\App\Client\addClientController.js" />
     <Content Include="Scripts\App\Client\clientList.html" />
-    <Content Include="Scripts\App\Client\clientList.js" />
-    <Content Include="Scripts\App\Client\clientModule.js" />
-    <Content Include="Scripts\App\Employee\employeeModule.js" />
+    <Content Include="Scripts\App\Client\clientListController.js" />
+    <Content Include="Scripts\App\Client\1.clientModule.js" />
+    <Content Include="Scripts\App\Employee\1.employeeModule.js" />
     <Content Include="Scripts\App\Navigation\navigation.html" />
     <Content Include="Scripts\App\Navigation\navigation.js" />
-    <Content Include="Scripts\App\Navigation\navigationModule.js" />
+    <Content Include="Scripts\App\Navigation\1.navigationModule.js" />
     <Content Include="Scripts\App\Trip\orderTrip.html" />
-    <Content Include="Scripts\App\Trip\orderTrip.js" />
-    <Content Include="Scripts\App\Trip\tripModule.js" />
+    <Content Include="Scripts\App\Trip\orderTripController.js" />
+    <Content Include="Scripts\App\Trip\1.tripModule.js" />
     <Content Include="Scripts\App\Warehouse\addWarehouse.html" />
-    <Content Include="Scripts\App\Warehouse\addWarehouse.js" />
+    <Content Include="Scripts\App\Warehouse\addWarehouseController.js" />
+    <Content Include="Scripts\App\Warehouse\warehouseForm.html" />
     <Content Include="Scripts\App\Warehouse\warehouseList.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseList.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseModule.js" />
+    <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
+    <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
+    <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
-    <Content Include="Scripts\SignIn\signInModule.js" />
-    <Content Include="Scripts\App\Client\clientController.js" />
+    <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
     <Content Include="Scripts\SignIn\signInService.js" />
+    <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\deleteButton.html" />
     <Content Include="Scripts\Util\deleteButtonDirective.js" />
+    <Content Include="Scripts\Util\editButton.html" />
+    <Content Include="Scripts\Util\editButtonDirective.js" />
     <Content Include="Scripts\Util\globalMessageDirective.js" />
+    <Content Include="Scripts\Util\buildIdMap.js" />
+    <Content Include="Scripts\Util\philippineDateFilter.js" />
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
-    <Content Include="Scripts\App\appModule.js" />
+    <Content Include="Scripts\App\1.appModule.js" />
     <Content Include="Scripts\App\Trip\tripService.js" />
     <Content Include="Scripts\App\Truck\addTruck.html" />
-    <Content Include="Scripts\App\Truck\addTruck.js" />
-    <Content Include="Scripts\App\Truck\truckModule.js" />
+    <Content Include="Scripts\App\Truck\addTruckController.js" />
+    <Content Include="Scripts\App\Truck\1.truckModule.js" />
     <Content Include="Scripts\App\Truck\truckService.js" />
     <Content Include="Scripts\App\Truck\truckStatusReport.html" />
-    <Content Include="Scripts\App\Truck\truckStatusReport.js" />
+    <Content Include="Scripts\App\Truck\truckStatusReportController.js" />
     <Content Include="Scripts\Util\url.js" />
-    <Content Include="Scripts\Util\utilModule.js" />
+    <Content Include="Scripts\Util\1.utilModule.js" />
     <Content Include="Scripts\App\Warehouse\warehouseService.js" />
     <Content Include="Scripts\Lib\angular-route.js" />
     <Content Include="Scripts\Lib\angular-tablesort.js" />
@@ -204,12 +234,11 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Page\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\DailyHitLogAttribute.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DummyRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -247,6 +276,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Page\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -256,8 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Attendance\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ssi.TrackTruck.Bussiness\Ssi.TrackTruck.Bussiness.csproj">

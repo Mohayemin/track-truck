@@ -1,37 +1,60 @@
 ﻿appModule.config([
     '$routeProvider',
-    function ($routeProvider) {
-        console.log('configuring routes');
-        function createClosedTag(tagName) {
-            return '<' + tagName + '>' + '</' + tagName + '>';
+    'urlProvider',
+    function ($routeProvider, urlProvider) {
+        function capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
 
-        function defaultRoute(directiveTag) {
+        function defaultRoute(module, feature) {
             return {
-                template: createClosedTag(directiveTag),
+                templateUrl: urlProvider.template(module, feature),
+                controller: feature + 'Controller',
                 caseInsensitiveMatch: true
             };
         }
 
+        function addRoute(module) {
+            var cappedModule = capitalizeFirstLetter(module);
+            return {
+                templateUrl: urlProvider.template(module, 'add' + cappedModule),
+                controller: 'add' + cappedModule + 'Controller',
+                caseInsensitiveMatch: true
+            };
+        }
+
+        function listRoute(module) {
+            return {
+                templateUrl: urlProvider.template(module, module + 'List'),
+                controller: module + 'ListController',
+                caseInsensitiveMatch: true
+            };
+        }
+
+        function editRoute(module) {
+            return {
+                templateUrl: urlProvider.template(module, module + 'Edit'),
+                controller: module + 'EditController',
+                caseInsensitiveMatch: true
+            };
+        }
+
+        ['truck', 'client', 'user', 'employee', 'warehouse'].forEach(function (module) {
+            $routeProvider
+                .when('/' + module + '/add', addRoute(module))
+                .when('/' + module + '/list', listRoute(module))
+                .when('/' + module + '/:id/edit', editRoute(module));
+        });
+
         $routeProvider
-            .when('/', defaultRoute('home'))
-            .when('/truck/add', defaultRoute('add-truck'))
-            .when('/truck/report', defaultRoute('truck-status-report'))
-            .when('/truck/list', defaultRoute('truck-list'))
-            .when('/client/list', defaultRoute('client-list'))
-            .when('/client/add', defaultRoute('add-client'))
-            .when('/client/:id', defaultRoute('client-detail'))
-            .when('/trip/order', defaultRoute('order-trip'))
-            .when('/trip/report', defaultRoute('trip-report'))
-            .when('/user/list', defaultRoute('user-list'))
-            .when('/user/add', defaultRoute('add-user'))
-            .when('/employee/list', defaultRoute('employee-list'))
-            .when('/employee/add', defaultRoute('add-employee'))
-            .when('/warehouse/add', defaultRoute('add-warehouse'))
-            .when('/warehouse/list', defaultRoute('warehouse-list'))
-            .when('/auth/changepassword', defaultRoute('change-password'))
-            .when('/attendance/report', defaultRoute('attendance-report'))
-            .otherwise({ redirectTo: '/' })
-        ;
+            .when('/', {
+                templateUrl: urlProvider.template('', 'home')
+            })
+            .when('/client/:id', defaultRoute('client', 'clientDetail'))
+            .when('/trip/order', defaultRoute('trip', 'orderTrip'))
+            .when('/trip/transactions', defaultRoute('trip', 'tripTransaction'))
+            .when('/auth/changepassword', defaultRoute('auth', 'changePassword'))
+            .when('/attendance/report', defaultRoute('attendance', 'attendanceReport'))
+            .otherwise({ redirectTo: '/' });
     }
 ]);

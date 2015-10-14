@@ -8,7 +8,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public virtual string Id { get; set; }
+        public string Id { get; set; }
         public virtual bool IsDeleted { get; set; }
         public virtual DateTime CreationTime { get; set; }
 
@@ -17,5 +17,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 
         [BsonExtraElements]
         public virtual BsonDocument UnMappedProperties { get; set; }
+
+        protected Entity()
+        {
+            Id = ObjectId.GenerateNewId().ToString();
+        }
     }
 }
