@@ -1,25 +1,29 @@
 ﻿clientModule.factory('clientService', [
     'repository',
     '_',
+    'buildIdMap',
     '$q',
     function clientService(repository,
         _,
+        buildIdMap,
         $q) {
         var _clients = [];
+        var _clientsById = {};
         var _loadPromise;
 
         var service = {
-            load: function () {
-                return repository.get('Client', 'All').then(function (clients) {
-                    _clients.length = 0;
-                    _clients.push.apply(_clients, clients);
-                    return _clients;
-                });
-            },
             getAll: function () {
-                return _loadPromise.then(function () {
-                    return _clients;
-                });
+                if (!_loadPromise) {
+                    _loadPromise = repository.get('Client', 'All').then(function (clients) {
+                        _clients.length = 0;
+                        _clients.push.apply(_clients, clients);
+                        _clientsById = buildIdMap(_clients);
+
+                        return _clients;
+                    });
+                }
+
+                return _loadPromise;
             },
             add: function (request) {
                 return repository.post('Client', 'Add', request).then(function (response) {
@@ -47,10 +51,13 @@
 
                     return $q.reject(response.Message || response.status || 'could not delete client');
                 });
+            },
+            getIndexedClients: function () {
+                return service.getAll().then(function () {
+                    return _clientsById;
+                });
             }
         };
-
-        _loadPromise = service.load();
 
         return service;
     }
