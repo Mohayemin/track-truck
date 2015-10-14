@@ -2,18 +2,22 @@
     'repository',
     'signedInUser',
     'buildIdMap',
+    '_',
+    'clientService',
     '$q',
     function tripService(
         repository
         , signedInUser
         , buildIdMap
+        , _
+        , clientService
         , $q
         ) {
         var _activeTrips = [];
         var _tripById = {};
 
         var _loadActivePromise;
-        
+
         var service = {
             getAllActive: function () {
                 if (!_loadActivePromise) {
@@ -40,7 +44,7 @@
                 return repository.post('Trip', 'Order', foramtterRequest);
             },
             getMyActiveDrops: function () {
-                return service.getAllActive().then(function() {
+                return service.getAllActive().then(function () {
                     return repository.get('Trip', 'MyActiveDrops');
                 });
             },
@@ -50,19 +54,30 @@
                     DeliveryRejections: {}
                 };
 
-                drop.DeliveryReceipts.forEach(function(dr) {
+                drop.DeliveryReceipts.forEach(function (dr) {
                     formattedRequest.DeliveryRejections[dr.Id] = dr.RejectedNumberOfBoxes;
                 });
 
-                return repository.post('Trip', 'Receive', formattedRequest).then(function(response) {
+                return repository.post('Trip', 'Receive', formattedRequest).then(function (response) {
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
                     return response;
                 });
             },
-            getReport: function(filter) {
-                return repository.post('Trip', 'Report', filter);
+            getReport: function (filter) {
+                return repository.post('Trip', 'Report', filter).then(function (report) {
+                    return clientService.getIndexedClients().then(function(clientsById) {
+                        return report.Trips.map(function (trip) {
+                            var drops = _.where(report.Drops, { TripId: trip.Id });
+                            return {
+                                TripId: trip.Id,
+                                Client: clientsById[trip.ClientId]
+                            };
+                        });
+                    });
+
+                });
             }
         };
 
