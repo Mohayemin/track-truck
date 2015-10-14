@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Utils;
 
@@ -48,6 +49,12 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             var response = _tripService.ReceiveDrop(request);
             return new JsonNetResult(response);
+        }
+
+        [HttpPost]
+        public ActionResult Report(DateTimeModel fromDate, DateTimeModel toDate)
+        {
+            return new JsonNetResult(new {fromDate, toDate});
         }
 	}
 }

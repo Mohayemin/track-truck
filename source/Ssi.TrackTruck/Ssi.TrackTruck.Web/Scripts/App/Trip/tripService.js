@@ -60,6 +60,9 @@
                     }
                     return response;
                 });
+            },
+            getReport: function(filter) {
+                return repository.post('Trip', 'Report', filter);
             }
         };
 
