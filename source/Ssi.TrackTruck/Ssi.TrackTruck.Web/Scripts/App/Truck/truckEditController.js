@@ -4,12 +4,14 @@
     'truckService',
     'employeeService',
     'designation',
+    'globalMessage',
     '$location',
     function ($scope,
         $routeParams,
         truckService,
         employeeService,
         designation,
+        globalMessage,
         $location) {
 
         truckService.get($routeParams['id']).then(function (truck) {
@@ -28,7 +30,10 @@
 
         $scope.save = function () {
             truckService.edit($scope.request).then(function () {
+                globalMessage.success('Successfully edited');
                 $location.url('truck/list');
+            }).catch(function (message) {
+                globalMessage.error(message);
             });
         }
     }
