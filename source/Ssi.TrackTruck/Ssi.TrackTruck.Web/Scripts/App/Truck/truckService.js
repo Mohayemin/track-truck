@@ -5,6 +5,18 @@
     function truckService(repository
         , $q
         , employeeService) {
+
+        var _trucks = [];
+        var _trucksById = [];
+        var _loadPromise = null;
+
+        function buildIdMap() {
+            _trucksById = {};
+            _trucks.forEach(function (truck) {
+                _trucksById[truck.Id] = truck;
+            });
+        }
+
         function calculateReportSummary(trucks) {
             var summary = {
                 trucks: { total: trucks.length },
@@ -44,23 +56,54 @@
             });
         }
 
-        function getAll() {
-            return repository.get('Truck', 'All').then(function(trucks) {
-                employeeService.getIndexedEmployees().then(function(employees) {
-                    trucks.forEach(function(truck) {
-                        truck.DriverName = (employees[truck.DriverId] || {}).FullName;
-                        truck.HelperName = (employees[truck.HelperId] || {}).FullName;
+        function getAll(forse) {
+            if (!_loadPromise || forse) {
+                _loadPromise = repository.get('Truck', 'All').then(function (trucks) {
+                    employeeService.getIndexedEmployees().then(function (employees) {
+                        trucks.forEach(function (truck) {
+                            truck.DriverName = (employees[truck.DriverId] || {}).FullName;
+                            truck.HelperName = (employees[truck.HelperId] || {}).FullName;
+                        });
                     });
+
+                    _trucks.length = 0;
+                    _trucks.push.apply(_trucks, trucks);
+
+                    buildIdMap();
+
+                    return _trucks;
                 });
-                return trucks;
-            });
+            }
+            return _loadPromise;
         }
 
         return {
             calculateReportSummary: calculateReportSummary,
             getCurrentStatus: getCurrentStatus,
             add: add,
-            getAll: getAll
+            getAll: getAll,
+            get: function (id) {
+                return _loadPromise.then(function () {
+                    return _.find(_trucks, { Id: id });
+                });
+            },
+            edit: function (request) {
+                var formattedRequest = {
+                    Id: request.Id,
+                    RegistrationNumber: request.RegistrationNumber,
+                    DriverId: request.driver.Id,
+                    HelperId: request.helper.Id
+                };
+                return repository.post('Truck', 'Save', formattedRequest).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not edit truck');
+                    }
+
+                    var truck = _trucksById[request.Id];
+                    angular.extend(truck, response.Data);
+                    return truck;
+                });
+            }
         }
     }
 ]);
