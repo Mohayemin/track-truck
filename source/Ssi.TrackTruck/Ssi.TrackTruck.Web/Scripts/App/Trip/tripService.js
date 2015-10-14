@@ -5,6 +5,7 @@
     '_',
     'clientService',
     'employeeService',
+    'truckService',
     '$q',
     function tripService(
         repository
@@ -13,6 +14,7 @@
         , _
         , clientService
         , employeeService
+        , truckService
         , $q
         ) {
         var _activeTrips = [];
@@ -69,10 +71,14 @@
             },
             getReport: function (filter) {
                 return repository.post('Trip', 'Report', filter).then(function (report) {
-                    return $q.all([clientService.getIndexedClients(), employeeService.getIndexedEmployees()])
+                    return $q.all([clientService.getIndexedClients()
+                        , employeeService.getIndexedEmployees()
+                        , truckService.getIndexedTrucks()
+                    , truckService])
                         .then(function (lists) {
                             var clientsById = lists[0];
                             var employeesById = lists[1];
+                            var trucksById = lists[2];
 
                             report.Trips.forEach(function (trip) {
                                 var drops = _.where(report.Drops, { TripId: trip.Id });
@@ -81,6 +87,7 @@
                                 trip.HelperNames = trip.HelperIds.map(function(hid) {
                                     return (employeesById[hid] || {}).FullName;
                                 });
+                                trip.Truck = trucksById[trip.TruckId];
                             });
 
                             return report.Trips;
