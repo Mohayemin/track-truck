@@ -4,6 +4,7 @@
     'buildIdMap',
     '_',
     'clientService',
+    'employeeService',
     '$q',
     function tripService(
         repository
@@ -11,6 +12,7 @@
         , buildIdMap
         , _
         , clientService
+        , employeeService
         , $q
         ) {
         var _activeTrips = [];
@@ -67,15 +69,18 @@
             },
             getReport: function (filter) {
                 return repository.post('Trip', 'Report', filter).then(function (report) {
-                    return clientService.getIndexedClients().then(function(clientsById) {
-                        report.Trips.forEach(function (trip) {
-                            var drops = _.where(report.Drops, { TripId: trip.Id });
-                            trip.Client = clientsById[trip.ClientId];
+                    return $q.all([clientService.getIndexedClients(), employeeService.getIndexedEmployees()])
+                        .then(function (lists) {
+                            var clientsById = lists[0];
+                            var employeesById = lists[1];
+                            report.Trips.forEach(function (trip) {
+                                var drops = _.where(report.Drops, { TripId: trip.Id });
+                                trip.Client = clientsById[trip.ClientId];
+                                trip.Driver = employeesById[trip.DriverId];
+                            });
+
+                            return report.Trips;
                         });
-
-                        return report.Trips;
-                    });
-
                 });
             }
         };
