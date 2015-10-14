@@ -68,13 +68,12 @@
             getReport: function (filter) {
                 return repository.post('Trip', 'Report', filter).then(function (report) {
                     return clientService.getIndexedClients().then(function(clientsById) {
-                        return report.Trips.map(function (trip) {
+                        report.Trips.forEach(function (trip) {
                             var drops = _.where(report.Drops, { TripId: trip.Id });
-                            return {
-                                TripId: trip.Id,
-                                Client: clientsById[trip.ClientId]
-                            };
+                            trip.Client = clientsById[trip.ClientId];
                         });
+
+                        return report.Trips;
                     });
 
                 });
