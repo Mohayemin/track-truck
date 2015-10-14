@@ -99,9 +99,14 @@
                         return $q.reject(response.Message || response.Status || 'Could not edit truck');
                     }
 
-                    var truck = _trucksById[request.Id];
-                    angular.extend(truck, response.Data);
-                    return truck;
+                    return employeeService.get(response.Data.DriverId).then(function (driver) {
+                        response.Data.DriverName = driver.FullName;
+                        employeeService.get(response.Data.HelperId).then(function (helper) {
+                            response.Data.HelperName = helper.FullName;
+                            angular.extend(_trucksById[request.Id], response.Data);
+                        });
+                        return _trucksById[request.Id];
+                    });
                 });
             }
         }
