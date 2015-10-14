@@ -46,5 +46,21 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             }
             return Response.Error("", string.Format("The truck you tried to delete does not exist"));
         }
+
+        public Response Save(EditTruckRequest request)
+        {
+            var truck = _repository.GetById<DbTruck>(request.Id);
+            if (truck == null)
+            {
+                return Response.Error("", string.Format("The truck does not exist"));
+            }
+
+            truck.RegistrationNumber = request.RegistrationNumber;
+            truck.DriverId = request.DriverId;
+            truck.HelperId = request.HelperId;
+
+            _repository.Save(truck);
+            return Response.Success(truck, "Successfully edited");
+        }
     }
 }
