@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using MongoDB.Driver.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
@@ -52,6 +54,19 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                     .Select(branch => branch.Id);
             return userBrancheIds;
         }
+
+        public IQueryable<DbTrip> GetTripsInRange(DateTime from, DateTime to)
+        {
+            var trips =
+                _trips.AsQueryable().Where(trip => trip.ExpectedPickupTime >= from && trip.ExpectedPickupTime <= to);
+
+            return trips;
+        }
+
+        public IQueryable<DbTripDrop> GetDropsOfTrips(IEnumerable<string> tripIds)
+        {
+            return _drops.Find(Query<DbTripDrop>.In(drop => drop.TripId, tripIds)).AsQueryable();
+        } 
 
         public DbTripDrop GetDrop(string dropId)
         {

@@ -54,7 +54,8 @@ namespace Ssi.TrackTruck.Web.Controllers
         [HttpPost]
         public ActionResult Report(DateTimeModel fromDate, DateTimeModel toDate)
         {
-            return new JsonNetResult(new {fromDate, toDate});
+            var report = _tripService.GetReport(fromDate, toDate);
+            return new JsonNetResult(report);
         }
-	}
+    }
 }
