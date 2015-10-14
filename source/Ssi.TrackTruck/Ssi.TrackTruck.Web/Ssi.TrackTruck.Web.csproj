@@ -150,6 +150,8 @@
     <Content Include="Scripts\App\Auth\userRoles.js" />
     <Content Include="Scripts\App\Client\clientDetail.html" />
     <Content Include="Scripts\App\Client\clientDetailController.js" />
+    <Content Include="Scripts\App\Client\clientEdit.html" />
+    <Content Include="Scripts\App\Client\clientEditController.js" />
     <Content Include="Scripts\App\Client\clientForm.html" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
     <Content Include="Scripts\App\Employee\addEmployeeController.js" />
