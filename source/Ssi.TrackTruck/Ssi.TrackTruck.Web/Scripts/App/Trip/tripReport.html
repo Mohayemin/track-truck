@@ -1,0 +1,64 @@
+﻿<div>
+    <form ng-submit="loadReport()" class="form-horizontal">
+        <div class="col-sm-5">
+            <datetime model="filter.fromDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-5">
+            <datetime model="filter.toDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <button type="submit" class="btn btn-default btn-block">Load</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table class="table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Client
+                    </th>
+                    <th>
+                        Pickup Time
+                    </th>
+                    <th>
+                        Route
+                    </th>
+                    <th>
+                        Total Boxes
+                    </th>
+                    <th>
+                        Delivered Boxes
+                    </th>
+                    <th>
+                        Rejected Boxes
+                    </th>
+                    <th>
+                        Driver
+                    </th>
+                    <th>
+                        Helper
+                    </th>
+                    <th>
+                        Truck
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in reportRows">
+                    <td ng-bind="row.Client.Name"></td>
+                    <td ng-bind="row.ExpectedPickupTime | philDate"></td>
+                    <td ng-bind="row.Route"></td>
+                    <td ng-bind="row.TotalNumberOfBoxes"></td>
+                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
+                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
+                    <td ng-bind="row.Driver.FullName"></td>
+                    <td ng-bind="row.HelperNames"></td>
+                    <td ng-bind="row.Truck.RegistrationNumber"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
