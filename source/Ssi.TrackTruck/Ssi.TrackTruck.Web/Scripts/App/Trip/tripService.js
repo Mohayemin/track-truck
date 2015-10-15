@@ -93,6 +93,14 @@
                                 trip.TotalNumberOfBoxes = collection.sum(drops, 'TotalBoxes');
                                 trip.RejectedNumberOfBoxes = collection.sum(drops, 'TotalRejectedBoxes');
                                 trip.DeliveredNumberOfBoxes = collection.sum(drops, 'TotalDeliveredBoxes');
+
+                                var routeList = [trip.PickupAddress];
+
+                                drops.forEach(function(drop) {
+                                    return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
+                                });
+
+                                trip.Route = routeList.join(',');
                             });
 
                             return report.Trips;
