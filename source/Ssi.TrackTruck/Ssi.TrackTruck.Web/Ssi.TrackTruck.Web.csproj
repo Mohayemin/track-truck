@@ -164,6 +164,10 @@
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
+    <Content Include="Scripts\App\Trip\tripReport.html" />
+    <Content Include="Scripts\App\Trip\tripReportController.js" />
+    <Content Include="Scripts\App\Truck\truckEdit.html" />
+    <Content Include="Scripts\App\Truck\truckEditController.js" />
     <Content Include="Scripts\App\Truck\truckForm.html" />
     <Content Include="Scripts\App\Trip\tripTransactionController.js" />
     <Content Include="Scripts\App\Truck\truckList.html" />

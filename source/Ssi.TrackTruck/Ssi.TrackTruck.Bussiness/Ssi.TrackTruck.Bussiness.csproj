@@ -91,8 +91,10 @@
     <Compile Include="Trips\TripDropRequest.cs" />
     <Compile Include="Trips\TripOrderRequest.cs" />
     <Compile Include="Trips\TripMongoRepository.cs" />
+    <Compile Include="Trips\TripReportResponse.cs" />
     <Compile Include="Trips\TripService.cs" />
     <Compile Include="Trucks\AddTruckRequest.cs" />
+    <Compile Include="Trucks\EditTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
     <Compile Include="Warehouses\AddWarehouseRequest.cs" />
     <Compile Include="Warehouses\WarehouseService.cs" />
