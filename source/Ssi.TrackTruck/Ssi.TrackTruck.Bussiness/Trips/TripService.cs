@@ -6,6 +6,7 @@ using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
+using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
@@ -27,8 +28,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         {
             var trip = orderRequest.ToTrip();
             var drops = orderRequest.Drops.Select(request => request.ToDrop(trip.Id));
-            
-            _repository.Create(trip);            
+
+            _repository.Create(trip);
             _repository.CreateAll(drops);
 
             return trip;
@@ -55,7 +56,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public Response ReceiveDrop(DropReceiveRequest request)
         {
             var drop = _tripRepository.GetDrop(request.DropId);
-            
+
             if (drop == null)
             {
                 return Response.Error("", "Drop not found");
@@ -71,8 +72,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             }
             foreach (var rejection in request.DeliveryRejections)
             {
-                var dr = drop.DeliveryReceipts.FirstOrDefault(_=>_.Id == rejection.Key);
-                
+                var dr = drop.DeliveryReceipts.FirstOrDefault(_ => _.Id == rejection.Key);
+
                 if (dr == null)
                 {
                     return Response.Error("", "Request contains a DR that does not exist");
@@ -97,5 +98,22 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
             return Response.Success(drop, "Drop received");
         }
+
+        public TripReportResponse GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        {
+            var from = fromDate.ToDateTime(DateTimeConstants.PhilippineOffset);
+            var to = toDate.ToDateTime(DateTimeConstants.PhilippineOffset);
+            var trips = _tripRepository.GetTripsInRange(from, to);
+            var drops = _tripRepository.GetDropsOfTrips(trips.Select(trip => trip.Id));
+
+            return new TripReportResponse
+            {
+                FromDate = from,
+                ToDate = to,
+                Trips = trips,
+                Drops = drops
+            };
+        }
+
     }
 }

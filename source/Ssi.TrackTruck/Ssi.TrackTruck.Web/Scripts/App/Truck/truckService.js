@@ -1,21 +1,16 @@
 ﻿truckModule.factory('truckService', [
     'repository',
+    'buildIdMap',
     '$q',
     'employeeService',
     function truckService(repository
+        , buildIdMap
         , $q
         , employeeService) {
 
         var _trucks = [];
         var _trucksById = [];
         var _loadPromise = null;
-
-        function buildIdMap() {
-            _trucksById = {};
-            _trucks.forEach(function (truck) {
-                _trucksById[truck.Id] = truck;
-            });
-        }
 
         function calculateReportSummary(trucks) {
             var summary = {
@@ -68,8 +63,7 @@
 
                     _trucks.length = 0;
                     _trucks.push.apply(_trucks, trucks);
-
-                    buildIdMap();
+                    _trucksById = buildIdMap(_trucks);
 
                     return _trucks;
                 });
@@ -77,31 +71,36 @@
             return _loadPromise;
         }
 
-        return {
+        var service = {
             calculateReportSummary: calculateReportSummary,
             getCurrentStatus: getCurrentStatus,
             add: add,
             getAll: getAll,
-            get: function (id) {
-                return _loadPromise.then(function () {
+            get: function(id) {
+                return _loadPromise.then(function() {
                     return _.find(_trucks, { Id: id });
                 });
             },
-            edit: function (request) {
+            getIndexedTrucks: function() {
+                return service.getAll().then(function() {
+                    return _trucksById;
+                });
+            },
+            edit: function(request) {
                 var formattedRequest = {
                     Id: request.Id,
                     RegistrationNumber: request.RegistrationNumber,
                     DriverId: request.driver.Id,
                     HelperId: request.helper.Id
                 };
-                return repository.post('Truck', 'Save', formattedRequest).then(function (response) {
+                return repository.post('Truck', 'Save', formattedRequest).then(function(response) {
                     if (response.IsError) {
                         return $q.reject(response.Message || response.Status || 'Could not edit truck');
                     }
 
-                    return employeeService.get(response.Data.DriverId).then(function (driver) {
+                    return employeeService.get(response.Data.DriverId).then(function(driver) {
                         response.Data.DriverName = driver.FullName;
-                        employeeService.get(response.Data.HelperId).then(function (helper) {
+                        employeeService.get(response.Data.HelperId).then(function(helper) {
                             response.Data.HelperName = helper.FullName;
                             angular.extend(_trucksById[request.Id], response.Data);
                         });
@@ -109,7 +108,9 @@
                     });
                 });
             }
-        }
+        };
+
+        return service;
     }
 ]);
 
