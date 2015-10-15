@@ -20,15 +20,26 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return Query<T>().FirstOrDefault(condition);
         }
 
-        public T Create<T>(T item)
+        public T Create<T>(T item) where T:IEntity
         {
+            item.CreationTime = DateTime.UtcNow;
             List<T>().Add(item);
             return item;
+        }
+
+        public void CreateAll<T>(IEnumerable<T> items) where T : IEntity
+        {
+            List<T>().AddRange(items);
         }
 
         public IQueryable<T> GetAll<T>()
         {
             return Query<T>();
+        }
+
+        public T GetById<T>(string id) where T : IEntity
+        {
+            return Query<T>().FirstOrDefault(arg => arg.Id == id);
         }
 
         public IQueryable<T> WhereIn<T, TProp>(Expression<Func<T, TProp>> property, IEnumerable<TProp> values)
@@ -42,17 +53,12 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return GetAll<T>();
         }
 
-        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        public bool Exists<T>(Expression<Func<T, bool>> condition) where T : IEntity
         {
             return Query<T>().Any(condition);
         }
 
-        public void CreateAll<T>(IEnumerable<T> items)
-        {
-            List<T>().AddRange(items);
-        }
-
-        public T SoftDelete<T>(string id) where T : IEntity, ISoftDeletable
+        public T SoftDelete<T>(string id) where T : IEntity
         {
             var item = FindOne<T>(e => e.Id == id);
             if (item != null)
@@ -62,9 +68,19 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return item;
         }
 
-        public IQueryable<T> GetAllUndeleted<T>() where T : ISoftDeletable
+        public IQueryable<T> GetAllUndeleted<T>() where T : IEntity
         {
             return GetAll<T>().Where(e => !e.IsDeleted);
+        }
+
+        public T Save<T>(T item)
+        {
+            return item;
+        }
+
+        public IQueryable<T> GetWhere<T>(Expression<Func<T, bool>> condition)
+        {
+            return GetAll<T>().Where(condition);
         }
 
         private IQueryable<T> Query<T>()

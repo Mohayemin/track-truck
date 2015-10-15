@@ -12,17 +12,30 @@ namespace Ssi.TrackTruck.Web.Controllers
             _truckService = truckService;
         }
         
-        public ActionResult GetCurrentStatus()
+        [HttpGet]
+        public ActionResult All()
         {
-            var data = _truckService.GetCurrentStatus();
-
-            return Json(data, JsonRequestBehavior.AllowGet);
+            return Json(_truckService.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult Add(AddTruckRequest request)
         {
             return Json(_truckService.Add(request));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var response = _truckService.Delete(id);
+            return Json(response);
+        }
+
+        [HttpPost]
+        public ActionResult Save(EditTruckRequest request)
+        {
+            var response = _truckService.Save(request);
+            return Json(response);
         }
     }
 }

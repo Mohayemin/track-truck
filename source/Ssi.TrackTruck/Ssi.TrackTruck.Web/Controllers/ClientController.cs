@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Clients;
+using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -18,12 +19,14 @@ namespace Ssi.TrackTruck.Web.Controllers
             return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateModel]
         [HttpPost]
         public ActionResult Add(AddClientRequest request)
         {
             var response = _clientService.Add(request);
             return Json(response);
         }
+
         [HttpPost]
         public ActionResult Delete(string id)
         {

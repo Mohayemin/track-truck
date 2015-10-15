@@ -15,33 +15,21 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             _repository = repository;
         }
 
-        public IEnumerable<Client> GetAll()
+        public IEnumerable<DbClient> GetAll()
         {
-            return _repository.GetAllUndeleted<Client>();
+            return _repository.GetAllUndeleted<DbClient>();
         }
 
         public Response Add(AddClientRequest request)
         {
-            if (!request.Validate())
-            {
-                return Response.Error("Validation");
-            }
             if (ClientNameIsDuplicate(request))
             {
-                return Response.Error("", "Client with same name already exists");
+                return Response.DuplicacyError("Client with same name already exists");
             }
-
-            if (request.Branches.Any())
-            {
-                if (BranchNameHasDuplicate(request))
-                {
-                    return Response.Error("", "Two or more branches has the same name");
-                }
-            }
-
+            
             var branches = request.Branches.Select(b => b.ToBranch());
 
-            var client = new Client
+            var client = new DbClient
             {
                 Name = request.Name,
                 TrucksPerDay = request.TrucksPerDay,
@@ -55,25 +43,25 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         private bool ClientNameIsDuplicate(AddClientRequest request)
         {
-            var nameTaken = _repository.Exists<Client>(c => c.Name == request.Name);
+            var nameTaken = _repository.Exists<DbClient>(c => c.Name == request.Name);
             return nameTaken;
         }
 
-        private static bool BranchNameHasDuplicate(AddClientRequest request)
-        {
-            var branchNames = request.Branches.Select(b => b.Name).ToList();
-            var branchNameDuplicate = branchNames.Distinct().Count() != branchNames.Count;
-            return branchNameDuplicate;
-        }
+        
         
         public Response Delete(string id)
         {
-            var client = _repository.SoftDelete<Client>(id);
+            var client = _repository.SoftDelete<DbClient>(id);
             if (client != null)
             {
-                return Response.Success();
+                return Response.Success(null, "Successfully deleted");
             }
-            return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
+            return Response.Error("", string.Format("The client you tried to delete does not exist"));
+        }
+
+        public DbClient GetClient(string clientId)
+        {
+            return GetAll().FirstOrDefault(client => client.Id == clientId);
         }
     }
 }

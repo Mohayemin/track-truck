@@ -1,26 +1,19 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
 {
     public class AddBranchRequest
     {
+        [Required(ErrorMessage = "Please specify branch name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Please specify branch address")]
         public string Address { get; set; }
-
-        public bool Validate()
+        
+        public DbBranch ToBranch()
         {
-            var fields = new[] { Name, Address};
-
-            var valid = fields.All(s => !string.IsNullOrWhiteSpace(s));
-
-            return valid;
+            return new DbBranch { Name = Name, Address = Address };
         }
-
-        public Branch ToBranch()
-        {
-            return new Branch { Name = Name, Address = Address };
-        }
-
     }
 }

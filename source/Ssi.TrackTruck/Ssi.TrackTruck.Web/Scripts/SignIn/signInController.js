@@ -8,7 +8,7 @@
 
         $scope.signIn = function() {
             $scope.response = null;
-            globalMessage.info('checking...');
+            globalMessage.info('checking...', 0);
             signInService.signIn($scope.model).then(function(response) {
                 $scope.message = null;
                 $scope.response = response;

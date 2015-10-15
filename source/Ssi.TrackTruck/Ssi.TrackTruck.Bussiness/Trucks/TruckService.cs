@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
-using Ssi.TrackTruck.Bussiness.DAL.Trips;
-using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trucks
@@ -17,30 +14,50 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
             _repository = repository;
         }
 
-        public IEnumerable<TruckStatusItem> GetCurrentStatus()
-        {
-            var allTrucks =
-                _repository.GetAll<Truck>();
-
-            var tripIds = allTrucks.Select(truck => truck.CurrentTripId);
-
-            var tripsById =
-                _repository.WhereIn<Trip, string>(trip => trip.Id, tripIds)
-                    .ToDictionary(trip => trip.Id, trip => trip);
-
-            var defaultTrip = new Trip();
-
-            return allTrucks.Select(truck => new TruckStatusItem(truck, tripsById.GetOrDefault(truck.CurrentTripId) ?? defaultTrip));
-        }
-
         public Response Add(AddTruckRequest request)
         {
-            if (request.Validate())
+            if (_repository.Exists<DbTruck>(dbTruck => dbTruck.RegistrationNumber == request.RegistrationNumber))
             {
-                var truck = _repository.Create(request.ToTruck());
-                return Response.Success(truck);
+                return Response.DuplicacyError("A truck with this registration number already exists");
             }
-            return Response.Error("Validation");
+            var truck = _repository.Create(request.ToTruck());
+            return Response.Success(truck);
+        }
+
+        public IEnumerable<DbTruck> GetAll()
+        {
+            return _repository.GetAllUndeleted<DbTruck>();
+        }
+
+        public Response Delete(string id)
+        {
+            var truck = _repository.SoftDelete<DbTruck>(id);
+            if (truck != null)
+            {
+                return Response.Success(null, "Successfully deleted");
+            }
+            return Response.Error("", string.Format("The truck you tried to delete does not exist"));
+        }
+
+        public Response Save(EditTruckRequest request)
+        {
+            var truck = _repository.GetById<DbTruck>(request.Id);
+            if (truck == null)
+            {
+                return Response.Error("", string.Format("The truck does not exist"));
+            }
+
+            if (_repository.Exists<DbTruck>(dbTruck => dbTruck.Id != request.Id && dbTruck.RegistrationNumber == request.RegistrationNumber))
+            {
+                return Response.DuplicacyError("A truck with this registration number already exists");
+            }
+
+            truck.RegistrationNumber = request.RegistrationNumber;
+            truck.DriverId = request.DriverId;
+            truck.HelperId = request.HelperId;
+
+            _repository.Save(truck);
+            return Response.Success(truck, "Successfully edited");
         }
     }
 }

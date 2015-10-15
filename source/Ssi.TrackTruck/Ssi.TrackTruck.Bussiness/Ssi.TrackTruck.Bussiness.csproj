@@ -41,10 +41,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attendances\AttendanceService.cs" />
     <Compile Include="Auth\AuthService.cs" />
+    <Compile Include="Auth\ISignedInUser.cs" />
     <Compile Include="Auth\Pbkdf2Hasher.cs" />
     <Compile Include="Auth\IHasher.cs" />
     <Compile Include="Auth\Role.cs" />
@@ -54,36 +58,45 @@
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
-    <Compile Include="DAL\Clients\Client.cs" />
-    <Compile Include="DAL\Clients\Branch.cs" />
-    <Compile Include="DAL\Entities\Employee.cs" />
+    <Compile Include="DAL\Clients\DbClient.cs" />
+    <Compile Include="DAL\Clients\DbBranch.cs" />
+    <Compile Include="DAL\DbIndexBuilder.cs" />
+    <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
-    <Compile Include="DAL\Entities\ISoftDeletable.cs" />
+    <Compile Include="DAL\Entities\Entity.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
-    <Compile Include="DAL\Trips\DeliveryReceipt.cs" />
-    <Compile Include="DAL\Trips\Drop.cs" />
-    <Compile Include="DAL\Trips\Trip.cs" />
-    <Compile Include="DAL\Entities\Truck.cs" />
-    <Compile Include="DAL\Entities\Warehouse.cs" />
+    <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />
+    <Compile Include="DAL\Trips\DbTripDrop.cs" />
+    <Compile Include="DAL\Trips\DbTrip.cs" />
+    <Compile Include="DAL\Entities\DbTruck.cs" />
+    <Compile Include="DAL\Entities\DbWarehouse.cs" />
+    <Compile Include="DAL\Entities\DbDailyHit.cs" />
+    <Compile Include="Employees\AddEmployeeRequest.cs" />
+    <Compile Include="Employees\EditEmployeeRequest.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
-    <Compile Include="Models\UserListResponseItem.cs" />
-    <Compile Include="DAL\Entities\User.cs" />
+    <Compile Include="Models\ChangePasswordRequest.cs" />
+    <Compile Include="DAL\Users\DbUser.cs" />
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ListStorageRepository.cs" />
-    <Compile Include="Models\CreateUserRequest.cs" />
+    <Compile Include="Auth\AddUserRequest.cs" />
     <Compile Include="Models\SignInRequest.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trips\DeliveryReceiptRequest.cs" />
+    <Compile Include="Trips\DropReceiveRequest.cs" />
+    <Compile Include="Trips\ITripRepository.cs" />
     <Compile Include="Trips\TripDropRequest.cs" />
     <Compile Include="Trips\TripOrderRequest.cs" />
+    <Compile Include="Trips\TripMongoRepository.cs" />
+    <Compile Include="Trips\TripReportResponse.cs" />
     <Compile Include="Trips\TripService.cs" />
     <Compile Include="Trucks\AddTruckRequest.cs" />
+    <Compile Include="Trucks\EditTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
-    <Compile Include="Trucks\TruckStatusItem.cs" />
+    <Compile Include="Warehouses\AddWarehouseRequest.cs" />
     <Compile Include="Warehouses\WarehouseService.cs" />
   </ItemGroup>
   <ItemGroup>
