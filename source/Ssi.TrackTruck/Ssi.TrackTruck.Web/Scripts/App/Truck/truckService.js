@@ -1,21 +1,16 @@
 ﻿truckModule.factory('truckService', [
     'repository',
+    'buildIdMap',
     '$q',
     'employeeService',
     function truckService(repository
+        , buildIdMap
         , $q
         , employeeService) {
 
         var _trucks = [];
         var _trucksById = [];
         var _loadPromise = null;
-
-        function buildIdMap() {
-            _trucksById = {};
-            _trucks.forEach(function (truck) {
-                _trucksById[truck.Id] = truck;
-            });
-        }
 
         function calculateReportSummary(trucks) {
             var summary = {
@@ -68,8 +63,7 @@
 
                     _trucks.length = 0;
                     _trucks.push.apply(_trucks, trucks);
-
-                    buildIdMap();
+                    _trucksById = buildIdMap(_trucks);
 
                     return _trucks;
                 });
