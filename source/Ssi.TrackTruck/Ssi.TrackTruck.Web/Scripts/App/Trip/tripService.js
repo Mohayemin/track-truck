@@ -6,6 +6,7 @@
     'clientService',
     'employeeService',
     'truckService',
+    'collection',
     '$q',
     function tripService(
         repository
@@ -15,6 +16,7 @@
         , clientService
         , employeeService
         , truckService
+        , collection
         , $q
         ) {
         var _activeTrips = [];
@@ -88,6 +90,9 @@
                                     return (employeesById[hid] || {}).FullName;
                                 });
                                 trip.Truck = trucksById[trip.TruckId];
+                                trip.TotalNumberOfBoxes = collection.sum(drops, 'TotalBoxes');
+                                trip.RejectedNumberOfBoxes = collection.sum(drops, 'TotalRejectedBoxes');
+                                trip.DeliveredNumberOfBoxes = collection.sum(drops, 'TotalDeliveredBoxes');
                             });
 
                             return report.Trips;

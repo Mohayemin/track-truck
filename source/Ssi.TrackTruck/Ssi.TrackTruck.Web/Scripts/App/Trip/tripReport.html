@@ -33,7 +33,7 @@
                         Delivered Boxes
                     </th>
                     <th>
-                        Missing Boxes
+                        Rejected Boxes
                     </th>
                     <th>
                         Driver
@@ -52,8 +52,8 @@
                     <td ng-bind="row.ExpectedPickupTime | philDate"></td>
                     <td ng-bind="row.Route"></td>
                     <td ng-bind="row.TotalNumberOfBoxes"></td>
-                    <td ng-bind="row.DeliveredBoxes"></td>
-                    <td ng-bind="row.MissingBoxes"></td>
+                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
+                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
                     <td ng-bind="row.Driver.FullName"></td>
                     <td ng-bind="row.HelperNames"></td>
                     <td ng-bind="row.Truck.RegistrationNumber"></td>
