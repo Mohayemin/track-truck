@@ -14,46 +14,46 @@
     </form>
 
     <div>
-        <table class="table table-bordered table-responsive table-hover">
+        <table class="table table-bordered table-responsive table-hover" ts-wrapper>
             <thead>
                 <tr>
-                    <th>
+                    <th ts-criteria="Client.Name|lowercase">
                         Client
                     </th>
-                    <th>
+                    <th ts-criteria="ExpectedPickupTime">
                         Pickup Time
                     </th>
-                    <th>
+                    <th ts-criteria="Route|lowercase">
                         Route
                     </th>
-                    <th>
+                    <th ts-criteria="TotalNumberOfBoxes">
                         Total Boxes
                     </th>
-                    <th>
+                    <th ts-criteria="DeliveredNumberOfBoxes">
                         Delivered Boxes
                     </th>
-                    <th>
-                        Missing Boxes
+                    <th ts-criteria="RejectedNumberOfBoxes">
+                        Rejected Boxes
                     </th>
-                    <th>
+                    <th ts-criteria="Driver.FullName">
                         Driver
                     </th>
-                    <th>
+                    <th ts-criteria="HelperNames">
                         Helper
                     </th>
-                    <th>
+                    <th ts-criteria="Truck.RegistrationNumber">
                         Truck
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in reportRows">
+                <tr ng-repeat="row in reportRows" ts-repeat>
                     <td ng-bind="row.Client.Name"></td>
                     <td ng-bind="row.ExpectedPickupTime | philDate"></td>
                     <td ng-bind="row.Route"></td>
                     <td ng-bind="row.TotalNumberOfBoxes"></td>
-                    <td ng-bind="row.DeliveredBoxes"></td>
-                    <td ng-bind="row.MissingBoxes"></td>
+                    <td ng-bind="row.DeliveredNumberOfBoxes"></td>
+                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
                     <td ng-bind="row.Driver.FullName"></td>
                     <td ng-bind="row.HelperNames"></td>
                     <td ng-bind="row.Truck.RegistrationNumber"></td>
