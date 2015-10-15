@@ -88,7 +88,7 @@
                                 trip.Driver = employeesById[trip.DriverId];
                                 trip.HelperNames = trip.HelperIds.map(function(hid) {
                                     return (employeesById[hid] || {}).FullName;
-                                });
+                                }).join(', ');
                                 trip.Truck = trucksById[trip.TruckId];
                                 trip.TotalNumberOfBoxes = collection.sum(drops, 'TotalBoxes');
                                 trip.RejectedNumberOfBoxes = collection.sum(drops, 'TotalRejectedBoxes');
@@ -100,7 +100,7 @@
                                     return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
                                 });
 
-                                trip.Route = routeList.join(',');
+                                trip.Route = routeList.join(', ');
                             });
 
                             return report.Trips;
