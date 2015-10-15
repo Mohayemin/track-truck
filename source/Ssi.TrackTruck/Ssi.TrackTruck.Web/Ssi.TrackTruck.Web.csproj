@@ -130,6 +130,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap-superhero-override.css" />
     <Content Include="Content\css\bootstrap-superhero.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\tablesort.css" />
@@ -160,7 +162,12 @@
     <Content Include="Scripts\App\Auth\changePassword.html" />
     <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
+    <Content Include="Scripts\App\Navigation\navs.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
+    <Content Include="Scripts\App\Trip\tripReport.html" />
+    <Content Include="Scripts\App\Trip\tripReportController.js" />
+    <Content Include="Scripts\App\Truck\truckEdit.html" />
+    <Content Include="Scripts\App\Truck\truckEditController.js" />
     <Content Include="Scripts\App\Truck\truckForm.html" />
     <Content Include="Scripts\App\Trip\tripTransactionController.js" />
     <Content Include="Scripts\App\Truck\truckList.html" />
@@ -190,11 +197,13 @@
     <Content Include="Scripts\App\Warehouse\warehouseList.html" />
     <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
     <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
+    <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
     <Content Include="Scripts\SignIn\signInService.js" />
+    <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\deleteButton.html" />
@@ -203,6 +212,7 @@
     <Content Include="Scripts\Util\editButtonDirective.js" />
     <Content Include="Scripts\Util\globalMessageDirective.js" />
     <Content Include="Scripts\Util\buildIdMap.js" />
+    <Content Include="Scripts\Util\philippineDateFilter.js" />
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
     <Content Include="Scripts\App\1.appModule.js" />
@@ -226,8 +236,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Page\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +278,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Page\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -279,8 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Attendance\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ssi.TrackTruck.Bussiness\Ssi.TrackTruck.Bussiness.csproj">

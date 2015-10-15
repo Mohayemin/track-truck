@@ -2,16 +2,26 @@
     'repository',
     'signedInUser',
     'buildIdMap',
+    '_',
+    'clientService',
+    'employeeService',
+    'truckService',
+    '$q',
     function tripService(
         repository
         , signedInUser
         , buildIdMap
+        , _
+        , clientService
+        , employeeService
+        , truckService
+        , $q
         ) {
         var _activeTrips = [];
         var _tripById = {};
 
         var _loadActivePromise;
-        
+
         var service = {
             getAllActive: function () {
                 if (!_loadActivePromise) {
@@ -37,13 +47,51 @@
 
                 return repository.post('Trip', 'Order', foramtterRequest);
             },
-            getMyTrips: function () {
-                return service.getAllActive().then(function() {
-                    return repository.get('Trip', 'MyActiveIds').then(function (tripIds) {
-                        return tripIds.map(function(tripId) {
-                            return _tripById[tripId];
+            getMyActiveDrops: function () {
+                return service.getAllActive().then(function () {
+                    return repository.get('Trip', 'MyActiveDrops');
+                });
+            },
+            receiveDrop: function (drop) {
+                var formattedRequest = {
+                    DropId: drop.Id,
+                    DeliveryRejections: {}
+                };
+
+                drop.DeliveryReceipts.forEach(function (dr) {
+                    formattedRequest.DeliveryRejections[dr.Id] = dr.RejectedNumberOfBoxes;
+                });
+
+                return repository.post('Trip', 'Receive', formattedRequest).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message);
+                    }
+                    return response;
+                });
+            },
+            getReport: function (filter) {
+                return repository.post('Trip', 'Report', filter).then(function (report) {
+                    return $q.all([clientService.getIndexedClients()
+                        , employeeService.getIndexedEmployees()
+                        , truckService.getIndexedTrucks()
+                    , truckService])
+                        .then(function (lists) {
+                            var clientsById = lists[0];
+                            var employeesById = lists[1];
+                            var trucksById = lists[2];
+
+                            report.Trips.forEach(function (trip) {
+                                var drops = _.where(report.Drops, { TripId: trip.Id });
+                                trip.Client = clientsById[trip.ClientId];
+                                trip.Driver = employeesById[trip.DriverId];
+                                trip.HelperNames = trip.HelperIds.map(function(hid) {
+                                    return (employeesById[hid] || {}).FullName;
+                                });
+                                trip.Truck = trucksById[trip.TruckId];
+                            });
+
+                            return report.Trips;
                         });
-                    });
                 });
             }
         };
