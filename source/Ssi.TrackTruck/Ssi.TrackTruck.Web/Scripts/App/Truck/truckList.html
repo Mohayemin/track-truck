@@ -16,6 +16,7 @@
                 <th ts-criteria="RegistrationNumber|lowercase">Registration Number</th>
                 <th ts-criteria="DriverName|lowercase">Driver</th>
                 <th ts-criteria="HelperName|lowercase">Helper</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,10 @@
                 <td ng-bind="truck.RegistrationNumber"></td>
                 <td ng-bind="truck.DriverName"></td>
                 <td ng-bind="truck.HelperName"></td>
+                <td>
+                    <edit-button module="'truck'" model="truck"></edit-button>
+                    <delete-button controller="'Truck'" list="trucks" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>

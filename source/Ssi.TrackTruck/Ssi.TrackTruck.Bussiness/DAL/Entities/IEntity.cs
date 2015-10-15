@@ -7,5 +7,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         string Id { get; set; }
         bool IsDeleted { get; set; }
         DateTime CreationTime { get; set; }
+        string CreatorId { get; set; }
     }
 }

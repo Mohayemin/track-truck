@@ -6,10 +6,6 @@
                title="add a warehouse">
                 <i class="fa fa-lg fa-plus"></i>
             </a>
-            <a ng-click="loadWarehouses()" class="btn btn-default btn-sm"
-                    title="refresh Warehouses' list">
-                <i class="fa fa-lg fa-refresh"></i>
-            </a>
         </label>
     </h3>
 
@@ -18,6 +14,7 @@
             <tr>
                 <th ts-criteria="Name|lowercase">Name</th>
                 <th ts-criteria="Address|parseInt">Address</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +23,9 @@
                     <a ng-href="{{url.route('warehouse', warehouse.Id)}}" ng-bind="warehouse.Name"></a>
                 </td>
                 <td ng-bind="warehouse.Address"></td>
+                <td>
+                    <delete-button controller="'Warehouse'" list="warehouses" index="$index"></delete-button>
+                </td>
             </tr>
         </tbody>
     </table>

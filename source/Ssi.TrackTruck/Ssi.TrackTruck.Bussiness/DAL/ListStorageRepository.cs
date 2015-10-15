@@ -27,6 +27,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return item;
         }
 
+        public void CreateAll<T>(IEnumerable<T> items) where T : IEntity
+        {
+            List<T>().AddRange(items);
+        }
+
         public IQueryable<T> GetAll<T>()
         {
             return Query<T>();
@@ -48,7 +53,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             return GetAll<T>();
         }
 
-        public bool Exists<T>(Expression<Func<T, bool>> condition)
+        public bool Exists<T>(Expression<Func<T, bool>> condition) where T : IEntity
         {
             return Query<T>().Any(condition);
         }

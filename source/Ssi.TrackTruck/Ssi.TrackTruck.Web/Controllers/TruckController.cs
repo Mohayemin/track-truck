@@ -12,13 +12,6 @@ namespace Ssi.TrackTruck.Web.Controllers
             _truckService = truckService;
         }
         
-        public ActionResult GetCurrentStatus()
-        {
-            var data = _truckService.GetCurrentStatus();
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpGet]
         public ActionResult All()
         {
@@ -29,6 +22,20 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Add(AddTruckRequest request)
         {
             return Json(_truckService.Add(request));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var response = _truckService.Delete(id);
+            return Json(response);
+        }
+
+        [HttpPost]
+        public ActionResult Save(EditTruckRequest request)
+        {
+            var response = _truckService.Save(request);
+            return Json(response);
         }
     }
 }

@@ -21,9 +21,23 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(DbEmployee request)
+        public ActionResult Add(AddEmployeeRequest request)
         {
             var response = _employeeService.Add(request);
+            return Json(response);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            var response = _employeeService.Delete(id);
+            return Json(response);
+        }
+
+        [HttpPost]
+        public ActionResult Save(EditEmployeeRequest request)
+        {
+            var response = _employeeService.Save(request);
             return Json(response);
         }
 	}

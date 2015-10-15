@@ -54,9 +54,9 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             var client = _repository.SoftDelete<DbClient>(id);
             if (client != null)
             {
-                return Response.Success();
+                return Response.Success(null, "Successfully deleted");
             }
-            return Response.Error("", string.Format("Client with id '{0}' does not exist", id));
+            return Response.Error("", string.Format("The client you tried to delete does not exist"));
         }
 
         public DbClient GetClient(string clientId)
