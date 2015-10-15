@@ -1,0 +1,296 @@
+﻿
+<div>
+    <form ng-submit="order()" class="form-horizontal">
+        <fieldset>
+            <legend>
+                <span class="col-sm-offset-2">Order a trip</span>
+            </legend>
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Client</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.Client" ng-required="true"
+                                        ng-options="client.Name for client in clients"
+                                        class="form-control">
+                                    <option value=""> -- Choose Client -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Ticket Number</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.TripTicketNumber" required
+                                       type="text" placeholder="Trip Ticket Number"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Pickup Point</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.PickupAddress" ng-required="true"
+                                        ng-options="address for address in request.Client.Addresses"
+                                        class="form-control">
+                                    <option value=""> -- Choose Pickup Point -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Pickup Time</label>
+                            <div class="col-sm-10">
+                                <datetime model="request.ExpectedPickupTime" required="true" options="{sm: true}"></datetime>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <fieldset ng-disabled="!request.Client">
+                    <div ng-repeat="drop in request.Drops">
+                        <hr class="no-margin-top" />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-2 control-label">Branch</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="drop.BranchId" ng-required="true"
+                                                ng-options="branch.Id as branch.Name for branch in request.Client.Branches"
+                                                class="form-control">
+                                            <option value=""> -- Choose Branch -- </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-2 control-label">Drop Time</label>
+                                    <div class="col-sm-10">
+                                        <datetime model="drop.ExpectedDropTime" required="true" options="{sm: true}"></datetime>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div ng-repeat="dr in drop.DeliveryReceipts" class="form-group form-group-sm">
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-2 control-label">DR <span ng-bind="$index+1"></span></label>
+                                    <div class="col-sm-10">
+                                        <input ng-model="dr.DrNumber" ng-required="true"
+                                               type="text" min="0" placeholder="DR Number"
+                                               class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-2 control-label">Boxes</label>
+                                    <div class="col-sm-10">
+                                        <div ng-class="{'input-group input-group-sm': $last}">
+                                            <input ng-model="dr.NumberOfBoxes" ng-required="true"
+                                                   type="number" min="1" placeholder="Number of Boxes"
+                                                   class="form-control" />
+                                            <span class="input-group-btn" ng-if="$last">
+                                                <button type="button" class="btn btn-primary" ng-click="addDr(drop)">
+                                                    <i class="fa fa-lg fa-plus"></i> Add DR
+                                                </button>
+                                            </span>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <hr class="no-margin-top" />
+                        <label class="col-sm-2 control-label">Total <span ng-bind="request.Drops.length"></span> drop(s)</label>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-info btn-sm" ng-click="addDrop()">
+                                <i class="fa fa-plus"></i>
+                                Add Another Drop
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="well">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Truck</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.Truck" ng-required="true"
+                                        ng-options="truck as truck.RegistrationNumber for truck in trucks"
+                                        class="form-control">
+                                    <option value=""> -- Choose Truck -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Fuel</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.FuelCost" required
+                                       type="number" min="0" placeholder="Fuel Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Toll</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.TollCost" required
+                                       type="number" min="0" placeholder="Toll Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Parking</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.ParkingCost" required
+                                       type="number" min="0" placeholder="Parking Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Barge</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.BargeCost" required
+                                       type="number" min="0" placeholder="Barge Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Bundle</label>
+                            <div class="col-sm-10">
+                                <input ng-model="request.BundleCost" required
+                                       type="number" min="0" placeholder="Bundle Cost"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">1st Helper</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.HelperIds[0]" ng-required="true"
+                                        ng-options="helper.Id as helper.FullName for helper in helpers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Helper -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">2nd Helper</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.HelperIds[1]"
+                                        ng-options="helper.Id as helper.FullName for helper in helpers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Helper -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">3rd Helper</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.HelperIds[2]"
+                                        ng-options="helper.Id as helper.FullName for helper in helpers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Helper -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <div class="col-xs-6">
+                                <input ng-model="request.HelperAllowance" ng-required="true"
+                                       type="number" min="0" placeholder="Helper's Allowance"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-xs-6">
+                                <input ng-model="request.HelperSalary" ng-required="true"
+                                       type="number" min="0" placeholder="Helper's Salary"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Driver</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.DriverId" ng-required="true"
+                                        ng-options="driver.Id as driver.FullName for driver in drivers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Driver -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <div class="col-xs-6">
+                                <input ng-model="request.DriverAllowance" ng-required="true"
+                                       type="number" min="0" placeholder="Driver's Allowance"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-xs-6">
+                                <input ng-model="request.DriverSalary" ng-required="true"
+                                       type="number" min="0" placeholder="Driver's Salary"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-2 control-label">Released By</label>
+                            <div class="col-sm-10">
+                                <select ng-model="request.SupervisorId" ng-required="true"
+                                        ng-options="supervisor.Id as supervisor.FullName for supervisor in supervisors"
+                                        class="form-control">
+                                    <option value=""> -- Choose Released By -- </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input class="btn btn-success btn-block" type="submit" value="Put Order" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
