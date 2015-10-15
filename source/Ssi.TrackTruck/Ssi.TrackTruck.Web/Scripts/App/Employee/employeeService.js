@@ -1,21 +1,16 @@
 ﻿employeeModule.factory('employeeService', [
     'repository',
+    'buildIdMap',
     '$q',
     '_',
     function employeeService(
         repository,
+        buildIdMap,
         $q,
         _) {
         var _employees = [];
         var _employeeById = {};
         var _loadPromise = null;
-
-        function buildIdMap() {
-            _employeeById = {};
-            _employees.forEach(function (employee) {
-                _employeeById[employee.Id] = employee;
-            });
-        }
 
         var service = {
             getAllByDesignation: function(designation) {
@@ -28,8 +23,7 @@
                     _loadPromise = repository.get('Employee', 'All').then(function (employees) {
                         _employees.length = 0;
                         _employees.push.apply(_employees, employees);
-
-                        buildIdMap();
+                        _employeeById = buildIdMap(_employees);
 
                         return _employees;
                     });
