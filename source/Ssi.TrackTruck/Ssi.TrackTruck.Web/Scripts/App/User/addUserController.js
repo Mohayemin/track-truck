@@ -22,10 +22,13 @@
             InitialPassword: userService.generateInitialPassword()
         };
 
-        $scope.isUsernameReadonly = true;
+        $scope.User = {
+            isUsernameReadonly: true,
+            isEditing: false
+        };
 
         $scope.setUsername = function() {
-            if ($scope.isUsernameReadonly) {
+            if ($scope.User.isUsernameReadonly) {
                 $scope.request.Username = ($scope.request.FirstName || '') +
                 ($scope.request.LastName || '');
             }
