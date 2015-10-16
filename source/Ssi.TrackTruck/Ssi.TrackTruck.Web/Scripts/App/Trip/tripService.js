@@ -19,26 +19,8 @@
         , collection
         , $q
         ) {
-        var _activeTrips = [];
-        var _tripById = {};
-
-        var _loadActivePromise;
-
+        
         var service = {
-            getAllActive: function () {
-                if (!_loadActivePromise) {
-                    _loadActivePromise = repository.get('Trip', 'Active').then(function (trips) {
-                        _activeTrips.length = 0;
-                        _activeTrips.push.apply(_activeTrips, trips);
-
-                        _tripById = buildIdMap(_activeTrips);
-
-                        return _activeTrips;
-                    });
-                }
-
-                return _loadActivePromise;
-            },
             orderTrip: function (request) {
                 var foramtterRequest = angular.extend({}, request);
 
@@ -50,9 +32,7 @@
                 return repository.post('Trip', 'Order', foramtterRequest);
             },
             getMyActiveDrops: function () {
-                return service.getAllActive().then(function () {
-                    return repository.get('Trip', 'MyActiveDrops');
-                });
+                return repository.get('Trip', 'MyActiveDrops');
             },
             receiveDrop: function (drop) {
                 var formattedRequest = {
@@ -86,7 +66,7 @@
                                 var drops = _.where(report.Drops, { TripId: trip.Id });
                                 trip.Client = clientsById[trip.ClientId];
                                 trip.Driver = employeesById[trip.DriverId];
-                                trip.HelperNames = trip.HelperIds.map(function(hid) {
+                                trip.HelperNames = trip.HelperIds.map(function (hid) {
                                     return (employeesById[hid] || {}).FullName;
                                 }).join(', ');
                                 trip.Truck = trucksById[trip.TruckId];
@@ -96,7 +76,7 @@
 
                                 var routeList = [trip.PickupAddress];
 
-                                drops.forEach(function(drop) {
+                                drops.forEach(function (drop) {
                                     return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
                                 });
 

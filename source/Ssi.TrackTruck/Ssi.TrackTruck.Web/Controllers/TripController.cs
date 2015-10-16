@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Trips;
+using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web.Controllers
@@ -14,13 +16,9 @@ namespace Ssi.TrackTruck.Web.Controllers
             _tripService = tripService;
         }
 
-        public ActionResult All()
-        {
-            return Json(_tripService.GetAll(), JsonRequestBehavior.AllowGet);
-        }
-
         [ValidateModel]
         [HttpPost]
+        [AllowedRoles(Role.Encoder)]
         public ActionResult Order(TripOrderRequest orderRequest)
         {
             var trip = _tripService.AddTrip(orderRequest);
@@ -29,14 +27,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Active()
-        {
-            var activeTrips = _tripService.GetActiveTrips();
-
-            return new JsonNetResult(activeTrips);
-        }
-
-        [HttpGet]
+        [AllowedRoles(Role.BranchCustodian)]
         public ActionResult MyActiveDrops()
         {
             var myActiveDrops = _tripService.GetMyActiveDrops();
@@ -45,6 +36,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
+        [AllowedRoles(Role.BranchCustodian)]
         public ActionResult Receive(DropReceiveRequest request)
         {
             var response = _tripService.ReceiveDrop(request);
@@ -52,6 +44,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
+        [AllowedRoles(Role.Admin)]
         public ActionResult Report(DateTimeModel fromDate, DateTimeModel toDate)
         {
             var report = _tripService.GetReport(fromDate, toDate);
