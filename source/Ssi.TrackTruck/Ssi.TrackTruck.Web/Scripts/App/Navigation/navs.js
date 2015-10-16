@@ -31,10 +31,6 @@
                     iconClass: 'fa fa-fw fa-lg fa-shopping-cart',
                     text: 'Clients'
                 }, {
-                    url: url.route('warehouse', 'list'),
-                    iconClass: 'fa fa-fw fa-lg fa-home',
-                    text: '3PW'
-                }, {
                     url: url.route('user', 'list'),
                     iconClass: 'fa fa-fw fa-lg fa-user',
                     text: 'Users'
