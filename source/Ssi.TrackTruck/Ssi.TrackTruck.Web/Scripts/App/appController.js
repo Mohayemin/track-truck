@@ -5,8 +5,8 @@
     'pageTitle',
     function (
         $scope
-        , url
         , userRoles
+        , url
         , pageTitle) {
         $scope.url = url;
         $scope.roles = userRoles;
