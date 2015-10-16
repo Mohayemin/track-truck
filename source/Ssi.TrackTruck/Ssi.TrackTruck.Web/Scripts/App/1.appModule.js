@@ -7,7 +7,6 @@
     'client',
     'trip',
     'employee',
-    'warehouse',
     'user',
     'auth',
     'ui.bootstrap',
