@@ -8,6 +8,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Clients
         public string Name { get; set; }
         public int TrucksPerDay { get; set; }
         public IEnumerable<DbBranch> Branches { get; set; }
-        public List<string> Addresses { get; set; }
+        public List<DbTextItem> Addresses { get; set; }
     }
 }
