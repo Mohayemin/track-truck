@@ -19,7 +19,7 @@
         function addRoute(module) {
             var cappedModule = capitalizeFirstLetter(module);
             return {
-                id: module.toLowerCase() + 'add',
+                id: module + 'add',
                 title: 'Add ' + module,
                 templateUrl: urlProvider.template(module, 'add' + cappedModule),
                 controller: 'add' + cappedModule + 'Controller',
@@ -39,7 +39,7 @@
 
         function editRoute(module) {
             return {
-                id: module + 'Edit',
+                id: module + 'edit',
                 title: 'Edit ' + module,
                 templateUrl: urlProvider.template(module, module + 'Edit'),
                 controller: module + 'EditController',
@@ -60,8 +60,8 @@
                 templateUrl: urlProvider.template('', 'home'),
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail', 'clientdetail', 'Client Detail'))
-            .when('/trip/order', defaultRoute('trip', 'orderTrip', 'ordertrip', 'Order a Trip'))
-            .when('/trip/transactions', defaultRoute('trip', 'tripTransaction', 'triptransaction', 'Upcoming Transactions'))
+            .when('/trip/order', defaultRoute('trip', 'orderTrip', 'triporder', 'Order a Trip'))
+            .when('/trip/transactions', defaultRoute('trip', 'tripTransaction', 'triptransactions', 'Upcoming Transactions'))
             .when('/trip/report', defaultRoute('trip', 'tripReport', 'tripreport', 'Trip Report'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword', 'changepassword', 'Change Password'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport', 'attendancereport', 'Attendance Report'))
