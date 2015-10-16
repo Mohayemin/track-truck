@@ -77,7 +77,7 @@
             add: add,
             getAll: getAll,
             get: function(id) {
-                return _loadPromise.then(function() {
+                return getAll().then(function () {
                     return _.find(_trucks, { Id: id });
                 });
             },
