@@ -196,6 +196,9 @@
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
     <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
+    <Content Include="Content\css\ng-tags-input.bootstrap.css" />
+    <Content Include="Content\css\ng-tags-input.css" />
+    <Content Include="Scripts\Lib\ng-tags-input.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
