@@ -10,7 +10,7 @@ authModule.directive('allowedRoles', [
             link: function (scope, element) {
                 var roles = scope.allowedRoles;
                 if (!angular.isDefined(roles)) {
-                    roles = [];
+                    return;
                 }
 
                 if (!Array.isArray(roles)) {
