@@ -6,7 +6,7 @@
             'signedInUser',
             function (
                 url
-                , userRoles
+                , roles
                 , signedInUser) {
                 var newTripGroup = {
                     text: 'New Order Trip',
@@ -14,17 +14,19 @@
                         {
                             url: url.route('trip', 'order'),
                             iconClass: 'fa fa-fw fa-lg fa-plus',
-                            text: 'New Trip'
+                            text: 'New Trip',
+                            roles: [roles.encoder]
                         }, {
                             url: url.route('trip', 'transactions'),
                             iconClass: 'fa fa-fw fa-lg fa-cubes',
-                            text: 'Transactions'
+                            text: 'Transactions',
+                            roles: [roles.admin, roles.branchCustodian]
                         }
                     ]
                 };
                 var databaseGroup = {
                     text: 'Database',
-                    roles: [userRoles.admin],
+                    roles: [roles.admin],
                     navs: [
                         {
                             url: url.route('employee', 'list'),
@@ -51,6 +53,7 @@
                 };
                 var reportsGroup = {
                     text: 'Reports',
+                    roles: [roles.admin],
                     navs: [
                         {
                             url: url.route('trip', 'report'),
