@@ -1,0 +1,65 @@
+﻿<div>
+    <page-title></page-title>
+    <form ng-submit="loadReport()" class="form-horizontal">
+        <div class="col-sm-5">
+            <datetime model="filter.fromDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-5">
+            <datetime model="filter.toDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <button type="submit" class="btn btn-default btn-block">Load</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table class="table table-bordered table-responsive table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="Client.Name|lowercase">
+                        Client
+                    </th>
+                    <th ts-criteria="ExpectedPickupTime">
+                        Pickup Time
+                    </th>
+                    <th ts-criteria="Route|lowercase">
+                        Route
+                    </th>
+                    <th ts-criteria="TotalNumberOfBoxes">
+                        Total Boxes
+                    </th>
+                    <th ts-criteria="DeliveredNumberOfBoxes">
+                        Delivered Boxes
+                    </th>
+                    <th ts-criteria="RejectedNumberOfBoxes">
+                        Rejected Boxes
+                    </th>
+                    <th ts-criteria="Driver.FullName">
+                        Driver
+                    </th>
+                    <th ts-criteria="HelperNames">
+                        Helper
+                    </th>
+                    <th ts-criteria="Truck.RegistrationNumber">
+                        Truck
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in reportRows" ts-repeat>
+                    <td ng-bind="row.Client.Name"></td>
+                    <td ng-bind="row.ExpectedPickupTime | philDate"></td>
+                    <td ng-bind="row.Route"></td>
+                    <td ng-bind="row.TotalNumberOfBoxes"></td>
+                    <td ng-bind="row.DeliveredNumberOfBoxes"></td>
+                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
+                    <td ng-bind="row.Driver.FullName"></td>
+                    <td ng-bind="row.HelperNames"></td>
+                    <td ng-bind="row.Truck.RegistrationNumber"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
