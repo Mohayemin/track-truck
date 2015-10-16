@@ -27,18 +27,11 @@ namespace Ssi.TrackTruck.Bussiness.Clients
                 return Response.DuplicacyError("Client with same name already exists");
             }
             
-            var branches = request.Branches.Select(b => b.ToBranch());
+            var dbClient = request.ToDbClient();
 
-            var client = new DbClient
-            {
-                Name = request.Name,
-                TrucksPerDay = request.TrucksPerDay,
-                Branches = branches
-            };
+            _repository.Create(dbClient);
 
-            _repository.Create(client);
-
-            return Response.Success(client);
+            return Response.Success(dbClient);
         }
 
         private bool ClientNameIsDuplicate(AddClientRequest request)
