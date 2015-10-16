@@ -19,7 +19,7 @@ authModule.factory('userRoles', [
             map: map,
             admin: 1,
             branchCustodian: 2,
-            Encoder: 5
+            encoder: 4
         };
     }
 ]);
