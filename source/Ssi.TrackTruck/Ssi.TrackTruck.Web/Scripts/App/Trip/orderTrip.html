@@ -30,8 +30,8 @@
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Pickup Point</label>
                             <div class="col-sm-10">
-                                <select ng-model="request.PickupAddress" ng-required="true"
-                                        ng-options="address for address in request.Client.Addresses"
+                                <select ng-model="request.PickupAddressId" ng-required="true"
+                                        ng-options="address.Id as address.Text for address in request.Client.Addresses"
                                         class="form-control">
                                     <option value=""> -- Choose Pickup Point -- </option>
                                 </select>
