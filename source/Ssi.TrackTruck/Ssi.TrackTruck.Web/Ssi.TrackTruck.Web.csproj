@@ -174,6 +174,8 @@
     <Content Include="Scripts\App\Truck\truckListController.js" />
     <Content Include="Scripts\App\User\addUser.html" />
     <Content Include="Scripts\App\User\addUserController.js" />
+    <Content Include="Scripts\App\User\userEdit.html" />
+    <Content Include="Scripts\App\User\userEditController.js" />
     <Content Include="Scripts\App\User\userForm.html" />
     <Content Include="Scripts\App\User\userList.html" />
     <Content Include="Scripts\App\User\userListController.js" />
@@ -203,6 +205,8 @@
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
     <Content Include="Scripts\SignIn\signInService.js" />
+    <Content Include="Scripts\Util\addButton.html" />
+    <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
