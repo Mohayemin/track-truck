@@ -34,5 +34,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _authService.Delete(id, User.Identity.Name);
             return Json(response);
         }
+
+        [HttpPost]
+        public ActionResult Save(EditUserRequest request)
+        {
+            var response = _authService.Save(request);
+            return Json(response);
+        }
 	}
 }
