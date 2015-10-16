@@ -1,14 +1,8 @@
 ﻿<div>
-    <h3>
-        List of Users
-
-        <label class="btn-group btn-group-sm pull-right">
-            <a ng-href="{{url.route('user', 'add')}}" class="btn btn-default"
-               title="add a user">
-                <i class="fa fa-lg fa-plus"></i>
-            </a>
-        </label>
-    </h3>
+    <page-title>
+        <add-button module="'user'"></add-button>
+    </page-title>
+    
     <table class="table table-hover table-bordered table-responsive" ts-wrapper>
         <thead>
             <tr>
@@ -26,6 +20,7 @@
                 <td ng-bind="user.Username"></td>
                 <td ng-bind="roleMap[user.Role]"></td>
                 <td>
+                    <edit-button module="'user'" model="user"></edit-button>
                     <delete-button controller="'User'" list="users" index="$index"></delete-button>
                 </td>
             </tr>

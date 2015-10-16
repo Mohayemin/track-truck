@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Clients;
+using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web.Controllers
@@ -14,6 +16,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
+        [AllowedRoles(Role.Admin, Role.BranchCustodian, Role.Encoder)]
         public ActionResult All()
         {
             return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);
@@ -21,6 +24,7 @@ namespace Ssi.TrackTruck.Web.Controllers
 
         [ValidateModel]
         [HttpPost]
+        [AllowedRoles(Role.Admin)]
         public ActionResult Add(AddClientRequest request)
         {
             var response = _clientService.Add(request);
@@ -28,6 +32,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
+        [AllowedRoles(Role.Admin)]
         public ActionResult Delete(string id)
         {
             var response = _clientService.Delete(id);

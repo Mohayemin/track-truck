@@ -19,5 +19,12 @@ namespace Ssi.TrackTruck.Web.Utils
                 return _httpContext.User.Identity.Name;
             }
         }
+
+        public bool IsSignedIn {
+            get
+            {
+                return _httpContext.User.Identity.IsAuthenticated;
+            }
+        }
     }
 }

@@ -12,26 +12,28 @@
         var _employeeById = {};
         var _loadPromise = null;
 
+        function getAll(force) {
+            if (!_loadPromise || force) {
+                _loadPromise = repository.get('Employee', 'All').then(function (employees) {
+                    _employees.length = 0;
+                    _employees.push.apply(_employees, employees);
+                    _employeeById = buildIdMap(_employees);
+
+                    return _employees;
+                });
+            }
+            return _loadPromise;
+        }
+
         var service = {
             getAllByDesignation: function(designation) {
                 return service.getAll().then(function() {
                     return _.where(_employees, { Designation: designation });
                 });
             },
-            getAll: function (force) {
-                if (!_loadPromise || force) {
-                    _loadPromise = repository.get('Employee', 'All').then(function (employees) {
-                        _employees.length = 0;
-                        _employees.push.apply(_employees, employees);
-                        _employeeById = buildIdMap(_employees);
-
-                        return _employees;
-                    });
-                }
-                return _loadPromise;
-            },
+            getAll: getAll,
             get: function (id) {
-                return _loadPromise.then(function () {
+                return getAll().then(function () {
                     return _.find(_employees, { Id: id });
                 });
             },

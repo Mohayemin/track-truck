@@ -16,17 +16,30 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string BranchId { get; set; }
         public DateTime ExpectedDropTime { get; set; }
         public IList<DbDeliveryReceipt> DeliveryReceipts { get; set; }
-
-        public int TotalBoxes
-        {
-            get
-            {
-                return DeliveryReceipts != null ? DeliveryReceipts.Sum(receipt => receipt.NumberOfBoxes) : 0;
-            }
-        }
-
         public bool IsReceived { get; set; }
         public DateTime? ActualDropTime { get; set; }
         public string ReceiverUserId { get; set; }
+
+        public DbTripDrop()
+        {
+            DeliveryReceipts = new List<DbDeliveryReceipt>();
+        }
+
+        [BsonIgnore]
+        public int TotalBoxes
+        {
+            get { return DeliveryReceipts.Sum(receipt => receipt.NumberOfBoxes); }
+        }
+
+        [BsonIgnore]
+        public int TotalRejectedBoxes
+        {
+            get { return IsReceived ? DeliveryReceipts.Sum(receipt => receipt.RejectedNumberOfBoxes) : 0; }
+        }
+
+        public int TotalDeliveredBoxes
+        {
+            get { return IsReceived ? TotalBoxes - TotalRejectedBoxes : 0; }
+        }
     }
 }
