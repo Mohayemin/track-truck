@@ -56,7 +56,8 @@
 
         $routeProvider
             .when('/', {
-                templateUrl: urlProvider.template('', 'home')
+                title: 'Home',
+                templateUrl: urlProvider.template('', 'home'),
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail', 'clientdetail', 'Client Detail'))
             .when('/trip/order', defaultRoute('trip', 'orderTrip', 'ordertrip', 'Order a Trip'))
