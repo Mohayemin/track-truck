@@ -194,12 +194,6 @@
     <Content Include="Scripts\App\Trip\orderTrip.html" />
     <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
-    <Content Include="Scripts\App\Warehouse\addWarehouse.html" />
-    <Content Include="Scripts\App\Warehouse\addWarehouseController.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseForm.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseList.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
-    <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
     <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
@@ -233,7 +227,6 @@
     <Content Include="Scripts\App\Truck\truckStatusReportController.js" />
     <Content Include="Scripts\Util\url.js" />
     <Content Include="Scripts\Util\1.utilModule.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseService.js" />
     <Content Include="Scripts\Lib\angular-route.js" />
     <Content Include="Scripts\Lib\angular-tablesort.js" />
     <Content Include="Scripts\Lib\angular.js" />
