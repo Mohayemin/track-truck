@@ -1,0 +1,29 @@
+﻿<div>
+    <page-title>
+        <add-button module="'user'"></add-button>
+    </page-title>
+    
+    <table class="table table-hover table-bordered table-responsive" ts-wrapper>
+        <thead>
+            <tr>
+                <th ts-criteria="FirstName|lowercase">First Name</th>
+                <th ts-criteria="LastName|lowercase">Last Name</th>
+                <th ts-criteria="Username|lowercase">Username</th>
+                <th ts-criteria="Role|lowercase">Roles</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users" ts-repeat>
+                <td ng-bind="user.FirstName"></td>
+                <td ng-bind="user.LastName"></td>
+                <td ng-bind="user.Username"></td>
+                <td ng-bind="roleMap[user.Role]"></td>
+                <td>
+                    <edit-button module="'user'" model="user"></edit-button>
+                    <delete-button controller="'User'" list="users" index="$index"></delete-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
