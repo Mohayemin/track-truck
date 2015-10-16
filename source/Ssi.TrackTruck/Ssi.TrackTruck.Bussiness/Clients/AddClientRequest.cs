@@ -48,7 +48,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
             if (Addresses.Any())
             {
-                var addresses = Addresses.Select(item => item.Value).ToList();
+                var addresses = Addresses.Select(item => item.Text).ToList();
                 var addressDuplicate = addresses.Distinct().Count() != addresses.Count();
                 if (addressDuplicate)
                 {

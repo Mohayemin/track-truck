@@ -7,7 +7,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Value { get; set; }
+        public string Text { get; set; }
         public bool IsDeleted { get; set; }
 
         public DbTextItem()
