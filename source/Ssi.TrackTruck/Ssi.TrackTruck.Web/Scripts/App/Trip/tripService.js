@@ -74,7 +74,8 @@
                                 trip.RejectedNumberOfBoxes = collection.sum(drops, 'TotalRejectedBoxes');
                                 trip.DeliveredNumberOfBoxes = collection.sum(drops, 'TotalDeliveredBoxes');
 
-                                var routeList = [trip.PickupAddress];
+                                var pickupAddress = _.find(trip.Client.Addresses, { Id: trip.PickupAddressId });
+                                var routeList = [pickupAddress.Text];
 
                                 drops.forEach(function (drop) {
                                     return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
