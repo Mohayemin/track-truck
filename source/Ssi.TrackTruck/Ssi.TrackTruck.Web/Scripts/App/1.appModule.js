@@ -11,6 +11,7 @@
     'auth',
     'ui.bootstrap',
     'tableSort',
+    'ngTagsInput',
     'ngRoute']);
 
 appModule.config([
