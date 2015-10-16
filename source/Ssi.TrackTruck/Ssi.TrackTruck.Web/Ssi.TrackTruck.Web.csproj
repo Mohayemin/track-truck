@@ -145,6 +145,7 @@
     <Content Include="Scripts\App\Attendance\attendanceReportController.js" />
     <Content Include="Scripts\App\Attendance\attendanceService.js" />
     <Content Include="Scripts\App\Auth\1.authModule.js" />
+    <Content Include="Scripts\App\Auth\allowedRolesDirective.js" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\signedInUser.js" />
     <Content Include="Scripts\App\Auth\userRoles.js" />
@@ -174,6 +175,8 @@
     <Content Include="Scripts\App\Truck\truckListController.js" />
     <Content Include="Scripts\App\User\addUser.html" />
     <Content Include="Scripts\App\User\addUserController.js" />
+    <Content Include="Scripts\App\User\userEdit.html" />
+    <Content Include="Scripts\App\User\userEditController.js" />
     <Content Include="Scripts\App\User\userForm.html" />
     <Content Include="Scripts\App\User\userList.html" />
     <Content Include="Scripts\App\User\userListController.js" />
@@ -191,18 +194,14 @@
     <Content Include="Scripts\App\Trip\orderTrip.html" />
     <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
-    <Content Include="Scripts\App\Warehouse\addWarehouse.html" />
-    <Content Include="Scripts\App\Warehouse\addWarehouseController.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseForm.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseList.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
-    <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
     <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
     <Content Include="Scripts\SignIn\signInService.js" />
+    <Content Include="Scripts\Util\addButton.html" />
+    <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
@@ -212,6 +211,9 @@
     <Content Include="Scripts\Util\editButtonDirective.js" />
     <Content Include="Scripts\Util\globalMessageDirective.js" />
     <Content Include="Scripts\Util\buildIdMap.js" />
+    <Content Include="Scripts\Util\pageTitle.html" />
+    <Content Include="Scripts\Util\pageTitleDirective.js" />
+    <Content Include="Scripts\Util\pageTitleService.js" />
     <Content Include="Scripts\Util\philippineDateFilter.js" />
     <Content Include="Scripts\Util\repository.js" />
     <Content Include="Scripts\App\routeConfig.js" />
@@ -225,7 +227,6 @@
     <Content Include="Scripts\App\Truck\truckStatusReportController.js" />
     <Content Include="Scripts\Util\url.js" />
     <Content Include="Scripts\Util\1.utilModule.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseService.js" />
     <Content Include="Scripts\Lib\angular-route.js" />
     <Content Include="Scripts\Lib\angular-tablesort.js" />
     <Content Include="Scripts\Lib\angular.js" />
@@ -245,6 +246,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Auth\AllowedRoles.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -253,7 +255,6 @@
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

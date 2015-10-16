@@ -19,6 +19,10 @@
                         _clients.push.apply(_clients, clients);
                         _clientsById = buildIdMap(_clients);
 
+                        _clients.forEach(function(client) {
+                            client.BranchesById = buildIdMap(client.Branches);
+                        });
+
                         return _clients;
                     });
                 }
