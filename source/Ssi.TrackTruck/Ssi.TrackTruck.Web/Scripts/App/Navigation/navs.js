@@ -15,12 +15,14 @@
                             url: url.route('trip', 'order'),
                             iconClass: 'fa fa-fw fa-lg fa-plus',
                             text: 'New Trip',
-                            roles: [roles.encoder]
+                            roles: [roles.encoder],
+                            highLightRoutes: ['triporder']
                         }, {
                             url: url.route('trip', 'transactions'),
                             iconClass: 'fa fa-fw fa-lg fa-cubes',
                             text: 'Transactions',
-                            roles: [roles.admin, roles.branchCustodian]
+                            roles: [roles.admin, roles.branchCustodian],
+                            highLightRoutes: ['triptransactions']
                         }
                     ]
                 };
@@ -31,19 +33,23 @@
                         {
                             url: url.route('employee', 'list'),
                             iconClass: 'fa fa-fw fa-lg fa-credit-card',
-                            text: 'Employees'
+                            text: 'Employees',
+                            highLightRoutes: ['employeelist', 'employeeadd', 'employeeedit']
                         }, {
                             url: url.route('truck', 'list'),
                             iconClass: 'fa fa-fw fa-lg fa-truck',
-                            text: 'Trucks'
+                            text: 'Trucks',
+                            highLightRoutes: ['trucklist', 'truckadd', 'truckedit']
                         }, {
                             url: url.route('client', 'list'),
                             iconClass: 'fa fa-fw fa-lg fa-black-tie',
-                            text: 'Clients'
+                            text: 'Clients',
+                            highLightRoutes: ['clientlist', 'clientadd', 'clientedit']
                         }, {
                             url: url.route('user', 'list'),
                             iconClass: 'fa fa-fw fa-lg fa-user',
-                            text: 'Users'
+                            text: 'Users',
+                            highLightRoutes: ['userlist', 'usertadd', 'useredit']
                         }
                     ]
                 };
@@ -54,11 +60,13 @@
                         {
                             url: url.route('trip', 'report'),
                             iconClass: 'fa fa-fw fa-lg fa-cubes',
-                            text: 'Trips'
+                            text: 'Trips',
+                            highLightRoutes: ['tripreport']
                         }, {
                             url: url.route('attendance', 'report'),
                             iconClass: 'fa fa-fw fa-lg fa-check-square-o',
-                            text: 'Attendence'
+                            text: 'Attendance',
+                            highLightRoutes: ['attendancereport']
                         }
                     ]
                 };
@@ -68,7 +76,8 @@
                         {
                             url: url.route('auth', 'changepassword'),
                             iconClass: 'fa fa-fw fa-lg fa-key',
-                            text: 'Change Password'
+                            text: 'Change Password',
+                            highLightRoutes: ['changepassword']
                         }, {
                             url: url.server('auth', 'signout'),
                             iconClass: 'fa fa-fw fa-lg fa-sign-out',
