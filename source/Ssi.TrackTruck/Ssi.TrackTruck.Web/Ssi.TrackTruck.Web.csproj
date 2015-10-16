@@ -262,7 +262,6 @@
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

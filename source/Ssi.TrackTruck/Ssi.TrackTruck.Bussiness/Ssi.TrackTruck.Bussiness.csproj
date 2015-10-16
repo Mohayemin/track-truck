@@ -71,7 +71,6 @@
     <Compile Include="DAL\Trips\DbTripDrop.cs" />
     <Compile Include="DAL\Trips\DbTrip.cs" />
     <Compile Include="DAL\Entities\DbTruck.cs" />
-    <Compile Include="DAL\Entities\DbWarehouse.cs" />
     <Compile Include="DAL\Entities\DbDailyHit.cs" />
     <Compile Include="Employees\AddEmployeeRequest.cs" />
     <Compile Include="Employees\EditEmployeeRequest.cs" />
@@ -97,8 +96,6 @@
     <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\EditTruckRequest.cs" />
     <Compile Include="Trucks\TruckService.cs" />
-    <Compile Include="Warehouses\AddWarehouseRequest.cs" />
-    <Compile Include="Warehouses\WarehouseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
