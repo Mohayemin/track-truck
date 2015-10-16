@@ -16,12 +16,13 @@
         
         $scope.userRoles = userRoles;
 
-        clientService.getAll().then(function (clients) {
-            $scope.clients = clients;
-        });
-
         userService.get($routeParams['id']).then(function (user) {
             $scope.request = JSON.parse(JSON.stringify(user));
+            clientService.getIndexedClients().then(function (clients) {
+                $scope.clients = clients;
+                $scope.request.client = client[$scope.request.ClientId];
+                $scope.request.branch = {};
+            });
         });
 
         $scope.showBranchSelect = function () {
