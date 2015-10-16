@@ -6,6 +6,7 @@
     'clientService',
     'employeeService',
     'truckService',
+    'collection',
     '$q',
     function tripService(
         repository
@@ -15,6 +16,7 @@
         , clientService
         , employeeService
         , truckService
+        , collection
         , $q
         ) {
         var _activeTrips = [];
@@ -86,8 +88,19 @@
                                 trip.Driver = employeesById[trip.DriverId];
                                 trip.HelperNames = trip.HelperIds.map(function(hid) {
                                     return (employeesById[hid] || {}).FullName;
-                                });
+                                }).join(', ');
                                 trip.Truck = trucksById[trip.TruckId];
+                                trip.TotalNumberOfBoxes = collection.sum(drops, 'TotalBoxes');
+                                trip.RejectedNumberOfBoxes = collection.sum(drops, 'TotalRejectedBoxes');
+                                trip.DeliveredNumberOfBoxes = collection.sum(drops, 'TotalDeliveredBoxes');
+
+                                var routeList = [trip.PickupAddress];
+
+                                drops.forEach(function(drop) {
+                                    return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
+                                });
+
+                                trip.Route = routeList.join(', ');
                             });
 
                             return report.Trips;
