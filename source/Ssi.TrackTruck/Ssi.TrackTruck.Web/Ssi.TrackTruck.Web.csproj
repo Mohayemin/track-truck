@@ -145,6 +145,7 @@
     <Content Include="Scripts\App\Attendance\attendanceReportController.js" />
     <Content Include="Scripts\App\Attendance\attendanceService.js" />
     <Content Include="Scripts\App\Auth\1.authModule.js" />
+    <Content Include="Scripts\App\Auth\allowedRolesDirective.js" />
     <Content Include="Scripts\App\Auth\authService.js" />
     <Content Include="Scripts\App\Auth\signedInUser.js" />
     <Content Include="Scripts\App\Auth\userRoles.js" />
@@ -252,6 +253,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Auth\AllowedRoles.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ClientController.cs" />

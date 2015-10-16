@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Attendances;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Helpers;
+using Ssi.TrackTruck.Web.Auth;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -14,6 +16,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
+        [AllowedRoles(Role.Admin)]
         public ActionResult Report(DateTimeModel fromDate, DateTimeModel toDate)
         {
             var report = _attendanceService.GetReport(fromDate, toDate);
