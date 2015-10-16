@@ -20,7 +20,7 @@
             navs: [
                 {
                     url: url.route('employee', 'list'),
-                    iconClass: 'fa fa-fw fa-lg fa-group',
+                    iconClass: 'fa fa-fw fa-lg fa-credit-card',
                     text: 'Employees'
                 }, {
                     url: url.route('truck', 'list'),
@@ -28,7 +28,7 @@
                     text: 'Trucks'
                 }, {
                     url: url.route('client', 'list'),
-                    iconClass: 'fa fa-fw fa-lg fa-shopping-cart',
+                    iconClass: 'fa fa-fw fa-lg fa-black-tie',
                     text: 'Clients'
                 }, {
                     url: url.route('user', 'list'),
@@ -46,7 +46,7 @@
                     text: 'Trips'
                 }, {
                     url: url.route('attendance', 'report'),
-                    iconClass: 'fa fa-fw fa-lg fa-group',
+                    iconClass: 'fa fa-fw fa-lg fa-check-square-o',
                     text: 'Attendence'
                 }
             ]
