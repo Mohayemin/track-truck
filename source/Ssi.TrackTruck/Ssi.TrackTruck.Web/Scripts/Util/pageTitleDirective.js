@@ -1,8 +1,17 @@
 ﻿utilModule.directive('pageTitle', [
-    function() {
+    'pageTitle',
+    function (pageTitle) {
         var directive = {
             templateUrl: '/Scripts/Util/pageTitle.html',
-            transclude: true
+            transclude: true,
+            controller: [
+                '$scope',
+                function($scope) {
+                    $scope.getTitle = function() {
+                        return pageTitle.getTitle();
+                    };
+                }
+            ]
         };
 
         return directive;
