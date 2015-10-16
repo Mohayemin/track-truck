@@ -3,7 +3,6 @@
     'clientService',
     'truckService',
     'tripService',
-    'warehouseService',
     'employeeService',
     'designation',
     'globalMessage',
@@ -12,7 +11,6 @@
         clientService,
         truckService,
         tripService,
-        warehouseService,
         employeeService,
         designation,
         globalMessage) {
