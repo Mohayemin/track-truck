@@ -1,5 +1,7 @@
 ﻿<div>
-    <page-title></page-title>
+    <page-title>
+        <list-button module="'employee'"></list-button>
+    </page-title>
     <form ng-submit="add()" class="form-horizontal">
         <fieldset>
             <ng-include src="url.template('Employee', 'employeeForm')"></ng-include>
