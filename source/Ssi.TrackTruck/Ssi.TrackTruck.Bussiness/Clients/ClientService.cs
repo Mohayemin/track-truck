@@ -2,6 +2,7 @@
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
+using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
@@ -50,6 +51,44 @@ namespace Ssi.TrackTruck.Bussiness.Clients
                 return Response.Success(null, "Successfully deleted");
             }
             return Response.Error("", string.Format("The client you tried to delete does not exist"));
+        }
+
+        public Response Edit(EditClientRequest request)
+        {
+            var client = _repository.GetById<DbClient>(request.Id);
+            
+            // Add
+            var addedBranches = request.Branches.Where(branch => branch.ModificationStatus == CrudStatus.Added);
+            client.Branches.AddRange(addedBranches.Select(branch=>branch.ToBranch()));
+            
+            // Delete
+            var deletedBrancheIds = request.Branches.Where(branch => branch.ModificationStatus.HasFlag(CrudStatus.Deleted)).Select(branch=>branch.Id).ToList();
+            var deletedDbBranches = client.Branches.Where(branch => deletedBrancheIds.Contains(branch.Id));
+            client.Branches.RemoveAll(branch => deletedBrancheIds.Contains(branch.Id));
+            client.DeletedBranches.AddRange(deletedDbBranches);
+
+            // Edit
+            var editedBranches = request.Branches.Where(branch => branch.ModificationStatus == CrudStatus.Edited);
+            foreach (var branchRequest in editedBranches)
+            {
+                var dbBranch = client.Branches.FirstOrDefault(branch => branch.Id == branchRequest.Id);
+                if (dbBranch != null)
+                {
+                    branchRequest.Update(dbBranch);
+                }
+            }
+
+            var deletedAddress =
+                client.Addresses.Where(dbAddress => request.Addresses.All(reqAddress => reqAddress.Id != dbAddress.Id));
+            client.DeletedAddresses.AddRange(deletedAddress);
+
+            client.Addresses = request.Addresses;
+
+            client.Name = request.Name;
+            client.TrucksPerDay = request.TrucksPerDay;
+
+
+            return Response.Success(client);
         }
 
         public DbClient GetClient(string clientId)

@@ -14,9 +14,9 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         [Range(0, int.MaxValue, ErrorMessage = "Truck per day cannot be less than zero")]
         public int TrucksPerDay { get; set; }
 
-        public IList<DbTextItem> Addresses { get; set; }
+        public List<DbTextItem> Addresses { get; set; }
 
-        public IList<AddBranchRequest> Branches { get; set; }
+        public List<AddBranchRequest> Branches { get; set; }
 
         public AddClientRequest()
         {
