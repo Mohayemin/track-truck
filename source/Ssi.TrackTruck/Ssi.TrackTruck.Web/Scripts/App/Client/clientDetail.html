@@ -2,9 +2,7 @@
     <page-title>
         <div class="btn-group btn-group-sm pull-right">
             <edit-button module="'client'" item-id="client.Id" ng-class="btn-sm"></edit-button>
-            <button class="btn btn-danger" ng-click="delete()">
-                <i class="fa fa-lg fa-fw fa-trash"></i>
-            </button>
+            <delete-button module="'client'" item-id="client.Id" action="deleteItem"></delete-button>
         </div>
     </page-title>
     <dl class="dl-horizontal">

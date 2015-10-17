@@ -8,5 +8,7 @@
         truckService.getAll().then(function (trucks) {
             $scope.trucks = trucks;
         });
+
+        $scope.deleteItem = truckService.delete;
     }
 ]);

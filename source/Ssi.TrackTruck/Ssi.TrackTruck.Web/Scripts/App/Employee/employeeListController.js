@@ -13,5 +13,7 @@
         };
 
         $scope.loadEmployees();
+
+        $scope.deleteItem = employeeService.delete;
     }
 ]);

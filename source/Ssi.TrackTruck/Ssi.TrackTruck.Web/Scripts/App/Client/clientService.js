@@ -56,16 +56,13 @@
                     return _clientsById[id];
                 });
             },
-            'delete': function (client) {
-                if (!client) {
-                    return $q.reject('client does not exist');
-                }
-                return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
+            'delete': function (id) {
+                return repository.post('Client', 'Delete', { id: id }).then(function (response) {
                     if (!response.IsError) {
-                        var index = _.findIndex(_clients, { Id: client.Id });
+                        var index = _.findIndex(_clients, { Id: id });
                         if (index >= 0) {
                             _clients.splice(index, 1);
-                            delete _clientsById[client.Id];
+                            delete _clientsById[id];
                         }
                         return response;
                     }

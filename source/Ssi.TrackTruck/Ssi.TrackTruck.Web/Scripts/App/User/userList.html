@@ -21,7 +21,7 @@
                 <td ng-bind="roleMap[user.Role]"></td>
                 <td>
                     <edit-button module="'user'" item-id="user.Id" ng-class="'btn-xs'"></edit-button>
-                    <delete-button controller="'User'" list="users" index="$index"></delete-button>
+                    <delete-button module="'user'" item-id="user.Id" action="deleteItem"></delete-button>
                 </td>
             </tr>
         </tbody>

@@ -21,6 +21,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         public AddClientRequest()
         {
             Branches = new List<AddBranchRequest>();
+            Addresses = new List<DbTextItem>();
         }
 
         public DbClient ToDbClient()
