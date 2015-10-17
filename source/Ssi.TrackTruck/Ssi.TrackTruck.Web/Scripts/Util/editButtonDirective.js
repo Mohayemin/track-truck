@@ -1,19 +1,20 @@
 ﻿utilModule.directive('editButton', [
-    function() {
+    function () {
         return {
             templateUrl: '/Scripts/Util/editButton.html',
+            replace: true,
             scope: {
                 module: '=',
-                model: '='
+                itemId: '=',
+                cssClass: '='
             },
             controller: [
                 '$scope',
-                '$location',
+                'url',
                 function ($scope,
-                    $location) {
-                    $scope.edit = function() {
-                        $location.url($scope.module + '/' + $scope.model.Id + '/edit');
-                    }
+                    url) {
+                    console.log($scope.cssClass);
+                    $scope.href = url.route($scope.module, $scope.itemId, 'edit');
                 }
             ]
         };
