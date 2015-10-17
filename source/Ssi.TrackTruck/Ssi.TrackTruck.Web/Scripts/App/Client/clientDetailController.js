@@ -25,7 +25,7 @@
                 return address.Text;
             }).join(', ');
 
-            $scope.deleteClient = function() {
+            $scope.delete = function() {
                 if ($window.confirm('Are you sure you want to delete this client?')) {
                     clientService.delete($scope.client).then(function() {
                         $location.url('client/list');

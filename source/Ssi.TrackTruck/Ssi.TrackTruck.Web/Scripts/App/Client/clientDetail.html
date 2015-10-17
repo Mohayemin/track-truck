@@ -1,5 +1,14 @@
 ﻿<div>
-    <page-title></page-title>
+    <page-title>
+        <div class="btn-group btn-group-sm pull-right">
+            <a class="btn btn-xs btn-warning" ng-href="{{url.route('client', client.Id, 'edit')}}">
+                <i class="fa fa-lg fa-fw fa-edit"></i>
+            </a>
+            <button class="btn btn-xs btn-danger" ng-click="delete()">
+                <i class="fa fa-lg fa-fw fa-trash"></i>
+            </button>
+        </div>
+    </page-title>
     <dl class="dl-horizontal">
         <dt>Client Name</dt>
         <dd ng-bind="client.Name"></dd>
@@ -17,8 +26,8 @@
         <dt>Address</dt>
         <dd ng-bind="branch.Address"></dd>
         <dt>Custodian</dt>
-        <dd ng-bind="branch.CustodianUser.Name || 'Not assigned'"></dd>
-        
+        <dd ng-bind="branch.CustodianUser.FullName || 'Not assigned'"></dd>
     </dl>
+
 </div>
 
