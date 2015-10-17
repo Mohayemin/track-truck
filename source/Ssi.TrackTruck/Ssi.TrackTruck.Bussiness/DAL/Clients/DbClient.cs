@@ -7,7 +7,15 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Clients
     {
         public string Name { get; set; }
         public int TrucksPerDay { get; set; }
-        public IList<DbBranch> Branches { get; set; }
-        public IList<DbTextItem> Addresses { get; set; }
+        public List<DbBranch> Branches { get; set; }
+        public List<DbTextItem> Addresses { get; set; }
+        public List<DbBranch> DeletedBranches { get; set; }
+        public List<DbTextItem> DeletedAddresses { get; set; }
+
+        public DbClient()
+        {
+            DeletedBranches = new List<DbBranch>();
+            DeletedAddresses = new List<DbTextItem>();
+        }
     }
 }
