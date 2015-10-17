@@ -62,6 +62,11 @@
                 }
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
+                        var index = _.findIndex(_clients, { Id: client.Id });
+                        if (index >= 0) {
+                            _clients.splice(index, 1);
+                            delete _clientsById[client.Id];
+                        }
                         return response;
                     }
 
