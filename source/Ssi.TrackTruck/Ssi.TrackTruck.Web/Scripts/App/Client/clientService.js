@@ -40,8 +40,8 @@
                 });
             },
             get: function (id) {
-                return _loadPromise.then(function () {
-                    return _.find(_clients, { Id: id });
+                return service.getAll().then(function () {
+                    return _clientsById[id];
                 });
             },
             'delete': function (client) {
