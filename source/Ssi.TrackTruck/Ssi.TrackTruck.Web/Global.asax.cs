@@ -17,7 +17,7 @@ namespace Ssi.TrackTruck.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             ModelBinders.Binders.Add(typeof(IList<string>), new ListModelBinder<string>());
-            GlobalFilters.Filters.Add(new DailyHitLogAttribute(DateTimeConstants.PhilippineOffset));
+            GlobalFilters.Filters.Add(new DailyHitLogAttribute());
 
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 

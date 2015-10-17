@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
@@ -11,15 +11,13 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
     public class AttendanceService
     {
         private readonly IRepository _repository;
-        private readonly AuthService _authService;
 
-        public AttendanceService(IRepository repository, AuthService authService)
+        public AttendanceService(IRepository repository)
         {
             _repository = repository;
-            _authService = authService;
         }
 
-        public bool UpdateDailyHit(string userId, DateTimeModel time)
+        public bool UpdateDailyHit(string userId, DateTime time)
         {
             var user = _repository.GetById<DbUser>(userId);
 
@@ -28,10 +26,11 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
                 return false;
             }
 
-            var log = _repository.FindOne<DbDailyHit>(hit => hit.UserId == user.Id && hit.Date == time.DateInt) ??
-                      new DbDailyHit { UserId = user.Id, Date = time.DateInt, HitTimes = new List<int>() };
+            var today = time.Date;
+            var log = _repository.FindOne<DbDailyHit>(hit => hit.UserId == user.Id && hit.Date == today) ??
+                      new DbDailyHit { UserId = user.Id, Date = today, HitTimes = new List<TimeSpan>() };
 
-            log.HitTimes.Add(time.TimeInt);
+            log.HitTimes.Add(time.TimeOfDay);
             _repository.Save(log);
 
             return true;
@@ -39,7 +38,7 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
 
         public object GetReport(DateTimeModel fromDate, DateTimeModel toDate)
         {
-            var report = _repository
+            /*var report = _repository
                 .GetWhere<DbDailyHit>(hit => hit.Date >= fromDate.DateInt && hit.Date <= toDate.DateInt)
                 .Select(hit => new
                 {
@@ -54,7 +53,8 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
                     Attendance = g.ToDictionary(arg => arg.Date.ToString(), arg => arg.HasHit)
                 });
 
-            return report;
+            return report;*/
+            return null;
         }
     }
 }
