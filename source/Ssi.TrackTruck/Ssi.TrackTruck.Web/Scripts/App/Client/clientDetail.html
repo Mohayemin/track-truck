@@ -1,19 +1,24 @@
 ﻿<div>
     <page-title></page-title>
-    <h2>
-        Client: <span ng-bind="client.Name"></span>
-        <small>
-            <small><span ng-bind="client.TrucksPerDay"></span> Trucks allocated per Day</small>
-        </small>
-    </h2>
-    <div ng-repeat="branch in client.Branches">
-        <h4>Branch&nbsp;<span ng-bind="$index+1"></span>:&nbsp;<span ng-bind="branch.Name"></span></h4>
-        <address ng-bind="branch.Address"></address>
-    </div>
-    <div>
-        <button class="btn btn-danger btn-sm" ng-click="deleteClient()">
-            <i class="fa fa-lg fa-fw fa-trash"></i> Delete Client
-        </button>
-    </div>
+    <dl class="dl-horizontal">
+        <dt>Client Name</dt>
+        <dd ng-bind="client.Name"></dd>
+        <dt>Trucks/Day</dt>
+        <dd ng-bind="client.TrucksPerDay"></dd>
+        <dt>Pickup Addresses</dt>
+        <dd>
+            <span ng-bind="PickupAddressDisplay"></span>
+            <span class="badge label-info">Total <span ng-bind="client.Addresses.length"></span></span>
+        </dd>
+    </dl>
+    <dl class="dl-horizontal" ng-repeat="branch in client.Branches">
+        <dt>Branch-<span ng-bind="$index+1"></span></dt>
+        <dd ng-bind="branch.Name"></dd>
+        <dt>Address</dt>
+        <dd ng-bind="branch.Address"></dd>
+        <dt>Custodian</dt>
+        <dd ng-bind="branch.CustodianUser.Name || 'Not assigned'"></dd>
+        
+    </dl>
 </div>
 
