@@ -1,6 +1,6 @@
 ﻿// Keep sync with CrudStatus.cs
 // Algorithm: http://mohayemin.bitbucket.org/modification-state-transitions/
-utilModule.factory('CrudStatus', [
+utilModule.factory('crudStatus', [
     function () {
         var unchanged = 'Unchanged';
         var added = 'Added';
@@ -20,6 +20,7 @@ utilModule.factory('CrudStatus', [
             deletedUnchanged: deletedUnchanged,
             deletedAdded: deletedAdded,
             deletedEdited: deletedEdited,
+            allDeleted: [deletedUnchanged, deletedAdded, deletedEdited],
 
             getStatusOnEdit: function (currentStatus) {
                 switch (currentStatus) {
