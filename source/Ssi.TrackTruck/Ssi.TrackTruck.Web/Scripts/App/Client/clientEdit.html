@@ -1,0 +1,15 @@
+﻿<div>
+    <form ng-submit="save()" class="form-horizontal">
+        <fieldset>
+            <legend>
+                <span class="col-sm-offset-2">Edit Client</span>
+            </legend>
+            <ng-include src="url.template('Client', 'clientForm')"></ng-include>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-lg fa-save"></i> Save</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
