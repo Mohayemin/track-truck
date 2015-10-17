@@ -3,7 +3,7 @@
         return {
             templateUrl: '/Templates/datetimeDirective.html',
             scope: {
-                model: '=',
+                ngModel: '=',
                 hideTime: '=',
                 options: '='
             },
@@ -12,7 +12,7 @@
                 '$filter',
                 function ($scope
                     , $filter) {
-                    var model = $scope.model;
+                    /*var model = $scope.model;
 
                     if (model && model.year) {
                         $scope.datePickerDate = new Date(
@@ -44,7 +44,7 @@
                             $scope.timeDisplay = null;
                         }
                         $scope.timeDisplay = $filter('date')(tpt, 'hh:mm a');
-                    });
+                    });*/
                 }
             ]
         };
