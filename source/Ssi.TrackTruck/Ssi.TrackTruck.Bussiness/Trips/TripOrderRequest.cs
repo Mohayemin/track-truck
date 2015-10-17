@@ -14,7 +14,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
         [Required(ErrorMessage = "Please choose a client")]
         public string ClientId { get; set; }
-        public string PickupAddress { get; set; }
+        public string PickupAddressId { get; set; }
         public DateTimeModel ExpectedPickupTime { get; set; }
 
         [Required(ErrorMessage = "Please choose a driver")]
@@ -57,7 +57,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return new DbTrip
             {
                 ClientId = ClientId,
-                PickupAddress = PickupAddress,
+                PickupAddressId = PickupAddressId,
                 ExpectedPickupTime = ExpectedPickupTime.ToDateTime(DateTimeConstants.PhilippineOffset),
                 DriverId = DriverId,
                 DriverAllowanceInCentavos = (long)(DriverAllowance ?? 0) * 100,

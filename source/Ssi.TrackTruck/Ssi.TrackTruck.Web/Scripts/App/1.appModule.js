@@ -7,11 +7,11 @@
     'client',
     'trip',
     'employee',
-    'warehouse',
     'user',
     'auth',
     'ui.bootstrap',
     'tableSort',
+    'ngTagsInput',
     'ngRoute']);
 
 appModule.config([
