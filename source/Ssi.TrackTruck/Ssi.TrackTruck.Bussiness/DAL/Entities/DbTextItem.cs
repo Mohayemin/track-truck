@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
+    [BsonIgnoreExtraElements]
     public class DbTextItem
     {
         [BsonRepresentation(BsonType.ObjectId)]
