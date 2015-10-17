@@ -13,6 +13,7 @@ namespace Ssi.TrackTruck.Web
                 .Include("~/Scripts/Lib/ui-bootstrap-tpls-0.13.4.min.js")
                 .Include("~/Scripts/Lib/underscore-min.js")
                 .Include("~/Scripts/Lib/angular-tablesort.js")
+                .Include("~/Scripts/Lib/ng-tags-input.js")
                 .Include("~/Scripts/Lib/moment.min.js");
 
             var signIn = new ScriptBundle("~/js/signin")
@@ -33,6 +34,8 @@ namespace Ssi.TrackTruck.Web
                 .Include("~/Content/css/font-awesome.min.css")
                 .Include("~/Content/css/tablesort.css")
                 .Include("~/Content/css/animate.css")
+                .Include("~/Content/css/ng-tags-input.css")
+                .Include("~/Content/css/ng-tags-input.bootstrap.css")
                 .Include("~/Content/css/track-truck.css");
 
             bundles.Add(css);
