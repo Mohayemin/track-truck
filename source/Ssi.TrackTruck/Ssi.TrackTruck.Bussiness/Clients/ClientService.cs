@@ -87,6 +87,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
             client.Name = request.Name;
             client.TrucksPerDay = request.TrucksPerDay;
 
+            _repository.Save(client);
 
             return Response.Success(client);
         }

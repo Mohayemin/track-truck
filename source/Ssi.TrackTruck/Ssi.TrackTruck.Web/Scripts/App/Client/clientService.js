@@ -19,7 +19,7 @@
                         _clients.push.apply(_clients, clients);
                         _clientsById = buildIdMap(_clients);
 
-                        _clients.forEach(function(client) {
+                        _clients.forEach(function (client) {
                             client.BranchesById = buildIdMap(client.Branches);
                         });
 
@@ -36,6 +36,18 @@
                     }
                     var client = response.Data;
                     _clients.push(client);
+                    return client;
+                });
+            },
+            edit: function (request) {
+                return repository.post('Client', 'Edit', request).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not edit truck');
+                    }
+
+                    var client = response.Data;
+                    angular.extend(_clientsById[client.Id], client);
+
                     return client;
                 });
             },
