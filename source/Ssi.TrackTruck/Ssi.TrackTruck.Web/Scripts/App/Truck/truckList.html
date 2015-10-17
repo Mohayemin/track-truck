@@ -1,0 +1,27 @@
+﻿<div>
+    <page-title>
+        <add-button module="'truck'"></add-button>
+    </page-title>
+
+    <table class="table table-hover table-responsive table-bordered" ts-wrapper>
+        <thead>
+            <tr>
+                <th ts-criteria="RegistrationNumber|lowercase">Registration Number</th>
+                <th ts-criteria="DriverName|lowercase">Driver</th>
+                <th ts-criteria="HelperName|lowercase">Helper</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="truck in trucks track by truck.Id" ts-repeat>
+                <td ng-bind="truck.RegistrationNumber"></td>
+                <td ng-bind="truck.DriverName"></td>
+                <td ng-bind="truck.HelperName"></td>
+                <td>
+                    <edit-button module="'truck'" model="truck"></edit-button>
+                    <delete-button controller="'Truck'" list="trucks" index="$index"></delete-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

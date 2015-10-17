@@ -1,0 +1,24 @@
+﻿<div>
+    <page-title></page-title>
+    <dl class="dl-horizontal">
+        <dt>Client Name</dt>
+        <dd ng-bind="client.Name"></dd>
+        <dt>Trucks/Day</dt>
+        <dd ng-bind="client.TrucksPerDay"></dd>
+        <dt>Pickup Addresses</dt>
+        <dd>
+            <span ng-bind="PickupAddressDisplay"></span>
+            <span class="badge label-info">Total <span ng-bind="client.Addresses.length"></span></span>
+        </dd>
+    </dl>
+    <dl class="dl-horizontal" ng-repeat="branch in client.Branches">
+        <dt>Branch-<span ng-bind="$index+1"></span></dt>
+        <dd ng-bind="branch.Name"></dd>
+        <dt>Address</dt>
+        <dd ng-bind="branch.Address"></dd>
+        <dt>Custodian</dt>
+        <dd ng-bind="branch.CustodianUser.Name || 'Not assigned'"></dd>
+        
+    </dl>
+</div>
+
