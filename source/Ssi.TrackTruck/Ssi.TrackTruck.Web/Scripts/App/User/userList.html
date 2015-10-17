@@ -19,7 +19,7 @@
                 <td ng-bind="user.LastName"></td>
                 <td ng-bind="user.Username"></td>
                 <td ng-bind="roleMap[user.Role]"></td>
-                <td>
+                <td class="action-col-2">
                     <div class="btn-group btn-group-xs">
                         <edit-button module="'user'" item-id="user.Id" ng-class="'btn-xs'"></edit-button>
                         <delete-button module="'user'" item-id="user.Id" action="deleteItem"></delete-button>
