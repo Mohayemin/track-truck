@@ -9,6 +9,7 @@
         $window) {
         return {
             templateUrl: '/Scripts/Util/deleteButton.html',
+            replace: true,
             scope: {
                 module: '=',
                 itemId: '=',
