@@ -2,7 +2,7 @@
     <page-title>
         <add-button module="'user'"></add-button>
     </page-title>
-    
+
     <table class="table table-hover table-bordered table-responsive" ts-wrapper>
         <thead>
             <tr>
@@ -20,8 +20,10 @@
                 <td ng-bind="user.Username"></td>
                 <td ng-bind="roleMap[user.Role]"></td>
                 <td>
-                    <edit-button module="'user'" item-id="user.Id" ng-class="'btn-xs'"></edit-button>
-                    <delete-button module="'user'" item-id="user.Id" action="deleteItem"></delete-button>
+                    <div class="btn-group btn-group-xs">
+                        <edit-button module="'user'" item-id="user.Id" ng-class="'btn-xs'"></edit-button>
+                        <delete-button module="'user'" item-id="user.Id" action="deleteItem"></delete-button>
+                    </div>
                 </td>
             </tr>
         </tbody>
