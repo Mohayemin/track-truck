@@ -14,17 +14,17 @@
         </thead>
         <tbody>
             <tr ng-repeat="client in clients track by client.Id" ts-repeat>
-                <td ng-bind="client.Name">
+                <td ng-bind="client.Name" >
                 </td>
                 <td ng-bind="client.TrucksPerDay"></td>
                 <td ng-bind="client.Branches.length"></td>
-                <td>
+                <td class="action-col-3">
                     <div class="btn-group btn-group-xs">
                         <detail-button module="'client'"></detail-button>
                         <edit-button module="'client'" item-id="client.Id"></edit-button>
-                        <delete-button module="'client'" item-id="client.Id" action="deleteItem"></delete-button>    
+                        <delete-button module="'client'" item-id="client.Id" action="deleteItem"></delete-button>
                     </div>
-                    
+
                 </td>
             </tr>
         </tbody>
