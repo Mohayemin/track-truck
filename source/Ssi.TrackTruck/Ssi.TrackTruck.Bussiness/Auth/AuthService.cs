@@ -51,25 +51,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
             var user = CreateUserObject(request);
 
-            if (request.Role == Role.BranchCustodian)
-            {
-                var client = _clientService.GetClient(request.ClientId);
-
-                if (client == null)
-                {
-                    return Response.ValidationError("The client you specified does not exist");
-                }
-                var branch = client.Branches.FirstOrDefault(dbBranch => dbBranch.Id == request.BranchId);
-                if (branch == null)
-                {
-                    return Response.ValidationError("The branch you specified does not exist");
-                }
-
-                branch.CustodianUserId = user.Id;
-
-                _repository.Save(client);
-            }
-
             _repository.Create(user);
 
             return Response.Success(user, "User Added");
@@ -150,6 +131,29 @@ namespace Ssi.TrackTruck.Bussiness.Auth
             }
             _repository.SoftDelete<DbUser>(id);
             return Response.Success(null, "Successfully deleted");
+        }
+
+        public Response Save(EditUserRequest request)
+        {
+            var dbUSer = FindByUsername(request.Username);
+            if (dbUSer != null && dbUSer.Id != request.Id)
+            {
+                return Response.DuplicacyError("A user with this name is already registered");
+            }
+            var user = _repository.GetById<DbUser>(request.Id);
+            if (user == null)
+            {
+                return Response.Error("", string.Format("The user does not exist"));
+            }
+
+            user.Username = request.Username;
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.Role = request.Role;
+            user.UsernameLowerCase = request.Username.ToLower();
+
+            _repository.Save(user);
+            return Response.Success(user, "Successfully edited");
         }
     }
 }

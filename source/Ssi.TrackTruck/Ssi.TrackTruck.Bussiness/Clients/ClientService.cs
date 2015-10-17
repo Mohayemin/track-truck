@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
+using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
@@ -9,10 +12,12 @@ namespace Ssi.TrackTruck.Bussiness.Clients
     public class ClientService
     {
         private readonly IRepository _repository;
+        private readonly ISignedInUser _user;
 
-        public ClientService(IRepository repository)
+        public ClientService(IRepository repository, ISignedInUser user)
         {
             _repository = repository;
+            _user = user;
         }
 
         public IEnumerable<DbClient> GetAll()
@@ -27,18 +32,11 @@ namespace Ssi.TrackTruck.Bussiness.Clients
                 return Response.DuplicacyError("Client with same name already exists");
             }
             
-            var branches = request.Branches.Select(b => b.ToBranch());
+            var dbClient = request.ToDbClient();
 
-            var client = new DbClient
-            {
-                Name = request.Name,
-                TrucksPerDay = request.TrucksPerDay,
-                Branches = branches
-            };
+            _repository.Create(dbClient);
 
-            _repository.Create(client);
-
-            return Response.Success(client);
+            return Response.Success(dbClient);
         }
 
         private bool ClientNameIsDuplicate(AddClientRequest request)
@@ -57,6 +55,47 @@ namespace Ssi.TrackTruck.Bussiness.Clients
                 return Response.Success(null, "Successfully deleted");
             }
             return Response.Error("", string.Format("The client you tried to delete does not exist"));
+        }
+
+        public Response Edit(EditClientRequest request)
+        {
+            var client = _repository.GetById<DbClient>(request.Id);
+
+            var deletedBrancheIds = request.Branches.Where(branch => branch.ModificationStatus.HasFlag(CrudStatus.Deleted)).Select(branch => branch.Id).ToList();
+            var deletedDbBranches = client.Branches.Where(branch => deletedBrancheIds.Contains(branch.Id));
+
+            client.Branches =
+                request.Branches.Where(branch => !branch.ModificationStatus.HasFlag(CrudStatus.Deleted))
+                    .Select(branch => branch.ToBranch()).ToList();
+
+            var now = DateTime.UtcNow;
+            _repository.CreateAll(deletedDbBranches.Select(branch => new DbDeletedBranch
+            {
+                DeletionTime = now,
+                ClientId = client.Id,
+                DeletorUserId = _user.Id,
+                DeletedItem = branch
+            }));
+
+            var deletedAddress =
+                client.Addresses.Where(dbAddress => request.Addresses.All(reqAddress => reqAddress.Id != dbAddress.Id));
+
+            client.Addresses = request.Addresses;
+
+            _repository.CreateAll(deletedAddress.Select(address => new DbDeletedAddress
+            {
+                DeletionTime    = now,
+                ClientId = client.Id,
+                DeletorUserId = _user.Id,
+                DeletedItem = address
+            }));
+
+            client.Name = request.Name;
+            client.TrucksPerDay = request.TrucksPerDay;
+
+            _repository.Save(client);
+
+            return Response.Success(client);
         }
 
         public DbClient GetClient(string clientId)

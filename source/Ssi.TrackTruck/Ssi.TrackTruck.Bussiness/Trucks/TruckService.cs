@@ -47,7 +47,7 @@ namespace Ssi.TrackTruck.Bussiness.Trucks
                 return Response.Error("", string.Format("The truck does not exist"));
             }
 
-            if (_repository.Exists<DbTruck>(dbTruck => dbTruck.RegistrationNumber == request.RegistrationNumber))
+            if (_repository.Exists<DbTruck>(dbTruck => dbTruck.Id != request.Id && dbTruck.RegistrationNumber == request.RegistrationNumber))
             {
                 return Response.DuplicacyError("A truck with this registration number already exists");
             }

@@ -18,8 +18,9 @@
                     $scope.activeGroup = null;
                     $scope.activeNav = null;
 
-                    function setActiveNav() {
-                        var activeUrl = url.route($location.url());
+                    function setActiveNav(event, current) {
+                        var routeId = current.$$route.id;
+
                         $scope.activeGroup = null;
                         $scope.activeNav = null;
 
@@ -27,7 +28,7 @@
                             var group = $scope.navGroups[i];
                             for (var j = 0; j < group.navs.length && !$scope.activeGroup; j++) {
                                 var nav = group.navs[j];
-                                if (nav.url == activeUrl) {
+                                if (nav.highLightRoutes && nav.highLightRoutes.indexOf(routeId) >= 0) {
                                     $scope.activeGroup = group;
                                     $scope.activeNav = nav;
                                 }
@@ -37,9 +38,7 @@
 
                     $scope.navGroups = navs.groups;
 
-                    setActiveNav();
-                    
-                    $scope.$on('$locationChangeSuccess', setActiveNav);
+                    $scope.$on('$routeChangeSuccess', setActiveNav);
                 }
             ]
         };
