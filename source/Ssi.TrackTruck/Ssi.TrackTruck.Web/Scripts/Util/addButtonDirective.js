@@ -11,7 +11,7 @@
                 function (
                     $scope,
                     url) {
-                    $scope.url = url;
+                    $scope.href = url.route($scope.module, 'add');
                 }
             ]
         };
