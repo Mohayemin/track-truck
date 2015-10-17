@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Clients
 {
+    [BsonIgnoreExtraElements]
     public class DbBranch
     {
         [BsonRepresentation(BsonType.ObjectId)]
