@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -9,8 +10,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public int Date { get; set; }
+        public DateTime Date { get; set; }
         public string UserId { get; set; }
-        public List<int> HitTimes { get; set; }
+        public List<TimeSpan> HitTimes { get; set; }
     }
 }
