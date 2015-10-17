@@ -36,6 +36,7 @@
                     }
                     var client = response.Data;
                     _clients.push(client);
+                    _clientsById[client.Id] = client;
                     return client;
                 });
             },
