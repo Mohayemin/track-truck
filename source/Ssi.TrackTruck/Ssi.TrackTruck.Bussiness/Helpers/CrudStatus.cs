@@ -3,9 +3,11 @@
     // Keep sync with crudStatus.js
     public enum CrudStatus
     {
-        Unchanged = 0,
-        Added = 1,
-        Edited = 2,
-        Deleted = 3
+        Unchanged = 1,
+        Added = 2,
+        Edited = 4,
+        DeletedUnchanged = 8,
+        DeletedAdded = 16,
+        DeletedEdited = 32
     }
 }
