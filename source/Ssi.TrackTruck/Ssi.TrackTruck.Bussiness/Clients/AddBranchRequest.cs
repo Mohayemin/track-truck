@@ -11,10 +11,18 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         [Required(ErrorMessage = "Please specify branch address")]
         public string Address { get; set; }
-        
-        public DbBranch ToBranch()
+
+        public string CustodianUserId { get; set; }
+
+        public virtual DbBranch ToBranch()
         {
-            return new DbBranch { Id = ObjectId.GenerateNewId().ToString(), Name = Name, Address = Address };
+            return new DbBranch
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Name = Name,
+                Address = Address,
+                CustodianUserId = CustodianUserId
+            };
         }
     }
 }

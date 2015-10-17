@@ -3,14 +3,12 @@
     '$routeParams',
     'userService',
     'userRoles',
-    'clientService',
     '$location',
     'globalMessage',
     function ($scope,
         $routeParams,
         userService,
         userRoles,
-        clientService,
         $location,
         globalMessage) {
         
@@ -18,16 +16,7 @@
 
         userService.get($routeParams['id']).then(function (user) {
             $scope.request = JSON.parse(JSON.stringify(user));
-            clientService.getIndexedClients().then(function (clients) {
-                $scope.clients = clients;
-                $scope.request.client = client[$scope.request.ClientId];
-                $scope.request.branch = {};
-            });
         });
-
-        $scope.showBranchSelect = function () {
-            return $scope.request && $scope.request.Role == userRoles.branchCustodian;
-        };
 
         $scope.User = {
             isUsernameReadonly: false,

@@ -151,6 +151,8 @@
     <Content Include="Scripts\App\Auth\userRoles.js" />
     <Content Include="Scripts\App\Client\clientDetail.html" />
     <Content Include="Scripts\App\Client\clientDetailController.js" />
+    <Content Include="Scripts\App\Client\clientEdit.html" />
+    <Content Include="Scripts\App\Client\clientEditController.js" />
     <Content Include="Scripts\App\Client\clientForm.html" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
     <Content Include="Scripts\App\Employee\addEmployeeController.js" />
@@ -194,14 +196,11 @@
     <Content Include="Scripts\App\Trip\orderTrip.html" />
     <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
-    <Content Include="Scripts\App\Warehouse\addWarehouse.html" />
-    <Content Include="Scripts\App\Warehouse\addWarehouseController.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseForm.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseList.html" />
-    <Content Include="Scripts\App\Warehouse\warehouseListController.js" />
-    <Content Include="Scripts\App\Warehouse\1.warehouseModule.js" />
     <Content Include="Scripts\Lib\angular-animate.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
+    <Content Include="Content\css\ng-tags-input.bootstrap.css" />
+    <Content Include="Content\css\ng-tags-input.css" />
+    <Content Include="Scripts\Lib\ng-tags-input.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
@@ -209,6 +208,7 @@
     <Content Include="Scripts\Util\addButton.html" />
     <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
+    <Content Include="Scripts\Util\crudStatus.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\deleteButton.html" />
@@ -233,7 +233,6 @@
     <Content Include="Scripts\App\Truck\truckStatusReportController.js" />
     <Content Include="Scripts\Util\url.js" />
     <Content Include="Scripts\Util\1.utilModule.js" />
-    <Content Include="Scripts\App\Warehouse\warehouseService.js" />
     <Content Include="Scripts\Lib\angular-route.js" />
     <Content Include="Scripts\Lib\angular-tablesort.js" />
     <Content Include="Scripts\Lib\angular.js" />
@@ -262,7 +261,6 @@
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

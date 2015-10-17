@@ -77,6 +77,11 @@
                     angular.extend(user, response.Data);
                     return user;
                 });
+            },
+            getUsersByRole: function(role) {
+                return service.getAll().then(function() {
+                    return _.where(_users, { Role: role });
+                });
             }
         };
 
