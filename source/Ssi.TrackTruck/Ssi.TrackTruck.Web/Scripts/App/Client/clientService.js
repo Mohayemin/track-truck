@@ -19,6 +19,10 @@
                         _clients.push.apply(_clients, clients);
                         _clientsById = buildIdMap(_clients);
 
+                        _clients.forEach(function (client) {
+                            client.BranchesById = buildIdMap(client.Branches);
+                        });
+
                         return _clients;
                     });
                 }
@@ -35,9 +39,21 @@
                     return client;
                 });
             },
+            edit: function (request) {
+                return repository.post('Client', 'Edit', request).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not edit truck');
+                    }
+
+                    var client = response.Data;
+                    angular.extend(_clientsById[client.Id], client);
+
+                    return client;
+                });
+            },
             get: function (id) {
-                return _loadPromise.then(function () {
-                    return _.find(_clients, { Id: id });
+                return service.getAll().then(function () {
+                    return _clientsById[id];
                 });
             },
             'delete': function (client) {
@@ -46,6 +62,11 @@
                 }
                 return repository.post('Client', 'Delete', { id: client.Id }).then(function (response) {
                     if (!response.IsError) {
+                        var index = _.findIndex(_clients, { Id: client.Id });
+                        if (index >= 0) {
+                            _clients.splice(index, 1);
+                            delete _clientsById[client.Id];
+                        }
                         return response;
                     }
 

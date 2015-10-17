@@ -51,6 +51,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL
         public void CreateAll<T>(IEnumerable<T> items) where T : IEntity
         {
             var list = items.ToList();
+            if (!list.Any())
+            {
+                return;
+            }
             list.ForEach(UpdateForCreation);
             Collection<T>().InsertBatch(list);
         }

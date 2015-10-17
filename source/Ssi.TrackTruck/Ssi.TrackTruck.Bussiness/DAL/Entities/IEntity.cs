@@ -2,10 +2,9 @@
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
-    public interface IEntity
+    public interface IEntity : IDeletable
     {
         string Id { get; set; }
-        bool IsDeleted { get; set; }
         DateTime CreationTime { get; set; }
         string CreatorId { get; set; }
     }
