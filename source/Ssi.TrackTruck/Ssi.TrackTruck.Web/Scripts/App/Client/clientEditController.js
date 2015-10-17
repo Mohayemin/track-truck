@@ -2,14 +2,18 @@
     '$scope',
     '$routeParams',
     'clientService',
+    'userService',
     'crudStatus',
     'globalMessage',
+    'userRoles',
     '$location',
     function ($scope,
         $routeParams,
         clientService,
+        userService,
         crudStatus,
         globalMessage,
+        userRoles,
         $location) {
 
         clientService.get($routeParams['id']).then(function (client) {
@@ -17,6 +21,10 @@
             $scope.request.Branches.forEach(function (branch) {
                 setBranchStatus(branch);
             });
+        });
+
+        userService.getUsersByRole(userRoles.branchCustodian).then(function (custodians) {
+            $scope.custodianUsers = custodians;
         });
 
         $scope.addBranch = function () {
@@ -36,7 +44,7 @@
             branch.ModificationStatus = branch.ModificationStatus || crudStatus.unchanged;
             branch.isDeleted = crudStatus.allDeleted.indexOf(branch.ModificationStatus) >= 0;
             branch.cssClass = statusClass[branch.ModificationStatus];
-        }        
+        }
 
         $scope.deleteBranch = function (branch) {
             branch.ModificationStatus = crudStatus.getStatusOnDelete(branch.ModificationStatus);
