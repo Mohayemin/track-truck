@@ -1,22 +1,12 @@
 ﻿userModule.controller('addUserController', [
     '$scope',
-    'clientService',
     'userService',
     'userRoles',
     '$location',
     'globalMessage',
-    function($scope, clientService, userService, userRoles, $location, globalMessage) {
+    function($scope, userService, userRoles, $location, globalMessage) {
 
         $scope.userRoles = userRoles;
-
-        clientService.getAll().then(function(clients) {
-            $scope.clients = clients;
-            console.log(clients);
-        });
-
-        $scope.showBranchSelect = function() {
-            return $scope.request.Role == userRoles.branchCustodian;
-        };
 
         $scope.request = {
             InitialPassword: userService.generateInitialPassword()
