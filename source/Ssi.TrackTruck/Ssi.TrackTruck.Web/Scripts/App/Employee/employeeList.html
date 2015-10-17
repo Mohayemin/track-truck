@@ -19,7 +19,7 @@
                 <td ng-bind="employee.Designation"></td>
                 <td>
                     <edit-button module="'employee'" item-id="employee.Id" ng-class="'btn-xs'"></edit-button>
-                    <delete-button controller="'Employee'" list="employees" index="$index"></delete-button>
+                    <delete-button module="'employee'" item-id="employee.Id" action="deleteItem"></delete-button>
                 </td>
             </tr>
         </tbody>

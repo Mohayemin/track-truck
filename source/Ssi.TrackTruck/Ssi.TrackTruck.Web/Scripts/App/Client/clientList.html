@@ -21,7 +21,7 @@
                 <td ng-bind="client.Branches.length"></td>
                 <td>
                     <edit-button module="'client'" item-id="client.Id" ng-class="'btn-xs'"></edit-button>
-                    <delete-button controller="'Client'" list="clients" index="$index"></delete-button>
+                    <delete-button module="'client'" item-id="client.Id" action="deleteItem"></delete-button>
                 </td>
             </tr>
         </tbody>

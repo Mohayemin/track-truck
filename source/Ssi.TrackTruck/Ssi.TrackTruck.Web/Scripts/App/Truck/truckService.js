@@ -86,6 +86,20 @@
                     return _trucksById;
                 });
             },
+            'delete': function (id) {
+                return repository.post('Truck', 'Delete', { id: id }).then(function (response) {
+                    if (!response.IsError) {
+                        var index = _.findIndex(_trucks, { Id: id });
+                        if (index >= 0) {
+                            _trucks.splice(index, 1);
+                            delete _trucksById[id];
+                        }
+                        return response;
+                    }
+
+                    return $q.reject(response.Message || response.status || 'could not delete client');
+                });
+            },
             edit: function(request) {
                 var formattedRequest = {
                     Id: request.Id,

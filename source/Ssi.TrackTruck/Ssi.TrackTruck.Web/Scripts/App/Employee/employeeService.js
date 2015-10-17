@@ -37,6 +37,20 @@
                     return _.find(_employees, { Id: id });
                 });
             },
+            'delete': function (id) {
+                return repository.post('Employee', 'Delete', { id: id }).then(function (response) {
+                    if (!response.IsError) {
+                        var index = _.findIndex(_employees, { Id: id });
+                        if (index >= 0) {
+                            _employees.splice(index, 1);
+                            delete _employeeById[id];
+                        }
+                        return response;
+                    }
+
+                    return $q.reject(response.Message || response.status || 'could not delete client');
+                });
+            },
             add: function (request) {
                 return repository.post('Employee', 'Add', request).then(function (response) {
                     if (response.IsError) {

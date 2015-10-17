@@ -7,5 +7,7 @@
         userService.getAll().then(function(users) {
             $scope.users = users;
         });
+
+        $scope.deleteItem = userService.delete;
     }
 ]);

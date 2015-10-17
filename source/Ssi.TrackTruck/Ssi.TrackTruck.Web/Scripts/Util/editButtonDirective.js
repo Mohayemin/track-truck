@@ -13,7 +13,6 @@
                 'url',
                 function ($scope,
                     url) {
-                    console.log($scope.cssClass);
                     $scope.href = url.route($scope.module, $scope.itemId, 'edit');
                 }
             ]
