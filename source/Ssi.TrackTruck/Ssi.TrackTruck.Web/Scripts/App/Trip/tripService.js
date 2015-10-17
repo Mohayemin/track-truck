@@ -29,7 +29,12 @@
                     delete foramtterRequest[prop];
                 });
 
-                return repository.post('Trip', 'Order', foramtterRequest);
+                return repository.post('Trip', 'Order', foramtterRequest).then(function(response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message);
+                    }
+                    return response;
+                });
             },
             getMyActiveDrops: function () {
                 return repository.get('Trip', 'MyActiveDrops');
@@ -78,7 +83,7 @@
                                 var routeList = [pickupAddress.Text];
 
                                 drops.forEach(function (drop) {
-                                    return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
+                                    return routeList.push(_.find(trip.Client.Branches, { Id: drop.BranchId }).Name);
                                 });
 
                                 trip.Route = routeList.join(', ');
