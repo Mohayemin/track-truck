@@ -18,8 +18,10 @@
                 <td ng-bind="truck.DriverName"></td>
                 <td ng-bind="truck.HelperName"></td>
                 <td>
-                    <edit-button module="'truck'" item-id="truck.Id" ng-class="'btn-xs'"></edit-button>
-                    <delete-button module="'truck'" item-id="truck.Id" action="deleteItem"></delete-button>
+                    <div class="btn-group btn-group-xs">
+                        <edit-button module="'truck'" item-id="truck.Id" ng-class="'btn-xs'"></edit-button>
+                        <delete-button module="'truck'" item-id="truck.Id" action="deleteItem"></delete-button>
+                    </div>
                 </td>
             </tr>
         </tbody>
