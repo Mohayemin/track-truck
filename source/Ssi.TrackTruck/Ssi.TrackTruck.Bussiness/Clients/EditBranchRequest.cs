@@ -1,4 +1,5 @@
-﻿using Ssi.TrackTruck.Bussiness.DAL.Clients;
+﻿using MongoDB.Bson;
+using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.Helpers;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
@@ -11,7 +12,8 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         public override DbBranch ToBranch()
         {
             var branch = base.ToBranch();
-            branch.Id = Id;
+            branch.Id = ModificationStatus == CrudStatus.Added ? ObjectId.GenerateNewId().ToString() : Id;
+
             return branch;
         }
     }

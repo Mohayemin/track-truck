@@ -16,7 +16,7 @@
         globalMessage) {
 
         $scope.request = {
-            ExpectedPickupTime: { year: 2015, month: 6, day: 15, hour: 13, minute: 10 },
+            ExpectedPickupTime: { year: 2015, month: 10, day: 15, hour: 13, minute: 10 },
             Drops: [],
             HelperIds: [undefined, undefined, undefined],
             FuelCost: 0,
@@ -100,8 +100,8 @@
             globalMessage.info('Creating Order...', 0);
             tripService.orderTrip($scope.request).then(function () {
                 globalMessage.success('Order Created.');
-            }).catch(function () {
-                globalMessage.error('Could not create order, please try again.');
+            }).catch(function (message) {
+                globalMessage.error(message);
             });
         };
     }
