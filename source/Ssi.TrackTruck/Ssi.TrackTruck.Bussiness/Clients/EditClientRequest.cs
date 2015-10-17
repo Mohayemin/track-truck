@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
 {
-    public class AddClientRequest : IValidatableObject
+    // TODO: this class has a lot of duplicacies with AddClientRequest, fix it
+    public class EditClientRequest
     {
+        public string Id { get; set; }
         [Required(ErrorMessage = "Please specify client's name")]
         public string Name { get; set; }
 
@@ -16,22 +17,12 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public List<DbTextItem> Addresses { get; set; }
 
-        public List<AddBranchRequest> Branches { get; set; }
+        public List<EditBranchRequest> Branches { get; set; }
 
-        public AddClientRequest()
+        public EditClientRequest()
         {
-            Branches = new List<AddBranchRequest>();
-        }
-
-        public DbClient ToDbClient()
-        {
-            return  new DbClient
-            {
-                Name = Name,
-                TrucksPerDay = TrucksPerDay,
-                Addresses = Addresses ?? new List<DbTextItem>(),
-                Branches = Branches.Select(b => b.ToBranch()).ToList()
-            };
+            Branches = new List<EditBranchRequest>();
+            Addresses = new List<DbTextItem>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

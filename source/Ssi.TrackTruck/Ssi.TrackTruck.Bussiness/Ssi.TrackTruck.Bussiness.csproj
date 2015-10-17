@@ -56,12 +56,17 @@
     <Compile Include="Clients\AddClientRequest.cs" />
     <Compile Include="Clients\AddBranchRequest.cs" />
     <Compile Include="Clients\ClientService.cs" />
+    <Compile Include="Clients\EditBranchRequest.cs" />
+    <Compile Include="Clients\EditClientRequest.cs" />
+    <Compile Include="DAL\Clients\DbDeletedAddress.cs" />
+    <Compile Include="DAL\Clients\DbDeletedBranch.cs" />
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\Clients\DbClient.cs" />
     <Compile Include="DAL\Clients\DbBranch.cs" />
     <Compile Include="DAL\DbIndexBuilder.cs" />
+    <Compile Include="DAL\Entities\DbDeletedItem.cs" />
     <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
     <Compile Include="DAL\Entities\DbTextItem.cs" />
@@ -78,6 +83,7 @@
     <Compile Include="Employees\EditEmployeeRequest.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
+    <Compile Include="Helpers\CrudStatus.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="DAL\Users\DbUser.cs" />

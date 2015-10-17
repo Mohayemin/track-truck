@@ -151,6 +151,8 @@
     <Content Include="Scripts\App\Auth\userRoles.js" />
     <Content Include="Scripts\App\Client\clientDetail.html" />
     <Content Include="Scripts\App\Client\clientDetailController.js" />
+    <Content Include="Scripts\App\Client\clientEdit.html" />
+    <Content Include="Scripts\App\Client\clientEditController.js" />
     <Content Include="Scripts\App\Client\clientForm.html" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
     <Content Include="Scripts\App\Employee\addEmployeeController.js" />
@@ -206,6 +208,7 @@
     <Content Include="Scripts\Util\addButton.html" />
     <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
+    <Content Include="Scripts\Util\crudStatus.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\deleteButton.html" />
