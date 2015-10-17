@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Entities
 {
+    [BsonIgnoreExtraElements]
     public class DbDeletedItem<TItem> : IEntity
     {
         [BsonRepresentation(BsonType.ObjectId)]
