@@ -2,11 +2,24 @@
     '$scope',
     '$location',
     'globalMessage',
+    'userRoles',
+    'userService',
     'clientService',
-    function($scope, $location, globalMessage, clientService) {
+    function ($scope
+        , $location
+        , globalMessage
+        , userRoles
+        , userService
+        , clientService) {
+
         $scope.request = {
             Branches: []
         };
+
+        userService.getUsersByRole(userRoles.branchCustodian).then(function(custodians) {
+            $scope.custodianUsers = custodians;
+            console.log(custodians);
+        });
 
         $scope.add = function() {
             globalMessage.info('adding client', 0);
