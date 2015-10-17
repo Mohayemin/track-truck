@@ -1,10 +1,8 @@
 ﻿<div>
     <page-title>
         <div class="btn-group btn-group-sm pull-right">
-            <a class="btn btn-xs btn-warning" ng-href="{{url.route('client', client.Id, 'edit')}}">
-                <i class="fa fa-lg fa-fw fa-edit"></i>
-            </a>
-            <button class="btn btn-xs btn-danger" ng-click="delete()">
+            <edit-button module="'client'" item-id="client.Id" ng-class="btn-sm"></edit-button>
+            <button class="btn btn-danger" ng-click="delete()">
                 <i class="fa fa-lg fa-fw fa-trash"></i>
             </button>
         </div>
