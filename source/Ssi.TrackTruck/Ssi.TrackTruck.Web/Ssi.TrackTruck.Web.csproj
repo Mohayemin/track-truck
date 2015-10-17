@@ -208,6 +208,7 @@
     <Content Include="Scripts\Util\addButton.html" />
     <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
+    <Content Include="Scripts\Util\crudStatus.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\deleteButton.html" />

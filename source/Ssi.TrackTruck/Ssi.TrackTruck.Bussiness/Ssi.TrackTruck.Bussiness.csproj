@@ -78,6 +78,7 @@
     <Compile Include="Employees\EditEmployeeRequest.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
+    <Compile Include="Helpers\CrudStatus.cs" />
     <Compile Include="Helpers\DateTimeModel.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="DAL\Users\DbUser.cs" />
