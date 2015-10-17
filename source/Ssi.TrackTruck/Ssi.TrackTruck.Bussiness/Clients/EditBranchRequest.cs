@@ -8,11 +8,11 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         public string Id { get; set; }
         public CrudStatus ModificationStatus { get; set; }
 
-        public void Update(DbBranch dbBranch)
+        public override DbBranch ToBranch()
         {
-            dbBranch.Name = Name;
-            dbBranch.Address = Address;
-            dbBranch.CustodianUserId = CustodianUserId;
+            var branch = base.ToBranch();
+            branch.Id = Id;
+            return branch;
         }
     }
 }

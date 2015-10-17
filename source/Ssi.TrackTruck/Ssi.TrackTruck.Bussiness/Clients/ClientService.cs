@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.Helpers;
@@ -10,10 +12,12 @@ namespace Ssi.TrackTruck.Bussiness.Clients
     public class ClientService
     {
         private readonly IRepository _repository;
+        private readonly ISignedInUser _user;
 
-        public ClientService(IRepository repository)
+        public ClientService(IRepository repository, ISignedInUser user)
         {
             _repository = repository;
+            _user = user;
         }
 
         public IEnumerable<DbClient> GetAll()
@@ -56,33 +60,35 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         public Response Edit(EditClientRequest request)
         {
             var client = _repository.GetById<DbClient>(request.Id);
-            
-            // Add
-            var addedBranches = request.Branches.Where(branch => branch.ModificationStatus == CrudStatus.Added);
-            client.Branches.AddRange(addedBranches.Select(branch=>branch.ToBranch()));
-            
-            // Delete
-            var deletedBrancheIds = request.Branches.Where(branch => branch.ModificationStatus.HasFlag(CrudStatus.Deleted)).Select(branch=>branch.Id).ToList();
-            var deletedDbBranches = client.Branches.Where(branch => deletedBrancheIds.Contains(branch.Id));
-            client.Branches.RemoveAll(branch => deletedBrancheIds.Contains(branch.Id));
-            client.DeletedBranches.AddRange(deletedDbBranches);
 
-            // Edit
-            var editedBranches = request.Branches.Where(branch => branch.ModificationStatus == CrudStatus.Edited);
-            foreach (var branchRequest in editedBranches)
+            var deletedBrancheIds = request.Branches.Where(branch => branch.ModificationStatus.HasFlag(CrudStatus.Deleted)).Select(branch => branch.Id).ToList();
+            var deletedDbBranches = client.Branches.Where(branch => deletedBrancheIds.Contains(branch.Id));
+
+            client.Branches =
+                request.Branches.Where(branch => !branch.ModificationStatus.HasFlag(CrudStatus.Deleted))
+                    .Select(branch => branch.ToBranch()).ToList();
+
+            var now = DateTime.UtcNow;
+            _repository.CreateAll(deletedDbBranches.Select(branch => new DbDeletedBranch
             {
-                var dbBranch = client.Branches.FirstOrDefault(branch => branch.Id == branchRequest.Id);
-                if (dbBranch != null)
-                {
-                    branchRequest.Update(dbBranch);
-                }
-            }
+                DeletionTime = now,
+                ClientId = client.Id,
+                DeletorUserId = _user.Id,
+                DeletedItem = branch
+            }));
 
             var deletedAddress =
                 client.Addresses.Where(dbAddress => request.Addresses.All(reqAddress => reqAddress.Id != dbAddress.Id));
-            client.DeletedAddresses.AddRange(deletedAddress);
 
             client.Addresses = request.Addresses;
+
+            _repository.CreateAll(deletedAddress.Select(address => new DbDeletedAddress
+            {
+                DeletionTime    = now,
+                ClientId = client.Id,
+                DeletorUserId = _user.Id,
+                DeletedItem = address
+            }));
 
             client.Name = request.Name;
             client.TrucksPerDay = request.TrucksPerDay;
