@@ -18,7 +18,6 @@
 
         userService.getUsersByRole(userRoles.branchCustodian).then(function(custodians) {
             $scope.custodianUsers = custodians;
-            console.log(custodians);
         });
 
         $scope.add = function() {
