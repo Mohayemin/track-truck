@@ -3,11 +3,13 @@
     '$routeParams',
     'clientService',
     'crudStatus',
+    'globalMessage',
     '$location',
     function ($scope,
         $routeParams,
         clientService,
         crudStatus,
+        globalMessage,
         $location) {
 
         clientService.get($routeParams['id']).then(function (client) {
@@ -34,7 +36,7 @@
             branch.ModificationStatus = branch.ModificationStatus || crudStatus.unchanged;
             branch.isDeleted = crudStatus.allDeleted.indexOf(branch.ModificationStatus) >= 0;
             branch.cssClass = statusClass[branch.ModificationStatus];
-        }
+        }        
 
         $scope.deleteBranch = function (branch) {
             branch.ModificationStatus = crudStatus.getStatusOnDelete(branch.ModificationStatus);
@@ -51,8 +53,14 @@
             setBranchStatus(branch);
         };
 
-        $scope.save = function() {
-            $location.url('client/list');
+        $scope.save = function () {
+            globalMessage.info('editing client', 0);
+            clientService.edit($scope.request).then(function () {
+                $location.url('client/list');
+                globalMessage.success('client edited');
+            }).catch(function (message) {
+                globalMessage.error(message);
+            });
         };
     }
 ]);

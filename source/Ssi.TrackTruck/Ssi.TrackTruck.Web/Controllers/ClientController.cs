@@ -38,5 +38,13 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _clientService.Delete(id);
             return Json(response);
         }
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin)]
+        public ActionResult Edit(EditClientRequest request)
+        {
+            var response = _clientService.Edit(request);
+            return new JsonNetResult(response);
+        }
     }
 }

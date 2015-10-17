@@ -19,6 +19,11 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public List<EditBranchRequest> Branches { get; set; }
 
+        public EditClientRequest()
+        {
+            Branches = new List<EditBranchRequest>();
+            Addresses = new List<DbTextItem>();
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
