@@ -2,10 +2,10 @@
     <page-title></page-title>
     <form ng-submit="loadReport()" class="form-horizontal">
         <div class="col-sm-5">
-            <datetime model="filter.fromDate" hide-time="true"></datetime>
+            <datetime ng-model="filter.fromDate" hide-time="true"></datetime>
         </div>
         <div class="col-sm-5">
-            <datetime model="filter.toDate" hide-time="true"></datetime>
+            <datetime ng-model="filter.toDate" hide-time="true"></datetime>
         </div>
         <div class="col-sm-2">
             <div class="form-group">
@@ -50,7 +50,7 @@
             <tbody>
                 <tr ng-repeat="row in reportRows" ts-repeat>
                     <td ng-bind="row.Client.Name"></td>
-                    <td ng-bind="row.ExpectedPickupTime | philDate"></td>
+                    <td ng-bind="row.ExpectedPickupTimeUtc | philDate"></td>
                     <td ng-bind="row.Route"></td>
                     <td ng-bind="row.TotalNumberOfBoxes"></td>
                     <td ng-bind="row.DeliveredNumberOfBoxes"></td>

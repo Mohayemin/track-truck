@@ -3,6 +3,9 @@
     function ($filter) {
         var dateFilter = $filter('date');
         var service = {
+            formatIso: function (date) {
+                return date.toISOString();
+            },
             formatDate: function (date, format) {
                 return dateFilter(date, format || 'yyyy-MM-dd');
             },
@@ -17,6 +20,11 @@
             yesterday: function() {
                 var yesterday = service.today();
                 yesterday.setDate(yesterday.getDate() - 1);
+                return yesterday;
+            },
+            tomorrow: function() {
+                var yesterday = service.today();
+                yesterday.setDate(yesterday.getDate() + 1);
                 return yesterday;
             }
         };
