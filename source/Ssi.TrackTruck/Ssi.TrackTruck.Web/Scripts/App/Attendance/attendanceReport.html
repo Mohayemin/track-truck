@@ -1,0 +1,41 @@
+﻿<div>
+    <page-title></page-title>
+
+    <form ng-submit="loadReport()" class="form-horizontal">
+        <div class="col-sm-5">
+            <datetime model="filter.fromDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-5">
+            <datetime model="filter.toDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <button type="submit" class="btn btn-default btn-block">Load</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table class="table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        User
+                    </th>
+                    <th ng-repeat="date in dates" ng-bind="date.label">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in reportRows">
+                    <td ng-bind="row.FullName">
+                    </td>
+                    <td ng-repeat="date in dates" class="attendance" ng-class="{present:row.Attendance[date.value]}">
+                        <!--<i class="fa fa-lg"
+                               ng-class="{'fa-check': row.Attendance[date.value], 'fa-close': !row.Attendance[date.value]}"></i>-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
