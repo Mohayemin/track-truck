@@ -6,15 +6,9 @@
         attendanceService,
         wellKnownDateTime
     ) {
-        var today = new Date();
-        var yesterday = new Date();
-        today.setHours(0, 0, 0, 0);
-        yesterday.setDate(yesterday.getDate() - 1);
-        yesterday.setHours(0, 0, 0, 0);
-
-        var filter = {
-            fromDate: yesterday,
-            toDate: today
+       var filter = {
+            fromDate: wellKnownDateTime.yesterday(),
+            toDate: wellKnownDateTime.today()
         };
 
         $scope.filter = filter;
