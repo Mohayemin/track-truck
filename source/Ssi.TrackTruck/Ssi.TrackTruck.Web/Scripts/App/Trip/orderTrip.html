@@ -1,10 +1,7 @@
-﻿
-<div>
+﻿<div>
+    <page-title></page-title>
     <form ng-submit="order()" class="form-horizontal">
         <fieldset>
-            <legend>
-                <span class="col-sm-offset-2">Order a trip</span>
-            </legend>
             <div class="well">
                 <div class="row">
                     <div class="col-sm-6">
@@ -33,8 +30,8 @@
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Pickup Point</label>
                             <div class="col-sm-10">
-                                <select ng-model="request.PickupAddress" ng-required="true"
-                                        ng-options="address for address in request.Client.Addresses"
+                                <select ng-model="request.PickupAddressId" ng-required="true"
+                                        ng-options="address.Id as address.Text for address in request.Client.Addresses"
                                         class="form-control">
                                     <option value=""> -- Choose Pickup Point -- </option>
                                 </select>
@@ -45,7 +42,7 @@
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Pickup Time</label>
                             <div class="col-sm-10">
-                                <datetime model="request.ExpectedPickupTime" required="true" options="{sm: true}"></datetime>
+                                <datetime ng-model="request.ExpectedPickupTime" required="true" options="{sm: true}"></datetime>
                             </div>
                         </div>
                     </div>
@@ -70,7 +67,7 @@
                                 <div class="form-group form-group-sm">
                                     <label class="col-sm-2 control-label">Drop Time</label>
                                     <div class="col-sm-10">
-                                        <datetime model="drop.ExpectedDropTime" required="true" options="{sm: true}"></datetime>
+                                        <datetime ng-model="drop.ExpectedDropTime" required="true" options="{sm: true}"></datetime>
                                     </div>
                                 </div>
                             </div>
@@ -287,8 +284,8 @@
                 </div>
             </div>
             <div class="form-group form-group-sm">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <input class="btn btn-success btn-block" type="submit" value="Put Order" />
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-lg fa-ticket"></i> Place Order</button>
                 </div>
             </div>
         </fieldset>

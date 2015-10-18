@@ -3,22 +3,22 @@
     'clientService',
     'truckService',
     'tripService',
-    'warehouseService',
     'employeeService',
     'designation',
+    'wellKnownDateTime',
     'globalMessage',
     function orderTripController(
         $scope,
         clientService,
         truckService,
         tripService,
-        warehouseService,
         employeeService,
         designation,
+        wellKnownDateTime,
         globalMessage) {
 
         $scope.request = {
-            ExpectedPickupTime: { year: 2015, month: 6, day: 15, hour: 13, minute: 10 },
+            ExpectedPickupTime: wellKnownDateTime.tomorrow(),
             Drops: [],
             HelperIds: [undefined, undefined, undefined],
             FuelCost: 0,
@@ -33,14 +33,14 @@
             TripTicketNumber: 'TT-' + Math.round(Math.random() * 1000)
         };
 
-        $scope.addDr = function(drop) {
+        $scope.addDr = function (drop) {
             drop.DeliveryReceipts.push({});
         };
 
-        $scope.addDrop = function() {
+        $scope.addDrop = function () {
             var drop = {
                 BranchId: null,
-                ExpectedDropTime: {},
+                ExpectedDropTime: wellKnownDateTime.tomorrow(),
                 DeliveryReceipts: []
             };
             $scope.addDr(drop);
@@ -49,48 +49,47 @@
 
         $scope.addDrop();
 
-        $scope.getTotalBoxes = function(drop) {
-            return drop.DeliveryReceipts.map(function(dr) {
+        $scope.getTotalBoxes = function (drop) {
+            return drop.DeliveryReceipts.map(function (dr) {
                 return dr.NumberOfBoxes;
-            }).reduce(function(oldV, v) {
+            }).reduce(function (oldV, v) {
                 return isNaN(v) ? oldV : (v + oldV);
             }, 0);
         };
 
-        clientService.getAll().then(function(clients) {
+        clientService.getAll().then(function (clients) {
             $scope.clients = clients;
             $scope.request.Client = clients[clients.length - 1];
-            $scope.request.PickupAddress = $scope.request.Client.Addresses[0];
+            $scope.request.PickupAddressId = ($scope.request.Client.Addresses[0] || {}).Id;
 
             var drop = $scope.request.Drops[0];
-            drop.BranchId = $scope.request.Client.Branches[0].Id;
-            angular.extend(drop.ExpectedDropTime, { year: 2015, month: 9, day: 3, hour: 18, minute: 36 });
+            drop.BranchId = ($scope.request.Client.Branches[0] || {}).Id;
             drop.DeliveryReceipts[0].DrNumber = "ER-234";
             drop.DeliveryReceipts[0].NumberOfBoxes = 4;
 
-        }).catch(function() {
+        }).catch(function () {
             console.error('could not load clients');
         });
 
-        truckService.getAll().then(function(trucks) {
+        truckService.getAll().then(function (trucks) {
             $scope.trucks = trucks;
             $scope.request.Truck = trucks[0];
         });
 
-        employeeService.getAllByDesignation(designation.driver).then(function(drivers) {
+        employeeService.getAllByDesignation(designation.driver).then(function (drivers) {
             $scope.drivers = drivers;
             $scope.request.DriverId = drivers[0].Id;
         });
-        employeeService.getAllByDesignation(designation.helper).then(function(helpers) {
+        employeeService.getAllByDesignation(designation.helper).then(function (helpers) {
             $scope.helpers = helpers;
             $scope.request.HelperIds[0] = helpers[0].Id;
         });
-        employeeService.getAllByDesignation(designation.supervisor).then(function(supervisors) {
+        employeeService.getAllByDesignation(designation.supervisor).then(function (supervisors) {
             $scope.supervisors = supervisors;
             $scope.request.SupervisorId = supervisors[0].Id;
         });
 
-        $scope.$watch('request.Truck', function() {
+        $scope.$watch('request.Truck', function () {
             var truck = $scope.request.Truck;
             if (truck) {
                 $scope.request.DriverId = truck.DriverId || $scope.request.DriverId;
@@ -98,12 +97,12 @@
             }
         });
 
-        $scope.order = function() {
+        $scope.order = function () {
             globalMessage.info('Creating Order...', 0);
-            tripService.orderTrip($scope.request).then(function() {
+            tripService.orderTrip($scope.request).then(function () {
                 globalMessage.success('Order Created.');
-            }).catch(function() {
-                globalMessage.error('Could not create order, please try again.');
+            }).catch(function (message) {
+                globalMessage.error(message);
             });
         };
     }

@@ -55,10 +55,10 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return userBrancheIds;
         }
 
-        public IQueryable<DbTrip> GetTripsInRange(DateTime from, DateTime to)
+        public IQueryable<DbTrip> GetTripsInRange(DateTime fromUtc, DateTime toUtc)
         {
             var trips =
-                _trips.AsQueryable().Where(trip => trip.ExpectedPickupTime >= from && trip.ExpectedPickupTime <= to);
+                _trips.AsQueryable().Where(trip => trip.ExpectedPickupTimeUtc >= fromUtc && trip.ExpectedPickupTimeUtc <= toUtc);
 
             return trips;
         }

@@ -7,19 +7,17 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class DbTrip : IEntity
+    public class DbTrip : Entity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         public TripStatus Status { get; set; }
-
 
         public string TripTicketNumber { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string ClientId { get; set; }
-        public string PickupAddress { get; set; }
-        public DateTime ExpectedPickupTime { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string PickupAddressId { get; set; }
+        public DateTime ExpectedPickupTimeUtc { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
@@ -44,9 +42,5 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         
         [BsonRepresentation(BsonType.ObjectId)]
         public string SupervisorId { get; set; }
-        
-        public bool IsDeleted { get; set; }
-        public DateTime CreationTime { get; set; }
-        public string CreatorId { get; set; }
     }
 }

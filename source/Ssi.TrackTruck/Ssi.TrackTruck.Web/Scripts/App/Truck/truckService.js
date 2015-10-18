@@ -1,46 +1,16 @@
 ﻿truckModule.factory('truckService', [
     'repository',
+    'buildIdMap',
     '$q',
     'employeeService',
     function truckService(repository
+        , buildIdMap
         , $q
         , employeeService) {
 
         var _trucks = [];
         var _trucksById = [];
         var _loadPromise = null;
-
-        function buildIdMap() {
-            _trucksById = {};
-            _trucks.forEach(function (truck) {
-                _trucksById[truck.Id] = truck;
-            });
-        }
-
-        function calculateReportSummary(trucks) {
-            var summary = {
-                trucks: { total: trucks.length },
-                items: {}
-            };
-
-            [0, 1001, 1002, 1003].forEach(function(status) {
-                var trucksWithStatus = _.filter(trucks, { Status: status });
-                summary.trucks[status] = trucksWithStatus.length;
-                summary.items[status] = trucksWithStatus.reduce(function(memo, truck) {
-                    return memo + truck.ItemsCarrying;
-                }, 0);
-            });
-
-            summary.items.total = trucks.reduce(function(memo, truck) {
-                return memo + truck.ItemsCarrying;
-            }, 0);
-
-            return summary;
-        }
-
-        function getCurrentStatus() {
-            return repository.get('Truck', 'GetCurrentStatus');
-        }
 
         function add(request) {
             var formattedRequest = {
@@ -68,8 +38,7 @@
 
                     _trucks.length = 0;
                     _trucks.push.apply(_trucks, trucks);
-
-                    buildIdMap();
+                    _trucksById = buildIdMap(_trucks);
 
                     return _trucks;
                 });
@@ -78,18 +47,30 @@
         }
 
         var service = {
-            calculateReportSummary: calculateReportSummary,
-            getCurrentStatus: getCurrentStatus,
             add: add,
             getAll: getAll,
             get: function(id) {
-                return _loadPromise.then(function() {
+                return getAll().then(function () {
                     return _.find(_trucks, { Id: id });
                 });
             },
             getIndexedTrucks: function() {
                 return service.getAll().then(function() {
                     return _trucksById;
+                });
+            },
+            'delete': function (id) {
+                return repository.post('Truck', 'Delete', { id: id }).then(function (response) {
+                    if (!response.IsError) {
+                        var index = _.findIndex(_trucks, { Id: id });
+                        if (index >= 0) {
+                            _trucks.splice(index, 1);
+                            delete _trucksById[id];
+                        }
+                        return response;
+                    }
+
+                    return $q.reject(response.Message || response.status || 'could not delete client');
                 });
             },
             edit: function(request) {

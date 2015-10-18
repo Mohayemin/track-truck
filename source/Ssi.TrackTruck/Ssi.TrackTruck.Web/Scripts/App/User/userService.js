@@ -15,6 +15,20 @@
             });
         }
 
+        function getAll(force) {
+            if (!_loadPromise || force) {
+                _loadPromise = repository.get('User', 'All').then(function (users) {
+                    _users.length = 0;
+                    _users.push.apply(_users, users);
+
+                    buildIdMap();
+
+                    return _users;
+                });
+            }
+            return _loadPromise;
+        }
+
         var service = {
             generateInitialPassword: function () {
                 var text = '';
@@ -24,19 +38,7 @@
 
                 return text;
             },
-            getAll: function (force) {
-                if (!_loadPromise || force) {
-                    _loadPromise = repository.get('User', 'All').then(function (users) {
-                        _users.length = 0;
-                        _users.push.apply(_users, users);
-
-                        buildIdMap();
-
-                        return _users;
-                    });
-                }
-                return _loadPromise;
-            },
+            getAll: getAll,
             add: function (request) {
                 var formatterRequest = {
                     FirstName: request.FirstName,
@@ -58,6 +60,41 @@
             getIndexedUsers: function() {
                 return service.getAll().then(function() {
                     return _userById;
+                });
+            },
+            get: function (id) {
+                return getAll().then(function () {
+                    return _.find(_users, { Id: id });
+                });
+            },
+            'delete': function (id) {
+                return repository.post('User', 'Delete', { id: id }).then(function (response) {
+                    if (!response.IsError) {
+                        var index = _.findIndex(_users, { Id: id });
+                        if (index >= 0) {
+                            _users.splice(index, 1);
+                            delete _userById[id];
+                        }
+                        return response;
+                    }
+
+                    return $q.reject(response.Message || response.status || 'could not delete client');
+                });
+            },
+            edit: function (request) {
+                return repository.post('User', 'Save', request).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message || response.Status || 'Could not edit user');
+                    }
+
+                    var user = _userById[request.Id];
+                    angular.extend(user, response.Data);
+                    return user;
+                });
+            },
+            getUsersByRole: function(role) {
+                return service.getAll().then(function() {
+                    return _.where(_users, { Role: role });
                 });
             }
         };

@@ -1,44 +1,33 @@
 ﻿attendanceModule.controller('attendanceReportController', [
     '$scope',
     'attendanceService',
+    'wellKnownDateTime',
     function($scope,
-        attendanceService
+        attendanceService,
+        wellKnownDateTime
     ) {
-        var today = moment();
-        var yesterday = moment().add(-1, 'd');
-
-        $scope.filter = {
-            fromDate: {
-                year: yesterday.year(),
-                month: yesterday.month(),
-                day: yesterday.date()
-            },
-            toDate: {
-                year: today.year(),
-                month: today.month(),
-                day: today.date()
-            }
+       var filter = {
+            fromDate: wellKnownDateTime.yesterday(),
+            toDate: wellKnownDateTime.today()
         };
 
-        $scope.loadReport = function() {
-            var fd = $scope.filter.fromDate;
-            var td = $scope.filter.toDate;
-            var start = moment(new Date(fd.year, fd.month - 1, fd.day));
-            var end = moment(new Date(td.year, td.month - 1, td.day));
+        $scope.filter = filter;
 
-            if (start <= end) {
+        $scope.loadReport = function() {
+            if (filter.fromDate <= filter.toDate) {
                 attendanceService.getReport($scope.filter).then(function(data) {
                     $scope.reportRows = data;
                 });
 
-                var current = start;
+                var current = new Date(filter.fromDate);
+                var end = new Date(filter.toDate);
                 $scope.dates = [];
                 while (current <= end) {
                     $scope.dates.push({
-                        value: current.format('YYYYMMDD'),
-                        label: current.format('D-MMM-YY'),
+                        value: wellKnownDateTime.formatDateInt(current),
+                        label: wellKnownDateTime.formatDate(current, 'd-MMM-yy'),
                     });
-                    current.add(1, 'd');
+                    current.setDate(current.getDate() + 1);
                 }
             }
         };
