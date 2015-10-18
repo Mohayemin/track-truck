@@ -99,17 +99,18 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return Response.Success(drop, "Drop received");
         }
 
-        public TripReportResponse GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        public TripReportResponse GetReport(DateTime fromDate, DateTime toDate)
         {
-            var from = fromDate.ToDateTime(DateTimeConstants.PhilippineOffset);
-            var to = toDate.ToDateTime(DateTimeConstants.PhilippineOffset);
-            var trips = _tripRepository.GetTripsInRange(from, to);
+            fromDate = fromDate.ToUniversalTime();
+            toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
+            
+            var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
             var drops = _tripRepository.GetDropsOfTrips(trips.Select(trip => trip.Id));
 
             return new TripReportResponse
             {
-                FromDate = from,
-                ToDate = to,
+                FromDate = fromDate,
+                ToDate = toDate,
                 Trips = trips,
                 Drops = drops
             };

@@ -19,11 +19,12 @@ appModule.config([
     'datepickerPopupConfig',
     'datepickerConfig',
     'timepickerConfig',
-    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig) {
+    'dateFormat',
+    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig, dateFormat) {
         console.log('configuring app');
 
         $locationProvider.html5Mode(false);
-        datepickerPopupConfig.datepickerPopup = 'MMMM dd, yyyy';
+        datepickerPopupConfig.datepickerPopup = dateFormat;
         datepickerConfig.showWeeks = false;
         datepickerPopupConfig.appendToBody = true;
         timepickerConfig.showSpinners = false;
@@ -31,4 +32,4 @@ appModule.config([
 ]);
 
 appModule.value('_', window._);
-appModule.value('dateFormat', 'MMMM dd, yyyy');
+appModule.constant('dateFormat', 'MMMM dd, yyyy');
