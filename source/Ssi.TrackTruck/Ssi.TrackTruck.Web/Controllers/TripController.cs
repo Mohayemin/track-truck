@@ -51,5 +51,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var report = _tripService.GetReport(fromDate, toDate);
             return new JsonNetResult(report);
         }
+
+        [HttpGet]
+        public ActionResult Get(string id)
+        {
+            var trip = _tripService.Get(id);
+            return new JsonNetResult(trip);
+        }
     }
 }

@@ -100,6 +100,7 @@
     <Compile Include="Trips\TripOrderRequest.cs" />
     <Compile Include="Trips\TripMongoRepository.cs" />
     <Compile Include="Trips\TripReportResponse.cs" />
+    <Compile Include="Trips\TripResponse.cs" />
     <Compile Include="Trips\TripService.cs" />
     <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\EditTruckRequest.cs" />

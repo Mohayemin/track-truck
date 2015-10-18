@@ -67,6 +67,9 @@
 
                     return trips;
                 });
+            },
+            getTrip: function(tripId) {
+                return repository.get('Trip', 'Get', tripId);
             }
         };
 

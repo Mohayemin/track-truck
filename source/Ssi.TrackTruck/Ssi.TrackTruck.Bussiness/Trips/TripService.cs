@@ -114,5 +114,16 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             };
         }
 
+        public TripResponse Get(string id)
+        {
+            var trip = _repository.GetById<DbTrip>(id);
+            if (trip != null)
+            {
+                var drops = _repository.GetWhere<DbTripDrop>(drop => drop.TripId == trip.Id);
+                return new TripResponse{Trip = trip, Drops = drops};
+            }
+
+            return null;
+        }
     }
 }
