@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Ssi.TrackTruck.Bussiness.DAL.Clients;
+using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
 {
@@ -12,14 +14,26 @@ namespace Ssi.TrackTruck.Bussiness.Clients
         [Range(0, int.MaxValue, ErrorMessage = "Truck per day cannot be less than zero")]
         public int TrucksPerDay { get; set; }
 
-        public IList<AddBranchRequest> Branches { get; set; }
+        public List<DbTextItem> Addresses { get; set; }
+
+        public List<AddBranchRequest> Branches { get; set; }
 
         public AddClientRequest()
         {
             Branches = new List<AddBranchRequest>();
+            Addresses = new List<DbTextItem>();
         }
 
-
+        public DbClient ToDbClient()
+        {
+            return  new DbClient
+            {
+                Name = Name,
+                TrucksPerDay = TrucksPerDay,
+                Addresses = Addresses ?? new List<DbTextItem>(),
+                Branches = Branches.Select(b => b.ToBranch()).ToList()
+            };
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -33,6 +47,15 @@ namespace Ssi.TrackTruck.Bussiness.Clients
                 }
             }
 
+            if (Addresses.Any())
+            {
+                var addresses = Addresses.Select(item => item.Text).ToList();
+                var addressDuplicate = addresses.Distinct().Count() != addresses.Count();
+                if (addressDuplicate)
+                {
+                    yield return new ValidationResult("Two or more addresses are same");
+                }
+            }
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿<div>
+    <page-title>
+        <list-button module="'truck'"></list-button>
+    </page-title>
     <form ng-submit="add()" class="form-horizontal">
         <fieldset>
-            <legend>
-                <span class="col-sm-offset-2">Add a Truck</span>
-            </legend>
             <ng-include src="url.template('Truck', 'truckForm')"></ng-include>
 
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-12">
                     <button type="submit" class="btn btn-success btn-block">
                         <i class="fa fa-fw fa-lg fa-plus"></i> Add Truck
                     </button>

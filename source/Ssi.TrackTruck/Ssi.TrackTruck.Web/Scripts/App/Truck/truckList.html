@@ -1,14 +1,7 @@
 ﻿<div>
-    <h3>
-        List of Trucks
-
-        <label class="btn-group btn-group-sm pull-right">
-            <a ng-href="{{url.route('truck', 'add')}}" class="btn btn-default"
-               title="add a truck">
-                <i class="fa fa-lg fa-plus"></i>
-            </a>
-        </label>
-    </h3>
+    <page-title>
+        <add-button module="'truck'"></add-button>
+    </page-title>
 
     <table class="table table-hover table-responsive table-bordered" ts-wrapper>
         <thead>
@@ -24,9 +17,11 @@
                 <td ng-bind="truck.RegistrationNumber"></td>
                 <td ng-bind="truck.DriverName"></td>
                 <td ng-bind="truck.HelperName"></td>
-                <td>
-                    <edit-button module="'truck'" model="truck"></edit-button>
-                    <delete-button controller="'Truck'" list="trucks" index="$index"></delete-button>
+                <td class="action-col-2">
+                    <div class="btn-group btn-group-xs">
+                        <edit-button module="'truck'" item-id="truck.Id" ng-class="'btn-xs'"></edit-button>
+                        <delete-button module="'truck'" item-id="truck.Id" action="deleteItem"></delete-button>
+                    </div>
                 </td>
             </tr>
         </tbody>
