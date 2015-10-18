@@ -30,7 +30,7 @@
                 $scope.dates = [];
                 while (current <= end) {
                     $scope.dates.push({
-                        value: wellKnownDateTime.formatDate(current),
+                        value: wellKnownDateTime.formatDateInt(current),
                         label: wellKnownDateTime.formatDate(current, 'd-MMM-yy'),
                     });
                     current.setDate(current.getDate() + 1);
