@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
-using Ssi.TrackTruck.Bussiness.Helpers;
 
 namespace Ssi.TrackTruck.Bussiness.Attendances
 {
@@ -17,8 +17,10 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
             _repository = repository;
         }
 
-        public bool UpdateDailyHit(string userId, DateTime time)
+        public bool UpdateDailyHit(string userId)
         {
+            var offset = DateTimeOffset.Now.ToOffset(DateTimeConstants.PhilippineOffset);
+            var time = new DateTime(offset.Ticks, DateTimeKind.Unspecified);
             var user = _repository.GetById<DbUser>(userId);
 
             if (user == null)
@@ -36,10 +38,12 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
             return true;
         }
 
-        public object GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        public object GetReport(DateTimeOffset fromDate, DateTimeOffset toDate)
         {
-            /*var report = _repository
-                .GetWhere<DbDailyHit>(hit => hit.Date >= fromDate.DateInt && hit.Date <= toDate.DateInt)
+            var dbDailyHits = _repository
+                .GetWhere<DbDailyHit>(hit => hit.Date >= fromDate && hit.Date <= toDate).ToList();
+
+            var report = dbDailyHits
                 .Select(hit => new
                 {
                     UserId = hit.UserId,
@@ -50,11 +54,10 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
                 .Select(g =>
                 new {
                     UserId = g.Key,
-                    Attendance = g.ToDictionary(arg => arg.Date.ToString(), arg => arg.HasHit)
+                    Attendance = g.ToDictionary(arg => arg.Date.ToString(DateTimeConstants.WellKnownDateFormat), arg => arg.HasHit)
                 });
 
-            return report;*/
-            return null;
+            return report;
         }
     }
 }

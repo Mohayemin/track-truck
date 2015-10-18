@@ -1,12 +1,16 @@
 ﻿attendanceModule.controller('attendanceReportController', [
     '$scope',
     'attendanceService',
+    'wellKnownDateTime',
     function($scope,
-        attendanceService
+        attendanceService,
+        wellKnownDateTime
     ) {
         var today = new Date();
         var yesterday = new Date();
+        today.setHours(0, 0, 0, 0);
         yesterday.setDate(yesterday.getDate() - 1);
+        yesterday.setHours(0, 0, 0, 0);
 
         var filter = {
             fromDate: yesterday,
@@ -21,15 +25,15 @@
                     $scope.reportRows = data;
                 });
 
-                var current = moment(filter.fromDate);
-                var end = moment(filter.toDate);
+                var current = new Date(filter.fromDate);
+                var end = new Date(filter.toDate);
                 $scope.dates = [];
                 while (current <= end) {
                     $scope.dates.push({
-                        value: current.format('YYYYMMDD'),
-                        label: current.format('D-MMM-YY'),
+                        value: wellKnownDateTime.formatDate(current),
+                        label: wellKnownDateTime.formatDate(current, 'd-MMM-yy'),
                     });
-                    current.add(1, 'd');
+                    current.setDate(current.getDate() + 1);
                 }
             }
         };

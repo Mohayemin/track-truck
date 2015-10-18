@@ -14,11 +14,8 @@ namespace Ssi.TrackTruck.Web.ActionFilters
                 return;
             }
 
-            var ct = DateTime.UtcNow;
-
             var attendanceService = DependencyResolver.Current.GetService<AttendanceService>();
-
-            attendanceService.UpdateDailyHit(identity.Name, ct);
+            attendanceService.UpdateDailyHit(identity.Name);
         }
     }
 }
