@@ -18,10 +18,10 @@
         <table class="table table-bordered table-responsive table-hover" ts-wrapper>
             <thead>
                 <tr>
-                    <th>
+                    <th ts-criteria="DeliveredNumberOfDrops">
                         Delivered Drops
                     </th>
-                    <th>
+                    <th ts-criteria="TotalNumberOfDrops">
                         Total Drops
                     </th>
                     <th ts-criteria="Client.Name|lowercase">
@@ -68,7 +68,7 @@
                     </td>
                     <td ng-bind="trip.TotalNumberOfBoxes"></td>
                     <td ng-bind="trip.DeliveredNumberOfBoxes"></td>
-                    <td ng-bind="trip.RejectedNumberOfBoxes"></td>
+                    <td ng-bind="trip.RejectedNumberOfBoxes" ng-class="{'error': 'trip.RejectedNumberOfBoxes>0'}"></td>
                     <td ng-bind="trip.Driver.FullName"></td>
                     <td>
                         <span ng-repeat="helper in trip.Helpers">
