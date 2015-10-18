@@ -1,10 +1,13 @@
-﻿<div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="dateIsOpen=true">
-    <input ng-model="ngModel" ng-required="required"
-           type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
-           class="form-control" />
-    <span class="input-group-btn">
-        <button type="button" class="btn btn-primary">
-            <i class="glyphicon glyphicon-calendar"></i>
-        </button>
-    </span>
+﻿<div>
+    <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="dateIsOpen=true">
+        <input ng-model="ngModel" ng-required="required"
+               type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
+               class="form-control" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </span>
+    </div>
+    <timepicker ng-show="!hideTime" ng-model="ngModel" show-meridian="true"></timepicker>
 </div>
