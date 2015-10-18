@@ -44,6 +44,8 @@
             truckService.get(_this.TruckId).then(function (truck) {
                 _this.Truck = truck;
             });
+
+            _this.AllDropsDelivered = _this.TotalNumberOfDrops == _this.DeliveredNumberOfDrops;
         }
 
         return Trip;
