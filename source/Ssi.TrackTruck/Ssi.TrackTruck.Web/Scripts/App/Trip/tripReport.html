@@ -18,6 +18,12 @@
         <table class="table table-bordered table-responsive table-hover" ts-wrapper>
             <thead>
                 <tr>
+                    <th>
+                        Delivered Drops
+                    </th>
+                    <th>
+                        Total Drops
+                    </th>
                     <th ts-criteria="Client.Name|lowercase">
                         Client
                     </th>
@@ -39,8 +45,8 @@
                     <th ts-criteria="Driver.FullName">
                         Driver
                     </th>
-                    <th ts-criteria="HelperNames">
-                        Helper
+                    <th>
+                        Helpers
                     </th>
                     <th ts-criteria="Truck.RegistrationNumber">
                         Truck
@@ -48,16 +54,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in reportRows" ts-repeat>
-                    <td ng-bind="row.Client.Name"></td>
-                    <td ng-bind="row.ExpectedPickupTimeUtc | philDate"></td>
-                    <td ng-bind="row.Route"></td>
-                    <td ng-bind="row.TotalNumberOfBoxes"></td>
-                    <td ng-bind="row.DeliveredNumberOfBoxes"></td>
-                    <td ng-bind="row.RejectedNumberOfBoxes"></td>
-                    <td ng-bind="row.Driver.FullName"></td>
-                    <td ng-bind="row.HelperNames"></td>
-                    <td ng-bind="row.Truck.RegistrationNumber"></td>
+                <tr ng-repeat="trip in trips" ts-repeat>
+                    <td ng-bind="trip.DeliveredNumberOfDrops"></td>
+                    <td ng-bind="trip.TotalNumberOfDrops"></td>
+                    <td ng-bind="trip.Client.Name"></td>
+                    <td ng-bind="trip.ExpectedPickupTimeUtc | philDate"></td>
+                    <td>
+                        <span ng-bind="trip.PickupAddress.Text"></span>
+                        <span ng-repeat="drop in trip.Drops">
+                            <span>,</span>
+                            <span ng-bind="drop.Branch.Name"></span>
+                        </span>
+                    </td>
+                    <td ng-bind="trip.TotalNumberOfBoxes"></td>
+                    <td ng-bind="trip.DeliveredNumberOfBoxes"></td>
+                    <td ng-bind="trip.RejectedNumberOfBoxes"></td>
+                    <td ng-bind="trip.Driver.FullName"></td>
+                    <td>
+                        <span ng-repeat="helper in trip.Helpers">
+                            <span ng-bind="helper.FullName"></span>
+                            <span ng-if="!$last">,</span>
+                        </span>
+                        <span ng-bind="trip.Helpers.length"></span>
+                    </td>
+                    <td ng-bind="trip.Truck.RegistrationNumber"></td>
                 </tr>
             </tbody>
         </table>

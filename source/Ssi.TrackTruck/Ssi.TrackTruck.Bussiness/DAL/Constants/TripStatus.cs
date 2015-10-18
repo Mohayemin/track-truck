@@ -3,6 +3,7 @@
     public enum TripStatus
     {
         OnTheWay = 1001,
-        NotStarted = 1004
+        Complete = 1002,
+        NotStarted = 1004,
     }
 }

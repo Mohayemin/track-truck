@@ -13,8 +13,8 @@
         };
 
         $scope.loadReport = function () {
-            tripService.getReport($scope.filter).then(function (reportRows) {
-                $scope.reportRows = reportRows;
+            tripService.getReport($scope.filter).then(function (trips) {
+                $scope.trips = trips;
             });
         };
     }
