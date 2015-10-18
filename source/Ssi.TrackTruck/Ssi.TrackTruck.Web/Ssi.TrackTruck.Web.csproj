@@ -167,6 +167,8 @@
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
     <Content Include="Scripts\App\Trip\trip.js" />
+    <Content Include="Scripts\App\Trip\tripDetail.html" />
+    <Content Include="Scripts\App\Trip\tripDetailController.js" />
     <Content Include="Scripts\App\Trip\tripStatus.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
     <Content Include="Scripts\App\Trip\tripReport.html" />
