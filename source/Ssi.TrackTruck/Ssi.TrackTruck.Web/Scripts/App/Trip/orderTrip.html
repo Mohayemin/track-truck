@@ -42,7 +42,7 @@
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Pickup Time</label>
                             <div class="col-sm-10">
-                                <datetime model="request.ExpectedPickupTime" required="true" options="{sm: true}"></datetime>
+                                <datetime ng-model="request.ExpectedPickupTime" required="true" options="{sm: true}"></datetime>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                 <div class="form-group form-group-sm">
                                     <label class="col-sm-2 control-label">Drop Time</label>
                                     <div class="col-sm-10">
-                                        <datetime model="drop.ExpectedDropTime" required="true" options="{sm: true}"></datetime>
+                                        <datetime ng-model="drop.ExpectedDropTime" required="true" options="{sm: true}"></datetime>
                                     </div>
                                 </div>
                             </div>

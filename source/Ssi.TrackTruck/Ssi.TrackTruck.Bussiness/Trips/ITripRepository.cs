@@ -10,7 +10,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         IQueryable<DbTripDrop> GetUsersActiveDrops(string userId);
         DbTripDrop GetDrop(string dropId);
         IEnumerable<string> GetUserBranchIds(string userId);
-        IQueryable<DbTrip> GetTripsInRange(DateTime from, DateTime to);
+        IQueryable<DbTrip> GetTripsInRange(DateTime fromUtc, DateTime toUtc);
         IQueryable<DbTripDrop> GetDropsOfTrips(IEnumerable<string> tripIds);
     }
 }

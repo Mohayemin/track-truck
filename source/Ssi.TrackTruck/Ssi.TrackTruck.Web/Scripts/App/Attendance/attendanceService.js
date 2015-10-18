@@ -10,8 +10,8 @@
         var service = {
             getReport: function (filter) {
                 var formattedFilter = {
-                    fromDate: wellKnownDateTime.formatDate(filter.fromDate),
-                    toDate: wellKnownDateTime.formatDate(filter.toDate)
+                    fromDate: wellKnownDateTime.formatIso(filter.fromDate),
+                    toDate: wellKnownDateTime.formatIso(filter.toDate)
                 };
                 return repository.post('Attendance', 'Report', formattedFilter).then(function (rows) {
                     userService.getIndexedUsers().then(function(userIndex) {
