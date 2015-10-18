@@ -10,7 +10,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
         public string UserId { get; set; }
         public List<TimeSpan> HitTimes { get; set; }
     }
