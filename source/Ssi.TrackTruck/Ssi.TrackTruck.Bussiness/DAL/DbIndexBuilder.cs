@@ -24,7 +24,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             BuildIndex<DbUser>(user => user.UsernameLowerCase);
 
             BuildIndex<DbDailyHit>(
-                hit => hit.Date,
+                hit => hit.DatePhilippine,
                 hit => hit.UserId);
 
             BuildIndex<DbTrip>(
