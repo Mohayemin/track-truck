@@ -12,31 +12,6 @@
         var _trucksById = [];
         var _loadPromise = null;
 
-        function calculateReportSummary(trucks) {
-            var summary = {
-                trucks: { total: trucks.length },
-                items: {}
-            };
-
-            [0, 1001, 1002, 1003].forEach(function(status) {
-                var trucksWithStatus = _.filter(trucks, { Status: status });
-                summary.trucks[status] = trucksWithStatus.length;
-                summary.items[status] = trucksWithStatus.reduce(function(memo, truck) {
-                    return memo + truck.ItemsCarrying;
-                }, 0);
-            });
-
-            summary.items.total = trucks.reduce(function(memo, truck) {
-                return memo + truck.ItemsCarrying;
-            }, 0);
-
-            return summary;
-        }
-
-        function getCurrentStatus() {
-            return repository.get('Truck', 'GetCurrentStatus');
-        }
-
         function add(request) {
             var formattedRequest = {
                 RegistrationNumber: request.RegistrationNumber,
@@ -72,8 +47,6 @@
         }
 
         var service = {
-            calculateReportSummary: calculateReportSummary,
-            getCurrentStatus: getCurrentStatus,
             add: add,
             getAll: getAll,
             get: function(id) {
