@@ -68,8 +68,8 @@
                     return trips;
                 });
             },
-            getTrip: function(tripId) {
-                return repository.get('Trip', 'Get', tripId);
+            get: function (tripId) {
+                return repository.get('Trip', 'Get', { id: tripId });
             }
         };
 
