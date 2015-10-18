@@ -18,7 +18,7 @@ namespace Ssi.TrackTruck.Web.Controllers
 
         [ValidateModel]
         [HttpPost]
-        [AllowedRoles(Role.Encoder)]
+        [AllowedRoles(Role.Encoder, Role.Admin)]
         public ActionResult Order(TripOrderRequest orderRequest)
         {
             var trip = _tripService.AddTrip(orderRequest);

@@ -6,5 +6,9 @@
         clientService.getAll().then(function(clients) {
             $scope.clients = clients;
         });
+
+        $scope.deleteItem = function(clientId) {
+            return clientService.delete(clientId);
+        };
     }
 ]);

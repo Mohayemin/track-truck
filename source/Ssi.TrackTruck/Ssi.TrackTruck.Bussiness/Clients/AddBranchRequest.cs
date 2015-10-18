@@ -14,7 +14,7 @@ namespace Ssi.TrackTruck.Bussiness.Clients
 
         public string CustodianUserId { get; set; }
 
-        public DbBranch ToBranch()
+        public virtual DbBranch ToBranch()
         {
             return new DbBranch
             {

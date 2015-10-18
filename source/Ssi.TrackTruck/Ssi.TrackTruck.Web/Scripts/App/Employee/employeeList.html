@@ -17,9 +17,11 @@
                 <td ng-bind="employee.FirstName"></td>
                 <td ng-bind="employee.LastName"></td>
                 <td ng-bind="employee.Designation"></td>
-                <td>
-                    <edit-button module="'employee'" model="employee"></edit-button>
-                    <delete-button controller="'Employee'" list="employees" index="$index"></delete-button>
+                <td class="action-col-2">
+                    <div class="btn-group btn-group-xs">
+                        <edit-button module="'employee'" item-id="employee.Id"></edit-button>
+                        <delete-button module="'employee'" item-id="employee.Id" action="deleteItem"></delete-button>
+                    </div>
                 </td>
             </tr>
         </tbody>

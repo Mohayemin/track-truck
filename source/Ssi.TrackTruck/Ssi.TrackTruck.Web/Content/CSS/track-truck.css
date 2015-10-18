@@ -89,3 +89,11 @@
 .no-margin-top {
     margin-top: 0;
 }
+
+.action-col-2 {
+    width: 81px;
+}
+
+.action-col-3 {
+    width: 114px;
+}

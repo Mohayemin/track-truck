@@ -67,6 +67,20 @@
                     return _.find(_users, { Id: id });
                 });
             },
+            'delete': function (id) {
+                return repository.post('User', 'Delete', { id: id }).then(function (response) {
+                    if (!response.IsError) {
+                        var index = _.findIndex(_users, { Id: id });
+                        if (index >= 0) {
+                            _users.splice(index, 1);
+                            delete _userById[id];
+                        }
+                        return response;
+                    }
+
+                    return $q.reject(response.Message || response.status || 'could not delete client');
+                });
+            },
             edit: function (request) {
                 return repository.post('User', 'Save', request).then(function (response) {
                     if (response.IsError) {
