@@ -5,6 +5,9 @@
         return {
             formatDate: function (date, format) {
                 return dateFilter(date, format || 'yyyy-MM-dd');
+            },
+            formatDateInt: function(date) {
+                return dateFilter(date, 'yyyyMMdd');
             }
         };
     }
