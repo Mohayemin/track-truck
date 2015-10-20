@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Attendances;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Web.Auth;
+using Ssi.TrackTruck.Web.Utils;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -17,10 +19,10 @@ namespace Ssi.TrackTruck.Web.Controllers
 
         [HttpPost]
         [AllowedRoles(Role.Admin)]
-        public ActionResult Report(DateTimeModel fromDate, DateTimeModel toDate)
+        public ActionResult Report(DateTime fromDate, DateTime toDate)
         {
             var report = _attendanceService.GetReport(fromDate, toDate);
-            return Json(report, JsonRequestBehavior.AllowGet);
+            return new JsonNetResult(report);
         }
     }
 }

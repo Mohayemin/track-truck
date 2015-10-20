@@ -14,7 +14,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string BranchId { get; set; }
-        public DateTime ExpectedDropTime { get; set; }
+        public DateTime ExpectedDropTimeUtc { get; set; }
         public IList<DbDeliveryReceipt> DeliveryReceipts { get; set; }
         public bool IsReceived { get; set; }
         public DateTime? ActualDropTime { get; set; }
