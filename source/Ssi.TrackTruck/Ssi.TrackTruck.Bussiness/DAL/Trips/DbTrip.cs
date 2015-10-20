@@ -17,7 +17,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string PickupAddressId { get; set; }
-        public DateTime ExpectedPickupTime { get; set; }
+        public DateTime ExpectedPickupTimeUtc { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }

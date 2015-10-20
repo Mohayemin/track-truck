@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Helpers;
@@ -11,15 +12,13 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
     public class AttendanceService
     {
         private readonly IRepository _repository;
-        private readonly AuthService _authService;
 
-        public AttendanceService(IRepository repository, AuthService authService)
+        public AttendanceService(IRepository repository)
         {
             _repository = repository;
-            _authService = authService;
         }
 
-        public bool UpdateDailyHit(string userId, DateTimeModel time)
+        public bool UpdateDailyHit(string userId)
         {
             var user = _repository.GetById<DbUser>(userId);
 
@@ -28,30 +27,38 @@ namespace Ssi.TrackTruck.Bussiness.Attendances
                 return false;
             }
 
-            var log = _repository.FindOne<DbDailyHit>(hit => hit.UserId == user.Id && hit.Date == time.DateInt) ??
-                      new DbDailyHit { UserId = user.Id, Date = time.DateInt, HitTimes = new List<int>() };
+            var nowAtPhilippines = DateTime.UtcNow.ToPhilppines();
+            var today = nowAtPhilippines.DateInt();
+            
+            var log = _repository.FindOne<DbDailyHit>(hit => hit.UserId == user.Id && hit.DatePhilippine == today) ??
+                      new DbDailyHit { UserId = user.Id, DatePhilippine = today, HitTimesPhilippine = new List<TimeSpan>() };
 
-            log.HitTimes.Add(time.TimeInt);
+            log.HitTimesPhilippine.Add(nowAtPhilippines.TimeOfDay);
             _repository.Save(log);
 
             return true;
         }
 
-        public object GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        public object GetReport(DateTime fromDate, DateTime toDate)
         {
-            var report = _repository
-                .GetWhere<DbDailyHit>(hit => hit.Date >= fromDate.DateInt && hit.Date <= toDate.DateInt)
+            var fromPhil = fromDate.DateInt();
+            var toPhil = toDate.DateInt();
+
+            var dbDailyHits = _repository
+                .GetWhere<DbDailyHit>(hit => hit.DatePhilippine >= fromPhil && hit.DatePhilippine <= toPhil).ToList();
+
+            var report = dbDailyHits
                 .Select(hit => new
                 {
                     UserId = hit.UserId,
-                    Date = hit.Date,
-                    HasHit = hit.HitTimes.Count != 0
+                    Date = hit.DatePhilippine,
+                    HasHit = hit.HitTimesPhilippine.Count != 0
                 })
                 .GroupBy(t => t.UserId)
                 .Select(g =>
                 new {
                     UserId = g.Key,
-                    Attendance = g.ToDictionary(arg => arg.Date.ToString(), arg => arg.HasHit)
+                    Attendance = g.ToDictionary(arg => arg.Date, arg => arg.HasHit)
                 });
 
             return report;

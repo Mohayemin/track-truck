@@ -20,7 +20,7 @@
                 <td ng-bind="client.Branches.length"></td>
                 <td class="action-col-3">
                     <div class="btn-group btn-group-xs">
-                        <detail-button module="'client'"></detail-button>
+                        <detail-button module="'client'" item-id="client.Id"></detail-button>
                         <edit-button module="'client'" item-id="client.Id"></edit-button>
                         <delete-button module="'client'" item-id="client.Id" action="deleteItem"></delete-button>
                     </div>
