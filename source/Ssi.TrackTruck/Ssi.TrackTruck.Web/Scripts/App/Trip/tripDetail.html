@@ -1,3 +1,93 @@
-﻿<pre ng-bind="trip | json">
-    
-</pre>
+﻿<div>
+    <page-title>
+        <div class="btn-group btn-group-sm pull-right">
+            <delete-button module="'trip'" item-id="trip.Id" action="deleteItem" title="delete trip"></delete-button>
+        </div>
+    </page-title>
+    <div>
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>Ticket Number</dt>
+                <dd ng-bind="trip.TripTicketNumber"></dd>
+                <dt>Client</dt>
+                <dd ng-bind="trip.Client.Name"></dd>
+                <dt>Pickup Addresse</dt>
+                <dd ng-bind="trip.PickupAddress.Text"></dd>
+                <dt>Expected Pickup Time</dt>
+                <dd ng-bind="trip.ExpectedPickupTimeUtc | philDate"></dd>
+                <dt>Truck</dt>
+                <dd ng-bind="trip.Truck.RegistrationNumber"></dd>
+                <dt>Fuel Cost</dt>
+                <dd ng-bind="trip.FuelCostInCentavos/100"></dd>
+                <dt>Toll Cost</dt>
+                <dd ng-bind="trip.TollCostInCentavos/100"></dd>
+                <dt>Parking Cost</dt>
+                <dd ng-bind="trip.ParkingCostInCentavos/100"></dd>
+                <dt>Barge Cost</dt>
+                <dd ng-bind="trip.BargeCostInCentavos/100"></dd>
+                <dt>Bundle Cost</dt>
+                <dd ng-bind="trip.BundleCostInCentavos/100"></dd>
+                <dt>Driver</dt>
+                <dd ng-bind="trip.Driver.FullName"></dd>
+                <dt>Driver's Allowance</dt>
+                <dd ng-bind="trip.DriverAllowanceInCentavos/100"></dd>
+                <dt>Driver's Salary</dt>
+                <dd ng-bind="trip.DriverSalaryInCentavos/100"></dd>
+                <dt>Helper(s)</dt>
+                <dd ng-bind="trip.HelperNames"></dd>
+                <dt>Helper's Allowance</dt>
+                <dd ng-bind="trip.HelperAllowanceInCentavos/100"></dd>
+                <dt>Helper's Salary</dt>
+                <dd ng-bind="trip.HelperSalaryInCentavos/100"></dd>
+                <dt>Supervisor</dt>
+                <dd ng-bind="trip.Supervisor.FullName"></dd>
+            </dl>
+        </div>
+
+        <div class="col-sm-6">
+            <div ng-repeat="drop in trip.Drops">
+                <dl class="dl-horizontal">
+                    <dt>Drop <span ng-bind="$index + 1"></span> Branch</dt>
+                    <dd ng-bind="drop.Branch.Name"></dd>
+                    <dt>Scheduled Drop Time</dt>
+                    <dd ng-bind="drop.ExpectedDropTimeUtc | philDate"></dd>
+                    <dt>Actual Drop Time</dt>
+                    <dd>
+                        <span ng-if="drop.IsDelivered" ng-bind="drop.ActualDropTimeUtc | philDate"></span>
+                        <span ng-if="!drop.IsDelivered">Not delivered yet</span>
+                    </dd>
+                    <dt>Drops</dt>
+                    <dd>
+                        <table class="table table-condensed table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>DR#</th>
+                                    <th>Total Boxes</th>
+                                    <th ng-if="drop.IsDelivered">Rejected Boxes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="dr in drop.DeliveryReceipts" class="dl-horizontal">
+                                    <td ng-bind="dr.DrNumber"></td>
+                                    <td ng-bind="dr.NumberOfBoxes"></td>
+                                    <td ng-if="drop.IsDelivered" ng-bind="dr.RejectedNumberOfBoxes"></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <th ng-bind="drop.TotalBoxes"></th>
+                                    <th ng-if="drop.IsDelivered" ng-bind="drop.TotalRejectedBoxes"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+</div>
+

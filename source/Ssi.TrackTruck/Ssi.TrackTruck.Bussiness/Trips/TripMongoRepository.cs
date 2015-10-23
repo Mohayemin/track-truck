@@ -39,7 +39,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
             var userBrancheIds = GetUserBranchIds(userId);
 
-            return _drops.Find(Query.And(Query<DbTripDrop>.EQ(drop => drop.IsReceived, false), Query<DbTripDrop>.In(drop => drop.BranchId, userBrancheIds),
+            return _drops.Find(Query.And(Query<DbTripDrop>.EQ(drop => drop.IsDelivered, false), Query<DbTripDrop>.In(drop => drop.BranchId, userBrancheIds),
                 Query<DbTripDrop>.In(drop => drop.TripId, activeTripIds))).AsQueryable();
         }
 

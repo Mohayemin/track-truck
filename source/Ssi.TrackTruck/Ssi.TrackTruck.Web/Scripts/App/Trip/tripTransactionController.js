@@ -24,7 +24,7 @@
 
         $scope.receive = function (drop) {
             tripService.receiveDrop(drop).then(function () {
-                drop.IsReceived = true;
+                drop.IsDelivered = true;
                 globalMessage.success('drop received');
             }).catch(function(message) {
                 globalMessage.error(message);
