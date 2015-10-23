@@ -1,26 +1,28 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 
 namespace Ssi.TrackTruck.Bussiness.Clients
 {
     public class AddBranchRequest
     {
+        [Required(ErrorMessage = "Please specify branch name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Please specify branch address")]
         public string Address { get; set; }
 
-        public bool Validate()
+        public string CustodianUserId { get; set; }
+
+        public virtual DbBranch ToBranch()
         {
-            var fields = new[] { Name, Address};
-
-            var valid = fields.All(s => !string.IsNullOrWhiteSpace(s));
-
-            return valid;
+            return new DbBranch
+            {
+                Id = ObjectId.GenerateNewId().ToString(),
+                Name = Name,
+                Address = Address,
+                CustodianUserId = CustodianUserId
+            };
         }
-
-        public DbBranch ToBranch()
-        {
-            return new DbBranch { Name = Name, Address = Address };
-        }
-
     }
 }

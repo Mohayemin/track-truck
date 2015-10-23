@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using Ssi.TrackTruck.Bussiness.DAL.Entities;
+﻿using System.Web.Mvc;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Employees;
+using Ssi.TrackTruck.Web.Auth;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -15,15 +15,33 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
+        [AllowedRoles(Role.Admin, Role.BranchCustodian, Role.Encoder)]
         public ActionResult All()
         {
             return Json(_employeeService.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult Add(DbEmployee request)
+        [AllowedRoles(Role.Admin)]
+        public ActionResult Add(AddEmployeeRequest request)
         {
             var response = _employeeService.Add(request);
+            return Json(response);
+        }
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin)]
+        public ActionResult Delete(string id)
+        {
+            var response = _employeeService.Delete(id);
+            return Json(response);
+        }
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin)]
+        public ActionResult Save(EditEmployeeRequest request)
+        {
+            var response = _employeeService.Save(request);
             return Json(response);
         }
 	}

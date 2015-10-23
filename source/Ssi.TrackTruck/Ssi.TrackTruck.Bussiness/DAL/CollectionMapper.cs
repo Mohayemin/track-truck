@@ -19,9 +19,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 {typeof(DbEmployee), "employees"},
                 {typeof(DbTruck), "trucks"},
                 {typeof(DbUser), "users"},
-                {typeof(DbWarehouse), "warehouses"},
                 {typeof(DbTrip), "trips"},
-                {typeof(DbDailyHit), "dailyHit"}
+                {typeof(DbTripDrop), "tripDrops"},
+                {typeof(DbDailyHit), "dailyHit"},
+                {typeof(DbDeletedBranch), "deleted_clientBranch"},
+                {typeof(DbDeletedAddress), "deleted_clientAddress"}
             };
         }
 

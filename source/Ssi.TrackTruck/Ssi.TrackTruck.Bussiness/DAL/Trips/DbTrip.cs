@@ -7,34 +7,40 @@ using Ssi.TrackTruck.Bussiness.DAL.Entities;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
-    public class DbTrip : IEntity
+    public class DbTrip : Entity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
         public TripStatus Status { get; set; }
 
+        public string TripTicketNumber { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string ClientId { get; set; }
-        public DateTime ExpectedPickupTime { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string PickupAddressId { get; set; }
+        public DateTime ExpectedPickupTimeUtc { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string TruckId { get; set; }
+        public long FuelCostInCentavos { get; set; }
+        public long TollCostInCentavos { get; set; }
+        public long ParkingCostInCentavos { get; set; }
+        public long BargeCostInCentavos { get; set; }
+        public long BundleCostInCentavos { get; set; }
+
         
         [BsonRepresentation(BsonType.ObjectId)]
         public string DriverId { get; set; }
-
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string WarehouseId { get; set; }
         public long DriverAllowanceInCentavos { get; set; }
         public long DriverSalaryInCentavos { get; set; }
-        
+
+
         [BsonRepresentation(BsonType.ObjectId)]
-        public string HelperId { get; set; }
+        public List<string> HelperIds { get; set; }
         public long HelperAllowanceInCentavos { get; set; }
         public long HelperSalaryInCentavos { get; set; }
-        public IEnumerable<DbDrop> Drops { get; set; }
-
-        public DbTrip()
-        {
-            Drops = new List<DbDrop>();
-        }
+        
+        
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string SupervisorId { get; set; }
     }
 }

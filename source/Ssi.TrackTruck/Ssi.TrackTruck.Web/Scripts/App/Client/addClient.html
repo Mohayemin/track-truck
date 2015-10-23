@@ -1,10 +1,9 @@
 ﻿<div>
-    
+    <page-title>
+        <list-button module="'client'"></list-button>
+    </page-title>
     <form ng-submit="add()" class="form-horizontal">
         <fieldset>
-            <legend>
-                <span class="col-sm-offset-2">Add New Client</span>
-            </legend>
             <div class="well">
                 <div class="form-group">
                     <label class="control-label col-sm-2">Client's Name</label>
@@ -15,8 +14,21 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Trucks per day</label>
                     <div class="col-sm-10">
-                        <input ng-model="request.TrucksPerDay" type="number" 
+                        <input ng-model="request.TrucksPerDay" type="number"
                                class="form-control" placeholder="Trucks allocated per day" required />
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Addresses</label>
+                        <div class="col-sm-10">
+                            <tags-input ng-model="request.Addresses"
+                                        key-property="Text"
+                                        display-property="Text"
+                                        type="text"
+                                        placeholder="Add an address"
+                                        min-length="1" add-on-comma="true"></tags-input>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,6 +58,16 @@
                                        class="form-control" placeholder="Branch Address" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Branch Custodian</label>
+                            <div class="col-sm-10">
+                                <select ng-model="branch.CustodianUserId"
+                                        ng-options="user.Id as user.FullName for user in custodianUsers"
+                                        class="form-control">
+                                    <option value=""> -- Choose Branch Custodian -- </option>
+                                </select>
+                            </div>
+                        </div>
                         <hr />
                     </fieldset>
                 </div>
@@ -60,7 +82,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-12">
                     <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-lg fa-plus"></i> Add Client</button>
                 </div>
             </div>

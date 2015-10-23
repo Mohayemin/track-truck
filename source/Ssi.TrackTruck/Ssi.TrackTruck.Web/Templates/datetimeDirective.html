@@ -1,32 +1,13 @@
-﻿<div class="row">
-    <div ng-class="{'col-lg-12': hideTime, 'col-sm-6 col-md-8': !hideTime}">
-        <div class="input-group" ng-click="dateIsOpen=true">
-            <input ng-model="datePickerDate" ng-required="required" ng-change="dateChanged()"
-                   type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
-                   class="form-control" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-primary">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                </button>
-            </span>
-        </div>
+﻿<div>
+    <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="dateIsOpen=true">
+        <input ng-model="ngModel" ng-required="required"
+               type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
+               class="form-control" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </span>
     </div>
-    <div class="col-sm-6 col-md-4" ng-if="!hideTime">
-        
-        <div class="row">
-
-            <div class="col-xs-6">
-                
-                <input ng-model="model.hour" ng-required="required"
-                       type="number" min="0" max="23" placeholder="hour"
-                       class="form-control" />
-            </div>
-            <div class="col-xs-6">
-                <input ng-model="model.minute" ng-required="required"
-                       type="number" min="0" max="59" placeholder="minute"
-                       class="form-control" />
-            </div>
-        </div>
-        
-    </div>
+    <timepicker ng-show="!hideTime" ng-model="ngModel" show-meridian="true"></timepicker>
 </div>
