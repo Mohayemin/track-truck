@@ -1,0 +1,17 @@
+﻿<div>
+    <page-title></page-title>
+    <form ng-submit="save()" class="form-horizontal">
+        <fieldset>
+            <ng-include src="url.template('Truck', 'truckForm')"></ng-include>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fa fa-fw fa-lg fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
