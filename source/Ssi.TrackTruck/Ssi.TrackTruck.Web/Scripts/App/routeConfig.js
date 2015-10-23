@@ -61,9 +61,9 @@
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail', 'clientdetail', 'Client Detail'))
             .when('/trip/order', defaultRoute('trip', 'orderTrip', 'triporder', 'Order a Trip'))
-            .when('/trip/:id', defaultRoute('trip', 'tripDetail', 'tripdetail', 'Trip Detail'))
             .when('/trip/transactions', defaultRoute('trip', 'tripTransaction', 'triptransactions', 'Upcoming Transactions'))
             .when('/trip/report', defaultRoute('trip', 'tripReport', 'tripreport', 'Trip Report'))
+            .when('/trip/:id', defaultRoute('trip', 'tripDetail', 'tripdetail', 'Trip Detail'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword', 'changepassword', 'Change Password'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport', 'attendancereport', 'Attendance Report'))
             .otherwise({ redirectTo: '/' });

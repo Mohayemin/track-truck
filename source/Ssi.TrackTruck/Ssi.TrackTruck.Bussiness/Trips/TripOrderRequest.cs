@@ -68,7 +68,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 HelperSalaryInCentavos = (long)(HelperSalary ?? 0) * 100,
                 SupervisorId = SupervisorId,
                 FuelCostInCentavos = (long)(FuelCost ?? 0) * 100,
-                ParkingCostInCenvatos = (long)(ParkingCost ?? 0) * 100,
+                ParkingCostInCentavos = (long)(ParkingCost ?? 0) * 100,
                 TollCostInCentavos = (long)(TollCost ?? 0) * 100,
                 BargeCostInCentavos = (long)(BargeCost ?? 0) * 100,
                 BundleCostInCentavos = (long)(BundleCost ?? 0) * 100,
