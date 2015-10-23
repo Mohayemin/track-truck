@@ -84,7 +84,7 @@
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\CrudStatus.cs" />
-    <Compile Include="Helpers\DateTimeModel.cs" />
+    <Compile Include="Helpers\DateTimeExtensions.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="DAL\Users\DbUser.cs" />
     <Compile Include="DAL\IRepository.cs" />
@@ -100,6 +100,7 @@
     <Compile Include="Trips\TripOrderRequest.cs" />
     <Compile Include="Trips\TripMongoRepository.cs" />
     <Compile Include="Trips\TripReportResponse.cs" />
+    <Compile Include="Trips\TripResponse.cs" />
     <Compile Include="Trips\TripService.cs" />
     <Compile Include="Trucks\AddTruckRequest.cs" />
     <Compile Include="Trucks\EditTruckRequest.cs" />

@@ -7,6 +7,7 @@
     'employeeService',
     'truckService',
     'collection',
+    'Trip',
     '$q',
     function tripService(
         repository
@@ -17,9 +18,10 @@
         , employeeService
         , truckService
         , collection
+        , Trip
         , $q
         ) {
-        
+
         var service = {
             orderTrip: function (request) {
                 var foramtterRequest = angular.extend({}, request);
@@ -29,7 +31,12 @@
                     delete foramtterRequest[prop];
                 });
 
-                return repository.post('Trip', 'Order', foramtterRequest);
+                return repository.post('Trip', 'Order', foramtterRequest).then(function (response) {
+                    if (response.IsError) {
+                        return $q.reject(response.Message);
+                    }
+                    return response;
+                });
             },
             getMyActiveDrops: function () {
                 return repository.get('Trip', 'MyActiveDrops');
@@ -53,40 +60,16 @@
             },
             getReport: function (filter) {
                 return repository.post('Trip', 'Report', filter).then(function (report) {
-                    return $q.all([clientService.getIndexedClients()
-                        , employeeService.getIndexedEmployees()
-                        , truckService.getIndexedTrucks()
-                    , truckService])
-                        .then(function (lists) {
-                            var clientsById = lists[0];
-                            var employeesById = lists[1];
-                            var trucksById = lists[2];
+                    var trips = report.Trips.map(function (dbTrip) {
+                        var drops = _.where(report.Drops, { TripId: dbTrip.Id });
+                        return new Trip(dbTrip, drops);
+                    });
 
-                            report.Trips.forEach(function (trip) {
-                                var drops = _.where(report.Drops, { TripId: trip.Id });
-                                trip.Client = clientsById[trip.ClientId];
-                                trip.Driver = employeesById[trip.DriverId];
-                                trip.HelperNames = trip.HelperIds.map(function (hid) {
-                                    return (employeesById[hid] || {}).FullName;
-                                }).join(', ');
-                                trip.Truck = trucksById[trip.TruckId];
-                                trip.TotalNumberOfBoxes = collection.sum(drops, 'TotalBoxes');
-                                trip.RejectedNumberOfBoxes = collection.sum(drops, 'TotalRejectedBoxes');
-                                trip.DeliveredNumberOfBoxes = collection.sum(drops, 'TotalDeliveredBoxes');
-
-                                var pickupAddress = _.find(trip.Client.Addresses, { Id: trip.PickupAddressId });
-                                var routeList = [pickupAddress.Text];
-
-                                drops.forEach(function (drop) {
-                                    return routeList.push(trip.Client.BranchesById[drop.BranchId].Name);
-                                });
-
-                                trip.Route = routeList.join(', ');
-                            });
-
-                            return report.Trips;
-                        });
+                    return trips;
                 });
+            },
+            get: function (tripId) {
+                return repository.get('Trip', 'Get', { id: tripId });
             }
         };
 

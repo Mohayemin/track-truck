@@ -17,13 +17,13 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string PickupAddressId { get; set; }
-        public DateTime ExpectedPickupTime { get; set; }
+        public DateTime ExpectedPickupTimeUtc { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
         public long FuelCostInCentavos { get; set; }
         public long TollCostInCentavos { get; set; }
-        public long ParkingCostInCenvatos { get; set; }
+        public long ParkingCostInCentavos { get; set; }
         public long BargeCostInCentavos { get; set; }
         public long BundleCostInCentavos { get; set; }
 

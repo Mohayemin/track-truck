@@ -39,7 +39,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
             var userBrancheIds = GetUserBranchIds(userId);
 
-            return _drops.Find(Query.And(Query<DbTripDrop>.EQ(drop => drop.IsReceived, false), Query<DbTripDrop>.In(drop => drop.BranchId, userBrancheIds),
+            return _drops.Find(Query.And(Query<DbTripDrop>.EQ(drop => drop.IsDelivered, false), Query<DbTripDrop>.In(drop => drop.BranchId, userBrancheIds),
                 Query<DbTripDrop>.In(drop => drop.TripId, activeTripIds))).AsQueryable();
         }
 
@@ -55,10 +55,10 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return userBrancheIds;
         }
 
-        public IQueryable<DbTrip> GetTripsInRange(DateTime from, DateTime to)
+        public IQueryable<DbTrip> GetTripsInRange(DateTime fromUtc, DateTime toUtc)
         {
             var trips =
-                _trips.AsQueryable().Where(trip => trip.ExpectedPickupTime >= from && trip.ExpectedPickupTime <= to);
+                _trips.AsQueryable().Where(trip => trip.ExpectedPickupTimeUtc >= fromUtc && trip.ExpectedPickupTimeUtc <= toUtc);
 
             return trips;
         }

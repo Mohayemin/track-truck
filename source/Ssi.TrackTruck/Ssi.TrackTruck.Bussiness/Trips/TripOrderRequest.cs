@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
@@ -15,7 +16,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         [Required(ErrorMessage = "Please choose a client")]
         public string ClientId { get; set; }
         public string PickupAddressId { get; set; }
-        public DateTimeModel ExpectedPickupTime { get; set; }
+        public DateTime ExpectedPickupTime { get; set; }
 
         [Required(ErrorMessage = "Please choose a driver")]
         public string DriverId { get; set; }
@@ -58,7 +59,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 ClientId = ClientId,
                 PickupAddressId = PickupAddressId,
-                ExpectedPickupTime = ExpectedPickupTime.ToDateTime(DateTimeConstants.PhilippineOffset),
+                ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
                 DriverId = DriverId,
                 DriverAllowanceInCentavos = (long)(DriverAllowance ?? 0) * 100,
                 DriverSalaryInCentavos = (long)(DriverSalary ?? 0) * 100,
@@ -67,7 +68,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 HelperSalaryInCentavos = (long)(HelperSalary ?? 0) * 100,
                 SupervisorId = SupervisorId,
                 FuelCostInCentavos = (long)(FuelCost ?? 0) * 100,
-                ParkingCostInCenvatos = (long)(ParkingCost ?? 0) * 100,
+                ParkingCostInCentavos = (long)(ParkingCost ?? 0) * 100,
                 TollCostInCentavos = (long)(TollCost ?? 0) * 100,
                 BargeCostInCentavos = (long)(BargeCost ?? 0) * 100,
                 BundleCostInCentavos = (long)(BundleCost ?? 0) * 100,

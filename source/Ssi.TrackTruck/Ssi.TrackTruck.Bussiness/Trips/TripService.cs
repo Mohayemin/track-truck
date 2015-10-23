@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Driver.Linq;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
-using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
@@ -61,7 +59,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 return Response.Error("", "Drop not found");
             }
-            if (drop.IsReceived)
+            if (drop.IsDelivered)
             {
                 return Response.Error("", "The drop is already received");
             }
@@ -90,30 +88,42 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 dr.RejectedNumberOfBoxes = rejection.Value;
             }
 
-            drop.ActualDropTime = DateTime.UtcNow;
+            drop.ActualDropTimeUtc = DateTime.UtcNow;
             drop.ReceiverUserId = _user.Id;
-            drop.IsReceived = true;
+            drop.IsDelivered = true;
 
             _repository.Save(drop);
 
             return Response.Success(drop, "Drop received");
         }
 
-        public TripReportResponse GetReport(DateTimeModel fromDate, DateTimeModel toDate)
+        public TripReportResponse GetReport(DateTime fromDate, DateTime toDate)
         {
-            var from = fromDate.ToDateTime(DateTimeConstants.PhilippineOffset);
-            var to = toDate.ToDateTime(DateTimeConstants.PhilippineOffset);
-            var trips = _tripRepository.GetTripsInRange(from, to);
+            fromDate = fromDate.ToUniversalTime();
+            toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
+            
+            var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
             var drops = _tripRepository.GetDropsOfTrips(trips.Select(trip => trip.Id));
 
             return new TripReportResponse
             {
-                FromDate = from,
-                ToDate = to,
+                FromDate = fromDate,
+                ToDate = toDate,
                 Trips = trips,
                 Drops = drops
             };
         }
 
+        public TripResponse Get(string id)
+        {
+            var trip = _repository.GetById<DbTrip>(id);
+            if (trip != null)
+            {
+                var drops = _repository.GetWhere<DbTripDrop>(drop => drop.TripId == trip.Id);
+                return new TripResponse{Trip = trip, Drops = drops};
+            }
+
+            return null;
+        }
     }
 }

@@ -5,6 +5,7 @@
     'tripService',
     'employeeService',
     'designation',
+    'wellKnownDateTime',
     'globalMessage',
     function orderTripController(
         $scope,
@@ -13,10 +14,11 @@
         tripService,
         employeeService,
         designation,
+        wellKnownDateTime,
         globalMessage) {
 
         $scope.request = {
-            ExpectedPickupTime: { year: 2015, month: 6, day: 15, hour: 13, minute: 10 },
+            ExpectedPickupTime: wellKnownDateTime.tomorrow(),
             Drops: [],
             HelperIds: [undefined, undefined, undefined],
             FuelCost: 0,
@@ -38,7 +40,7 @@
         $scope.addDrop = function () {
             var drop = {
                 BranchId: null,
-                ExpectedDropTime: {},
+                ExpectedDropTime: wellKnownDateTime.tomorrow(),
                 DeliveryReceipts: []
             };
             $scope.addDr(drop);
@@ -62,7 +64,6 @@
 
             var drop = $scope.request.Drops[0];
             drop.BranchId = ($scope.request.Client.Branches[0] || {}).Id;
-            angular.extend(drop.ExpectedDropTime, { year: 2015, month: 9, day: 3, hour: 18, minute: 36 });
             drop.DeliveryReceipts[0].DrNumber = "ER-234";
             drop.DeliveryReceipts[0].NumberOfBoxes = 4;
 
@@ -100,8 +101,8 @@
             globalMessage.info('Creating Order...', 0);
             tripService.orderTrip($scope.request).then(function () {
                 globalMessage.success('Order Created.');
-            }).catch(function () {
-                globalMessage.error('Could not create order, please try again.');
+            }).catch(function (message) {
+                globalMessage.error(message);
             });
         };
     }
