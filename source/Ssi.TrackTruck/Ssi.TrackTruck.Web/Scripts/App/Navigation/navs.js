@@ -67,7 +67,7 @@
                             url: url.route('attendance', 'report'),
                             iconClass: 'fa fa-fw fa-lg fa-check-square-o',
                             text: 'Attendance',
-                            highLightRoutes: ['attendancereport']
+                            highLightRoutes: ['attendancereport', 'tripdetail']
                         }
                     ]
                 };

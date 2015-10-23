@@ -14,13 +14,30 @@
                     toDate: wellKnownDateTime.formatIso(filter.toDate)
                 };
                 return repository.post('Attendance', 'Report', formattedFilter).then(function (rows) {
-                    userService.getIndexedUsers().then(function(userIndex) {
-                        rows.forEach(function (row) {
-                            row.FullName = (userIndex[row.UserId] || {}).FullName;
-                        });
+                    var reportRows = [];
+                    var reportedUserIds = {};
+
+                    rows.forEach(function (row) {
+                        return reportedUserIds[row.UserId] = true;
                     });
 
-                    return rows;
+                    userService.getIndexedUsers().then(function (userIndex) {
+                        rows.forEach(function (row) {
+                            row.User = userIndex[row.UserId];
+                            reportRows.push(row);
+                        });
+
+                        for (var userId in userIndex) {
+                            if (!reportedUserIds[userId]) {
+                                reportRows.push({
+                                    UserId: userId,
+                                    User : userIndex[userId]
+                                });
+                            }        
+                        }
+                    });
+
+                    return reportRows;
                 });
             }
         };

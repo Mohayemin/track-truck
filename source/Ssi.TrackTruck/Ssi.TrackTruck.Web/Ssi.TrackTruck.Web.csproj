@@ -45,6 +45,10 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FizzWare.NBuilder, Version=3.0.1.0, Culture=neutral, PublicKeyToken=5651b03e12e42c12, processorArchitecture=MSIL">
       <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
       <Private>True</Private>
@@ -167,6 +171,8 @@
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
     <Content Include="Scripts\App\Trip\trip.js" />
+    <Content Include="Scripts\App\Trip\tripDetail.html" />
+    <Content Include="Scripts\App\Trip\tripDetailController.js" />
     <Content Include="Scripts\App\Trip\tripStatus.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
     <Content Include="Scripts\App\Trip\tripReport.html" />
@@ -254,8 +260,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\DailyHitLogAttribute.cs" />
+    <Compile Include="ActionFilters\ElmahHandlerErrorAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DummyRepository.cs" />
+    <Compile Include="App_Start\LoggerConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />

@@ -17,9 +17,11 @@ namespace Ssi.TrackTruck.Web
 
             ModelBinders.Binders.Add(typeof(IList<string>), new ListModelBinder<string>());
             GlobalFilters.Filters.Add(new DailyHitLogAttribute());
+            GlobalFilters.Filters.Add(new ElmahHandleErrorAttribute());
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             DependencyResolver.Current.GetService<DbIndexBuilder>().BuildIndexes();
         }
+
     }
 }

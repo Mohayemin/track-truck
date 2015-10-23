@@ -19,7 +19,7 @@
             _this.RejectedNumberOfBoxes = collection.sum(_this.Drops, 'TotalRejectedBoxes');
             _this.DeliveredNumberOfBoxes = collection.sum(_this.Drops, 'TotalDeliveredBoxes');
             _this.TotalNumberOfDrops = dbDrops.length;
-            _this.DeliveredNumberOfDrops = collection.count(_this.Drops, 'IsReceived', true);
+            _this.DeliveredNumberOfDrops = collection.count(_this.Drops, 'IsDelivered', true);
 
             _this.Client = {};
             clientService.get(_this.ClientId).then(function (client) {
@@ -38,6 +38,12 @@
                 _this.Helpers = _this.HelperIds.map(function (hid) {
                     return employeesById[hid];
                 });
+
+                _this.HelperNames = _this.Helpers.map(function(helper) {
+                    return helper.FullName;
+                }).join(', ');
+
+                _this.Supervisor = employeesById[_this.SupervisorId];
             });
 
             _this.Truck = {};

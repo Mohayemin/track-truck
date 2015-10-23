@@ -18,6 +18,9 @@
         <table class="table table-bordered table-responsive table-hover" ts-wrapper>
             <thead>
                 <tr>
+                    <th ts-criteria="TripTicketNumber">
+                        Ticket#
+                    </th>
                     <th ts-criteria="DeliveredNumberOfDrops">
                         Delivered Drops
                     </th>
@@ -55,6 +58,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="trip in trips" ts-repeat>
+                    <td>
+                        <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
+                    </td>
                     <td ng-bind="trip.DeliveredNumberOfDrops"></td>
                     <td ng-bind="trip.TotalNumberOfDrops"></td>
                     <td ng-bind="trip.Client.Name"></td>

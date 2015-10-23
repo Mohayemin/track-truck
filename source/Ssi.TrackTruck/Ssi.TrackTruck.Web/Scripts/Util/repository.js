@@ -1,17 +1,25 @@
 ﻿utilModule.factory('repository', [
     'url',
     '$http',
-    function repository(url, $http) {
+    '$window',
+    function repository(url, $http, $window) {
         function onSuccess(response) {
             return response.data;
         };
 
+        function onError(response) {
+            if (response.status == 401) {
+                $window.location.reload();
+            }
+            return response;
+        }
+
         return {
             get: function(controller, action, params) {
-                return $http.get(url.server(controller, action, params)).then(onSuccess);
+                return $http.get(url.server(controller, action, params)).then(onSuccess, onError);
             },
             post: function(controller, action, data) {
-                return $http.post(url.server(controller, action), data).then(onSuccess);
+                return $http.post(url.server(controller, action), data).then(onSuccess, onError);
             }
         }
     }

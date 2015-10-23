@@ -59,7 +59,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 return Response.Error("", "Drop not found");
             }
-            if (drop.IsReceived)
+            if (drop.IsDelivered)
             {
                 return Response.Error("", "The drop is already received");
             }
@@ -88,9 +88,9 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 dr.RejectedNumberOfBoxes = rejection.Value;
             }
 
-            drop.ActualDropTime = DateTime.UtcNow;
+            drop.ActualDropTimeUtc = DateTime.UtcNow;
             drop.ReceiverUserId = _user.Id;
-            drop.IsReceived = true;
+            drop.IsDelivered = true;
 
             _repository.Save(drop);
 
@@ -114,5 +114,16 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             };
         }
 
+        public TripResponse Get(string id)
+        {
+            var trip = _repository.GetById<DbTrip>(id);
+            if (trip != null)
+            {
+                var drops = _repository.GetWhere<DbTripDrop>(drop => drop.TripId == trip.Id);
+                return new TripResponse{Trip = trip, Drops = drops};
+            }
+
+            return null;
+        }
     }
 }
