@@ -16,10 +16,10 @@
     </form>
 
     <div>
-        <table class="table table-bordered table-responsive table-hover">
+        <table class="table table-bordered table-responsive table-hover" ts-wrapper>
             <thead>
                 <tr>
-                    <th>
+                    <th ts-criteria="User.FullName">
                         User
                     </th>
                     <th ng-repeat="date in dates" ng-bind="date.label">
@@ -27,13 +27,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in reportRows">
-                    <td ng-bind="row.FullName">
-                    </td>
-                    <td ng-repeat="date in dates" class="attendance" ng-class="{present:row.Attendance[date.value]}">
-                        <!--<i class="fa fa-lg"
-                               ng-class="{'fa-check': row.Attendance[date.value], 'fa-close': !row.Attendance[date.value]}"></i>-->
-                    </td>
+                <tr ng-repeat="row in reportRows" ts-repeat>
+                    <td ng-bind="row.User.FullName" style="white-space: nowrap"></td>
+                    <td ng-repeat="date in dates" class="attendance" ng-class="{present:row.Attendance[date.value]}"
+                        ng-attr-title="{{row.User.FullName}}, {{date.label}}, {{row.Attendance[date.value]?'present':'absent'}}"></td>
                 </tr>
             </tbody>
         </table>
