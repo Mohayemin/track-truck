@@ -3,12 +3,14 @@
     'collection',
     'clientService',
     'employeeService',
+    'userService',
     'truckService',
     function (
         _,
         collection,
         clientService,
         employeeService,
+        userService,
         truckService
         ) {
         function Trip(dbTrip, dbDrops) {
@@ -22,12 +24,17 @@
             _this.DeliveredNumberOfDrops = collection.count(_this.Drops, 'IsDelivered', true);
 
             _this.Client = {};
+
+            
             clientService.get(_this.ClientId).then(function (client) {
                 _this.Client = client;
                 _this.PickupAddress = _.find(_this.Client.Addresses, { Id: _this.PickupAddressId });
 
-                _this.Drops.forEach(function (drop) {
-                    drop.Branch = _.find(_this.Client.Branches, { Id: drop.BranchId });
+                userService.getIndexedUsers().then(function (userIndex) {
+                    _this.Drops.forEach(function (drop) {
+                        drop.Branch = _.find(_this.Client.Branches, { Id: drop.BranchId });
+                        drop.ReceiverUser = userIndex[drop.ReceiverUserId];
+                    });
                 });
             });
 
