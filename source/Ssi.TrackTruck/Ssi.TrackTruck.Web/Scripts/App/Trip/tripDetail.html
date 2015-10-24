@@ -51,10 +51,13 @@
                     <dd ng-bind="drop.Branch.Name"></dd>
                     <dt>Scheduled Drop Time</dt>
                     <dd ng-bind="drop.ExpectedDropTimeUtc | philDate"></dd>
-                    <dt>Actual Drop Time</dt>
-                    <dd>
-                        <span ng-if="drop.IsDelivered" ng-bind="drop.ActualDropTimeUtc | philDate"></span>
-                        <span ng-if="!drop.IsDelivered">Not delivered yet</span>
+                    <dt>Received By</dt>
+                    <dd ng-if="drop.IsDelivered">
+                        <span ng-bind="drop.ReceiverUser.FullName"></span> at 
+                        <span ng-bind="drop.ActualDropTimeUtc | philDate"></span>
+                    </dd>
+                    <dd ng-if="!drop.IsDelivered">
+                        Not delivered yet
                     </dd>
                     <dt>Drops</dt>
                     <dd>
