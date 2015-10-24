@@ -219,6 +219,8 @@
     <Content Include="Scripts\Util\crudStatus.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
+    <Content Include="Scripts\Util\serverClock.html" />
+    <Content Include="Scripts\Util\serverClockDirective.js" />
     <Content Include="Scripts\Util\wellKnownDateTime.js" />
     <Content Include="Scripts\Util\detailButton.html" />
     <Content Include="Scripts\Util\detailButtonDirective.js" />
