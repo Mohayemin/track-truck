@@ -19,3 +19,10 @@ table.table thead th {
 .navbar-brand {
     font-size: 27px;
 }
+
+.nav>li>a,.nav>li>.navbar-text {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
