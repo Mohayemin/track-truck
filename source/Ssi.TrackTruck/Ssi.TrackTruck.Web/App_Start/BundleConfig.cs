@@ -28,7 +28,7 @@ namespace Ssi.TrackTruck.Web
             bundles.Add(util);
             bundles.Add(app);
 
-            var css = new StyleBundle("~/css")
+            var css = new StyleBundle("~/Content/css/all")
                 .Include("~/Content/css/bootstrap-superhero.min.css")
                 .Include("~/Content/css/bootstrap-superhero-override.css")
                 .Include("~/Content/css/font-awesome.min.css")
