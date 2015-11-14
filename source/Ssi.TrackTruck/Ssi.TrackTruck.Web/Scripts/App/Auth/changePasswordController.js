@@ -1,9 +1,11 @@
 ﻿authModule.controller('changePasswordController', [
     '$scope',
     'authService',
+    '$location',
     'globalMessage',
     function($scope,
         authService,
+        $location,
         globalMessage) {
         $scope.request = {};
 
