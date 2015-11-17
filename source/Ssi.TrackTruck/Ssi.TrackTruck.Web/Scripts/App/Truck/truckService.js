@@ -15,10 +15,10 @@
         function add(request) {
             var formattedRequest = {
                 RegistrationNumber: request.RegistrationNumber,
-                DriverId: request.driver.Id,
-                HelperId: request.helper.Id
+                DriverId: (request.driver || {}).Id,
+                HelperId: (request.helper || {}).Id
             };
-            return repository.post('Truck', 'Add', formattedRequest).then(function(response) {
+            return repository.post('Truck', 'Add', formattedRequest).then(function (response) {
                 if (response.IsError) {
                     return $q.reject(response.Message);
                 }
@@ -49,13 +49,13 @@
         var service = {
             add: add,
             getAll: getAll,
-            get: function(id) {
+            get: function (id) {
                 return getAll().then(function () {
                     return _.find(_trucks, { Id: id });
                 });
             },
-            getIndexedTrucks: function() {
-                return service.getAll().then(function() {
+            getIndexedTrucks: function () {
+                return service.getAll().then(function () {
                     return _trucksById;
                 });
             },
@@ -73,21 +73,21 @@
                     return $q.reject(response.Message || response.status || 'could not delete client');
                 });
             },
-            edit: function(request) {
+            edit: function (request) {
                 var formattedRequest = {
                     Id: request.Id,
                     RegistrationNumber: request.RegistrationNumber,
                     DriverId: request.driver.Id,
                     HelperId: request.helper.Id
                 };
-                return repository.post('Truck', 'Save', formattedRequest).then(function(response) {
+                return repository.post('Truck', 'Save', formattedRequest).then(function (response) {
                     if (response.IsError) {
                         return $q.reject(response.Message || response.Status || 'Could not edit truck');
                     }
 
-                    return employeeService.get(response.Data.DriverId).then(function(driver) {
+                    return employeeService.get(response.Data.DriverId).then(function (driver) {
                         response.Data.DriverName = driver.FullName;
-                        employeeService.get(response.Data.HelperId).then(function(helper) {
+                        employeeService.get(response.Data.HelperId).then(function (helper) {
                             response.Data.HelperName = helper.FullName;
                             angular.extend(_trucksById[request.Id], response.Data);
                         });
