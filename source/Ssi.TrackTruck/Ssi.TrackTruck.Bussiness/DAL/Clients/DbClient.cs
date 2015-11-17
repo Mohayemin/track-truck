@@ -9,5 +9,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Clients
         public int TrucksPerDay { get; set; }
         public List<DbBranch> Branches { get; set; }
         public List<DbTextItem> Addresses { get; set; }
+
+        public DbClient()
+        {
+            Branches = new List<DbBranch>();
+            Addresses = new List<DbTextItem>();
+        }
     }
 }
