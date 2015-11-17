@@ -9,7 +9,7 @@
         , employeeService) {
 
         var _trucks = [];
-        var _trucksById = [];
+        var _trucksById = {};
         var _loadPromise = null;
 
         function add(request) {
@@ -22,7 +22,12 @@
                 if (response.IsError) {
                     return $q.reject(response.Message);
                 }
-                return response;
+
+                var truck = response.Data;
+                _trucks.push(truck);
+                _trucksById[truck.Id] = truck;
+
+                return truck;
             });
         }
 
@@ -77,8 +82,8 @@
                 var formattedRequest = {
                     Id: request.Id,
                     RegistrationNumber: request.RegistrationNumber,
-                    DriverId: request.driver.Id,
-                    HelperId: request.helper.Id
+                    DriverId: (request.driver || {}).Id,
+                    HelperId: (request.helper || {}).Id
                 };
                 return repository.post('Truck', 'Save', formattedRequest).then(function (response) {
                     if (response.IsError) {

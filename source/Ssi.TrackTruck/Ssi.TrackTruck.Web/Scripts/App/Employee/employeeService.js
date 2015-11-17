@@ -58,6 +58,8 @@
                     }
                     var employee = response.Data;
                     _employees.push(employee);
+                    _employeeById[employee.Id] = employee;
+
                     return employee;
                 });
             },

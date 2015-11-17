@@ -53,8 +53,10 @@
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
-                    _users.push(response.Data);
-                    return response.Data;
+                    var user = response.Data;
+                    _users.push(user);
+                    _userById[user.Id] = user;
+                    return user;
                 });
             },
             getIndexedUsers: function() {
