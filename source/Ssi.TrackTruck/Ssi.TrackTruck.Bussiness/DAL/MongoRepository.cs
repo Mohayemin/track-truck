@@ -86,7 +86,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
 
         public T SoftDelete<T>(string id) where T : IEntity
         {
-            var item = FindOne<T>(e => e.Id == id && !e.IsDeleted);
+            var item = FindOne<T>(e => e.Id == id);
             if (item != null)
             {
                 item.IsDeleted = true;
