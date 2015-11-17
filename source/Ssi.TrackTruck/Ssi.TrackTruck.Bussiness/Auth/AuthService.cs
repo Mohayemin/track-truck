@@ -72,13 +72,7 @@ namespace Ssi.TrackTruck.Bussiness.Auth
 
         public IEnumerable<DbUser> GetUserList()
         {
-            return _repository.GetAllProjected<DbUser>(
-                user => user.Id,
-                user => user.FirstName,
-                user => user.LastName,
-                user => user.Role,
-                user => user.Username
-                );
+            return _repository.GetAllUndeleted<DbUser>();
         }
 
         public Response ChangePassword(ChangePasswordRequest request, string userId)
