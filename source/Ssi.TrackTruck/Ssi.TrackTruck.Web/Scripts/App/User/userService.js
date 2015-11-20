@@ -30,7 +30,7 @@
         }
 
         var service = {
-            generateInitialPassword: function () {
+            generateRandomPassword: function () {
                 var text = '';
                 for (var i = 0; i < 6; i++) {
                     text += _alphaNumbers[Math.floor(Math.random() * _alphaNumbers.length)];

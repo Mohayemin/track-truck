@@ -7,10 +7,13 @@
     function($scope, userService, userRoles, $location, globalMessage) {
 
         $scope.userRoles = userRoles;
-
-        $scope.request = {
-            InitialPassword: userService.generateInitialPassword()
+        
+        $scope.generatePassword = function() {
+            $scope.request.InitialPassword = userService.generateRandomPassword();
         };
+
+        $scope.request = {};
+        $scope.generatePassword();
 
         $scope.User = {
             isUsernameReadonly: true,
