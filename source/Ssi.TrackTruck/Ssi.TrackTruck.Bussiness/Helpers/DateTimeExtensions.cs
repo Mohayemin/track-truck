@@ -1,5 +1,4 @@
 ﻿using System;
-using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Bussiness.Helpers
 {
@@ -14,6 +13,7 @@ namespace Ssi.TrackTruck.Bussiness.Helpers
 
         public static DateTime PhilippinesToUtc(this DateTime dateTime)
         {
+            dateTime = new DateTime(dateTime.Ticks,DateTimeKind.Unspecified);
             var phil = new DateTimeOffset(dateTime, PhilippineOffset);
             return phil.ToUniversalTime().DateTime;
         }
