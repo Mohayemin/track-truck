@@ -10,7 +10,7 @@
                 , signedInUser) {
                 var newTripGroup = {
                     text: 'New Order Trip',
-                    roles: [roles.encoder, roles.admin, roles.branchCustodian],
+                    roles: [roles.encoder, roles.admin],
                     navs: [
                         {
                             url: url.route('trip', 'order'),
@@ -18,12 +18,6 @@
                             text: 'New Trip',
                             roles: [roles.encoder, roles.admin],
                             highLightRoutes: ['triporder']
-                        }, {
-                            url: url.route('trip', 'transactions'),
-                            iconClass: 'fa fa-fw fa-lg fa-cubes',
-                            text: 'Transactions',
-                            roles: [roles.branchCustodian],
-                            highLightRoutes: ['triptransactions']
                         }
                     ]
                 };

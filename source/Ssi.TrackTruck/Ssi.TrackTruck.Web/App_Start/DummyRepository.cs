@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FizzWare.NBuilder;
+using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
@@ -44,17 +45,25 @@ namespace Ssi.TrackTruck.Web
             {
                 new DbUser
                 {
-                    Id = "1",
                     Username = "Mohayemin",
                     UsernameLowerCase = "mohayemin",
-                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
+                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA==",
+                    Role = Role.Admin,
+                    FirstName = "Mohayeminul",
+                    LastName = "Islam",
+                    IsDeleted = false,
+                    CreationTime = DateTime.MinValue
                 },
                 new DbUser
                 {
-                    Id = "2",
                     Username = "JR",
                     UsernameLowerCase = "jr",
-                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA=="
+                    PasswordHash = "g+S4Aydl1ZTXWYxO8IdfJWVUJVCpeTc7D09FOEFfPT/rvjDhVFVe9pqfIFS8HfU36AMAAA==",
+                    Role = Role.Admin,
+                    FirstName = "JRF",
+                    LastName = "Ibanez",
+                    IsDeleted = false,
+                    CreationTime = DateTime.MinValue
                 }
             };
 

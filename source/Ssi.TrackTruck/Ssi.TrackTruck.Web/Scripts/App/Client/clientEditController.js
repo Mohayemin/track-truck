@@ -23,10 +23,6 @@
             });
         });
 
-        userService.getUsersByRole(userRoles.branchCustodian).then(function (custodians) {
-            $scope.custodianUsers = custodians;
-        });
-
         $scope.addBranch = function () {
             var branch = {
                 ModificationStatus: crudStatus.added

@@ -24,7 +24,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        [AllowedRoles(Role.Admin, Role.BranchCustodian, Role.Encoder)]
+        [AllowedRoles(Role.Admin, Role.Encoder)]
         public ActionResult All()
         {
             var users = _authService.GetUserList();
