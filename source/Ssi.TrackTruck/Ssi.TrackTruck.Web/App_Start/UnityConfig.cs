@@ -45,9 +45,9 @@ namespace Ssi.TrackTruck.Web
             var mongoDb = mongoClient.GetServer().GetDatabase(mongoUrl.DatabaseName);
 
             container.RegisterType<MongoDatabase>(new InjectionFactory(_ => mongoDb));
-            container.RegisterType<IRepository, MongoRepository>();
+            //container.RegisterType<IRepository, MongoRepository>();
             container.RegisterType<ITripRepository, TripMongoRepository>();
-            //container.RegisterType<IRepository, DummyRepository>();
+            container.RegisterType<IRepository, DummyRepository>();
         }
     }
 }
