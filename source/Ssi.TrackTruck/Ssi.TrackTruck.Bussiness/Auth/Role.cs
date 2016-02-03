@@ -9,7 +9,6 @@ namespace Ssi.TrackTruck.Bussiness.Auth
     public enum Role
     {
         Admin = 1,
-        BranchCustodian = 2,
         Encoder = 4,
         Supervisor = 8
     }

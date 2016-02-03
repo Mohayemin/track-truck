@@ -5,7 +5,6 @@ authModule.factory('userRoles', [
     function () {
         var roleList = [
             { label: 'Admin', value: 1 },
-            { label: 'Branch Custodian', value: 2 },
             { label: 'Encoder', value: 4 }
         ];
 
@@ -18,7 +17,6 @@ authModule.factory('userRoles', [
             roleList: roleList,
             map: map,
             admin: 1,
-            branchCustodian: 2,
             encoder: 4
         };
     }

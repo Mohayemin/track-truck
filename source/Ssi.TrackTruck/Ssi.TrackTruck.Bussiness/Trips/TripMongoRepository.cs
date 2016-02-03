@@ -30,31 +30,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             _clients = repository1.Collection<DbClient>();
         }
 
-        public IQueryable<DbTripDrop> GetUsersActiveDrops(string userId)
-        {
-            var activeTripIds =
-                _trips.Find(Query<DbTrip>.In(trip => trip.Status, ActiveTripStatuses))
-                    .SetFields(Fields<DbTrip>.Include(trip => trip.Id))
-                    .Select(trip => trip.Id);
-
-            var userBrancheIds = GetUserBranchIds(userId);
-
-            return _drops.Find(Query.And(Query<DbTripDrop>.EQ(drop => drop.IsDelivered, false), Query<DbTripDrop>.In(drop => drop.BranchId, userBrancheIds),
-                Query<DbTripDrop>.In(drop => drop.TripId, activeTripIds))).AsQueryable();
-        }
-
-        public IEnumerable<string> GetUserBranchIds(string userId)
-        {
-            var branchQuery = Query<DbBranch>.EQ(branch => branch.CustodianUserId, userId);
-
-            var userBrancheIds =
-                _clients.Find(Query<DbClient>.ElemMatch(client => client.Branches, builder => branchQuery))
-                    .SelectMany(client => client.Branches)
-                    .Where(branch => branch.CustodianUserId == userId)
-                    .Select(branch => branch.Id);
-            return userBrancheIds;
-        }
-
         public IQueryable<DbTrip> GetTripsInRange(DateTime fromUtc, DateTime toUtc)
         {
             var trips =

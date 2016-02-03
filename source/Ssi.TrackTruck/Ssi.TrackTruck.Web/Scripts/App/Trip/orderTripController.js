@@ -78,15 +78,15 @@
 
         employeeService.getAllByDesignation(designation.driver).then(function (drivers) {
             $scope.drivers = drivers;
-            $scope.request.DriverId = drivers[0].Id;
+            $scope.request.DriverId = (drivers[0] || {}).Id;
         });
         employeeService.getAllByDesignation(designation.helper).then(function (helpers) {
             $scope.helpers = helpers;
-            $scope.request.HelperIds[0] = helpers[0].Id;
+            $scope.request.HelperIds[0] = (helpers[0] || {}).Id;
         });
         employeeService.getAllByDesignation(designation.supervisor).then(function (supervisors) {
             $scope.supervisors = supervisors;
-            $scope.request.SupervisorId = supervisors[0].Id;
+            $scope.request.SupervisorId = (supervisors[0] || {}).Id;
         });
 
         $scope.$watch('request.Truck', function () {

@@ -2,21 +2,12 @@
     '$scope',
     '$routeParams',
     'clientService',
-    'userService',
     function (
         $scope
         , $routeParams
-        , clientService
-        , userService) {
+        , clientService) {
         function init(client) {
             $scope.client = client;
-
-            userService.getIndexedUsers().then(function (userIndex) {
-                $scope.client.Branches.forEach(function (branch) {
-                    branch.CustodianUser = userIndex[branch.CustodianUserId];
-                });
-            });
-
 
             $scope.PickupAddressDisplay = client.Addresses.map(function (address) {
                 return address.Text;
