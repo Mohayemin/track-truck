@@ -213,3 +213,4 @@ ehthumbs.db
 Desktop.ini
 *.orig
 Errors/*
+.vs
