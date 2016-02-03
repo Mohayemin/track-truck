@@ -26,6 +26,18 @@
                 var yesterday = service.today();
                 yesterday.setDate(yesterday.getDate() + 1);
                 return yesterday;
+            },
+            weekStart: function () {
+                return moment(service.today()).startOf('week').toDate();
+            },
+            weekEnd: function() {
+                return moment(service.today()).endOf('week').toDate();
+            },
+            monthStart: function() {
+                return moment(service.today()).startOf('month').toDate();
+            },
+            monthEnd: function() {
+                return moment(service.today()).endOf('month').toDate();
             }
         };
         return service;
