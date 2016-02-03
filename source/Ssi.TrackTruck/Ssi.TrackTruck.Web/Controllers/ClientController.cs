@@ -16,7 +16,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpGet]
-        [AllowedRoles(Role.Admin, Role.BranchCustodian, Role.Encoder)]
+        [AllowedRoles(Role.Admin, Role.Encoder)]
         public ActionResult All()
         {
             return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);

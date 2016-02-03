@@ -16,10 +16,6 @@
             Branches: []
         };
 
-        userService.getUsersByRole(userRoles.branchCustodian).then(function(custodians) {
-            $scope.custodianUsers = custodians;
-        });
-
         $scope.add = function() {
             globalMessage.info('adding client', 0);
             clientService.add($scope.request).then(function() {

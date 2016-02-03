@@ -27,23 +27,6 @@ namespace Ssi.TrackTruck.Web.Controllers
             return new JsonNetResult(trip);
         }
 
-        [HttpGet]
-        [AllowedRoles(Role.BranchCustodian)]
-        public ActionResult MyActiveDrops()
-        {
-            var myActiveDrops = _tripService.GetMyActiveDrops();
-
-            return new JsonNetResult(myActiveDrops);
-        }
-
-        [HttpPost]
-        [AllowedRoles(Role.BranchCustodian)]
-        public ActionResult Receive(DropReceiveRequest request)
-        {
-            var response = _tripService.ReceiveDrop(request);
-            return new JsonNetResult(response);
-        }
-
         [HttpPost]
         [AllowedRoles(Role.Admin)]
         public ActionResult Report(DateTime fromDate, DateTime toDate)

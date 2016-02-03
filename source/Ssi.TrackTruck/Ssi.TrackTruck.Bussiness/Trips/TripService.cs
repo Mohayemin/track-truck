@@ -45,58 +45,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return activeTrips;
         }
 
-        public IQueryable<DbTripDrop> GetMyActiveDrops()
-        {
-            var myDrops = _tripRepository.GetUsersActiveDrops(_user.Id);
-            return myDrops;
-        }
-
-        public Response ReceiveDrop(DropReceiveRequest request)
-        {
-            var drop = _tripRepository.GetDrop(request.DropId);
-
-            if (drop == null)
-            {
-                return Response.Error("", "Drop not found");
-            }
-            if (drop.IsDelivered)
-            {
-                return Response.Error("", "The drop is already received");
-            }
-            var myBranches = _tripRepository.GetUserBranchIds(_user.Id);
-            if (!myBranches.Contains(drop.BranchId))
-            {
-                return Response.Error("", "You are not custodian of the branch of this drop");
-            }
-            foreach (var rejection in request.DeliveryRejections)
-            {
-                var dr = drop.DeliveryReceipts.FirstOrDefault(_ => _.Id == rejection.Key);
-
-                if (dr == null)
-                {
-                    return Response.Error("", "Request contains a DR that does not exist");
-                }
-                if (rejection.Value > dr.NumberOfBoxes)
-                {
-                    return Response.Error("", string.Format("{0} boxes rejected but total number of boxes is {1}", rejection.Value, dr.NumberOfBoxes));
-                }
-                if (rejection.Value < 0)
-                {
-                    return Response.Error("", "Cannot reject negetive number of boxes");
-                }
-
-                dr.RejectedNumberOfBoxes = rejection.Value;
-            }
-
-            drop.ActualDropTimeUtc = DateTime.UtcNow;
-            drop.ReceiverUserId = _user.Id;
-            drop.IsDelivered = true;
-
-            _repository.Save(drop);
-
-            return Response.Success(drop, "Drop received");
-        }
-
         public TripReportResponse GetReport(DateTime fromDate, DateTime toDate)
         {
             fromDate = fromDate.ToUniversalTime();
