@@ -65,7 +65,7 @@
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\Clients\DbClient.cs" />
     <Compile Include="DAL\Clients\DbBranch.cs" />
-    <Compile Include="DAL\DbIndexBuilder.cs" />
+    <Compile Include="DAL\DbInitializer.cs" />
     <Compile Include="DAL\Entities\DbDeletedItem.cs" />
     <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />
