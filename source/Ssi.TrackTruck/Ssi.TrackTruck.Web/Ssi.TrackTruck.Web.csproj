@@ -283,6 +283,7 @@
     <Compile Include="Auth\AllowedRoles.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BackdoorController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
@@ -326,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Backdoor\" />
     <Folder Include="Views\Info\" />
   </ItemGroup>
   <ItemGroup>
