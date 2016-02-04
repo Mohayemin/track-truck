@@ -28,7 +28,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
-        [AllowedRoles(Role.Admin)]
+        [AllowedRoles(Role.Encoder, Role.Admin)]
         public ActionResult Report(DateTime fromDate, DateTime toDate)
         {
             var report = _tripService.GetReport(fromDate, toDate);
