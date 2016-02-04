@@ -47,7 +47,7 @@ namespace Ssi.TrackTruck.Web
             container.RegisterType<MongoDatabase>(new InjectionFactory(_ => mongoDb));
             //container.RegisterType<IRepository, MongoRepository>();
             container.RegisterType<ITripRepository, TripMongoRepository>();
-            container.RegisterType<IRepository, DummyRepository>();
+            container.RegisterType<IRepository, MongoRepository>();
         }
     }
 }
