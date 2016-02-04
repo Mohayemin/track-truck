@@ -1,0 +1,38 @@
+﻿<div>
+    <page-title></page-title>
+
+    <form ng-submit="loadReport()" class="form-horizontal">
+        <div class="col-sm-5">
+            <datetime ng-model="filter.fromDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-5">
+            <datetime ng-model="filter.toDate" hide-time="true"></datetime>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <button type="submit" class="btn btn-default btn-block">Load</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table class="table table-bordered table-responsive table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="User.FullName">
+                        User
+                    </th>
+                    <th ng-repeat="date in dates" ng-bind="date.label">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in reportRows" ts-repeat>
+                    <td ng-bind="row.User.FullName" style="white-space: nowrap"></td>
+                    <td ng-repeat="date in dates" class="attendance" ng-class="{present:row.Attendance[date.value]}"
+                        ng-attr-title="{{row.User.FullName}}, {{date.label}}, {{row.Attendance[date.value]?'present':'absent'}}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
