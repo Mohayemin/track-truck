@@ -58,7 +58,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             helper.Designation = EmployeDesignations.Helper;
 
             var supervisor = Builder<DbEmployee>.CreateNew().Do(_ => _.Id = Oid).Do(_ => _.CreatorId = admin.Id).Build();
-            helper.Designation = EmployeDesignations.Supervisor;
+            supervisor.Designation = EmployeDesignations.Supervisor;
 
             _repository.Save(driver);
             _repository.Save(helper);
