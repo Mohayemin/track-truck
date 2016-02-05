@@ -72,6 +72,20 @@
                         Truck
                     </th>
                 </tr>
+                <tr>
+                    <th>Total</th>
+                    <th ng-bind="total.DeliveredNumberOfDrops"></th>
+                    <th ng-bind="total.TotalNumberOfDrops"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalNumberOfBoxes"></th>
+                    <th ng-bind="total.DeliveredNumberOfBoxes"></th>
+                    <th ng-bind="total.RejectedNumberOfBoxes"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="trip in trips" ts-repeat>

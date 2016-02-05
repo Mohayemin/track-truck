@@ -27,10 +27,25 @@
             setDateRange(wellKnownDateTime.monthStart(), wellKnownDateTime.monthEnd());
         };
 
-
         $scope.loadReport = function () {
+
             tripService.getReport($scope.filter).then(function (trips) {
+                $scope.total = {
+                    DeliveredNumberOfDrops: 0,
+                    TotalNumberOfDrops: 0,
+                    TotalNumberOfBoxes: 0,
+                    DeliveredNumberOfBoxes: 0,
+                    RejectedNumberOfBoxes: 0
+                };
+
                 $scope.trips = trips;
+                angular.forEach(trips, function (trip) {
+                    $scope.total.DeliveredNumberOfDrops += trip.DeliveredNumberOfDrops;
+                    $scope.total.TotalNumberOfDrops += trip.TotalNumberOfDrops;
+                    $scope.total.TotalNumberOfBoxes += trip.TotalNumberOfBoxes;
+                    $scope.total.DeliveredNumberOfBoxes += trip.DeliveredNumberOfBoxes;
+                    $scope.total.RejectedNumberOfBoxes += trip.RejectedNumberOfBoxes;
+                })
             });
         };
     }
