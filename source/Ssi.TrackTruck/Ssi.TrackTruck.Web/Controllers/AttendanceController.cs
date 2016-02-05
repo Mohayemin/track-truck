@@ -3,11 +3,10 @@ using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Attendances;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Web.Auth;
-using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class AttendanceController : Controller
+    public class AttendanceController : ControllerBase
     {
         private readonly AttendanceService _attendanceService;
 

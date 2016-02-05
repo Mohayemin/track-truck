@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Auth;
-using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
-using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class TripController : Controller
+    public class TripController : ControllerBase
     {
         private readonly TripService _tripService;
 

@@ -4,11 +4,10 @@ using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Models;
 using Ssi.TrackTruck.Web.Utils;
-using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
         private readonly AuthService _authService;
 

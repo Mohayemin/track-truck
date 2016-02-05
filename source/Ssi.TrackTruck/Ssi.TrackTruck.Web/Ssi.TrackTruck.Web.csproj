@@ -285,6 +285,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BackdoorController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -328,6 +329,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Backdoor\" />
+    <Folder Include="Views\ControllerBase\" />
     <Folder Include="Views\Info\" />
   </ItemGroup>
   <ItemGroup>
