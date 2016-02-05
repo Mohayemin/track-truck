@@ -40,6 +40,10 @@
       <HintPath>..\packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Driver.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -65,7 +69,7 @@
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\Clients\DbClient.cs" />
     <Compile Include="DAL\Clients\DbBranch.cs" />
-    <Compile Include="DAL\DbIndexBuilder.cs" />
+    <Compile Include="DAL\DbInitializer.cs" />
     <Compile Include="DAL\Entities\DbDeletedItem.cs" />
     <Compile Include="DAL\Entities\DbEmployee.cs" />
     <Compile Include="DAL\CollectionMapper.cs" />

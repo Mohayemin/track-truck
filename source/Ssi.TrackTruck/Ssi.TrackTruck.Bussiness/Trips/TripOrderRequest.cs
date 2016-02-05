@@ -74,7 +74,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 BundleCostInCentavos = (long)(BundleCost ?? 0) * 100,
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
-                Status = TripStatus.NotStarted
+                Status = TripStatus.New
             };
         }
 

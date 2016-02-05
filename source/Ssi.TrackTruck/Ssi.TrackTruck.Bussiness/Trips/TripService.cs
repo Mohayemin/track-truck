@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
-using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
-using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
 {
@@ -13,13 +10,11 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     {
         private readonly IRepository _repository;
         private readonly ITripRepository _tripRepository;
-        private readonly ISignedInUser _user;
 
-        public TripService(IRepository repository, ITripRepository tripRepository, ISignedInUser user)
+        public TripService(IRepository repository, ITripRepository tripRepository)
         {
             _repository = repository;
             _tripRepository = tripRepository;
-            _user = user;
         }
 
         public DbTrip AddTrip(TripOrderRequest orderRequest)
@@ -36,13 +31,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public IEnumerable<DbTrip> GetAll()
         {
             return _repository.GetAll<DbTrip>();
-        }
-
-        public IQueryable<DbTrip> GetActiveTrips()
-        {
-            var activeTrips = _repository.GetWhere<DbTrip>(
-                trip => trip.Status == TripStatus.NotStarted || trip.Status == TripStatus.OnTheWay);
-            return activeTrips;
         }
 
         public TripReportResponse GetReport(DateTime fromDate, DateTime toDate)

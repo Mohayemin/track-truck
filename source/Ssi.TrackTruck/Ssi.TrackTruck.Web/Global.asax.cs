@@ -20,7 +20,7 @@ namespace Ssi.TrackTruck.Web
             GlobalFilters.Filters.Add(new ElmahHandleErrorAttribute());
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            DependencyResolver.Current.GetService<DbIndexBuilder>().BuildIndexes();
+            DependencyResolver.Current.GetService<DbInitializer>().Init();
         }
 
     }
