@@ -10,7 +10,6 @@
                 , signedInUser) {
                 var newTripGroup = {
                     text: 'New Order Trip',
-                    roles: [roles.encoder, roles.admin],
                     navs: [
                         {
                             url: url.route('trip', 'order'),
@@ -50,17 +49,18 @@
                 };
                 var reportsGroup = {
                     text: 'Reports',
-                    roles: [roles.admin],
                     navs: [
                         {
                             url: url.route('trip', 'report'),
                             iconClass: 'fa fa-fw fa-lg fa-cubes',
                             text: 'Trips',
+                            roles: [roles.encoder, roles.admin],
                             highLightRoutes: ['tripreport']
                         }, {
                             url: url.route('attendance', 'report'),
                             iconClass: 'fa fa-fw fa-lg fa-check-square-o',
                             text: 'Attendance',
+                            roles: [roles.admin],
                             highLightRoutes: ['attendancereport', 'tripdetail']
                         }
                     ]

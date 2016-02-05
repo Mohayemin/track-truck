@@ -2,9 +2,8 @@
 using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Attendances;
 using Ssi.TrackTruck.Bussiness.Auth;
-using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Web.Auth;
-using Ssi.TrackTruck.Web.Utils;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -22,7 +21,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Report(DateTime fromDate, DateTime toDate)
         {
             var report = _attendanceService.GetReport(fromDate, toDate);
-            return new JsonNetResult(report);
+            return JsonNet(report);
         }
     }
 }

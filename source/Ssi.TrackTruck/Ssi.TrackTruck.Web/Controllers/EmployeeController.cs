@@ -2,6 +2,7 @@
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Employees;
 using Ssi.TrackTruck.Web.Auth;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -18,7 +19,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         [AllowedRoles(Role.Admin, Role.Encoder)]
         public ActionResult All()
         {
-            return Json(_employeeService.GetAll(), JsonRequestBehavior.AllowGet);
+            return JsonNet(_employeeService.GetAll());
         }
 
         [HttpPost]
@@ -26,7 +27,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Add(AddEmployeeRequest request)
         {
             var response = _employeeService.Add(request);
-            return Json(response);
+            return JsonNet(response);
         }
 
         [HttpPost]
@@ -34,7 +35,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Delete(string id)
         {
             var response = _employeeService.Delete(id);
-            return Json(response);
+            return JsonNet(response);
         }
 
         [HttpPost]
@@ -42,7 +43,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Save(EditEmployeeRequest request)
         {
             var response = _employeeService.Save(request);
-            return Json(response);
+            return JsonNet(response);
         }
 	}
 }
