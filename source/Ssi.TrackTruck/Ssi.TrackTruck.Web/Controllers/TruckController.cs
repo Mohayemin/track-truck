@@ -2,6 +2,7 @@
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Trucks;
 using Ssi.TrackTruck.Web.Auth;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -18,14 +19,14 @@ namespace Ssi.TrackTruck.Web.Controllers
         [AllowedRoles(Role.Admin, Role.Encoder)]
         public ActionResult All()
         {
-            return Json(_truckService.GetAll(), JsonRequestBehavior.AllowGet);
+            return JsonNet(_truckService.GetAll());
         }
 
         [HttpPost]
         [AllowedRoles(Role.Admin)]
         public ActionResult Add(AddTruckRequest request)
         {
-            return Json(_truckService.Add(request));
+            return JsonNet(_truckService.Add(request));
         }
 
         [HttpPost]
@@ -33,7 +34,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Delete(string id)
         {
             var response = _truckService.Delete(id);
-            return Json(response);
+            return JsonNet(response);
         }
 
         [HttpPost]
@@ -41,7 +42,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Save(EditTruckRequest request)
         {
             var response = _truckService.Save(request);
-            return Json(response);
+            return JsonNet(response);
         }
     }
 }

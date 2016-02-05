@@ -5,6 +5,7 @@ using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -24,22 +25,22 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             var trip = _tripService.AddTrip(orderRequest);
 
-            return new JsonNetResult(trip);
+            return JsonNet(trip);
         }
 
         [HttpPost]
-        [AllowedRoles(Role.Admin)]
+        [AllowedRoles(Role.Encoder, Role.Admin)]
         public ActionResult Report(DateTime fromDate, DateTime toDate)
         {
             var report = _tripService.GetReport(fromDate, toDate);
-            return new JsonNetResult(report);
+            return JsonNet(report);
         }
 
         [HttpGet]
         public ActionResult Get(string id)
         {
             var trip = _tripService.Get(id);
-            return new JsonNetResult(trip);
+            return JsonNet(trip);
         }
     }
 }

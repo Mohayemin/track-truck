@@ -18,7 +18,7 @@ namespace Ssi.TrackTruck.Web.Utils
 
             var response = context.HttpContext.Response;
 
-            response.ContentType = !String.IsNullOrEmpty(ContentType)
+            response.ContentType = !string.IsNullOrEmpty(ContentType)
                 ? ContentType
                 : "application/json";
 
@@ -27,6 +27,17 @@ namespace Ssi.TrackTruck.Web.Utils
             
             var serializedObject = JsonConvert.SerializeObject(Data, Formatting.Indented);
             response.Write(serializedObject);
+            JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+        }
+
+        internal static ActionResult JsonNet(string v, JsonRequestBehavior allowGet)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static JsonNetResult JsonNet(object data)
+        {
+            return new JsonNetResult(data);
         }
     }
 }
