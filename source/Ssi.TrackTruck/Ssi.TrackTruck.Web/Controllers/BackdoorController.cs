@@ -10,11 +10,10 @@ using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
-using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class BackdoorController : Controller
+    public class BackdoorController : ControllerBase
     {
         private readonly IRepository _repository;
 

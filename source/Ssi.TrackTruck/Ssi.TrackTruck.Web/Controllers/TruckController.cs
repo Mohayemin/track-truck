@@ -2,11 +2,10 @@
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Trucks;
 using Ssi.TrackTruck.Web.Auth;
-using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class TruckController : Controller
+    public class TruckController : ControllerBase
     {
         private readonly TruckService _truckService;
 

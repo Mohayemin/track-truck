@@ -2,7 +2,7 @@
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class PageController : Controller
+    public class PageController : ControllerBase
     {
         [Route("")]
         public ActionResult App()
