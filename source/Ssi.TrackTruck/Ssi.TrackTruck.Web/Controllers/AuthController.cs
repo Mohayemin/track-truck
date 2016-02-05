@@ -4,6 +4,7 @@ using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
 using Ssi.TrackTruck.Bussiness.Models;
 using Ssi.TrackTruck.Web.Utils;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -26,7 +27,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             {
                 FormsAuthentication.SetAuthCookie(user.Id, request.RememberMe);
             }
-            return Json(response);
+            return JsonNet(response);
         }
 
         public ActionResult SignOut()
@@ -39,14 +40,14 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult ChangePassword(ChangePasswordRequest request)
         {
             var response = _authService.ChangePassword(request, User.Identity.Name);
-            return Json(response);
+            return JsonNet(response);
         }
 
         [HttpGet]
         public ActionResult GetSignedInUser()
         {
             var user = _authService.GetUser(User.Identity.Name);
-            return Json(user, JsonRequestBehavior.AllowGet);
+            return JsonNet(user);
         }
     }
 }
