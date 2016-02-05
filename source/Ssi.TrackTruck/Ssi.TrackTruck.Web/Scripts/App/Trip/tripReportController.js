@@ -48,5 +48,7 @@
                 })
             });
         };
+
+        $scope.loadReport();
     }
 ]);
