@@ -1,5 +1,5 @@
 ﻿// Map with Ssi.TrackTruck.Bussiness.DAL.Constants.TripStatus
-tripModule.factory('tripStatus', [function truckStatusFactory() {
+tripModule.factory('tripStatus', [function tripStatusFactory() {
     function obj(id, cssClass, text) {
         return {
             id: id,
@@ -9,15 +9,11 @@ tripModule.factory('tripStatus', [function truckStatusFactory() {
     }
 
     var factory = {
-        1001: obj(1001, 'success', 'On The Way'),
-        1004: obj(1002, 'info', 'Not Started'),
-        1003: obj(1003, 'warning', 'Unloading')
+        'New': obj(1001, 'info', 'New'),
+        'InProgress': obj(1002, 'warning', 'In progress'),
+        'DoneWithPartialDelivery': obj(1003, 'danger', 'Part delivered'),
+        'DoneWithFullDelivery': obj(1004, 'success', 'Full delivered')
     };
-
-    factory.notInUse = factory[0];
-    factory.moving = factory[1001];
-    factory.loading = factory[1002];
-    factory.unloading = factory[1003];
 
     return factory;
 }]);

@@ -2,8 +2,9 @@
 {
     public enum TripStatus
     {
-        OnTheWay = 1001,
-        Complete = 1002,
-        NotStarted = 1004,
+        New = 1001,
+        InProgress = 1002,
+        DoneWithPartialDelivery = 1003,
+        DoneWithFullDelivery = 1004,
     }
 }

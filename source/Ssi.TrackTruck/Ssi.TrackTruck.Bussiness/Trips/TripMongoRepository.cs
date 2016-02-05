@@ -20,7 +20,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         private readonly MongoCollection<DbTripDrop> _drops;
         private readonly MongoCollection<DbClient> _clients;
 
-        public static TripStatus[] ActiveTripStatuses = { TripStatus.NotStarted, TripStatus.OnTheWay };
+        public static TripStatus[] ActiveTripStatuses = { TripStatus.New, TripStatus.InProgress };
 
         public TripMongoRepository(MongoRepository repository)
         {
