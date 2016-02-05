@@ -72,6 +72,20 @@
                         Truck
                     </th>
                 </tr>
+                <tr class="active">
+                    <th>Total</th>
+                    <th ng-bind="total.DeliveredNumberOfDrops"></th>
+                    <th ng-bind="total.TotalNumberOfDrops"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalNumberOfBoxes"></th>
+                    <th ng-bind="total.DeliveredNumberOfBoxes"></th>
+                    <th ng-bind="total.RejectedNumberOfBoxes"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="trip in trips" ts-repeat>
@@ -103,6 +117,22 @@
                     <td ng-bind="trip.Truck.RegistrationNumber"></td>
                 </tr>
             </tbody>
+            <thead>
+                <tr ng-if="trips.length > 10" class="active">
+                    <th>Total</th>
+                    <th ng-bind="total.DeliveredNumberOfDrops"></th>
+                    <th ng-bind="total.TotalNumberOfDrops"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalNumberOfBoxes"></th>
+                    <th ng-bind="total.DeliveredNumberOfBoxes"></th>
+                    <th ng-bind="total.RejectedNumberOfBoxes"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
         </table>
     </div>
 </div>

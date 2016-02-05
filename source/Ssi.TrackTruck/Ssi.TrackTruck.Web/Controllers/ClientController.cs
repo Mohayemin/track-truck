@@ -3,6 +3,7 @@ using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Clients;
 using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -19,7 +20,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         [AllowedRoles(Role.Admin, Role.Encoder)]
         public ActionResult All()
         {
-            return Json(_clientService.GetAll(), JsonRequestBehavior.AllowGet);
+            return JsonNet(_clientService.GetAll());
         }
 
         [ValidateModel]
@@ -28,7 +29,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Add(AddClientRequest request)
         {
             var response = _clientService.Add(request);
-            return Json(response);
+            return JsonNet(response);
         }
 
         [HttpPost]
@@ -36,7 +37,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Delete(string id)
         {
             var response = _clientService.Delete(id);
-            return Json(response);
+            return JsonNet(response);
         }
 
         [HttpPost]
@@ -44,7 +45,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Edit(EditClientRequest request)
         {
             var response = _clientService.Edit(request);
-            return new JsonNetResult(response);
+            return JsonNet(response);
         }
     }
 }

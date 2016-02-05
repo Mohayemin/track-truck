@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web.Mvc;
 using FizzWare.NBuilder;
 using MongoDB.Bson;
-using MongoDB.Driver;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Clients;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.DAL.Users;
+using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -27,7 +27,7 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             if (password != "nooneknows")
             {
-                return Json("set password={password} param", JsonRequestBehavior.AllowGet);
+                return JsonNet("set password={password} param");
             }
             var admin = new DbUser
             {
@@ -74,7 +74,7 @@ namespace Ssi.TrackTruck.Web.Controllers
             _repository.Save(truck);
 
             var allItems = new List<object> { admin, client, driver, helper, supervisor, truck };
-            return Json(allItems, JsonRequestBehavior.AllowGet);
+            return JsonNet(allItems);
         }
 
         public string Oid => ObjectId.GenerateNewId().ToString();
