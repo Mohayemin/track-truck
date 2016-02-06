@@ -2,12 +2,11 @@
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Employees;
 using Ssi.TrackTruck.Web.Auth;
-using static Ssi.TrackTruck.Web.Utils.JsonNetResult;
 using System;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeeController : ControllerBase
     {
         private readonly EmployeeService _employeeService;
 

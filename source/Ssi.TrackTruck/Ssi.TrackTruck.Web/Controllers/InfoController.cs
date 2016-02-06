@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
-    public class InfoController : Controller
+    public class InfoController : ControllerBase
     {
         public ActionResult DateTimeUtc()
         {
