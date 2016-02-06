@@ -1,0 +1,81 @@
+﻿<div>
+    <page-title></page-title>
+    <form ng-submit="loadReport()" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group">
+                        <button class="btn btn-warning" ng-click="setThisWeek()">This Week</button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-danger" ng-click="setThisMonth()">This Month</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-sm-4">
+                <datetime ng-model="filter.fromDate" hide-time="true"></datetime>
+            </div>
+            <div class="col-sm-4">
+                <datetime ng-model="filter.toDate" hide-time="true"></datetime>
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-default btn-block">Load</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table class="table table-bordered table-responsive table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="Employee.FullName">
+                        Employee Name
+                    </th>
+                    <th ts-criteria="Employee.Designation">
+                        Designation
+                    </th>
+                    <th ts-criteria="TotalAllowance">
+                        Total Allowance
+                    </th>
+                    <th ts-criteria="TotalSalary">
+                        Total Salary
+                    </th>
+                    <th ts-criteria="TotalPayable">
+                        Total Payable
+                    </th>
+                </tr>
+                <tr class="active">
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalPayable"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employeeSalary in employeeSalaries" ts-repeat>
+                    <td ng-bind="employeeSalary.Employee.FullName"></td>
+                    <td ng-bind="employeeSalary.Employee.Designation"></td>
+                    <td ng-bind="employeeSalary.TotalAllowance"></td>
+                    <td ng-bind="employeeSalary.TotalSalary"></td>
+                    <td ng-bind="employeeSalary.TotalPayable"></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr ng-if="employeeSalaries.length > 10" class="active">
+                <tr class="active">
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalPayable"></th>
+                </tr>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

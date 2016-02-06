@@ -1,0 +1,36 @@
+﻿<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ng-href="{{url.route()}}">SSI Logistics</a>
+        </div>
+        <div collapse="navCollapsed" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-repeat="group in navGroups" dropdown ng-class="{'active': group == activeGroup}" 
+                    allowed-roles="group.roles">
+                    <a href dropdown-toggle>
+                        <span ng-bind="group.text"></span>&nbsp;
+                        <i class="fa fa-fw fa-lg fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="nav in group.navs" ng-class="{'active': nav == activeNav}" allowed-roles="nav.roles">
+                            <a ng-href="{{nav.url}}">
+                                <i ng-class="nav.iconClass"></i>&nbsp;
+                                <span ng-bind="nav.text"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <server-clock class="navbar-text" url="url.server('Info', 'DateTimeUtc')" format="'hh:mm a'"
+                                  server-sync-interval-ms="1000*60" local-sync-interval-ms="100"></server-clock>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

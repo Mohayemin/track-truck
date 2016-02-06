@@ -1,0 +1,63 @@
+﻿<div class="well">
+    <div class="form-group">
+        <label class="control-label col-sm-2">First Name</label>
+        <div class="col-sm-10">
+            <input ng-model="request.FirstName" type="text" class="form-control"
+                   name="first-name"
+                   placeholder="First Name" required
+                   ng-change="setUsername()" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Last Name</label>
+        <div class="col-sm-10">
+            <input ng-model="request.LastName" type="text" class="form-control"
+                   name="last-name"
+                   placeholder="Last Name" required
+                   ng-change="setUsername()" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">
+            Username
+        </label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-btn" title="toggle edit username"
+                      ng-click="User.isUsernameReadonly=!User.isUsernameReadonly">
+                    <a class="btn btn-primary" ng-class="{'active':!User.isUsernameReadonly}">
+                        <i class="fa fa-lg fa-fw fa-edit"></i>
+                    </a>
+                </span>
+                <input ng-model="request.Username" type="text" class="form-control"
+                       name="last-name"
+                       placeholder="Username" required ng-readonly="User.isUsernameReadonly" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-if="!User.isEditing">
+        <label class="control-label col-sm-2">Initial Password</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-btn" title="regenerate password" ng-click="generatePassword()">
+                    <a class="btn btn-primary">
+                        <i class="fa fa-lg fa-fw fa-refresh"></i>
+                    </a>
+                </span>
+                <input ng-model="request.InitialPassword" type="text" class="form-control"
+                       name="initial-password"
+                       placeholder="Initial Password" required />
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Role</label>
+        <div class="col-sm-10">
+            <div class="btn-group">
+                <label class="btn btn-info" ng-repeat="role in userRoles.roleList"
+                       ng-model="request.Role" btn-radio="role.value" uncheckable ng-required="true">{{role.label}}</label>
+            </div>
+        </div>
+    </div>
+</div>
