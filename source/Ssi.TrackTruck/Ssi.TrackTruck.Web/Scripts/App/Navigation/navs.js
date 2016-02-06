@@ -43,7 +43,7 @@
                             url: url.route('user', 'list'),
                             iconClass: 'fa fa-fw fa-lg fa-user',
                             text: 'Users',
-                            highLightRoutes: ['userlist', 'usertadd', 'useredit']
+                            highLightRoutes: ['userlist', 'useradd', 'useredit']
                         }
                     ]
                 };
