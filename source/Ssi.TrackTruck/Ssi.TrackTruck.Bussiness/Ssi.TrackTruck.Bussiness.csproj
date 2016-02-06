@@ -85,6 +85,8 @@
     <Compile Include="DAL\Entities\DbDailyHit.cs" />
     <Compile Include="Employees\AddEmployeeRequest.cs" />
     <Compile Include="Employees\EditEmployeeRequest.cs" />
+    <Compile Include="Employees\EmployeeSalary.cs" />
+    <Compile Include="Employees\EmployeeSalaryReportResponse.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Helpers\CollectionExtension.cs" />
     <Compile Include="Helpers\CrudStatus.cs" />

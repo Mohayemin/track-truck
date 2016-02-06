@@ -37,6 +37,9 @@
                     return _.find(_employees, { Id: id });
                 });
             },
+            getSalaryReport: function (filter) {
+                return repository.post('Employee', 'SalaryReport', filter);
+            },
             'delete': function (id) {
                 return repository.post('Employee', 'Delete', { id: id }).then(function (response) {
                     if (!response.IsError) {
