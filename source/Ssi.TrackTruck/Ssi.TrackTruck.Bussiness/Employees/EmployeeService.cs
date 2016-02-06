@@ -2,16 +2,22 @@
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
 using Ssi.TrackTruck.Bussiness.Models;
+using System;
+using System.Linq;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
+using Ssi.TrackTruck.Bussiness.Trips;
 
 namespace Ssi.TrackTruck.Bussiness.Employees
 {
     public class EmployeeService
     {
         private readonly IRepository _repository;
+        private readonly ITripRepository _tripRepository;
 
-        public EmployeeService(IRepository repository)
+        public EmployeeService(IRepository repository, ITripRepository tripRepository)
         {
             _repository = repository;
+            _tripRepository = tripRepository;
         }
 
         public IEnumerable<DbEmployee> GetAll()
@@ -47,7 +53,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             var employee = _repository.GetById<DbEmployee>(request.Id);
             if (employee == null)
             {
-                return Response.Error("", string.Format("The employee does not exist"));                
+                return Response.Error("", string.Format("The employee does not exist"));
             }
 
             employee.Designation = request.Designation;
@@ -56,6 +62,47 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
             _repository.Save(employee);
             return Response.Success(employee, "Successfully edited");
+        }
+
+        public EmployeeSalaryReportResponse GetSalaryReport(DateTime fromDate, DateTime toDate)
+        {
+            fromDate = fromDate.ToUniversalTime();
+            toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
+
+            var drivers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Driver);
+            var helpers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Helper);
+            var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
+
+            var employeeSalaries = new List<EmployeeSalary>();
+
+            foreach (var driver in drivers)
+            {
+                var tripsForDriver = trips.Where(trip => trip.DriverId == driver.Id).ToList();
+                employeeSalaries.Add(new EmployeeSalary
+                {
+                    Employee = driver,
+                    TotalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInCentavos) / 100,
+                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInCentavos) / 100
+                });
+            }
+
+            foreach (var helper in helpers)
+            {
+                var tripsForHelper = trips.Where(trip => trip.HelperIds.Contains(helper.Id)).ToList();
+                employeeSalaries.Add(new EmployeeSalary
+                {
+                    Employee = helper,
+                    TotalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInCentavos) / 100,
+                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInCentavos) / 100
+                });
+            }
+
+            return new EmployeeSalaryReportResponse
+            {
+                FromDate = fromDate,
+                ToDate = toDate,
+                EmployeeSalaries = employeeSalaries
+            };
         }
     }
 }

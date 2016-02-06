@@ -39,13 +39,13 @@
                 };
 
                 $scope.trips = trips;
-                angular.forEach(trips, function (trip) {
+                angular.forEach(trips, function(trip) {
                     $scope.total.DeliveredNumberOfDrops += trip.DeliveredNumberOfDrops;
                     $scope.total.TotalNumberOfDrops += trip.TotalNumberOfDrops;
                     $scope.total.TotalNumberOfBoxes += trip.TotalNumberOfBoxes;
                     $scope.total.DeliveredNumberOfBoxes += trip.DeliveredNumberOfBoxes;
                     $scope.total.RejectedNumberOfBoxes += trip.RejectedNumberOfBoxes;
-                })
+                });
             });
         };
 

@@ -17,6 +17,12 @@
                             text: 'New Trip',
                             roles: [roles.encoder, roles.admin],
                             highLightRoutes: ['triporder']
+                        }, {
+                            url: url.route('trip', 'transactions'),
+                            iconClass: 'fa fa-fw fa-lg fa-cubes',
+                            text: 'Transactions',
+                            roles: [roles.encoder, roles.admin],
+                            highLightRoutes: ['triptransactions']
                         }
                     ]
                 };
@@ -43,7 +49,7 @@
                             url: url.route('user', 'list'),
                             iconClass: 'fa fa-fw fa-lg fa-user',
                             text: 'Users',
-                            highLightRoutes: ['userlist', 'usertadd', 'useredit']
+                            highLightRoutes: ['userlist', 'useradd', 'useredit']
                         }
                     ]
                 };
@@ -62,6 +68,12 @@
                             text: 'Attendance',
                             roles: [roles.admin],
                             highLightRoutes: ['attendancereport', 'tripdetail']
+                        }, {
+                            url: url.route('salary', 'report'),
+                            iconClass: 'fa fa-fw fa-lg fa-money',
+                            text: 'Salary',
+                            roles: [roles.admin],
+                            highLightRoutes: ['employeeSalaryReport']
                         }
                     ]
                 };

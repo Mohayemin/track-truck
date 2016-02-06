@@ -8,6 +8,7 @@
     'truckService',
     'collection',
     'Trip',
+    'tripStatus',
     '$q',
     function tripService(
         repository
@@ -19,8 +20,22 @@
         , truckService
         , collection
         , Trip
+        , tripStatus
         , $q
         ) {
+
+        function setTripStatus(trip, statusIdOrObject) {
+            var statusId, statusObject;
+            if (statusIdOrObject.id) {
+                statusId = statusIdOrObject.id;
+                statusObject = statusIdOrObject;
+            } else {
+                statusId = statusIdOrObject;
+                statusObject = tripStatus[statusIdOrObject];
+            }
+            trip.Status = statusId;
+            trip.StatusObject = statusObject;
+        }
 
         var service = {
             orderTrip: function (request) {
@@ -38,10 +53,14 @@
                     return response;
                 });
             },
-            getMyActiveDrops: function () {
-                return repository.get('Trip', 'MyActiveDrops');
+            getActiveTrips: function () {
+                return repository.get('Trip', 'GetActiveTrips').then(function (trips) {
+                    return trips.map(function (trip) {
+                        return new Trip(trip.Trip, trip.Drops);
+                    });
+                });
             },
-            receiveDrop: function (drop) {
+            receiveDrop: function (drop, trip) {
                 var formattedRequest = {
                     DropId: drop.Id,
                     DeliveryRejections: {}
@@ -55,6 +74,8 @@
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
+                    setTripStatus(trip, response.Data);
+                    drop.IsDelivered = true;
                     return response;
                 });
             },
@@ -70,6 +91,23 @@
             },
             get: function (tripId) {
                 return repository.get('Trip', 'Get', { id: tripId });
+            },
+            updateStatus: function(trip) {
+                var newStatus;
+                if (trip.StatusObject === tripStatus.New) {
+                    newStatus = tripStatus.InProgress;
+                } else if(trip.StatusObject === tripStatus.InProgress) {
+                    newStatus = tripStatus.New;
+                }
+                if (newStatus) {
+                    return repository.post('trip', 'updateStatus', {
+                        tripId: trip.Id,
+                        status: newStatus.id
+                    }).then(function () {
+                        setTripStatus(trip, newStatus);
+                        return trip;
+                    });
+                }
             }
         };
 

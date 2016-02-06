@@ -177,12 +177,15 @@
     <Content Include="Scripts\App\Employee\employeeForm.html" />
     <Content Include="Scripts\App\Employee\employeeList.html" />
     <Content Include="Scripts\App\Employee\employeeListController.js" />
+    <Content Include="Scripts\App\Employee\employeeSalaryReport.html" />
+    <Content Include="Scripts\App\Employee\employeeSalaryReportController.js" />
     <Content Include="Scripts\App\home.html" />
     <Content Include="Scripts\App\Auth\changePassword.html" />
     <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
     <Content Include="Scripts\App\Trip\trip.js" />
+    <Content Include="Scripts\App\Trip\tripDropUpdate.html" />
     <Content Include="Scripts\App\Trip\tripDetail.html" />
     <Content Include="Scripts\App\Trip\tripDetailController.js" />
     <Content Include="Scripts\App\Trip\tripStatus.js" />
@@ -233,6 +236,8 @@
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\serverClock.html" />
     <Content Include="Scripts\Util\serverClockDirective.js" />
+    <Content Include="Scripts\Util\statusLabel.html" />
+    <Content Include="Scripts\Util\statusLabelDirective.js" />
     <Content Include="Scripts\Util\wellKnownDateTime.js" />
     <Content Include="Scripts\Util\detailButton.html" />
     <Content Include="Scripts\Util\detailButtonDirective.js" />
