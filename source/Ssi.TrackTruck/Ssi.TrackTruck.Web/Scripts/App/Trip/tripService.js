@@ -24,6 +24,19 @@
         , $q
         ) {
 
+        function setTripStatus(trip, statusIdOrObject) {
+            var statusId, statusObject;
+            if (statusIdOrObject.id) {
+                statusId = statusIdOrObject.id;
+                statusObject = statusIdOrObject;
+            } else {
+                statusId = statusIdOrObject;
+                statusObject = tripStatus[statusIdOrObject];
+            }
+            trip.Status = statusId;
+            trip.StatusObject = statusObject;
+        }
+
         var service = {
             orderTrip: function (request) {
                 var foramtterRequest = angular.extend({}, request);
@@ -47,7 +60,7 @@
                     });
                 });
             },
-            receiveDrop: function (drop) {
+            receiveDrop: function (drop, trip) {
                 var formattedRequest = {
                     DropId: drop.Id,
                     DeliveryRejections: {}
@@ -61,6 +74,8 @@
                     if (response.IsError) {
                         return $q.reject(response.Message);
                     }
+                    setTripStatus(trip, response.Data);
+                    drop.IsDelivered = true;
                     return response;
                 });
             },
@@ -89,8 +104,7 @@
                         tripId: trip.Id,
                         status: newStatus.id
                     }).then(function () {
-                        trip.StatusObject = newStatus;
-                        trip.Status = newStatus.id;
+                        setTripStatus(trip, newStatus);
                         return trip;
                     });
                 }
