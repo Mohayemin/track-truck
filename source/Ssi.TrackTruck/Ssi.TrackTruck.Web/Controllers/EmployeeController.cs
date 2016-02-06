@@ -2,6 +2,7 @@
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.Employees;
 using Ssi.TrackTruck.Web.Auth;
+using System;
 
 namespace Ssi.TrackTruck.Web.Controllers
 {
@@ -44,5 +45,13 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _employeeService.Save(request);
             return JsonNet(response);
         }
-	}
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin)]
+        public ActionResult SalaryReport(DateTime fromDate, DateTime toDate)
+        {
+            var report = _employeeService.GetSalaryReport(fromDate, toDate);
+            return JsonNet(report);
+        }
+    }
 }

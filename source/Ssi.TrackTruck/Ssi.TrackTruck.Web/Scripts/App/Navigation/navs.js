@@ -62,6 +62,12 @@
                             text: 'Attendance',
                             roles: [roles.admin],
                             highLightRoutes: ['attendancereport', 'tripdetail']
+                        }, {
+                            url: url.route('salary', 'report'),
+                            iconClass: 'fa fa-fw fa-lg fa-money',
+                            text: 'Salary',
+                            roles: [roles.admin],
+                            highLightRoutes: ['employeeSalaryReport']
                         }
                     ]
                 };

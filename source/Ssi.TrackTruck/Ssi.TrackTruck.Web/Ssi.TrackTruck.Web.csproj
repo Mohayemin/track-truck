@@ -176,6 +176,8 @@
     <Content Include="Scripts\App\Employee\employeeForm.html" />
     <Content Include="Scripts\App\Employee\employeeList.html" />
     <Content Include="Scripts\App\Employee\employeeListController.js" />
+    <Content Include="Scripts\App\Employee\employeeSalaryReport.html" />
+    <Content Include="Scripts\App\Employee\employeeSalaryReportController.js" />
     <Content Include="Scripts\App\home.html" />
     <Content Include="Scripts\App\Auth\changePassword.html" />
     <Content Include="Scripts\App\Auth\changePasswordController.js" />

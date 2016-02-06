@@ -66,6 +66,7 @@
             .when('/trip/:id', defaultRoute('trip', 'tripDetail', 'tripdetail', 'Trip Detail'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword', 'changepassword', 'Change Password'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport', 'attendancereport', 'Attendance Report'))
+            .when('/salary/report', defaultRoute('employee', 'employeeSalaryReport', 'employeeSalaryReport', 'Salary Report'))
             .otherwise({ redirectTo: '/' });
     }
 ]);
