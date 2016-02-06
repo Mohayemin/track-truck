@@ -7,6 +7,6 @@ namespace Ssi.TrackTruck.Bussiness.Employees
         public DbEmployee Employee { get; set; }
         public long TotalAllowance { get; set; }
         public long TotalSalary { get; set; }
-        public long TotalPayable { get; set; }
+        public long TotalPayable { get { return TotalAllowance + TotalSalary; } }
     }
 }

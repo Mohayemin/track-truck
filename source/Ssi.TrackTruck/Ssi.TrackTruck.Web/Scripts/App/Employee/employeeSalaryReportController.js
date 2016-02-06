@@ -25,14 +25,14 @@
 
         $scope.loadReport = function () {
 
-            employeeService.getSalaryReport($scope.filter).then(function (employees) {
+            employeeService.getSalaryReport($scope.filter).then(function (employeeSalaries) {
                 $scope.total = {
                     TotalPayable: 0
                 };
 
-                $scope.employeeSalaries = employees;
-                angular.forEach(employees, function(employee) {
-                    $scope.total.TotalPayable += employee.DeliveredNumberOfDrops;
+                $scope.employeeSalaries = employeeSalaries;
+                angular.forEach(employeeSalaries, function (employee) {
+                    $scope.total.TotalPayable += employee.TotalPayable;
                 });
             });
         };
