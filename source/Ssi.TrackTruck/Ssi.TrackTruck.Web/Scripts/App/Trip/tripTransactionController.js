@@ -2,17 +2,20 @@
     '$scope',
     'tripService',
     'collection',
+    'tripStatus',
     'globalMessage',
     function (
         $scope
         , tripService
         , collection
+        , tripStatus
         , globalMessage
         ) {
 
+        $scope.tripStatus = tripStatus;
+
         tripService.getActiveTrips().then(function (trips) {
             $scope.trips = trips;
-            console.log(trips[0]);
         });
 
         $scope.totalRejected = function(drop) {
