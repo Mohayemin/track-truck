@@ -1,6 +1,6 @@
 ﻿<div>
     <page-title></page-title>
-    <div class="panel panel-default"
+    <div class="panel panel-default animate-out-right"
          ng-repeat="trip in trips"
          ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id">
         <div class="panel-heading">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <div class="col-md-6 animatable" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
+            <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
                 <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
             </div>
         </div>
