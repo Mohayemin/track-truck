@@ -56,5 +56,13 @@ namespace Ssi.TrackTruck.Web.Controllers
             _tripService.UpdateStatus(tripId, status);
             return JsonNet(new { success = true });
         }
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin, Role.Encoder)]
+        public ActionResult Receive(DropReceiveRequest request)
+        {
+            var response = _tripService.ReceiveDrop(request);
+            return new JsonNetResult(response);
+        }
     }
 }
