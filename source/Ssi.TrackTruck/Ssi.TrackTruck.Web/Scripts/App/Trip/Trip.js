@@ -4,6 +4,7 @@
     'clientService',
     'employeeService',
     'userService',
+    'tripStatus',
     'truckService',
     function (
         _,
@@ -11,12 +12,14 @@
         clientService,
         employeeService,
         userService,
+        tripStatus,
         truckService
         ) {
         function Trip(dbTrip, dbDrops) {
             var _this = this;
             angular.extend(_this, dbTrip);
             _this.Drops = dbDrops;
+            _this.StatusObject = tripStatus[_this.Status];
             _this.TotalNumberOfBoxes = collection.sum(_this.Drops, 'TotalBoxes');
             _this.RejectedNumberOfBoxes = collection.sum(_this.Drops, 'TotalRejectedBoxes');
             _this.DeliveredNumberOfBoxes = collection.sum(_this.Drops, 'TotalDeliveredBoxes');
@@ -24,7 +27,6 @@
             _this.DeliveredNumberOfDrops = collection.count(_this.Drops, 'IsDelivered', true);
 
             _this.Client = {};
-
             
             clientService.get(_this.ClientId).then(function (client) {
                 _this.Client = client;

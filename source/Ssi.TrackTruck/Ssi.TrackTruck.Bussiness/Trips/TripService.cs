@@ -81,5 +81,12 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 yield return new TripResponse { Drops = dropGroup, Trip = tripMap[dropGroup.Key] };
             }
         }
+
+        public void UpdateStatus(string tripId, TripStatus status)
+        {
+            var trip = _repository.GetById<DbTrip>(tripId);
+            trip.Status = status;
+            _repository.Save(trip);
+        }
     }
 }

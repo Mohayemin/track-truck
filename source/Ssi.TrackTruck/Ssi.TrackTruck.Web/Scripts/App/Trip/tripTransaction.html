@@ -11,13 +11,25 @@
                 <label class="col-md-2 col-sm-6 control-label">Client: {{trip.Client.Name}}</label>
                 <label class="col-md-3 col-sm-6 control-label">Driver: {{trip.Driver.FullName}}</label>
                 <label class="col-md-3 col-sm-6 control-label">Helpers: {{trip.HelperNames}}</label>
-                <label class="col-md-4 col-sm-6 control-label">
+                <div class="col-md-4 col-sm-6">
                     Status:
-                    {{trip.Status}} &nbsp;
-                    <a class="btn btn-info btn-xs">
-                        Change to <span ng-if="trip.Status=='New'">{{tripStatus.InProgress.text}}</span>
-                    </a>
-                </label>
+                    <label class="label" ng-class="'label-' + trip.StatusObject.cssClass">
+                        {{trip.StatusObject.text}}
+                    </label>
+                    &nbsp;
+                    <button ng-if="trip.Status === 'New'" class="btn btn-xs"
+                            ng-class="'btn-' + tripStatus.InProgress.cssClass"
+                            ng-disabled="trip.waiting"
+                            ng-click="updateStatus(trip)">
+                        Change to {{tripStatus.InProgress.text}}
+                    </button>
+                    <button ng-if="trip.Status === 'InProgress'" class="btn btn-xs"
+                            ng-class="'btn-' + tripStatus.New.cssClass"
+                            ng-disabled="trip.waiting"
+                            ng-click="updateStatus(trip)">
+                        Change to {{tripStatus.New.text}}
+                    </button>
+                </div>
             </div>
         </div>
         <div class="panel-body">

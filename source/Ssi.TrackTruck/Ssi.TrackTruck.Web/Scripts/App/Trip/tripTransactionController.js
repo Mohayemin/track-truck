@@ -12,6 +12,14 @@
         , globalMessage
         ) {
 
+        $scope.updateStatus = function (trip) {
+            trip.waiting = true;
+            tripService.updateStatus(trip).then(function() {
+                trip.waiting = false;
+                globalMessage.success('trip status updated');
+            });
+        };
+
         $scope.tripStatus = tripStatus;
 
         tripService.getActiveTrips().then(function (trips) {

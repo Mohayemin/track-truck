@@ -8,6 +8,7 @@
     'truckService',
     'collection',
     'Trip',
+    'tripStatus',
     '$q',
     function tripService(
         repository
@@ -19,6 +20,7 @@
         , truckService
         , collection
         , Trip
+        , tripStatus
         , $q
         ) {
 
@@ -39,8 +41,8 @@
                 });
             },
             getActiveTrips: function () {
-                return repository.get('Trip', 'GetActiveTrips').then(function(trips) {
-                    return trips.map(function(trip) {
+                return repository.get('Trip', 'GetActiveTrips').then(function (trips) {
+                    return trips.map(function (trip) {
                         return new Trip(trip.Trip, trip.Drops);
                     });
                 });
@@ -74,6 +76,24 @@
             },
             get: function (tripId) {
                 return repository.get('Trip', 'Get', { id: tripId });
+            },
+            updateStatus: function(trip) {
+                var newStatus;
+                if (trip.StatusObject === tripStatus.New) {
+                    newStatus = tripStatus.InProgress;
+                } else if(trip.StatusObject === tripStatus.InProgress) {
+                    newStatus = tripStatus.New;
+                }
+                if (newStatus) {
+                    return repository.post('trip', 'updateStatus', {
+                        tripId: trip.Id,
+                        status: newStatus.id
+                    }).then(function () {
+                        trip.StatusObject = newStatus;
+                        trip.Status = newStatus.id;
+                        return trip;
+                    });
+                }
             }
         };
 
