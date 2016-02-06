@@ -34,8 +34,8 @@
             return drop.TotalBoxes - $scope.totalRejected(drop);
         };
 
-        $scope.receive = function (drop) {
-            tripService.receiveDrop(drop).then(function () {
+        $scope.receive = function (drop, trip) {
+            tripService.receiveDrop(drop, trip).then(function () {
                 drop.IsDelivered = true;
                 globalMessage.success('drop received');
             }).catch(function(message) {

@@ -1,6 +1,8 @@
 ﻿<div>
     <page-title></page-title>
-    <div class="panel panel-default" ng-repeat="trip in trips">
+    <div class="panel panel-default"
+         ng-repeat="trip in trips"
+         ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id">
         <div class="panel-heading">
             <div class="row">
                 <label class="col-md-2 col-sm-6 control-label">Ticket Number: {{trip.TripTicketNumber}} </label>
@@ -14,19 +16,6 @@
                 <div class="col-md-4 col-sm-6">
                     Status:
                     <status-label status="trip.StatusObject"></status-label>
-                    &nbsp;
-                    <button ng-if="trip.Status === 'New'" class="btn btn-xs"
-                            ng-class="'btn-' + tripStatus.InProgress.cssClass"
-                            ng-disabled="trip.waiting"
-                            ng-click="updateStatus(trip)">
-                        Change to {{tripStatus.InProgress.text}}
-                    </button>
-                    <button ng-if="trip.Status === 'InProgress'" class="btn btn-xs"
-                            ng-class="'btn-' + tripStatus.New.cssClass"
-                            ng-disabled="trip.waiting"
-                            ng-click="updateStatus(trip)">
-                        Change to {{tripStatus.New.text}}
-                    </button>
                 </div>
             </div>
         </div>

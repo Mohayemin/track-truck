@@ -133,16 +133,17 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             _repository.Save(drop);
 
             var trip = _repository.GetById<DbTrip>(drop.TripId);
-            var allDelivered = _repository.Exists<DbTripDrop>(d => !d.IsDelivered);
+            var thisTripDrops = _repository.GetWhere<DbTripDrop>(d => d.TripId == drop.TripId);
+            var notAllDelivered = thisTripDrops.Any(d => !d.IsDelivered);
             TripStatus newStatus;
-            if (allDelivered)
+            if (notAllDelivered)
             {
-                newStatus = _repository.Exists<DbTripDrop>(d => d.DeliveryReceipts.Any(dr => dr.RejectedNumberOfBoxes == 0)) ?
-                    TripStatus.DoneWithPartialDelivery : TripStatus.DoneWithFullDelivery;
+                newStatus = TripStatus.InProgress;
             }
             else
             {
-                newStatus = TripStatus.InProgress;
+                newStatus = thisTripDrops.Any(d => d.TotalRejectedBoxes != 0) ?
+                    TripStatus.DoneWithPartialDelivery : TripStatus.DoneWithFullDelivery;
             }
             if (newStatus != trip.Status)
             {
@@ -150,7 +151,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 _repository.Save(trip);
             }
 
-            return Response.Success(drop, "Drop received");
+            return Response.Success(trip.Status.ToString(), "Drop received");
         }
     }
 }
