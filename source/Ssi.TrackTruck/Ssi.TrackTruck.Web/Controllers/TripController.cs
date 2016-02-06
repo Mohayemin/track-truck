@@ -40,5 +40,13 @@ namespace Ssi.TrackTruck.Web.Controllers
             var trip = _tripService.Get(id);
             return JsonNet(trip);
         }
+
+        [HttpGet]
+        [AllowedRoles(Role.Encoder, Role.Admin)]
+        public ActionResult GetActiveTrips()
+        {
+            var trips = _tripService.GetActiveTrips();
+            return JsonNet(trips);
+        }
     }
 }

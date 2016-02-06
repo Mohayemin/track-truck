@@ -10,8 +10,9 @@
         , globalMessage
         ) {
 
-        tripService.getMyActiveDrops().then(function (drops) {
-            $scope.drops = drops;
+        tripService.getActiveTrips().then(function (trips) {
+            $scope.trips = trips;
+            console.log(trips[0]);
         });
 
         $scope.totalRejected = function(drop) {
