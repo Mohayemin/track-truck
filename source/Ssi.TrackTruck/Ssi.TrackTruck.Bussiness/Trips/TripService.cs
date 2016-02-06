@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
@@ -37,7 +38,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         {
             fromDate = fromDate.ToUniversalTime();
             toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
-            
+
             var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
             var drops = _tripRepository.GetDropsOfTrips(trips.Select(trip => trip.Id));
 
@@ -56,10 +57,29 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             if (trip != null)
             {
                 var drops = _repository.GetWhere<DbTripDrop>(drop => drop.TripId == trip.Id);
-                return new TripResponse{Trip = trip, Drops = drops};
+                return new TripResponse { Trip = trip, Drops = drops };
             }
 
             return null;
+        }
+
+        public IEnumerable<TripResponse> GetActiveTrips()
+        {
+            var trips = _repository
+                .GetWhere<DbTrip>(trip => trip.Status == TripStatus.InProgress || trip.Status == TripStatus.New)
+                .OrderBy(trip => trip.Status);
+
+            var tripIds = trips.Select(trip => trip.Id);
+
+            var tripMap = trips.ToDictionary(trip => trip.Id, trip => trip);
+
+            var allDrops = _repository.WhereIn<DbTripDrop, string>(drop => drop.TripId, tripIds)
+                .GroupBy(drop => drop.TripId);
+
+            foreach (var dropGroup in allDrops)
+            {
+                yield return new TripResponse { Drops = dropGroup, Trip = tripMap[dropGroup.Key] };
+            }
         }
     }
 }
