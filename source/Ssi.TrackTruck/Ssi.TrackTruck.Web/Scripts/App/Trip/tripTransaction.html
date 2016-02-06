@@ -13,9 +13,7 @@
                 <label class="col-md-3 col-sm-6 control-label">Helpers: {{trip.HelperNames}}</label>
                 <div class="col-md-4 col-sm-6">
                     Status:
-                    <label class="label" ng-class="'label-' + trip.StatusObject.cssClass">
-                        {{trip.StatusObject.text}}
-                    </label>
+                    <status-label status="trip.StatusObject"></status-label>
                     &nbsp;
                     <button ng-if="trip.Status === 'New'" class="btn btn-xs"
                             ng-class="'btn-' + tripStatus.InProgress.cssClass"

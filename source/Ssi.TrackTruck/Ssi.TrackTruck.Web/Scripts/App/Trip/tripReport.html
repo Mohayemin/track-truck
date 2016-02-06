@@ -96,7 +96,9 @@
                     <td>
                         <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
                     </td>
-                    <td ng-bind="trip.StatusObject.text"></td>
+                    <td>
+                        <status-label status="trip.StatusObject"></status-label>
+                    </td>
                     <td ng-bind="trip.DeliveredNumberOfDrops"></td>
                     <td ng-bind="trip.TotalNumberOfDrops"></td>
                     <td ng-bind="trip.Client.Name"></td>
