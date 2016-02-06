@@ -17,6 +17,12 @@
                             text: 'New Trip',
                             roles: [roles.encoder, roles.admin],
                             highLightRoutes: ['triporder']
+                        }, {
+                            url: url.route('trip', 'transactions'),
+                            iconClass: 'fa fa-fw fa-lg fa-cubes',
+                            text: 'Transactions',
+                            roles: [roles.encoder, roles.admin],
+                            highLightRoutes: ['triptransactions']
                         }
                     ]
                 };
