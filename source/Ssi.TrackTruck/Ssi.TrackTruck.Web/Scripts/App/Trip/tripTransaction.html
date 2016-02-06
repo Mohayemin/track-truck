@@ -1,9 +1,22 @@
 ﻿<div>
     <page-title></page-title>
-    <div class="row" ng-repeat="trip in trips">
-        <pre>{{trip.Trip | json}}</pre>
-        <div class="col-md-6 animatable" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
-            <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+    <div class="well well-sm" ng-repeat="trip in trips">
+        <div class="alert alert-info">
+            <div class="row">
+                <label class="col-sm-3 control-label">Ticket Number: {{trip.TripTicketNumber}} </label>
+                <label class="col-sm-3 control-label">Status: {{trip.Status}}</label>
+                <label class="col-sm-3 control-label">Client: {{trip.Client.Name}}</label>
+                <label class="col-sm-3 control-label">Pickup Time: {{trip.ExpectedPickupTimeUtc | philDate}}</label>
+                <label class="col-sm-3 control-label">Helpers: {{trip.HelperNames}}</label>
+                <label class="col-sm-3 control-label">Driver: {{trip.Driver.FullName}}</label>
+                <label class="col-sm-3 control-label">Pickup Address: {{trip.PickupAddress.Text}}</label>
+                <label class="col-sm-3 control-label">Truck: {{trip.Truck.RegistrationNumber}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 animatable" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
+                <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+            </div>
         </div>
     </div>
 </div>

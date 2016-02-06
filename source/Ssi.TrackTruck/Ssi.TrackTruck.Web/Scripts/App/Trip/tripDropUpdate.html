@@ -1,7 +1,10 @@
 ﻿<form ng-submit="receive(drop)">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            Arriving at <span ng-bind="drop.ExpectedDropTimeUtc | philDate"></span>
+            <div class="row">
+                <div class="col-sm-4">Branch: {{drop.Branch.Name}}</div>
+                <div class="col-sm-8">Time: {{drop.ExpectedDropTimeUtc | philDate}}</div>
+            </div>
         </div>
         <table class="table table-responsive table-bordered">
             <thead>
