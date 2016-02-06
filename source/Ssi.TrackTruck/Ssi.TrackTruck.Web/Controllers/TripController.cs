@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Auth;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
@@ -47,6 +48,13 @@ namespace Ssi.TrackTruck.Web.Controllers
         {
             var trips = _tripService.GetActiveTrips();
             return JsonNet(trips);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatus(string tripId, TripStatus status)
+        {
+            _tripService.UpdateStatus(tripId, status);
+            return JsonNet(new { success = true });
         }
     }
 }
