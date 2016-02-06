@@ -1,66 +1,10 @@
 ﻿<div>
     <page-title></page-title>
-    <div class="row">
-        <div class="col-md-6 animatable" ng-repeat="drop in drops" ng-show="!drop.IsDelivered">
-            <form ng-submit="receive(drop)">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Arriving at <span ng-bind="drop.ExpectedDropTime | philDate"></span>
-                    </div>
-                    <table class="table table-responsive table-bordered">
-                        <thead>
-                            <tr>
-                                <th>DR Number</th>
-                                <th>Boxes</th>
-                                <th style="width: 90px;">Reject</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="dr in drop.DeliveryReceipts">
-                                <td ng-bind="dr.DrNumber"></td>
-                                <td ng-bind="dr.NumberOfBoxes"></td>
-                                <td>
-                                    <div class="input-group input-group-sm">
-                                        <input class="form-control input-sm" type="number" min="0"
-                                               ng-attr-max="{{dr.NumberOfBoxes}}" ng-model="dr.RejectedNumberOfBoxes" />
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                Total <span ng-bind="drop.DeliveryReceipts.length"></span> deliveries and
-                                <span ng-bind="drop.TotalBoxes"></span> boxes
-                            </div>
-                            <div class="col-xs-6">
-                                <button type="submit" class="btn btn-sm btn-success pull-right">
-                                    <i class="fa fa-lg fa-check-square"></i>
-                                    Receive <span ng-bind="totalAccepted(drop) || 'None'"></span> ,
-                                    Reject <span ng-bind="totalRejected(drop) || 'None'"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+    <div class="row" ng-repeat="trip in trips">
+        <pre>{{trip.Trip | json}}</pre>
+        <div class="col-md-6 animatable" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
+            <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
         </div>
     </div>
 </div>
-<!--
 
-<table class="table table-responsive table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Arrival Time</th>
-            <th>DR#</th>
-            <th>Boxes#</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr >
-
-        </tr>
-    </tbody>
-</table>-->

@@ -38,8 +38,8 @@
                     return response;
                 });
             },
-            getMyActiveDrops: function () {
-                return repository.get('Trip', 'MyActiveDrops');
+            getActiveTrips: function () {
+                return repository.get('Trip', 'GetActiveTrips');
             },
             receiveDrop: function (drop) {
                 var formattedRequest = {

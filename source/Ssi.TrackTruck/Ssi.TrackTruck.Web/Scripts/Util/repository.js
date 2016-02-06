@@ -2,7 +2,8 @@
     'url',
     '$http',
     '$window',
-    function repository(url, $http, $window) {
+    '$q',
+    function repository(url, $http, $window, $q) {
         function onSuccess(response) {
             return response.data;
         };
@@ -11,7 +12,7 @@
             if (response.status == 401) {
                 $window.location.reload();
             }
-            return response;
+            return $q.reject(response);
         }
 
         return {
