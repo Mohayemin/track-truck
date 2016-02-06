@@ -29,15 +29,5 @@ namespace Ssi.TrackTruck.Web.Utils
             response.Write(serializedObject);
             JsonRequestBehavior = JsonRequestBehavior.AllowGet;
         }
-
-        internal static ActionResult JsonNet(string v, JsonRequestBehavior allowGet)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static JsonNetResult JsonNet(object data)
-        {
-            return new JsonNetResult(data);
-        }
     }
 }
