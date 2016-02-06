@@ -53,7 +53,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             var employee = _repository.GetById<DbEmployee>(request.Id);
             if (employee == null)
             {
-                return Response.Error("", string.Format("The employee does not exist"));                
+                return Response.Error("", string.Format("The employee does not exist"));
             }
 
             employee.Designation = request.Designation;
@@ -70,36 +70,30 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
 
             var drivers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Driver);
-            var helpers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Driver);
+            var helpers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Helper);
             var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
 
             var employeeSalaries = new List<EmployeeSalary>();
 
             foreach (var driver in drivers)
             {
-                var tripsForDriver = trips.Where(trip => trip.DriverId == driver.Id);
-                var totalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInCentavos);
-                var totalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInCentavos);
+                var tripsForDriver = trips.Where(trip => trip.DriverId == driver.Id).ToList();
                 employeeSalaries.Add(new EmployeeSalary
                 {
                     Employee = driver,
-                    TotalAllowance = totalAllowance,
-                    TotalSalary = totalSalary,
-                    TotalPayable = totalAllowance + totalSalary
+                    TotalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInCentavos) / 100,
+                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInCentavos) / 100
                 });
             }
 
             foreach (var helper in helpers)
             {
-                var tripsForHelper = trips.Where(trip => trip.HelperIds.Contains(helper.Id));
-                var totalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInCentavos);
-                var totalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInCentavos);
+                var tripsForHelper = trips.Where(trip => trip.HelperIds.Contains(helper.Id)).ToList();
                 employeeSalaries.Add(new EmployeeSalary
                 {
                     Employee = helper,
-                    TotalAllowance = totalAllowance,
-                    TotalSalary = totalSalary,
-                    TotalPayable = totalAllowance + totalSalary
+                    TotalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInCentavos) / 100,
+                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInCentavos) / 100
                 });
             }
 
