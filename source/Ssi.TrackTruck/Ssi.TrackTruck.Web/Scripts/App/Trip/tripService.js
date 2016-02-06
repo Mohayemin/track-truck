@@ -39,7 +39,11 @@
                 });
             },
             getActiveTrips: function () {
-                return repository.get('Trip', 'GetActiveTrips');
+                return repository.get('Trip', 'GetActiveTrips').then(function(trips) {
+                    return trips.map(function(trip) {
+                        return new Trip(trip.Trip, trip.Drops);
+                    });
+                });
             },
             receiveDrop: function (drop) {
                 var formattedRequest = {
