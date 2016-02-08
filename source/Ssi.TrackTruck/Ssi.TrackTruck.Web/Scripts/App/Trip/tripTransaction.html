@@ -5,7 +5,7 @@
             <label class="control-label">Ticket</label>
             <input ng-model="filter.TripTicketNumber" type="text" class="form-control" placeholder="Ticket Number" />
         </div>
-        <div class="form-group form-group-sm">
+        <!--<div class="form-group form-group-sm">
             <label class="control-label">Date Range</label>
             <label class="control-label">
                 <datetime ng-model="filter.FromDate" hide-time="true" options="{sm:true, placeholder:'from'}"></datetime>
@@ -13,7 +13,7 @@
             <label>
                 <datetime ng-model="filter.ToDate" hide-time="true" options="{sm:true, placeholder:'to'}"></datetime>
             </label>
-        </div>
+        </div>-->
 
         <div class="form-group form-group-sm">
             <label class="control-label">Client</label>
@@ -42,7 +42,7 @@
     </form>
     <hr/>
     <div class="panel panel-default animate-out-right"
-         ng-repeat="trip in trips"
+         ng-repeat="trip in trips | filter:{TripTicketNumber:filter.TripTicketNumber, ClientId:filter.Client, Status:filter.Status||undefined}"
          ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id">
         <div class="panel-heading">
             <div class="row">
