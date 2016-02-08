@@ -169,6 +169,8 @@
     <Content Include="Scripts\App\Client\clientEdit.html" />
     <Content Include="Scripts\App\Client\clientEditController.js" />
     <Content Include="Scripts\App\Client\clientForm.html" />
+    <Content Include="Scripts\App\Client\clientSelect.html" />
+    <Content Include="Scripts\App\Client\clientSelect.js" />
     <Content Include="Scripts\App\Employee\addEmployee.html" />
     <Content Include="Scripts\App\Employee\addEmployeeController.js" />
     <Content Include="Scripts\App\Employee\employeeEdit.html" />
