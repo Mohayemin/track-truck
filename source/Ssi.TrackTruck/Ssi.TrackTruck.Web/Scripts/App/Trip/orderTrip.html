@@ -8,12 +8,13 @@
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label">Client</label>
                             <div class="col-sm-10">
-                                <select ng-model="request.Client" ng-required="true"
+                                <client-select ng-model="request.Client"></client-select>
+                                <!--<select ng-model="request.Client" ng-required="true"
                                         ng-options="client.Name for client in clients"
                                         class="form-control">
                                     <option value=""> -- Choose Client -- </option>
                                 </select>
-                            </div>
+-->                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
