@@ -1,0 +1,69 @@
+﻿<div>
+    <page-title></page-title>
+        <form ng-submit="applyFilter()" class="form-horizontal">
+            <div class="row">
+                <div class="form-group col-sm-6 col-lg-3 form-group-sm">
+                    <label class="control-label col-sm-3">Ticket</label>
+                    <div class="col-sm-9">
+                        <input ng-model="filter.TripTicketNumber" type="text" class="form-control" placeholder="Ticket Number" />
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 col-lg-4 form-group-sm">
+                    <label class="control-label col-sm-4">Date Range</label>
+                    <div class="col-sm-4">
+                        <datetime ng-model="filter.fromDate" hide-time="true" options="{sm:true}"></datetime>
+                    </div>
+                    <div class="col-sm-4">
+                        <datetime ng-model="filter.toDate" hide-time="true" options="{sm:true}"></datetime>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 col-lg-3 form-group-sm">
+                    <label class="control-label col-sm-6">Client</label>
+                    <div class="col-sm-6">
+                        <input ng-model="filter.Client" type="text" class="form-control" placeholder="Client" />
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-2">
+                    <div class="btn-group btn-group-xs">
+                        <label class="btn"
+                               ng-class="'btn-' + status.cssClass"
+                               ng-model="radioModel"
+                               uib-btn-radio="status.id"
+                               ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
+                            {{status.text}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+    <div class="panel panel-default animate-out-right"
+         ng-repeat="trip in trips"
+         ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id">
+        <div class="panel-heading">
+            <div class="row">
+                <label class="col-md-2 col-sm-6 control-label">Ticket Number: {{trip.TripTicketNumber}} </label>
+                <label class="col-md-3 col-sm-6 control-label">Truck: {{trip.Truck.RegistrationNumber}}</label>
+                <label class="col-md-3 col-sm-6 control-label">Pickup Address: {{trip.PickupAddress.Text}}</label>
+                <label class="col-md-4 col-sm-6 control-label">Pickup Time: {{trip.ExpectedPickupTimeUtc | philDate}}</label>
+
+                <label class="col-md-2 col-sm-6 control-label">Client: {{trip.Client.Name}}</label>
+                <label class="col-md-3 col-sm-6 control-label">Driver: {{trip.Driver.FullName}}</label>
+                <label class="col-md-3 col-sm-6 control-label">Helpers: {{trip.HelperNames}}</label>
+                <div class="col-md-4 col-sm-6">
+                    Status:
+                    <status-label status="trip.StatusObject"></status-label>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
+                <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+            </div>
+        </div>
+    </div>
+</div>
+
