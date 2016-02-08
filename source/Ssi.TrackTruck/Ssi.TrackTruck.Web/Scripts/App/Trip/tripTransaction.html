@@ -1,5 +1,45 @@
 ﻿<div>
     <page-title></page-title>
+        <form ng-submit="applyFilter()" class="form-horizontal">
+            <div class="row">
+                <div class="form-group col-sm-6 col-lg-3 form-group-sm">
+                    <label class="control-label col-sm-3">Ticket</label>
+                    <div class="col-sm-9">
+                        <input ng-model="filter.TripTicketNumber" type="text" class="form-control" placeholder="Ticket Number" />
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 col-lg-4 form-group-sm">
+                    <label class="control-label col-sm-4">Date Range</label>
+                    <div class="col-sm-4">
+                        <datetime ng-model="filter.fromDate" hide-time="true" options="{sm:true}"></datetime>
+                    </div>
+                    <div class="col-sm-4">
+                        <datetime ng-model="filter.toDate" hide-time="true" options="{sm:true}"></datetime>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6 col-lg-3 form-group-sm">
+                    <label class="control-label col-sm-6">Client</label>
+                    <div class="col-sm-6">
+                        <input ng-model="filter.Client" type="text" class="form-control" placeholder="Client" />
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-2">
+                    <div class="btn-group btn-group-xs">
+                        <label class="btn"
+                               ng-class="'btn-' + status.cssClass"
+                               ng-model="radioModel"
+                               uib-btn-radio="status.id"
+                               ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
+                            {{status.text}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+    </form>
+
     <div class="panel panel-default animate-out-right"
          ng-repeat="trip in trips"
          ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id">
