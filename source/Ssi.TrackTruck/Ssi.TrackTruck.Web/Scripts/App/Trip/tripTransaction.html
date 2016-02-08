@@ -24,12 +24,15 @@
             <label class="control-label">Status</label>
             <div class="btn-group btn-group-xs">
                 <label class="btn btn-default"
+                       ng-class="{'btn-default': filter.Status, 'btn-primary': !filter.Status}"
                        ng-model="filter.Status"
-                       uib-btn-radio="null">All</label>
-                <label class="btn"
-                       ng-class="'btn-' + status.cssClass"
+                       btn-radio="null"
+                       uncheckable>All</label>
+                <label class="btn "
+                       ng-class="'btn-' + statusButtonClass(status)"
                        ng-model="filter.Status"
-                       uib-btn-radio="status.id"
+                       btn-radio="status.id"
+                       uncheckable
                        ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
                     {{status.text}}
                 </label>

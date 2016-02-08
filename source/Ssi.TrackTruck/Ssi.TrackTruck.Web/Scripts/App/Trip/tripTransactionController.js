@@ -20,6 +20,13 @@
             });
         };
 
+        $scope.filter = {};
+        $scope.statusButtonClass = function(status) {
+            if ($scope.filter.Status === status.id) {
+                return status.cssClass;
+            }
+            return 'default';
+        };
         $scope.tripStatus = tripStatus;
 
         tripService.getActiveTrips().then(function (trips) {
