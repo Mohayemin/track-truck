@@ -12,6 +12,7 @@
                     <th>DR Number</th>
                     <th>Boxes</th>
                     <th style="width: 90px;">Reject</th>
+                    <th>Comment</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,8 +22,11 @@
                     <td>
                         <div class="input-group input-group-sm">
                             <input class="form-control input-sm" type="number" min="0"
-                                   ng-attr-max="{{dr.NumberOfBoxes}}" ng-model="dr.RejectedNumberOfBoxes" />
+                                   ng-attr-max="{{dr.NumberOfBoxes}}" ng-model="dr.RejectedNumberOfBoxes"/>
                         </div>
+                    </td>
+                    <td>
+                        <input class="form-control input-sm" type="text" ng-model="dr.Comment"/>
                     </td>
                 </tr>
             </tbody>
