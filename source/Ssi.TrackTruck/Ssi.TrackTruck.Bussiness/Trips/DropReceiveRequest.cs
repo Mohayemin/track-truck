@@ -7,6 +7,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     {
         [Required]
         public string DropId { get; set; }
-        public IDictionary<string, int> DeliveryRejections { get; set; }
+        public IList<DeleveryRejection> DeliveryRejections { get; set; }
     }
 }

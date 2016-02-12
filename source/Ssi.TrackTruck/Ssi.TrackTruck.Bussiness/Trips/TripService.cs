@@ -108,22 +108,23 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
             foreach (var rejection in request.DeliveryRejections)
             {
-                var dr = drop.DeliveryReceipts.FirstOrDefault(_ => _.Id == rejection.Key);
+                var dr = drop.DeliveryReceipts.FirstOrDefault(_ => _.Id == rejection.DeliveryReceiptId);
 
                 if (dr == null)
                 {
                     return Response.Error("", "Request contains a DR that does not exist");
                 }
-                if (rejection.Value > dr.NumberOfBoxes)
+                if (rejection.RejectedNumberOfBoxes > dr.NumberOfBoxes)
                 {
-                    return Response.Error("", string.Format("{0} boxes rejected but total number of boxes is {1}", rejection.Value, dr.NumberOfBoxes));
+                    return Response.Error("", string.Format("{0} boxes rejected but total number of boxes is {1}", rejection.RejectedNumberOfBoxes, dr.NumberOfBoxes));
                 }
-                if (rejection.Value < 0)
+                if (rejection.RejectedNumberOfBoxes < 0)
                 {
                     return Response.Error("", "Cannot reject negetive number of boxes");
                 }
 
-                dr.RejectedNumberOfBoxes = rejection.Value;
+                dr.RejectedNumberOfBoxes = rejection.RejectedNumberOfBoxes;
+                dr.Comment = rejection.Comment;
             }
 
             drop.ActualDropTimeUtc = DateTime.UtcNow;

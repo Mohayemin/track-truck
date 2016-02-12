@@ -63,11 +63,15 @@
             receiveDrop: function (drop, trip) {
                 var formattedRequest = {
                     DropId: drop.Id,
-                    DeliveryRejections: {}
+                    DeliveryRejections: []
                 };
 
                 drop.DeliveryReceipts.forEach(function (dr) {
-                    formattedRequest.DeliveryRejections[dr.Id] = dr.RejectedNumberOfBoxes;
+                    formattedRequest.DeliveryRejections.push({
+                        DeliveryReceiptId: dr.Id,
+                        RejectedNumberOfBoxes: dr.RejectedNumberOfBoxes,
+                        Comment: dr.Comment
+                    });
                 });
 
                 return repository.post('Trip', 'Receive', formattedRequest).then(function (response) {
