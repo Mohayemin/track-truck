@@ -76,6 +76,9 @@ namespace Ssi.TrackTruck.Web.Controllers
             return JsonNet(allItems);
         }
 
-        public string Oid => ObjectId.GenerateNewId().ToString();
+        public string Oid
+        {
+            get { return ObjectId.GenerateNewId().ToString(); }
+        }
     }
 }
