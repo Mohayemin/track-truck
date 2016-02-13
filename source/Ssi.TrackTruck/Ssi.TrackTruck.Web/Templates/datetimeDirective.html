@@ -1,7 +1,7 @@
 ﻿<div>
     <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="dateIsOpen=true">
         <input ng-model="ngModel" ng-required="required"
-               type="text" is-open="dateIsOpen" datepicker-popup placeholder="date"
+               type="text" is-open="dateIsOpen" datepicker-popup placeholder="{{options.placeholder}}"
                class="form-control" />
         <span class="input-group-btn">
             <button type="button" class="btn btn-primary">

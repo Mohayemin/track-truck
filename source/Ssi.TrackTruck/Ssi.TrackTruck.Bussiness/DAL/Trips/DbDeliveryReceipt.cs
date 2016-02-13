@@ -11,6 +11,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string DrNumber { get; set; }
         public int NumberOfBoxes { get; set; }
         public int RejectedNumberOfBoxes { get; set; }
+        public string Comment { get; set; }
 
         public DbDeliveryReceipt()
         {
