@@ -38,33 +38,38 @@
                 </label>
             </div>
         </div>
-        
-    </form>
-    <hr/>
-    <div class="panel panel-default animate-out-right"
-         ng-repeat="trip in trips | filter:{TripTicketNumber:filter.TripTicketNumber, ClientId:filter.Client.Id, Status:filter.Status||undefined}"
-         ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id">
-        <div class="panel-heading">
-            <div class="row">
-                <label class="col-md-2 col-sm-6 control-label">Ticket Number: {{trip.TripTicketNumber}} </label>
-                <label class="col-md-3 col-sm-6 control-label">Truck: {{trip.Truck.RegistrationNumber}}</label>
-                <label class="col-md-3 col-sm-6 control-label">Pickup Address: {{trip.PickupAddress.Text}}</label>
-                <label class="col-md-4 col-sm-6 control-label">Pickup Time: {{trip.ExpectedPickupTimeUtc | philDate}}</label>
 
-                <label class="col-md-2 col-sm-6 control-label">Client: {{trip.Client.Name}}</label>
-                <label class="col-md-3 col-sm-6 control-label">Driver: {{trip.Driver.FullName}}</label>
-                <label class="col-md-3 col-sm-6 control-label">Helpers: {{trip.HelperNames}}</label>
-                <div class="col-md-4 col-sm-6">
-                    Status:
-                    <status-label status="trip.StatusObject"></status-label>
+    </form>
+    <hr />
+    <accordion close-others="false">
+
+        <accordion-group ng-repeat="trip in trips | filter:{TripTicketNumber:filter.TripTicketNumber, ClientId:filter.Client.Id, Status:filter.Status||undefined}"
+                         ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id"
+                         is-open="trip.accordionOpen">
+            <accordion-heading>
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': trip.accordionOpen, 'glyphicon-chevron-right': !trip.accordionOpen}"></i>
+
+                <div class="row">
+
+                    <label class="col-md-2 col-sm-6 control-label">Ticket Number: {{trip.TripTicketNumber}} </label>
+                    <label class="col-md-3 col-sm-6 control-label">Truck: {{trip.Truck.RegistrationNumber}}</label>
+                    <label class="col-md-3 col-sm-6 control-label">Pickup Address: {{trip.PickupAddress.Text}}</label>
+                    <label class="col-md-4 col-sm-6 control-label">Pickup Time: {{trip.ExpectedPickupTimeUtc | philDate}}</label>
+
+                    <label class="col-md-2 col-sm-6 control-label">Client: {{trip.Client.Name}}</label>
+                    <label class="col-md-3 col-sm-6 control-label">Driver: {{trip.Driver.FullName}}</label>
+                    <label class="col-md-3 col-sm-6 control-label">Helpers: {{trip.HelperNames}}</label>
+                    <div class="col-md-4 col-sm-6">
+                        Status:
+                        <status-label status="trip.StatusObject"></status-label>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="panel-body">
+            </accordion-heading>
             <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
                 <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
             </div>
-        </div>
-    </div>
+        </accordion-group>
+    </accordion>
+
 </div>
 
