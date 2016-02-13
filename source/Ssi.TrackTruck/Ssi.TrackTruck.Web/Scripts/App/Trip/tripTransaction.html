@@ -1,0 +1,75 @@
+﻿<div>
+    <page-title></page-title>
+    <form ng-submit="applyFilter()" class="form-inline">
+        <div class="form-group form-group-sm">
+            <label class="control-label">Ticket</label>
+            <input ng-model="filter.TripTicketNumber" type="text" class="form-control" placeholder="Ticket Number" />
+        </div>
+        <!--<div class="form-group form-group-sm">
+            <label class="control-label">Date Range</label>
+            <label class="control-label">
+                <datetime ng-model="filter.FromDate" hide-time="true" options="{sm:true, placeholder:'from'}"></datetime>
+            </label>
+            <label>
+                <datetime ng-model="filter.ToDate" hide-time="true" options="{sm:true, placeholder:'to'}"></datetime>
+            </label>
+        </div>-->
+
+        <div class="form-group form-group-sm">
+            <label class="control-label">Client</label>
+            <client-select ng-model="filter.Client"></client-select>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="control-label">Status</label>
+            <div class="btn-group btn-group-xs">
+                <label class="btn btn-default"
+                       ng-class="{'btn-default': filter.Status, 'btn-primary': !filter.Status}"
+                       ng-model="filter.Status"
+                       btn-radio="null"
+                       uncheckable>All</label>
+                <label class="btn "
+                       ng-class="'btn-' + statusButtonClass(status)"
+                       ng-model="filter.Status"
+                       btn-radio="status.id"
+                       uncheckable
+                       ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
+                    {{status.text}}
+                </label>
+            </div>
+        </div>
+
+    </form>
+    <hr />
+    <accordion close-others="false">
+
+        <accordion-group ng-repeat="trip in trips | filter:{TripTicketNumber:filter.TripTicketNumber, ClientId:filter.Client.Id, Status:filter.Status||undefined}"
+                         ng-show="trip.Status == tripStatus.New.id || trip.Status == tripStatus.InProgress.id"
+                         is-open="trip.accordionOpen">
+            <accordion-heading>
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': trip.accordionOpen, 'glyphicon-chevron-right': !trip.accordionOpen}"></i>
+
+                <div class="row">
+
+                    <label class="col-md-2 col-sm-6 control-label">Ticket Number: {{trip.TripTicketNumber}} </label>
+                    <label class="col-md-3 col-sm-6 control-label">Truck: {{trip.Truck.RegistrationNumber}}</label>
+                    <label class="col-md-3 col-sm-6 control-label">Pickup Address: {{trip.PickupAddress.Text}}</label>
+                    <label class="col-md-4 col-sm-6 control-label">Pickup Time: {{trip.ExpectedPickupTimeUtc | philDate}}</label>
+
+                    <label class="col-md-2 col-sm-6 control-label">Client: {{trip.Client.Name}}</label>
+                    <label class="col-md-3 col-sm-6 control-label">Driver: {{trip.Driver.FullName}}</label>
+                    <label class="col-md-3 col-sm-6 control-label">Helpers: {{trip.HelperNames}}</label>
+                    <div class="col-md-4 col-sm-6">
+                        Status:
+                        <status-label status="trip.StatusObject"></status-label>
+                    </div>
+                </div>
+            </accordion-heading>
+            <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
+                <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+            </div>
+        </accordion-group>
+    </accordion>
+
+</div>
+
