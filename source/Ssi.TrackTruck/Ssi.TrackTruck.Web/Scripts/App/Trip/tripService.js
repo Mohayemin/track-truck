@@ -96,11 +96,11 @@
             get: function (tripId) {
                 return repository.get('Trip', 'Get', { id: tripId });
             },
-            updateStatus: function(trip) {
+            updateStatus: function (trip) {
                 var newStatus;
                 if (trip.StatusObject === tripStatus.New) {
                     newStatus = tripStatus.InProgress;
-                } else if(trip.StatusObject === tripStatus.InProgress) {
+                } else if (trip.StatusObject === tripStatus.InProgress) {
                     newStatus = tripStatus.New;
                 }
                 if (newStatus) {
@@ -112,6 +112,12 @@
                         return trip;
                     });
                 }
+            },
+            saveAdjustment: function (trip) {
+                return repository.post('trip', 'SaveAdjustments', {
+                    tripId: trip.Id,
+                    Adjustments: trip.Adjustments
+                });
             }
         };
 
