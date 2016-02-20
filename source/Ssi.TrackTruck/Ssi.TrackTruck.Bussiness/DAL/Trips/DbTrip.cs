@@ -43,8 +43,14 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public long HelperAllowanceInCentavos { get; set; }
         public long HelperSalaryInCentavos { get; set; }
 
-
         [BsonRepresentation(BsonType.ObjectId)]
         public string SupervisorId { get; set; }
+
+        public IList<DbTripSalaryAdjustment> Adjustments { get; set; }
+
+        public DbTrip()
+        {
+            Adjustments = new List<DbTripSalaryAdjustment>();
+        }
     }
 }

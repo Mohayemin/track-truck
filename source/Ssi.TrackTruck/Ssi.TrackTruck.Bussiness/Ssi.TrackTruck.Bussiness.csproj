@@ -83,6 +83,7 @@
     <Compile Include="DAL\Trips\DbTrip.cs" />
     <Compile Include="DAL\Entities\DbTruck.cs" />
     <Compile Include="DAL\Entities\DbDailyHit.cs" />
+    <Compile Include="DAL\Trips\DbTripSalaryAdjustment.cs" />
     <Compile Include="Employees\AddEmployeeRequest.cs" />
     <Compile Include="Employees\EditEmployeeRequest.cs" />
     <Compile Include="Employees\EmployeeSalary.cs" />
