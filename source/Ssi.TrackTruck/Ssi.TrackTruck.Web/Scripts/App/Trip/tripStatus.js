@@ -10,10 +10,10 @@ tripModule.factory('tripStatus', [function tripStatusFactory() {
     }
 
     var factory = {
-        'New': obj('New', 1001, 'info', 'New'),
+        'New': obj('New', 1001, 'danger', 'New'),
         'InProgress': obj('InProgress', 1002, 'warning', 'In progress'),
-        'DoneWithPartialDelivery': obj('DoneWithPartialDelivery', 1003, 'danger', 'Part delivered'),
-        'DoneWithFullDelivery': obj('DoneWithFullDelivery', 1004, 'success', 'Full delivered')
+        'Delivered': obj('Done', 1005, 'info', 'Delivered'),
+        'Archived': obj('Archived', 1006, 'success', 'Archived')
     };
 
     return factory;

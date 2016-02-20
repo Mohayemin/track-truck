@@ -25,30 +25,29 @@
         $scope.filter = {
             Status: {
                 New: true,
-                InProgress: true
+                InProgress: true,
+                Delivered: true
             }
         };
 
         $scope.applyFilter = function () {
             var filteredTrips = $scope.trips;
-            console.log($scope.trips);
+
             filteredTrips = $filter('filter')(filteredTrips, { TripTicketNumber: $scope.filter.TripTicketNumber });
-            console.log($scope.trips);
+
             filteredTrips = $filter('filter')(filteredTrips, { ClientId: $scope.filter.ClientId });
-            console.log($scope.trips);
-            filteredTrips = $filter('filter')(filteredTrips, function(trip) {
+
+            filteredTrips = $filter('filter')(filteredTrips, function (trip) {
                 return $scope.filter.Status[trip.Status];
             });
-            console.log($scope.trips);
+
             $scope.trips.forEach(function (trip) {
                 trip.show = false;
             });
-            
-            filteredTrips.forEach(function(trip) {
+
+            filteredTrips.forEach(function (trip) {
                 trip.show = true;
             });
-
-            console.log($scope.trips);
         };
 
         $scope.statusButtonClass = function (status) {
@@ -76,7 +75,7 @@
                 globalMessage.success('drop received');
             }).catch(function (message) {
                 globalMessage.error(message);
-            }).finally(function() {
+            }).finally(function () {
                 $scope.applyFilter();
             });
         };
