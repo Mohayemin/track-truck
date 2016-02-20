@@ -31,7 +31,7 @@
     <accordion close-others="false">
 
         <accordion-group ng-repeat="trip in trips"
-                         is-open="trip.accordionOpen">
+                         is-open="trip.accordionOpen" class="animate-out-right" ng-show="trip.show">
             <accordion-heading>
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': trip.accordionOpen, 'glyphicon-chevron-right': !trip.accordionOpen}"></i>
 

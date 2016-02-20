@@ -14,9 +14,6 @@
         , globalMessage
         ) {
 
-        var allTrips = [];
-        $scope.trips = [];
-
         $scope.updateStatus = function (trip) {
             trip.waiting = true;
             tripService.updateStatus(trip).then(function () {
@@ -33,14 +30,25 @@
         };
 
         $scope.applyFilter = function () {
-            var filteredTrips = allTrips;
+            var filteredTrips = $scope.trips;
+            console.log($scope.trips);
             filteredTrips = $filter('filter')(filteredTrips, { TripTicketNumber: $scope.filter.TripTicketNumber });
+            console.log($scope.trips);
             filteredTrips = $filter('filter')(filteredTrips, { ClientId: $scope.filter.ClientId });
+            console.log($scope.trips);
             filteredTrips = $filter('filter')(filteredTrips, function(trip) {
                 return $scope.filter.Status[trip.Status];
             });
+            console.log($scope.trips);
+            $scope.trips.forEach(function (trip) {
+                trip.show = false;
+            });
+            
+            filteredTrips.forEach(function(trip) {
+                trip.show = true;
+            });
 
-            $scope.trips = filteredTrips;
+            console.log($scope.trips);
         };
 
         $scope.statusButtonClass = function (status) {
@@ -50,7 +58,7 @@
         $scope.tripStatus = tripStatus;
 
         tripService.getActiveTrips().then(function (trips) {
-            allTrips = trips;
+            $scope.trips = trips;
             $scope.applyFilter();
         });
 
