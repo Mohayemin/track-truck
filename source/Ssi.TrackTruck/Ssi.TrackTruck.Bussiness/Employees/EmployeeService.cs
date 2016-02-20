@@ -81,8 +81,8 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 employeeSalaries.Add(new EmployeeSalary
                 {
                     Employee = driver,
-                    TotalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInCentavos) / 100,
-                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInCentavos) / 100
+                    TotalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInPeso),
+                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInPeso)
                 });
             }
 
@@ -92,8 +92,8 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 employeeSalaries.Add(new EmployeeSalary
                 {
                     Employee = helper,
-                    TotalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInCentavos) / 100,
-                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInCentavos) / 100
+                    TotalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInPeso),
+                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInPeso)
                 });
             }
 
