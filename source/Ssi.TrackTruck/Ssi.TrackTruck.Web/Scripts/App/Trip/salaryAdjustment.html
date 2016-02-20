@@ -1,0 +1,30 @@
+﻿<form>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Salary Adjustment
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="adjustment in trip.Adjustments">
+                <label>Amount</label>
+                <input ng-model="adjustment.Amount"/>
+                <label>Comment</label>
+                <input ng-model="adjustment.Comment"/>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Adjustment</button>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-sm btn-info">
+                <i class="fa fa-lg fa-save"></i>
+                Save
+            </button>
+            <!--ng-if="trip.Status=tripStatus.Delivered.id"-->
+            <button type="button" class="btn btn-sm btn-success" >
+                <i class="fa fa-lg fa-check-square-o"></i> 
+                Save and archive
+            </button>
+        </div>
+    </div>
+</form>
