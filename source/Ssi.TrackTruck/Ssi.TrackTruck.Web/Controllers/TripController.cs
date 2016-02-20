@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
+using Ssi.TrackTruck.Bussiness.DAL.Trips;
 using Ssi.TrackTruck.Bussiness.Trips;
 using Ssi.TrackTruck.Web.Auth;
 using Ssi.TrackTruck.Web.Utils;
@@ -62,6 +64,14 @@ namespace Ssi.TrackTruck.Web.Controllers
         public ActionResult Receive(DropReceiveRequest request)
         {
             var response = _tripService.ReceiveDrop(request);
+            return new JsonNetResult(response);
+        }
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin, Role.Admin)]
+        public ActionResult SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
+        {
+            var response = _tripService.SaveAdjustments(tripId, adjustments);
             return new JsonNetResult(response);
         }
     }
