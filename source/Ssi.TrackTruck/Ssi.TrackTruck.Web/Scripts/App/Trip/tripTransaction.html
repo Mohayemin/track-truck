@@ -51,8 +51,13 @@
                     </div>
                 </div>
             </accordion-heading>
+
             <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="!drop.IsDelivered">
                 <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+            </div>
+            
+            <div class="col-md-6">
+                <ng-include src="'Scripts/App/Trip/salaryAdjustment.html'"></ng-include>
             </div>
         </accordion-group>
     </accordion>
