@@ -87,5 +87,9 @@
         $scope.addNewAdjustment = function (trip) {
             trip.Adjustments.push({});
         };
+
+        $scope.saveAdjustment = function (trip) {
+            tripService.saveAdjustment(trip);
+        };
     }
 ]);
