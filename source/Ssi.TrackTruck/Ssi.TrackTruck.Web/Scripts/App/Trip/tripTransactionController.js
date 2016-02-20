@@ -61,7 +61,7 @@
             if (trips.length) {
                 trips[0].accordionOpen = true;
             }
-            
+
             $scope.applyFilter();
         });
 
@@ -82,6 +82,10 @@
             }).finally(function () {
                 $scope.applyFilter();
             });
+        };
+
+        $scope.addNewAdjustment = function (trip) {
+            trip.Adjustments.push({});
         };
     }
 ]);
