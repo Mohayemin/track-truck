@@ -1,9 +1,7 @@
 ﻿utilModule.filter('peso', [
-    '$filter',
-    function ($filter) {
-        var currency = $filter('currency');
+    function () {
         return function(val) {
-            return currency(val, '₱');
+            return val + ' ₱';
         };
     }
 ])
