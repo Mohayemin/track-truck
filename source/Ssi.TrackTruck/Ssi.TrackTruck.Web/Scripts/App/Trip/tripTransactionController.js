@@ -25,30 +25,29 @@
         $scope.filter = {
             Status: {
                 New: true,
-                InProgress: true
+                InProgress: true,
+                Delivered: true
             }
         };
 
         $scope.applyFilter = function () {
             var filteredTrips = $scope.trips;
-            console.log($scope.trips);
+
             filteredTrips = $filter('filter')(filteredTrips, { TripTicketNumber: $scope.filter.TripTicketNumber });
-            console.log($scope.trips);
+
             filteredTrips = $filter('filter')(filteredTrips, { ClientId: $scope.filter.ClientId });
-            console.log($scope.trips);
-            filteredTrips = $filter('filter')(filteredTrips, function(trip) {
+
+            filteredTrips = $filter('filter')(filteredTrips, function (trip) {
                 return $scope.filter.Status[trip.Status];
             });
-            console.log($scope.trips);
+
             $scope.trips.forEach(function (trip) {
                 trip.show = false;
             });
-            
-            filteredTrips.forEach(function(trip) {
+
+            filteredTrips.forEach(function (trip) {
                 trip.show = true;
             });
-
-            console.log($scope.trips);
         };
 
         $scope.statusButtonClass = function (status) {
@@ -59,6 +58,10 @@
 
         tripService.getActiveTrips().then(function (trips) {
             $scope.trips = trips;
+            if (trips.length) {
+                trips[0].accordionOpen = true;
+            }
+
             $scope.applyFilter();
         });
 
@@ -76,9 +79,26 @@
                 globalMessage.success('drop received');
             }).catch(function (message) {
                 globalMessage.error(message);
-            }).finally(function() {
+            }).finally(function () {
                 $scope.applyFilter();
             });
+        };
+
+        $scope.addNewAdjustment = function (trip) {
+            trip.Adjustments = trip.Adjustments || [];
+            trip.Adjustments.push({});
+        };
+
+        $scope.saveAdjustment = function (trip) {
+            tripService.saveAdjustment(trip).then(function(response) {
+                globalMessage.success(response.Message);
+            }).catch(function (response) {
+                globalMessage.error(response.Message);
+            });
+        };
+
+        $scope.deleteAdjustment = function(trip, adjustmentIndex) {
+            trip.Adjustments.splice(adjustmentIndex, 1);
         };
     }
 ]);
