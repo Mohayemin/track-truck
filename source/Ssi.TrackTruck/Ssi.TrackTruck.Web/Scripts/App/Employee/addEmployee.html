@@ -1,0 +1,15 @@
+﻿<div>
+    <page-title>
+        <list-button module="'employee'"></list-button>
+    </page-title>
+    <form ng-submit="add()" class="form-horizontal">
+        <fieldset>
+            <ng-include src="url.template('Employee', 'employeeForm')"></ng-include>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-lg fa-plus"></i> Add Employee</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
