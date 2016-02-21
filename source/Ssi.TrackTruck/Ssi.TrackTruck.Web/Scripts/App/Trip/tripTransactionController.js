@@ -13,15 +13,7 @@
         , tripStatus
         , globalMessage
         ) {
-
-        $scope.updateStatus = function (trip) {
-            trip.waiting = true;
-            tripService.updateStatus(trip).then(function () {
-                trip.waiting = false;
-                globalMessage.success('trip status updated');
-            });
-        };
-
+        
         $scope.filter = {
             Status: {
                 New: true,
@@ -81,6 +73,14 @@
                 globalMessage.error(message);
             }).finally(function () {
                 $scope.applyFilter();
+            });
+        };
+
+        $scope.archive = function(trip) {
+            tripService.archive(trip).then(function() {
+                globalMessage.success('Trip archived');
+            }).catch(function(response) {
+                globalMessage.error(response.Message);
             });
         };
 
