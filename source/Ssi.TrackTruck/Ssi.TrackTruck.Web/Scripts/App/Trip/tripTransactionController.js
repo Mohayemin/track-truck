@@ -30,7 +30,9 @@
             }
             filteredTrips = $filter('filter')(filteredTrips, { TripTicketNumber: $scope.filter.TripTicketNumber });
 
-            filteredTrips = $filter('filter')(filteredTrips, { ClientId: $scope.filter.ClientId });
+            if ($scope.filter.Client) {
+                filteredTrips = $filter('filter')(filteredTrips, { ClientId: $scope.filter.Client.Id });
+            }
 
             filteredTrips = $filter('filter')(filteredTrips, function (trip) {
                 return $scope.filter.Status[trip.Status];
