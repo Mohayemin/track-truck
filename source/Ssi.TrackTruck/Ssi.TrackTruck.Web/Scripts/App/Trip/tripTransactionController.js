@@ -22,9 +22,12 @@
             }
         };
 
-        $scope.applyFilter = function () {
+        function applyFilter() {
             var filteredTrips = $scope.trips;
 
+            if (!filteredTrips) {
+                return;
+            }
             filteredTrips = $filter('filter')(filteredTrips, { TripTicketNumber: $scope.filter.TripTicketNumber });
 
             filteredTrips = $filter('filter')(filteredTrips, { ClientId: $scope.filter.ClientId });
@@ -42,6 +45,9 @@
             });
         };
 
+        $scope.$watchCollection('filter', applyFilter);
+        $scope.$watchCollection('filter.Status', applyFilter);
+
         $scope.statusButtonClass = function (status) {
             return $scope.filter.Status[status.id] ? status.cssClass : 'default';
         };
@@ -54,7 +60,7 @@
                 trips[0].accordionOpen = true;
             }
 
-            $scope.applyFilter();
+            applyFilter();
         });
 
         $scope.totalRejected = function (drop) {
@@ -72,7 +78,7 @@
             }).catch(function (message) {
                 globalMessage.error(message);
             }).finally(function () {
-                $scope.applyFilter();
+                applyFilter();
             });
         };
 
