@@ -70,7 +70,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public IEnumerable<TripResponse> GetActiveTrips()
         {
             var trips = _repository
-                .GetWhere<DbTrip>(trip => trip.Status == TripStatus.InProgress || trip.Status == TripStatus.New)
+                .WhereIn<DbTrip, TripStatus>(trip => trip.Status, new[] { TripStatus.InProgress, TripStatus.New, TripStatus.Delivered })
                 .OrderBy(trip => trip.Status);
 
             var tripIds = trips.Select(trip => trip.Id);
@@ -143,8 +143,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             }
             else
             {
-                newStatus = thisTripDrops.Any(d => d.TotalRejectedBoxes != 0) ?
-                    TripStatus.DoneWithPartialDelivery : TripStatus.DoneWithFullDelivery;
+                newStatus = TripStatus.Delivered;
             }
             if (newStatus != trip.Status)
             {
@@ -153,6 +152,19 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             }
 
             return Response.Success(trip.Status.ToString(), "Drop received");
+        }
+
+        public Response SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
+        {
+            var trip = _repository.GetById<DbTrip>(tripId);
+            if (trip == null)
+            {
+                return Response.Error("", "No such trip found");
+            }
+
+            trip.Adjustments = adjustments;
+            _repository.Save(trip);
+            return Response.Success(message: "Adjustments saved");
         }
     }
 }

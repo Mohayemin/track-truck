@@ -25,26 +25,32 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
-        public long FuelCostInCentavos { get; set; }
-        public long TollCostInCentavos { get; set; }
-        public long ParkingCostInCentavos { get; set; }
-        public long BargeCostInCentavos { get; set; }
-        public long BundleCostInCentavos { get; set; }
+        public double FuelCostInPeso { get; set; }
+        public double TollCostInPeso { get; set; }
+        public double ParkingCostInPeso { get; set; }
+        public double BargeCostInPeso { get; set; }
+        public double BundleCostInPeso { get; set; }
 
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string DriverId { get; set; }
-        public long DriverAllowanceInCentavos { get; set; }
-        public long DriverSalaryInCentavos { get; set; }
+        public double DriverAllowanceInPeso { get; set; }
+        public double DriverSalaryInPeso { get; set; }
 
 
         [BsonRepresentation(BsonType.ObjectId)]
         public List<string> HelperIds { get; set; }
-        public long HelperAllowanceInCentavos { get; set; }
-        public long HelperSalaryInCentavos { get; set; }
-
+        public double HelperAllowanceInPeso { get; set; }
+        public double HelperSalaryInPeso { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string SupervisorId { get; set; }
+
+        public IList<DbTripSalaryAdjustment> Adjustments { get; set; }
+
+        public DbTrip()
+        {
+            Adjustments = new List<DbTripSalaryAdjustment>();
+        }
     }
 }
