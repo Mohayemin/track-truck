@@ -4,12 +4,11 @@
         <div class="form-group form-group-sm">
             <label class="control-label">Ticket</label>
             <input ng-model="filter.TripTicketNumber"
-                   ng-change="applyFilter()"
                    type="text" class="form-control" placeholder="Ticket Number" />
         </div>
         <div class="form-group form-group-sm">
             <label class="control-label">Client</label>
-            <client-select ng-model="filter.Client" ng-change="applyFilter()"></client-select>
+            <client-select ng-model="filter.Client"></client-select>
         </div>
 
         <div class="form-group form-group-sm">
@@ -19,7 +18,6 @@
                        ng-class="'btn-' + statusButtonClass(status)"
                        ng-model="filter.Status[status.id]"
                        btn-checkbox="status.id"
-                       ng-change="applyFilter()"
                        ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
                     {{status.text}}
                 </label>
