@@ -4,14 +4,15 @@
         return {
             templateUrl: '/Scripts/App/Client/clientSelect.html',
             scope: {
-                ngModel: '='
+                ngModel: '=',
+                autoSelectIndex: '='
             },
             controller: [
                 '$scope',
                 function($scope) {
                     clientService.getAll().then(function(clients) {
-                        if (clients && clients.length) {
-                            $scope.ngModel = clients[0];
+                        if (angular.isDefined($scope.autoSelectIndex) && clients && clients.length) {
+                            $scope.ngModel = clients[$scope.autoSelectIndex];
                         }
 
                         $scope.clients = clients;
