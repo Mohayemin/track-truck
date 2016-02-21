@@ -9,6 +9,8 @@
             <dl class="dl-horizontal">
                 <dt>Ticket Number</dt>
                 <dd ng-bind="trip.TripTicketNumber"></dd>
+                <dt>Status</dt>
+                <dd><status-label status="trip.StatusObject"></status-label></dd>
                 <dt>Client</dt>
                 <dd ng-bind="trip.Client.Name"></dd>
                 <dt>Pickup Addresse</dt>
@@ -41,11 +43,16 @@
                 <dd ng-bind="trip.HelperSalaryInPeso"></dd>
                 <dt>Supervisor</dt>
                 <dd ng-bind="trip.Supervisor.FullName"></dd>
+                <dt>Adjustments</dt>
+                <dd></dd>
+                <dt ng-repeat-start="adjustment in trip.Adjustments">{{adjustment.Comment}}</dt>
+                <dd ng-repeat-end>{{adjustment.AdjustmentInPeso | peso}}</dd>
             </dl>
+            
         </div>
 
         <div class="col-sm-6">
-            <div ng-repeat="drop in trip.Drops">
+            <div ng-repeat="drop in trip.Drops" class="well well-sm">
                 <dl class="dl-horizontal">
                     <dt>Drop <span ng-bind="$index + 1"></span> Branch</dt>
                     <dd ng-bind="drop.Branch.Name"></dd>
@@ -53,41 +60,39 @@
                     <dd ng-bind="drop.ExpectedDropTimeUtc | philDate"></dd>
                     <dt>Received By</dt>
                     <dd ng-if="drop.IsDelivered">
-                        <span ng-bind="drop.ReceiverUser.FullName"></span> at 
+                        <span ng-bind="drop.ReceiverUser.FullName"></span> at
                         <span ng-bind="drop.ActualDropTimeUtc | philDate"></span>
                     </dd>
                     <dd ng-if="!drop.IsDelivered">
                         Not delivered yet
                     </dd>
-                    <dt>Drops</dt>
-                    <dd>
-                        <table class="table table-condensed table-bordered table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>DR#</th>
-                                    <th>Total Boxes</th>
-                                    <th ng-if="drop.IsDelivered">Rejected Boxes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="dr in drop.DeliveryReceipts" class="dl-horizontal">
-                                    <td ng-bind="dr.DrNumber"></td>
-                                    <td ng-bind="dr.NumberOfBoxes"></td>
-                                    <td ng-if="drop.IsDelivered" ng-bind="dr.RejectedNumberOfBoxes"></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>
-                                        Total
-                                    </th>
-                                    <th ng-bind="drop.TotalBoxes"></th>
-                                    <th ng-if="drop.IsDelivered" ng-bind="drop.TotalRejectedBoxes"></th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </dd>
                 </dl>
+                <table class="table table-condensed table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>DR#</th>
+                            <th>Total Boxes</th>
+                            <th ng-if="drop.IsDelivered">Rejected Boxes</th>
+                            <th ng-if="drop.IsDelivered">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dr in drop.DeliveryReceipts" class="dl-horizontal">
+                            <td ng-bind="dr.DrNumber"></td>
+                            <td ng-bind="dr.NumberOfBoxes"></td>
+                            <td ng-if="drop.IsDelivered" ng-bind="dr.RejectedNumberOfBoxes"></td>
+                            <td ng-if="drop.IsDelivered" ng-bind="dr.Comment"></td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Total
+                            </td>
+                            <td ng-bind="drop.TotalBoxes"></td>
+                            <td ng-if="drop.IsDelivered" ng-bind="drop.TotalRejectedBoxes"></td>
+                            <td ng-if="drop.IsDelivered"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
