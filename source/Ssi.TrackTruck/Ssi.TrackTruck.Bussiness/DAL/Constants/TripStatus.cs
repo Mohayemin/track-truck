@@ -4,7 +4,7 @@
     {
         New = 1001,
         InProgress = 1002,
-        DoneWithPartialDelivery = 1003,
-        DoneWithFullDelivery = 1004,
+        Delivered = 1005,
+        Archived = 1006
     }
 }
