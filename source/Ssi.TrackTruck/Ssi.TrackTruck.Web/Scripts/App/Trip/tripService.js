@@ -96,22 +96,20 @@
             get: function (tripId) {
                 return repository.get('Trip', 'Get', { id: tripId });
             },
-            updateStatus: function(trip) {
-                var newStatus;
-                if (trip.StatusObject === tripStatus.New) {
-                    newStatus = tripStatus.InProgress;
-                } else if(trip.StatusObject === tripStatus.InProgress) {
-                    newStatus = tripStatus.New;
-                }
-                if (newStatus) {
-                    return repository.post('trip', 'updateStatus', {
-                        tripId: trip.Id,
-                        status: newStatus.id
-                    }).then(function () {
-                        setTripStatus(trip, newStatus);
-                        return trip;
-                    });
-                }
+            saveAdjustment: function (trip) {
+                return repository.post('trip', 'SaveAdjustments', {
+                    tripId: trip.Id,
+                    Adjustments: trip.Adjustments
+                });
+            },
+            archive: function(trip) {
+                return repository.post('trip', 'updateStatus', {
+                    tripId: trip.Id,
+                    status: tripStatus.Archived.id
+                }).then(function () {
+                    setTripStatus(trip, tripStatus.Archived.id);
+                    return trip;
+                });
             }
         };
 

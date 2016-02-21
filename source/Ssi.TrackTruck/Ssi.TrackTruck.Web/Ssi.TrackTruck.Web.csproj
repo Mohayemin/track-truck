@@ -186,6 +186,7 @@
     <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
+    <Content Include="Scripts\App\Trip\salaryAdjustment.html" />
     <Content Include="Scripts\App\Trip\trip.js" />
     <Content Include="Scripts\App\Trip\tripDropUpdate.html" />
     <Content Include="Scripts\App\Trip\tripDetail.html" />
@@ -236,6 +237,7 @@
     <Content Include="Scripts\Util\crudStatus.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
+    <Content Include="Scripts\Util\pesoFilter.js" />
     <Content Include="Scripts\Util\serverClock.html" />
     <Content Include="Scripts\Util\serverClockDirective.js" />
     <Content Include="Scripts\Util\statusLabel.html" />

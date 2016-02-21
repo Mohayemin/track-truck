@@ -21,22 +21,22 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         [Required(ErrorMessage = "Please choose a driver")]
         public string DriverId { get; set; }
 
-        public double? DriverAllowance { get; set; }
-        public double? DriverSalary { get; set; }
+        public double DriverAllowance { get; set; }
+        public double DriverSalary { get; set; }
         public List<string> HelperIds { get; set; }
-        public double? HelperAllowance { get; set; }
-        public double? HelperSalary { get; set; }
+        public double HelperAllowance { get; set; }
+        public double HelperSalary { get; set; }
         
         [Required(ErrorMessage = "Please choose a truck")]
         public string TruckId { get; set; }
 
         [Required(ErrorMessage = "Please choose released by")]
         public string SupervisorId { get; set; }
-        public double? TollCost { get; set; }
-        public double? ParkingCost { get; set; }
-        public double? FuelCost { get; set; }
-        public double? BargeCost { get; set; }
-        public double? BundleCost { get; set; }
+        public double TollCost { get; set; }
+        public double ParkingCost { get; set; }
+        public double FuelCost { get; set; }
+        public double BargeCost { get; set; }
+        public double BundleCost { get; set; }
 
         public List<TripDropRequest> Drops { get; set; }
 
@@ -61,17 +61,17 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 PickupAddressId = PickupAddressId,
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
                 DriverId = DriverId,
-                DriverAllowanceInCentavos = (long)(DriverAllowance ?? 0) * 100,
-                DriverSalaryInCentavos = (long)(DriverSalary ?? 0) * 100,
+                DriverAllowanceInPeso = DriverAllowance,
+                DriverSalaryInPeso = DriverSalary,
                 HelperIds = HelperIds.Where(id => !string.IsNullOrWhiteSpace(id)).ToList(),
-                HelperAllowanceInCentavos = (long)(HelperAllowance ?? 0) * 100,
-                HelperSalaryInCentavos = (long)(HelperSalary ?? 0) * 100,
+                HelperAllowanceInPeso = HelperAllowance,
+                HelperSalaryInPeso = HelperSalary,
                 SupervisorId = SupervisorId,
-                FuelCostInCentavos = (long)(FuelCost ?? 0) * 100,
-                ParkingCostInCentavos = (long)(ParkingCost ?? 0) * 100,
-                TollCostInCentavos = (long)(TollCost ?? 0) * 100,
-                BargeCostInCentavos = (long)(BargeCost ?? 0) * 100,
-                BundleCostInCentavos = (long)(BundleCost ?? 0) * 100,
+                FuelCostInPeso = FuelCost,
+                ParkingCostInPeso = ParkingCost,
+                TollCostInPeso = TollCost,
+                BargeCostInPeso = BargeCost,
+                BundleCostInPeso = BundleCost,
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
                 Status = TripStatus.New
