@@ -85,11 +85,16 @@
         };
 
         $scope.addNewAdjustment = function (trip) {
+            trip.Adjustments = trip.Adjustments || [];
             trip.Adjustments.push({});
         };
 
         $scope.saveAdjustment = function (trip) {
             tripService.saveAdjustment(trip);
+        };
+
+        $scope.deleteAdjustment = function(trip, adjustmentIndex) {
+            trip.Adjustments.splice(adjustmentIndex, 1);
         };
     }
 ]);

@@ -6,8 +6,9 @@
         <table class="table table-responsive table-bordered">
             <thead ng-if="trip.Adjustments.length">
                 <tr>
-                    <th>Adjustment</th>
-                    <th>Comment</th>
+                    <th class="col-md-4">Adjustment</th>
+                    <th class="col-md-7">Comment</th>
+                    <th class="col-md-1"></th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +18,12 @@
                                ng-model="adjustment.AdjustmentInPeso" required />
                     </td>
                     <td>
-                        <input class="form-control input-sm" type="text" ng-model="adjustment.Comment" required />
+                        <input class="form-control input-sm" type="text" ng-model="adjustment.Comment" required/>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" ng-click="deleteAdjustment(trip, $index)" title="delete this adjustment">
+                            <i class="fa fa-lg fa-fw fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
                 <tr>
