@@ -78,11 +78,14 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             foreach (var driver in drivers)
             {
                 var tripsForDriver = trips.Where(trip => trip.DriverId == driver.Id).ToList();
+                var adjustment = tripsForDriver.SelectMany(trip => trip.Adjustments).Sum(_ => _.AdjustmentInPeso);
+
                 employeeSalaries.Add(new EmployeeSalary
                 {
                     Employee = driver,
                     TotalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInPeso),
-                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInPeso)
+                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInPeso),
+                    TotalAdjustment = adjustment
                 });
             }
 
@@ -93,7 +96,8 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 {
                     Employee = helper,
                     TotalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInPeso),
-                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInPeso)
+                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInPeso),
+                    TotalAdjustment = 0
                 });
             }
 
