@@ -5,6 +5,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
     public class DbTripSalaryAdjustment : Entity
     {
         public string Comment { get; set; }
-        public long AdjustmentInPeso { get; set; }
+        public double AdjustmentInPeso { get; set; }
     }
 }
