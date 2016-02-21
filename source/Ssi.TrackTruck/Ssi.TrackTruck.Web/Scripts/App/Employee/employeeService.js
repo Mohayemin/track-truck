@@ -1,10 +1,12 @@
 ﻿employeeModule.factory('employeeService', [
     'repository',
+    'collection',
     'buildIdMap',
     '$q',
     '_',
     function employeeService(
         repository,
+        collection,
         buildIdMap,
         $q,
         _) {
@@ -38,8 +40,18 @@
                 });
             },
             getSalaryReport: function (filter) {
-                return repository.post('Employee', 'SalaryReport', filter).then(function(response) {
-                    return response.EmployeeSalaries;
+                return repository.post('Employee', 'SalaryReport', filter).then(function (response) {
+                    var employees = response.EmployeeSalaries;
+                    var total = {
+                        Allowance: collection.sum(employees, 'TotalAllowance'),
+                        Salary: collection.sum(employees, 'TotalSalary'),
+                        Adjustment: collection.sum(employees, 'TotalAdjustment'),
+                        Payable: collection.sum(employees, 'TotalPayable'),
+                    }
+                    return {
+                        employees: employees,
+                        total: total
+                    };
                 });
             },
             'delete': function (id) {

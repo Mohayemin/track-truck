@@ -236,6 +236,7 @@
     <Content Include="Scripts\Util\crudStatus.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
+    <Content Include="Scripts\Util\pesoFilter.js" />
     <Content Include="Scripts\Util\serverClock.html" />
     <Content Include="Scripts\Util\serverClockDirective.js" />
     <Content Include="Scripts\Util\statusLabel.html" />

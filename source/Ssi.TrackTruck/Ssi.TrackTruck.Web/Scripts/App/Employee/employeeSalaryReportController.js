@@ -2,11 +2,12 @@
     '$scope',
     'wellKnownDateTime',
     'employeeService',
+    'collection',
     function (
         $scope
         , wellKnownDateTime
         , employeeService) {
-        
+
         function setDateRange(from, to) {
             $scope.filter.fromDate = from;
             $scope.filter.toDate = to;
@@ -24,16 +25,9 @@
         };
 
         $scope.loadReport = function () {
-
-            employeeService.getSalaryReport($scope.filter).then(function (employeeSalaries) {
-                $scope.total = {
-                    TotalPayable: 0
-                };
-
-                $scope.employeeSalaries = employeeSalaries;
-                angular.forEach(employeeSalaries, function (employee) {
-                    $scope.total.TotalPayable += employee.TotalPayable;
-                });
+            employeeService.getSalaryReport($scope.filter).then(function (report) {
+                $scope.employeeSalaries = report.employees;
+                $scope.total = report.total;
             });
         };
 
