@@ -90,7 +90,11 @@
         };
 
         $scope.saveAdjustment = function (trip) {
-            tripService.saveAdjustment(trip);
+            tripService.saveAdjustment(trip).then(function(response) {
+                globalMessage.success(response.Message);
+            }).catch(function (response) {
+                globalMessage.error(response.Message);
+            });
         };
 
         $scope.deleteAdjustment = function(trip, adjustmentIndex) {
