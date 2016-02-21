@@ -31,9 +31,15 @@
     <accordion close-others="false">
 
         <accordion-group ng-repeat="trip in trips"
-                         is-open="trip.accordionOpen" class="animate-out-right" ng-show="trip.show">
+                         is-open="trip.accordionOpen" class="animate-out-right" ng-show="trip.show && trip.Status != tripStatus.Archived.id">
             <accordion-heading>
-                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': trip.accordionOpen, 'glyphicon-chevron-right': !trip.accordionOpen}"></i>
+
+                <div class="pull-right">
+                    <i class="glyphicon"
+                       ng-class="{'glyphicon-chevron-down': trip.accordionOpen, 'glyphicon-chevron-right': !trip.accordionOpen}"></i>
+                </div>
+                
+
 
                 <div class="row">
 
@@ -48,6 +54,13 @@
                     <div class="col-md-4 col-sm-6">
                         Status:
                         <status-label status="trip.StatusObject"></status-label>
+
+                        <button type="button"
+                                ng-click="archive(trip)"
+                                ng-if="trip.Status === tripStatus.Delivered.id" 
+                                class="btn btn-sm btn-success pull-right">
+                                Archive
+                        </button>
                     </div>
                 </div>
             </accordion-heading>
