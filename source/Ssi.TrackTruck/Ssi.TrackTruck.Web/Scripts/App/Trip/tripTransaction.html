@@ -17,7 +17,7 @@
                 <label class="btn "
                        ng-class="'btn-' + statusButtonClass(status)"
                        ng-model="filter.Status[status.id]"
-                       btn-checkbox="status.id"
+                       uib-btn-checkbox="status.id"
                        ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
                     {{status.text}}
                 </label>
