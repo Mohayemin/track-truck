@@ -11,9 +11,9 @@
         </div>
         <div collapse="navCollapsed" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-repeat="group in navGroups" dropdown ng-class="{'active': group == activeGroup}" 
+                <li ng-repeat="group in navGroups" uib-dropdown ng-class="{'active': group == activeGroup}" 
                     allowed-roles="group.roles">
-                    <a href dropdown-toggle>
+                    <a href uib-dropdown-toggle>
                         <span ng-bind="group.text"></span>&nbsp;
                         <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
