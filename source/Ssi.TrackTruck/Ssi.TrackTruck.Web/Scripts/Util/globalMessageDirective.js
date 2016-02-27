@@ -52,7 +52,7 @@ utilModule.directive('globalMessage', [
     function globalMessageDirective() {
         return {
             template: '<div class="global-message"> ' +
-                '<alert ng-show="messageObject.message" close="close()" type="{{messageObject.type}}">{{messageObject.message}}</alert>' +
+                '<uib-alert ng-show="messageObject.message" close="close()" type="{{messageObject.type}}">{{messageObject.message}}</alert>' +
                 '</div>',
             scope: {},
             controller: [
