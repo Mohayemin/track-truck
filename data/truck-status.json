@@ -1,0 +1,65 @@
+[
+    {
+        "TruckNumber": "AAB-1549",
+        "DriverId": 12,
+        "DriverName": "Hermie Mariano",
+        "ItemsCarrying": 7,
+        "Status": "Moving",
+        "FromOutlet": "A1",
+        "ToOutlet": "B4"
+    },
+    {
+        "TruckNumber": "CBC-3098",
+        "DriverId": 14,
+        "DriverName": "Loui Calacsan",
+        "ItemsCarrying": 7,
+        "Status": "Not In Use",
+        "FromOutlet": "-",
+        "ToOutlet": "-"
+    },
+    {
+        "TruckNumber": "ABB-6650",
+        "DriverId": 15,
+        "DriverName": "Avelino Lafuerta",
+        "ItemsCarrying": 8,
+        "Status": "Moving",
+        "FromOutlet": "B2",
+        "ToOutlet": "D1"
+    },
+    {
+        "TruckNumber": "CAB-2222",
+        "DriverId": 11,
+        "DriverName": "Rolandor Cantor",
+        "ItemsCarrying": 9,
+        "Status": "Loading",
+        "FromOutlet": "G9",
+        "ToOutlet": "-"
+    },
+    {
+        "TruckNumber": "CAB-2224",
+        "DriverId": 7,
+        "DriverName": "Gerry Salcedo",
+        "ItemsCarrying": 6,
+        "Status": "Moving",
+        "FromOutlet": "H5",
+        "ToOutlet": "M2"
+    },
+    {
+        "TruckNumber": "CAB-2225",
+        "DriverId": 3,
+        "DriverName": "Argie Edrial",
+        "ItemsCarrying": 4,
+        "Status": "Loading",
+        "FromOutlet": "H5",
+        "ToOutlet": 0
+    },
+    {
+        "TruckNumber": "ABB-5250",
+        "DriverId": 2,
+        "DriverName": "Solidad Joey",
+        "ItemsCarrying": 3,
+        "Status": "Unloading",
+        "FromOutlet": "-",
+        "ToOutlet": "B2"
+    }
+]
