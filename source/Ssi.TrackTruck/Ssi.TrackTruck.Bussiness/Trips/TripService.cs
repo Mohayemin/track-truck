@@ -154,7 +154,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return Response.Success(trip.Status.ToString(), "Drop received");
         }
 
-        public Response SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
+        /*public Response SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
         {
             var trip = _repository.GetById<DbTrip>(tripId);
             if (trip == null)
@@ -165,6 +165,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             trip.Adjustments = adjustments;
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");
-        }
+        }*/
     }
 }

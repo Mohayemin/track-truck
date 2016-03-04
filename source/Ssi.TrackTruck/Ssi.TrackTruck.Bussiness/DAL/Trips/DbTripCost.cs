@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
@@ -8,7 +9,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        public string CostType { get; set; }
+        public TripCostType CostType { get; set; }
         public double OriginalCostInPeso { get; set; }
         public double ActualCostInPeso { get; set; }
         [BsonIgnore]
