@@ -63,7 +63,7 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             _repository.Save(employee);
             return Response.Success(employee, "Successfully edited");
         }
-
+/*
         public EmployeeSalaryReportResponse GetSalaryReport(DateTime fromDate, DateTime toDate)
         {
             fromDate = fromDate.ToUniversalTime();
@@ -107,6 +107,6 @@ namespace Ssi.TrackTruck.Bussiness.Employees
                 ToDate = toDate,
                 EmployeeSalaries = employeeSalaries
             };
-        }
+        }*/
     }
 }

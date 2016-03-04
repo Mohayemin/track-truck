@@ -21,28 +21,21 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         [Required(ErrorMessage = "Please choose a driver")]
         public string DriverId { get; set; }
 
-        public double DriverAllowance { get; set; }
-        public double DriverSalary { get; set; }
         public List<string> HelperIds { get; set; }
-        public double HelperAllowance { get; set; }
-        public double HelperSalary { get; set; }
-        
+
         [Required(ErrorMessage = "Please choose a truck")]
         public string TruckId { get; set; }
 
         [Required(ErrorMessage = "Please choose released by")]
         public string SupervisorId { get; set; }
-        public double TollCost { get; set; }
-        public double ParkingCost { get; set; }
-        public double FuelCost { get; set; }
-        public double BargeCost { get; set; }
-        public double BundleCost { get; set; }
+
+        public IList<DbTripCost> Costs { get; set; }
 
         public List<TripDropRequest> Drops { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (HelperIds == null || HelperIds.TrueForAll(string.IsNullOrWhiteSpace))
+            if (HelperIds == null || HelperIds.Count == 0 || HelperIds.TrueForAll(string.IsNullOrWhiteSpace))
             {
                 yield return new ValidationResult("Please choose at least one helper");
             }
@@ -51,7 +44,34 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 yield return new ValidationResult("Please setup at least one drop");
             }
+
+            if (CheckCost(TripCostType.DriverAllowance, 1))
+            {
+                yield return new ValidationResult("Please set driver's allowance");
+            }
+            if (CheckCost(TripCostType.DriverSalary, 1))
+            {
+                yield return new ValidationResult("Please set driver's salary");
+            }
+            if (HelperIds != null)
+            {
+                if (CheckCost(TripCostType.HelperAllowance, HelperIds.Count))
+                {
+                    yield return
+                        new ValidationResult(string.Format("Please set {0} helper's allowance", HelperIds.Count));
+                }
+                if (CheckCost(TripCostType.HelperAllowance, HelperIds.Count))
+                {
+                    yield return
+                        new ValidationResult(string.Format("Please set {0} helper's salary", HelperIds.Count));
+                }
+            }
         }
+
+        public bool CheckCost(TripCostType type, int count)
+        {
+            return Costs.Count(cost => cost.CostType == TripCostType.DriverAllowance) != count;
+        } 
 
         public DbTrip ToTrip()
         {
@@ -61,17 +81,9 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 PickupAddressId = PickupAddressId,
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
                 DriverId = DriverId,
-                DriverAllowanceInPeso = DriverAllowance,
-                DriverSalaryInPeso = DriverSalary,
                 HelperIds = HelperIds.Where(id => !string.IsNullOrWhiteSpace(id)).ToList(),
-                HelperAllowanceInPeso = HelperAllowance,
-                HelperSalaryInPeso = HelperSalary,
                 SupervisorId = SupervisorId,
-                FuelCostInPeso = FuelCost,
-                ParkingCostInPeso = ParkingCost,
-                TollCostInPeso = TollCost,
-                BargeCostInPeso = BargeCost,
-                BundleCostInPeso = BundleCost,
+                Costs = Costs,
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
                 Status = TripStatus.New

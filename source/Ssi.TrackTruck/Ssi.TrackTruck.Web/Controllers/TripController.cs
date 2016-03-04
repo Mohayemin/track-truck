@@ -67,12 +67,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             return new JsonNetResult(response);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [AllowedRoles(Role.Admin, Role.Admin)]
         public ActionResult SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
         {
             var response = _tripService.SaveAdjustments(tripId, adjustments);
             return new JsonNetResult(response);
-        }
+        }*/
     }
 }
