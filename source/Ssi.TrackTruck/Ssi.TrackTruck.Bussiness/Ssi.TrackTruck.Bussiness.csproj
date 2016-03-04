@@ -66,6 +66,7 @@
     <Compile Include="DAL\Clients\DbDeletedBranch.cs" />
     <Compile Include="DAL\Constants\DateTimeConstants.cs" />
     <Compile Include="DAL\Constants\EmployeDesignations.cs" />
+    <Compile Include="DAL\Constants\TripCostType.cs" />
     <Compile Include="DAL\Constants\TripStatus.cs" />
     <Compile Include="DAL\Clients\DbClient.cs" />
     <Compile Include="DAL\Clients\DbBranch.cs" />
