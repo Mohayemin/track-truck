@@ -26,35 +26,38 @@
                     <dd ng-bind="trip.HelperNames"></dd>
                     <dt>Supervisor</dt>
                     <dd ng-bind="trip.Supervisor.FullName"></dd>
-                    <dt>Total Expected Cost</dt>
-                    <dd ng-bind="trip.TotalCost.ExpectedCostInPeso | peso"></dd>
-                    <dt>Total Actual Cost</dt>
-                    <dd ng-bind="trip.TotalCost.ActualCostInPeso | peso"></dd>
-                    <dt>Total Adjustment</dt>
-                    <dd ng-bind="trip.TotalCost.AdjustmentInPeso | peso"></dd>
                 </dl>
             </div>
 
             <div class="col-sm-6">
                 <table class="table table-condensed table-bordered table-responsive">
                     <thead>
-                    <tr>
-                        <th></th>
-                        <th>Expected Cost</th>
-                        <th>Actual Cost</th>
-                        <th>Adjustment</th>
-                        <th>Comment</th>
-                    </tr>
+                        <tr>
+                            <th></th>
+                            <th>Expected Cost</th>
+                            <th>Actual Cost</th>
+                            <th>Adjustment</th>
+                            <th>Comment</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="cost in trip.Costs">
-                        <td>{{cost.CostType}}</td>
-                        <td>{{cost.ExpectedCostInPeso | peso}}</td>
-                        <td>{{cost.ActualCostInPeso | peso}}</td>
-                        <td>{{cost.AdjustmentInPeso | peso}}</td>
-                        <td>{{cost.Comment}}</td>
-                    </tr>
+                        <tr ng-repeat="cost in trip.Costs">
+                            <td>{{cost.CostType}}</td>
+                            <td>{{cost.ExpectedCostInPeso | peso}}</td>
+                            <td>{{cost.ActualCostInPeso | peso}}</td>
+                            <td>{{cost.AdjustmentInPeso | peso}}</td>
+                            <td>{{cost.Comment}}</td>
+                        </tr>
                     </tbody>
+                    <thead>
+                        <tr class="active">
+                            <th>Total</th>
+                            <th>{{trip.TotalCost.ExpectedCostInPeso | peso}}</th>
+                            <th>{{trip.TotalCost.ActualCostInPeso | peso}}</th>
+                            <th>{{trip.TotalCost.AdjustmentInPeso | peso}}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
                 </table>
             </div>
         </div>
