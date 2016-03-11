@@ -63,7 +63,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
                 DriverContract = new DbTripContract(DriverId, DriverSalary, DriverAllowance),
                 Helper1Contract = new DbTripContract(HelperIds[0], HelperSalary, HelperAllowance),
-                SupervisorId = SupervisorId,
+                SupervisorContract = new DbTripContract(SupervisorId, 0, 0),
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
                 Status = TripStatus.New,

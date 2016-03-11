@@ -53,7 +53,7 @@
                     _this.HelperNames += ',' + employeesById[_this.Helper3Contract.EmployeeId].FullName;
                 }
 
-                _this.Supervisor = employeesById[_this.SupervisorId];
+                _this.Supervisor = employeesById[_this.SupervisorContract.EmployeeId];
             });
 
             _this.Truck = {};
