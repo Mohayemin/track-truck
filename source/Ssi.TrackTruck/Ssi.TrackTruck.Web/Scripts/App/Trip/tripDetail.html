@@ -31,7 +31,7 @@
                     <dt>Total Actual Cost</dt>
                     <dd ng-bind="trip.TotalCost.ActualCostInPeso | peso"></dd>
                     <dt>Total Adjustment</dt>
-                    <dd ng-bind="trip.TotalCost.Adjustment | peso"></dd>
+                    <dd ng-bind="trip.TotalCost.AdjustmentInPeso | peso"></dd>
                 </dl>
             </div>
 
@@ -51,7 +51,7 @@
                         <td>{{cost.CostType}}</td>
                         <td>{{cost.ExpectedCostInPeso | peso}}</td>
                         <td>{{cost.ActualCostInPeso | peso}}</td>
-                        <td>{{cost.Adjustment | peso}}</td>
+                        <td>{{cost.AdjustmentInPeso | peso}}</td>
                         <td>{{cost.Comment}}</td>
                     </tr>
                     </tbody>
