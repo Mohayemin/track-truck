@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
@@ -9,8 +11,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        [BsonRepresentation(BsonType.String)]
         public TripCostType CostType { get; set; }
-        public double OriginalCostInPeso { get; set; }
+        public double ExpectedCostInPeso { get; set; }
         public double ActualCostInPeso { get; set; }
         [BsonIgnore]
         public double Adjustment { get; set; }
@@ -20,6 +24,12 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public DbTripCost()
         {
             Id = ObjectId.GenerateNewId().ToString();
+        }
+
+        public DbTripCost(TripCostType costType, double expectedCostInPeso) : this()
+        {
+            CostType = costType;
+            ExpectedCostInPeso = expectedCostInPeso;
         }
     }
 }
