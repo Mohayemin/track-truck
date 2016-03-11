@@ -77,7 +77,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 }
             };
 
-
             if (HelperIds.Count > 1)
             {
                 dbTrip.Helper2Contract = new DbTripContract(HelperIds[1], HelperSalary, HelperAllowance);
