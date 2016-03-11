@@ -42,17 +42,15 @@
 
             _this.Driver = {};
             employeeService.getIndexedEmployees().then(function (employeesById) {
-                _this.Driver = employeesById[_this.DriverId];
-                _this.Helper1 = employeesById[_this.Helper1Id];
-                _this.Helper2 = employeesById[_this.Helper2Id];
-                _this.Helper3 = employeesById[_this.Helper3Id];
+                _this.Driver = employeesById[_this.DriverContract.EmployeeId];
 
-                _this.HelperNames = _this.Helper1.FullName;
-                if (_this.Helper2) {
-                    _this.HelperNames += ',' + _this.Helper2.FullName;
+                _this.HelperNames = employeesById[_this.Helper1Contract.EmployeeId].FullName;
+
+                if (_this.Helper2Contract) {
+                    _this.HelperNames += ',' + employeesById[_this.Helper2Contract.EmployeeId].FullName;
                 }
-                if (_this.Helper3) {
-                    _this.HelperNames += ',' + _this.Helper3.FullName;
+                if (_this.Helper3Contract) {
+                    _this.HelperNames += ',' + employeesById[_this.Helper3Contract.EmployeeId].FullName;
                 }
 
                 _this.Supervisor = employeesById[_this.SupervisorId];

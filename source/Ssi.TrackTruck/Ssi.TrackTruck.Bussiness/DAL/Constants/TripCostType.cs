@@ -5,14 +5,6 @@
     /// </summary>
     public enum TripCostType
     {
-        DriverSalary,
-        DriverAllowance,
-        Helper1Salary,
-        Helper1Allowance,
-        Helper2Salary,
-        Helper2Allowance,
-        Helper3Salary,
-        Helper3Allowance,
         Fuel,
         Toll,
         Parking,
