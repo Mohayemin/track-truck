@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -15,9 +16,14 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         [BsonRepresentation(BsonType.String)]
         public TripCostType CostType { get; set; }
         public double ExpectedCostInPeso { get; set; }
-        public double ActualCostInPeso { get; set; }
+        public double? ActualCostInPeso { get; set; }
         [BsonIgnore]
-        public double Adjustment { get; set; }
+        public double? Adjustment {
+            get
+            {
+                return ExpectedCostInPeso - ActualCostInPeso;
+            }
+        }
 
         public string Comment { get; set; }
 

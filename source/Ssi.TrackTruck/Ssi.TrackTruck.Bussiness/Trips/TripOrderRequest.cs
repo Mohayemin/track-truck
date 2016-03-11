@@ -26,7 +26,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public List<string> HelperIds { get; set; }
         public double HelperAllowance { get; set; }
         public double HelperSalary { get; set; }
-        
+
         [Required(ErrorMessage = "Please choose a truck")]
         public string TruckId { get; set; }
 
@@ -55,31 +55,47 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
         public DbTrip ToTrip()
         {
+            HelperIds = HelperIds.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
             var dbTrip = new DbTrip
             {
                 ClientId = ClientId,
                 PickupAddressId = PickupAddressId,
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
                 DriverId = DriverId,
-                HelperIds = HelperIds.Where(id => !string.IsNullOrWhiteSpace(id)).ToList(),
+                Helper1Id = HelperIds[0],
                 SupervisorId = SupervisorId,
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
-                Status = TripStatus.New,
-                Costs = new List<DbTripCost>
-                {
-                    new DbTripCost(TripCostType.DriverAllowance, DriverAllowance),
-                    new DbTripCost(TripCostType.DriverSalary, DriverSalary),
-                    new DbTripCost(TripCostType.HelperAllowance, HelperAllowance),
-                    new DbTripCost(TripCostType.HelperSalary, HelperSalary),
-                    new DbTripCost(TripCostType.Fuel, FuelCost),
-                    new DbTripCost(TripCostType.Parking, ParkingCost),
-                    new DbTripCost(TripCostType.Toll, TollCost),
-                    new DbTripCost(TripCostType.Barge, BargeCost),
-                    new DbTripCost(TripCostType.Bundle, BundleCost)
-                }
+                Status = TripStatus.New
             };
 
+            var costs = new List<DbTripCost>
+            {
+                new DbTripCost(TripCostType.DriverAllowance, DriverAllowance),
+                new DbTripCost(TripCostType.DriverSalary, DriverSalary),
+                new DbTripCost(TripCostType.Helper1Allowance, HelperAllowance),
+                new DbTripCost(TripCostType.Helper1Salary, HelperSalary),
+                new DbTripCost(TripCostType.Fuel, FuelCost),
+                new DbTripCost(TripCostType.Parking, ParkingCost),
+                new DbTripCost(TripCostType.Toll, TollCost),
+                new DbTripCost(TripCostType.Barge, BargeCost),
+                new DbTripCost(TripCostType.Bundle, BundleCost)
+            };
+            if (HelperIds.Count > 1)
+            {
+                dbTrip.Helper2Id = HelperIds[1];
+                costs.Add(new DbTripCost(TripCostType.Helper2Allowance, HelperAllowance));
+                costs.Add(new DbTripCost(TripCostType.Helper2Salary, HelperSalary));
+            }
+
+            if (HelperIds.Count > 2)
+            {
+                dbTrip.Helper3Id = HelperIds[2];
+                costs.Add(new DbTripCost(TripCostType.Helper3Allowance, HelperAllowance));
+                costs.Add(new DbTripCost(TripCostType.Helper3Salary, HelperSalary));
+            }
+
+            dbTrip.Costs = costs.OrderBy(cost => cost.CostType).ToList();
 
             return dbTrip;
         }

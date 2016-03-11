@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
@@ -28,11 +29,38 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         [BsonRepresentation(BsonType.ObjectId)]
         public string DriverId { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
-        public List<string> HelperIds { get; set; }
+        public string Helper1Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Helper2Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Helper3Id { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string SupervisorId { get; set; }
 
-        public IList<DbTripCost> Costs { get; set; }
+        public List<DbTripCost> Costs { get; set; }
+
+        private DbTripCost _totalCost;
+
+        [BsonIgnore]
+        public DbTripCost TotalCost {
+            get
+            {
+                if (_totalCost == null)
+                {
+                    double? actualCost = null;
+                    if (Costs.Any(cost => cost.ActualCostInPeso != null))
+                    {
+                        actualCost = Costs.Sum(cost => cost.ActualCostInPeso);
+                    }
+                    _totalCost = new DbTripCost
+                    {
+                        ExpectedCostInPeso = Costs.Sum(cost => cost.ExpectedCostInPeso),
+                        ActualCostInPeso = actualCost
+                    };
+                }
+                return _totalCost;
+            }
+        }
 
         public DbTrip()
         {

@@ -27,7 +27,7 @@
             _this.DeliveredNumberOfDrops = collection.count(_this.Drops, 'IsDelivered', true);
 
             _this.Client = {};
-            
+
             clientService.get(_this.ClientId).then(function (client) {
                 _this.Client = client;
                 _this.PickupAddress = _.find(_this.Client.Addresses, { Id: _this.PickupAddressId });
@@ -41,16 +41,19 @@
             });
 
             _this.Driver = {};
-            _this.Helpers = [];
             employeeService.getIndexedEmployees().then(function (employeesById) {
                 _this.Driver = employeesById[_this.DriverId];
-                _this.Helpers = _this.HelperIds.map(function (hid) {
-                    return employeesById[hid];
-                });
+                _this.Helper1 = employeesById[_this.Helper1Id];
+                _this.Helper2 = employeesById[_this.Helper2Id];
+                _this.Helper3 = employeesById[_this.Helper3Id];
 
-                _this.HelperNames = _this.Helpers.map(function(helper) {
-                    return helper.FullName;
-                }).join(', ');
+                _this.HelperNames = _this.Helper1.FullName;
+                if (_this.Helper2) {
+                    _this.HelperNames += ',' + _this.Helper2.FullName;
+                }
+                if (_this.Helper3) {
+                    _this.HelperNames += ',' + _this.Helper3.FullName;
+                }
 
                 _this.Supervisor = employeesById[_this.SupervisorId];
             });
