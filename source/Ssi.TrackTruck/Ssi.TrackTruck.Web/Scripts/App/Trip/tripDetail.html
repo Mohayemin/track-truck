@@ -20,13 +20,36 @@
                     <dd ng-bind="trip.ExpectedPickupTimeUtc | philDate"></dd>
                     <dt>Truck</dt>
                     <dd ng-bind="trip.Truck.RegistrationNumber"></dd>
-                    <dt>Driver</dt>
-                    <dd ng-bind="trip.Driver.FullName"></dd>
-                    <dt>Helper(s)</dt>
-                    <dd ng-bind="trip.HelperNames"></dd>
-                    <dt>Supervisor</dt>
-                    <dd ng-bind="trip.Supervisor.FullName"></dd>
                 </dl>
+            </div>
+
+            <div class="col-sm-6">
+                <table class="table table-bordered table-condensed table-responsive">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Salary</th>
+                            <th>Allowance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="contract in trip.Contracts">
+                            <td>
+                                {{contract.Employee.Designation}}
+                            </td>
+                            <td>
+                                {{contract.Employee.FullName}}
+                            </td>
+                            <td>
+                                {{contract.SalaryInPeso | peso}}
+                            </td>
+                            <td>
+                                {{contract.AllowanceInPeso | peso}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="col-sm-6">

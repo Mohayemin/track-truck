@@ -113,7 +113,7 @@
                     <td ng-bind="trip.TotalNumberOfBoxes"></td>
                     <td ng-bind="trip.DeliveredNumberOfBoxes"></td>
                     <td ng-bind="trip.RejectedNumberOfBoxes" ng-class="{'error': 'trip.RejectedNumberOfBoxes>0'}"></td>
-                    <td ng-bind="trip.Driver.FullName"></td>
+                    <td ng-bind="trip.DriverContract.Employee.FullName"></td>
                     <td ng-bind="trip.HelperNames"></td>
                     <td ng-bind="trip.Truck.RegistrationNumber"></td>
                 </tr>

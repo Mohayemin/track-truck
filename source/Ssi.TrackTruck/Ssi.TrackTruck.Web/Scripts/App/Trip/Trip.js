@@ -15,6 +15,11 @@
         tripStatus,
         truckService
         ) {
+
+        function setContractEmployee(contract, employeeIndex) {
+            contract.Employee = employeeIndex[contract.EmployeeId];
+        }
+
         function Trip(dbTrip, dbDrops) {
             var _this = this;
             angular.extend(_this, dbTrip);
@@ -42,18 +47,25 @@
 
             _this.Driver = {};
             employeeService.getIndexedEmployees().then(function (employeesById) {
-                _this.Driver = employeesById[_this.DriverContract.EmployeeId];
+                setContractEmployee(_this.DriverContract, employeesById);
+                setContractEmployee(_this.Helper1Contract, employeesById);
+
+                _this.Contracts = [_this.DriverContract, _this.Helper1Contract];
 
                 _this.HelperNames = employeesById[_this.Helper1Contract.EmployeeId].FullName;
-
                 if (_this.Helper2Contract) {
+                    setContractEmployee(_this.Helper2Contract, employeesById);
                     _this.HelperNames += ',' + employeesById[_this.Helper2Contract.EmployeeId].FullName;
+                    _this.Contracts.push(_this.Helper2Contract);
                 }
                 if (_this.Helper3Contract) {
+                    setContractEmployee(_this.Helper3Contract, employeesById);
                     _this.HelperNames += ',' + employeesById[_this.Helper3Contract.EmployeeId].FullName;
+                    _this.Contracts.push(_this.Helper3Contract);
                 }
 
-                _this.Supervisor = employeesById[_this.SupervisorContract.EmployeeId];
+                setContractEmployee(_this.SupervisorContract, employeesById);
+                _this.Contracts.push(_this.SupervisorContract);
             });
 
             _this.Truck = {};

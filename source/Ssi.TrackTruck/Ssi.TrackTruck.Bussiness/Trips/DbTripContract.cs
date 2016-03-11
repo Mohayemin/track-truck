@@ -7,18 +7,18 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string EmployeeId { get; set; }
-        public double Salary { get; set; }
-        public double Allowance { get; set; }
+        public double SalaryInPeso { get; set; }
+        public double AllowanceInPeso { get; set; }
 
         public DbTripContract()
         {
         }
 
-        public DbTripContract(string employeeId, double salary, double allowance)
+        public DbTripContract(string employeeId, double salaryInPeso, double allowanceInPeso)
         {
             EmployeeId = employeeId;
-            Salary = salary;
-            Allowance = allowance;
+            SalaryInPeso = salaryInPeso;
+            AllowanceInPeso = allowanceInPeso;
         }
     }
 }
