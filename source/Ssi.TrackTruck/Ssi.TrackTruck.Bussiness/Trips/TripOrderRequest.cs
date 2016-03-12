@@ -62,7 +62,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 PickupAddressId = PickupAddressId,
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
                 DriverContract = new DbTripContract(DriverId, DriverSalary, DriverAllowance),
-                Helper1Contract = new DbTripContract(HelperIds[0], HelperSalary, HelperAllowance),
+                HelperContracts = HelperIds.Select(hid => new DbTripContract(hid, HelperSalary, HelperAllowance)).ToList(),
                 SupervisorContract = new DbTripContract(SupervisorId, 0, 0),
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
@@ -76,17 +76,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                     new DbTripCost(TripCostType.Bundle, BundleCost)
                 }
             };
-
-            if (HelperIds.Count > 1)
-            {
-                dbTrip.Helper2Contract = new DbTripContract(HelperIds[1], HelperSalary, HelperAllowance);
-            }
-
-            if (HelperIds.Count > 2)
-            {
-                dbTrip.Helper3Contract = new DbTripContract(HelperIds[2], HelperSalary, HelperAllowance);
-            }
-
 
             return dbTrip;
         }

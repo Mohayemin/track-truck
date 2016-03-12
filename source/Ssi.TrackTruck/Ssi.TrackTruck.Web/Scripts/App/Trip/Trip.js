@@ -16,8 +16,9 @@
         truckService
         ) {
 
-        function setContractEmployee(contract, employeeIndex) {
+        function setContractEmployee(contract, employeeIndex, contracts) {
             contract.Employee = employeeIndex[contract.EmployeeId];
+            contracts.push(contract);
         }
 
         function Trip(dbTrip, dbDrops) {
@@ -47,25 +48,18 @@
 
             _this.Driver = {};
             employeeService.getIndexedEmployees().then(function (employeesById) {
-                setContractEmployee(_this.DriverContract, employeesById);
-                setContractEmployee(_this.Helper1Contract, employeesById);
+                _this.Contracts = [];
 
-                _this.Contracts = [_this.DriverContract, _this.Helper1Contract];
+                setContractEmployee(_this.DriverContract, employeesById, _this.Contracts);
+                _this.HelperContracts.forEach(function(helperContract) {
+                    setContractEmployee(helperContract, employeesById, _this.Contracts);
+                });
 
-                _this.HelperNames = employeesById[_this.Helper1Contract.EmployeeId].FullName;
-                if (_this.Helper2Contract) {
-                    setContractEmployee(_this.Helper2Contract, employeesById);
-                    _this.HelperNames += ',' + employeesById[_this.Helper2Contract.EmployeeId].FullName;
-                    _this.Contracts.push(_this.Helper2Contract);
-                }
-                if (_this.Helper3Contract) {
-                    setContractEmployee(_this.Helper3Contract, employeesById);
-                    _this.HelperNames += ',' + employeesById[_this.Helper3Contract.EmployeeId].FullName;
-                    _this.Contracts.push(_this.Helper3Contract);
-                }
+                _this.HelperNames = _this.HelperContracts.map(function(helperContract) {
+                    return helperContract.Employee.FullName;
+                }).join(', ');
 
-                setContractEmployee(_this.SupervisorContract, employeesById);
-                _this.Contracts.push(_this.SupervisorContract);
+                setContractEmployee(_this.SupervisorContract, employeesById, _this.Contracts);
             });
 
             _this.Truck = {};

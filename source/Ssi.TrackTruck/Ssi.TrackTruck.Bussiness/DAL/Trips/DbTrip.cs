@@ -29,9 +29,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string TruckId { get; set; }
 
         public DbTripContract DriverContract { get; set; }
-        public DbTripContract Helper1Contract { get; set; }
-        public DbTripContract Helper2Contract { get; set; }
-        public DbTripContract Helper3Contract { get; set; }
+        public List<DbTripContract> HelperContracts { get; set; }
+        
         public DbTripContract SupervisorContract { get; set; }
 
         public List<DbTripCost> Costs { get; set; }

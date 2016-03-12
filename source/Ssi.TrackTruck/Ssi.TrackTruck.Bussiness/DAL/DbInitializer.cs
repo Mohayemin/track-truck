@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -57,9 +58,10 @@ namespace Ssi.TrackTruck.Bussiness.DAL
             BuildIndex<DbTrip>(
                 trip => trip.ClientId,
                 trip => trip.DriverContract.EmployeeId,
-                trip => trip.Helper1Contract.EmployeeId,
-                trip => trip.Helper2Contract.EmployeeId,
-                trip => trip.Helper3Contract.EmployeeId,
+                trip => trip.HelperContracts[0].EmployeeId,
+                trip => trip.HelperContracts[1].EmployeeId,
+                trip => trip.HelperContracts[2].EmployeeId,
+                trip => trip.SupervisorContract.EmployeeId,
                 trip => trip.Status);
         }
 
