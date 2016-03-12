@@ -26,9 +26,11 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         {
             var trip = orderRequest.ToTrip();
             var drops = orderRequest.Drops.Select(request => request.ToDrop(trip.Id));
+            var contracts = orderRequest.ToContracts(trip.Id);
 
             _repository.Create(trip);
             _repository.CreateAll(drops);
+            _repository.CreateAll(contracts);
 
             return trip;
         }
@@ -44,16 +46,30 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
 
             var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
-            var drops = _tripRepository.GetDropsOfTrips(trips.Select(trip => trip.Id));
+            
+            var tripResponses = GetTripResponses(trips);
 
             return new TripReportResponse
             {
                 FromDate = fromDate,
                 ToDate = toDate,
-                Trips = trips,
-                Drops = drops
+                Trips = tripResponses
             };
         }
+
+        private IEnumerable<TripResponse> GetTripResponses(IQueryable<DbTrip> trips)
+        {
+            var tripIds = trips.Select(trip => trip.Id).ToList();
+
+            var drops = _tripRepository.GetIndexedDrops(tripIds);
+            var contracts = _tripRepository.GetIndexedContracts(tripIds);
+
+            foreach (var dbTrip in trips)
+            {
+                yield return new TripResponse(dbTrip, drops[dbTrip.Id], contracts[dbTrip.Id]);
+            }
+        }
+
 
         public TripResponse Get(string id)
         {
@@ -61,7 +77,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             if (trip != null)
             {
                 var drops = _repository.GetWhere<DbTripDrop>(drop => drop.TripId == trip.Id);
-                return new TripResponse { Trip = trip, Drops = drops };
+                var contracts = _repository.GetWhere<DbTripContract>(contract => contract.TripId == trip.Id);
+                return new TripResponse(trip, drops, contracts);
             }
 
             return null;
@@ -75,15 +92,13 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
             var tripIds = trips.Select(trip => trip.Id);
 
-            var tripMap = trips.ToDictionary(trip => trip.Id, trip => trip);
+            var dropIndex = _repository.WhereIn<DbTripDrop, string>(drop => drop.TripId, tripIds)
+                .GroupBy(drop => drop.TripId).ToDictionary(g => g.Key, g => g.ToList());
 
-            var allDrops = _repository.WhereIn<DbTripDrop, string>(drop => drop.TripId, tripIds)
-                .GroupBy(drop => drop.TripId);
+            var contractIndex = _repository.WhereIn<DbTripContract, string>(contract => contract.TripId, tripIds)
+                .GroupBy(contract => contract.TripId).ToDictionary(g => g.Key, g => g.ToList());
 
-            foreach (var dropGroup in allDrops)
-            {
-                yield return new TripResponse { Drops = dropGroup, Trip = tripMap[dropGroup.Key] };
-            }
+            return trips.Select(trip => new TripResponse(trip, dropIndex[trip.Id], contractIndex[trip.Id]));
         }
 
         public void UpdateStatus(string tripId, TripStatus status)
@@ -136,15 +151,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             var trip = _repository.GetById<DbTrip>(drop.TripId);
             var thisTripDrops = _repository.GetWhere<DbTripDrop>(d => d.TripId == drop.TripId);
             var notAllDelivered = thisTripDrops.Any(d => !d.IsDelivered);
-            TripStatus newStatus;
-            if (notAllDelivered)
-            {
-                newStatus = TripStatus.InProgress;
-            }
-            else
-            {
-                newStatus = TripStatus.Delivered;
-            }
+            var newStatus = notAllDelivered ? TripStatus.InProgress : TripStatus.Delivered;
             if (newStatus != trip.Status)
             {
                 trip.Status = newStatus;

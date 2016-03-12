@@ -54,9 +54,9 @@
                 });
             },
             getActiveTrips: function () {
-                return repository.get('Trip', 'GetActiveTrips').then(function (trips) {
-                    return trips.map(function (trip) {
-                        return new Trip(trip.Trip, trip.Drops);
+                return repository.get('Trip', 'GetActiveTrips').then(function (tripResponses) {
+                    return tripResponses.map(function (trip) {
+                        return new Trip(trip);
                     });
                 });
             },
@@ -85,9 +85,8 @@
             },
             getReport: function (filter) {
                 return repository.post('Trip', 'Report', filter).then(function (report) {
-                    var trips = report.Trips.map(function (dbTrip) {
-                        var drops = _.where(report.Drops, { TripId: dbTrip.Id });
-                        return new Trip(dbTrip, drops);
+                    var trips = report.Trips.map(function (tripResponse) {
+                        return new Trip(tripResponse);
                     });
 
                     return trips;
