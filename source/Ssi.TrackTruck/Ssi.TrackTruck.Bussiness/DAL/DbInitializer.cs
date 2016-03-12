@@ -44,7 +44,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 CreatorId = null
             };
 
-            _db.GetCollection(_mapper.Map(typeof (DbUser))).Save(admin);
+            _db.GetCollection(_mapper.Map(typeof(DbUser))).Save(admin);
         }
 
         public void BuildIndexes()
@@ -57,19 +57,17 @@ namespace Ssi.TrackTruck.Bussiness.DAL
 
             BuildIndex<DbTrip>(
                 trip => trip.ClientId,
-                trip => trip.DriverContract.EmployeeId,
-                trip => trip.HelperContracts[0].EmployeeId,
-                trip => trip.HelperContracts[1].EmployeeId,
-                trip => trip.HelperContracts[2].EmployeeId,
-                trip => trip.SupervisorContract.EmployeeId,
                 trip => trip.Status);
+
+            BuildIndex<DbTripDrop>(drop => drop.TripId);
+            BuildIndex<DbTripContract>(contract => contract.TripId);
         }
 
         private void BuildIndex<T>(params Expression<Func<T, object>>[] indexes)
         {
             foreach (var index in indexes)
             {
-                var collectionName = _mapper.Map(typeof (T));
+                var collectionName = _mapper.Map(typeof(T));
                 _db.GetCollection<T>(collectionName).CreateIndex(IndexKeys<T>.Ascending(index));
             }
         }

@@ -16,18 +16,19 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
     public class TripMongoRepository : ITripRepository
     {
+        private readonly MongoRepository _repository;
         private readonly MongoCollection<DbTrip> _trips;
         private readonly MongoCollection<DbTripDrop> _drops;
-        private readonly MongoCollection<DbClient> _clients;
+        private readonly MongoCollection<DbTripContract> _contracts;
 
         public static TripStatus[] ActiveTripStatuses = { TripStatus.New, TripStatus.InProgress };
 
         public TripMongoRepository(MongoRepository repository)
         {
-            MongoRepository repository1 = repository;
-            _trips = repository1.Collection<DbTrip>();
-            _drops = repository1.Collection<DbTripDrop>();
-            _clients = repository1.Collection<DbClient>();
+            _repository = repository;
+            _trips = repository.Collection<DbTrip>();
+            _drops = repository.Collection<DbTripDrop>();
+            _contracts = repository.Collection<DbTripContract>();
         }
 
         public IQueryable<DbTrip> GetTripsInRange(DateTime fromUtc, DateTime toUtc)
@@ -38,10 +39,19 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return trips;
         }
 
-        public IQueryable<DbTripDrop> GetDropsOfTrips(IEnumerable<string> tripIds)
+        public IDictionary<string, IEnumerable<DbTripDrop>> GetIndexedDrops(IEnumerable<string> tripIds)
         {
-            return _drops.Find(Query<DbTripDrop>.In(drop => drop.TripId, tripIds)).AsQueryable();
-        } 
+            return _repository.WhereIn<DbTripDrop, string>(contract => contract.TripId, tripIds)
+                .GroupBy(contract => contract.TripId)
+                .ToDictionary(g => g.Key, g => g.AsEnumerable());
+        }
+
+        public IDictionary<string, IEnumerable<DbTripContract>> GetIndexedContracts(IEnumerable<string> tripIds)
+        {
+            return _repository.WhereIn<DbTripContract, string>(contract => contract.TripId, tripIds)
+                .GroupBy(contract => contract.TripId)
+                .ToDictionary(g => g.Key, g => g.AsEnumerable());
+        }
 
         public DbTripDrop GetDrop(string dropId)
         {

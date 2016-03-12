@@ -55,15 +55,12 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
         public DbTrip ToTrip()
         {
-            HelperIds = HelperIds.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
             var dbTrip = new DbTrip
             {
                 ClientId = ClientId,
                 PickupAddressId = PickupAddressId,
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
-                DriverContract = new DbTripContract(DriverId, DriverSalary, DriverAllowance),
-                HelperContracts = HelperIds.Select(hid => new DbTripContract(hid, HelperSalary, HelperAllowance)).ToList(),
-                SupervisorContract = new DbTripContract(SupervisorId, 0, 0),
+                
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
                 Status = TripStatus.New,
@@ -80,5 +77,18 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return dbTrip;
         }
 
+
+        public IEnumerable<DbTripContract> ToContracts(string tripId)
+        {
+            yield return new DbTripContract(tripId, DriverId, DriverSalary, DriverAllowance);
+
+            HelperIds = HelperIds.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+            foreach (var helperId in HelperIds.Where(helperId => !string.IsNullOrWhiteSpace(helperId)))
+            {
+                yield return new DbTripContract(tripId, helperId, HelperSalary, HelperAllowance);
+            }
+
+            yield return new DbTripContract(tripId, SupervisorId, 0, 0);
+        }
     }
 }

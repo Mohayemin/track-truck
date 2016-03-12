@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Entities;
-using Ssi.TrackTruck.Bussiness.Trips;
 
 namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
@@ -27,11 +26,6 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
-
-        public DbTripContract DriverContract { get; set; }
-        public List<DbTripContract> HelperContracts { get; set; }
-        
-        public DbTripContract SupervisorContract { get; set; }
 
         public List<DbTripCost> Costs { get; set; }
 
