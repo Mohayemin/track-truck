@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Ssi.TrackTruck.Bussiness.Trips
+namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 {
     public class DbTripContract
     {
