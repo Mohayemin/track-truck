@@ -26,7 +26,10 @@
         });
 
         $scope.save = function () {
-            tripService.saveAdjustment($scope.trip, $scope.costs);
+            globalMessage.info('saving cost adjustments...');
+            tripService.saveAdjustment($scope.trip, $scope.costs).then(function() {
+                globalMessage.success('saved');
+            });
         };
 
         $scope.addNewCost = function () {
