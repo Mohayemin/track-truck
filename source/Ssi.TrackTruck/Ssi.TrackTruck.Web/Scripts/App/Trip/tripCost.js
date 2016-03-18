@@ -5,7 +5,7 @@
         }
 
         TripCost.prototype.getAdjustment = function() {
-            return this.ExpectedCostInPeso - this.ActualCostInPeso;
+            return this.AdjustmentInPeso = this.ExpectedCostInPeso - this.ActualCostInPeso;
         };
 
         return TripCost;
