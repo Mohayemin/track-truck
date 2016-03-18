@@ -2,6 +2,7 @@
     <page-title>
         <h4>
             Ticket Number: <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
+            <status-label status="trip.StatusObject"></status-label>
         </h4>
     </page-title>
 
