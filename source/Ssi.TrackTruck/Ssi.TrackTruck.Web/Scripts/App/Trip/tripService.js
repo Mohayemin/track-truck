@@ -93,9 +93,11 @@
                 });
             },
             get: function (tripId) {
-                return repository.get('Trip', 'Get', { id: tripId });
+                return repository.get('Trip', 'Get', { id: tripId }).then(function(response) {
+                    return new Trip(response);
+                });
             },
-            saveAdjustment: function (trip) {
+            saveAdjustment: function (trip, costs) {
                 return repository.post('trip', 'SaveAdjustments', {
                     tripId: trip.Id,
                     Adjustments: trip.Adjustments
