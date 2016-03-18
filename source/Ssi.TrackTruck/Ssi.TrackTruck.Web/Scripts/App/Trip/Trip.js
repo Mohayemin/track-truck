@@ -5,6 +5,7 @@
     'employeeService',
     'userService',
     'tripStatus',
+    'TripCost',
     'truckService',
     function (
         _,
@@ -13,21 +14,24 @@
         employeeService,
         userService,
         tripStatus,
+        TripCost,
         truckService
         ) {
-        function Trip(dbTrip, dbDrops) {
+        
+        function Trip(tripResponse) {
             var _this = this;
-            angular.extend(_this, dbTrip);
-            _this.Drops = dbDrops;
+            angular.extend(_this, tripResponse.Trip);
+            _this.Drops = tripResponse.Drops;
+            _this.Contracts = tripResponse.Contracts;
             _this.StatusObject = tripStatus[_this.Status];
             _this.TotalNumberOfBoxes = collection.sum(_this.Drops, 'TotalBoxes');
             _this.RejectedNumberOfBoxes = collection.sum(_this.Drops, 'TotalRejectedBoxes');
             _this.DeliveredNumberOfBoxes = collection.sum(_this.Drops, 'TotalDeliveredBoxes');
-            _this.TotalNumberOfDrops = dbDrops.length;
+            _this.TotalNumberOfDrops = _this.Drops.length;
             _this.DeliveredNumberOfDrops = collection.count(_this.Drops, 'IsDelivered', true);
 
             _this.Client = {};
-            
+
             clientService.get(_this.ClientId).then(function (client) {
                 _this.Client = client;
                 _this.PickupAddress = _.find(_this.Client.Addresses, { Id: _this.PickupAddressId });
@@ -40,24 +44,19 @@
                 });
             });
 
-            _this.Driver = {};
-            _this.Helpers = [];
             employeeService.getIndexedEmployees().then(function (employeesById) {
-                _this.Driver = employeesById[_this.DriverId];
-                _this.Helpers = _this.HelperIds.map(function (hid) {
-                    return employeesById[hid];
+                _this.Contracts.forEach(function (contract) {
+                    contract.Employee = employeesById[contract.EmployeeId];
                 });
-
-                _this.HelperNames = _this.Helpers.map(function(helper) {
-                    return helper.FullName;
-                }).join(', ');
-
-                _this.Supervisor = employeesById[_this.SupervisorId];
             });
 
             _this.Truck = {};
             truckService.get(_this.TruckId).then(function (truck) {
                 _this.Truck = truck;
+            });
+
+            _this.Costs = this.Costs.map(function(cost) {
+                return new TripCost(cost);
             });
 
             _this.AllDropsDelivered = _this.TotalNumberOfDrops == _this.DeliveredNumberOfDrops;

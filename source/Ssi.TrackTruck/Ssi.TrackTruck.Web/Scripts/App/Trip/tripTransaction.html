@@ -17,7 +17,7 @@
                 <label class="btn "
                        ng-class="'btn-' + statusButtonClass(status)"
                        ng-model="filter.Status[status.id]"
-                       btn-checkbox="status.id"
+                       uib-btn-checkbox="status.id"
                        ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
                     {{status.text}}
                 </label>
@@ -26,11 +26,11 @@
 
     </form>
     <hr />
-    <accordion close-others="false">
+    <uib-accordion close-others="false">
 
-        <accordion-group ng-repeat="trip in trips"
+        <uib-accordion-group ng-repeat="trip in trips"
                          is-open="trip.accordionOpen" class="animate-out-right" ng-show="trip.show && trip.Status != tripStatus.Archived.id">
-            <accordion-heading>
+            <uib-accordion-heading>
                 <div class="row">
                     <div class="col-md-3">
                         <dl class="dl-horizontal">
@@ -48,10 +48,6 @@
                         <dl class="dl-horizontal">
                             <dt>Truck</dt>
                             <dd>{{trip.Truck.RegistrationNumber}}</dd>
-                            <dt>Driver</dt>
-                            <dd>{{trip.Driver.FullName}}</dd>
-                            <dt>Helpers</dt>
-                            <dd>{{trip.HelperNames}}</dd>
                         </dl>
                     </div>
                     <div class="col-md-4">
@@ -63,7 +59,7 @@
                         </dl>
                     </div>
                 </div>
-            </accordion-heading>
+            </uib-accordion-heading>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -92,8 +88,8 @@
                     <ng-include src="'Scripts/App/Trip/salaryAdjustment.html'"></ng-include>
                 </div>
             </div>
-        </accordion-group>
-    </accordion>
+        </uib-accordion-group>
+    </uib-accordion>
 
 </div>
 

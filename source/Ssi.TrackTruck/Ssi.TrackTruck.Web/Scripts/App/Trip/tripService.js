@@ -54,9 +54,9 @@
                 });
             },
             getActiveTrips: function () {
-                return repository.get('Trip', 'GetActiveTrips').then(function (trips) {
-                    return trips.map(function (trip) {
-                        return new Trip(trip.Trip, trip.Drops);
+                return repository.get('Trip', 'GetActiveTrips').then(function (tripResponses) {
+                    return tripResponses.map(function (trip) {
+                        return new Trip(trip);
                     });
                 });
             },
@@ -85,21 +85,25 @@
             },
             getReport: function (filter) {
                 return repository.post('Trip', 'Report', filter).then(function (report) {
-                    var trips = report.Trips.map(function (dbTrip) {
-                        var drops = _.where(report.Drops, { TripId: dbTrip.Id });
-                        return new Trip(dbTrip, drops);
+                    var trips = report.Trips.map(function (tripResponse) {
+                        return new Trip(tripResponse);
                     });
 
                     return trips;
                 });
             },
             get: function (tripId) {
-                return repository.get('Trip', 'Get', { id: tripId });
+                return repository.get('Trip', 'Get', { id: tripId }).then(function(response) {
+                    return new Trip(response);
+                });
             },
-            saveAdjustment: function (trip) {
+            saveAdjustment: function (trip, costs) {
                 return repository.post('trip', 'SaveAdjustments', {
                     tripId: trip.Id,
-                    Adjustments: trip.Adjustments
+                    Adjustments: costs
+                }).then(function (result) {
+                    trip.Costs = costs;
+                    return result;
                 });
             },
             archive: function(trip) {

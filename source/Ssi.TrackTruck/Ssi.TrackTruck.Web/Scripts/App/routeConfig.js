@@ -57,13 +57,14 @@
         $routeProvider
             .when('/', {
                 title: 'Home',
-                templateUrl: urlProvider.template('', 'home'),
+                templateUrl: urlProvider.template('', 'home')
             })
             .when('/client/:id', defaultRoute('client', 'clientDetail', 'clientdetail', 'Client Detail'))
             .when('/trip/order', defaultRoute('trip', 'orderTrip', 'triporder', 'Order a Trip'))
             .when('/trip/transactions', defaultRoute('trip', 'tripTransaction', 'triptransactions', 'Upcoming Transactions'))
             .when('/trip/report', defaultRoute('trip', 'tripReport', 'tripreport', 'Trip Report'))
             .when('/trip/:id', defaultRoute('trip', 'tripDetail', 'tripdetail', 'Trip Detail'))
+            .when('/trip/:id/adjustment', defaultRoute('trip', 'costAdjustment', 'costadjustment', 'Cost Adjustment'))
             .when('/auth/changepassword', defaultRoute('auth', 'changePassword', 'changepassword', 'Change Password'))
             .when('/attendance/report', defaultRoute('attendance', 'attendanceReport', 'attendancereport', 'Attendance Report'))
             .when('/salary/report', defaultRoute('employee', 'employeeSalaryReport', 'employeeSalaryReport', 'Salary Report'))

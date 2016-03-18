@@ -1,0 +1,71 @@
+﻿<div>
+    <page-title>
+        <h4>
+            Ticket Number: <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
+            <status-label status="trip.StatusObject"></status-label>
+        </h4>
+    </page-title>
+
+    <table class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th class="col-sm-1 ">Cost type</th>
+                <th class="col-sm-1 ">Expected cost</th>
+                <th class="col-sm-2 col-xs-6">Actual cost</th>
+                <th class="col-sm-1 ">Adjustment</th>
+                <th class="col-sm-7 col-xs-6">Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cost in costs">
+                <td>
+                    {{cost.CostType}}
+                </td>
+                <td>
+                    {{cost.ExpectedCostInPeso | peso}}
+                </td>
+                <td>
+                    <input class="form-control input-sm"
+                           type="number"
+                           ng-model="cost.ActualCostInPeso"
+                           ng-change="recalculateTotal()"
+                           required />
+                </td>
+                <td>
+                    {{cost.getAdjustment() | peso}}
+                </td>
+                <td>
+                    <input class="form-control input-sm" type="text" ng-model="cost.Comment" required />
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th>
+                    Total
+                </th>
+                <th>
+                    {{total.ExpectedCostInPeso | peso}}
+                </th>
+                <th>
+                    {{total.ActualCostInPeso | peso}}
+                </th>
+                <th>
+                    {{total.getAdjustment() | peso}}
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <button type="button" class="btn btn-primary btn-xs" ng-click="addNewCost()">
+        <i class="fa fa-plus"></i>
+        Cost
+    </button>
+    <button type="button" class="btn btn-success btn-xs" ng-click="save()">
+        <i class="fa fa-save"></i>
+        Save
+    </button>
+</div>
+

@@ -68,8 +68,8 @@ namespace Ssi.TrackTruck.Web.Controllers
         }
 
         [HttpPost]
-        [AllowedRoles(Role.Admin, Role.Admin)]
-        public ActionResult SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
+        [AllowedRoles(Role.Admin, Role.Encoder)]
+        public ActionResult SaveAdjustments(string tripId, List<CostAdjustment> adjustments)
         {
             var response = _tripService.SaveAdjustments(tripId, adjustments);
             return new JsonNetResult(response);

@@ -21,6 +21,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL
                 {typeof(DbUser), "users"},
                 {typeof(DbTrip), "trips"},
                 {typeof(DbTripDrop), "tripDrops"},
+                {typeof(DbTripContract), "tripContracts"},
                 {typeof(DbDailyHit), "dailyHit"},
                 {typeof(DbDeletedBranch), "deleted_clientBranch"},
                 {typeof(DbDeletedAddress), "deleted_clientAddress"}

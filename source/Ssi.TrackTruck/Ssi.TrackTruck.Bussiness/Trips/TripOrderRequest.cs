@@ -26,7 +26,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         public List<string> HelperIds { get; set; }
         public double HelperAllowance { get; set; }
         public double HelperSalary { get; set; }
-        
+
         [Required(ErrorMessage = "Please choose a truck")]
         public string TruckId { get; set; }
 
@@ -55,28 +55,40 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
         public DbTrip ToTrip()
         {
-            return new DbTrip
+            var dbTrip = new DbTrip
             {
                 ClientId = ClientId,
                 PickupAddressId = PickupAddressId,
                 ExpectedPickupTimeUtc = ExpectedPickupTime.PhilippinesToUtc(),
-                DriverId = DriverId,
-                DriverAllowanceInPeso = DriverAllowance,
-                DriverSalaryInPeso = DriverSalary,
-                HelperIds = HelperIds.Where(id => !string.IsNullOrWhiteSpace(id)).ToList(),
-                HelperAllowanceInPeso = HelperAllowance,
-                HelperSalaryInPeso = HelperSalary,
-                SupervisorId = SupervisorId,
-                FuelCostInPeso = FuelCost,
-                ParkingCostInPeso = ParkingCost,
-                TollCostInPeso = TollCost,
-                BargeCostInPeso = BargeCost,
-                BundleCostInPeso = BundleCost,
+                
                 TripTicketNumber = TripTicketNumber,
                 TruckId = TruckId,
-                Status = TripStatus.New
+                Status = TripStatus.New,
+                Costs = new List<DbTripCost>
+                {
+                    new DbTripCost(TripCostType.Fuel, FuelCost),
+                    new DbTripCost(TripCostType.Parking, ParkingCost),
+                    new DbTripCost(TripCostType.Toll, TollCost),
+                    new DbTripCost(TripCostType.Barge, BargeCost),
+                    new DbTripCost(TripCostType.Bundle, BundleCost)
+                }
             };
+
+            return dbTrip;
         }
 
+
+        public IEnumerable<DbTripContract> ToContracts(string tripId)
+        {
+            yield return new DbTripContract(tripId, DriverId, DriverSalary, DriverAllowance);
+
+            HelperIds = HelperIds.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+            foreach (var helperId in HelperIds.Where(helperId => !string.IsNullOrWhiteSpace(helperId)))
+            {
+                yield return new DbTripContract(tripId, helperId, HelperSalary, HelperAllowance);
+            }
+
+            yield return new DbTripContract(tripId, SupervisorId, 0, 0);
+        }
     }
 }
