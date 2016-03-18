@@ -92,21 +92,5 @@
             });
         };
 
-        $scope.addNewAdjustment = function (trip) {
-            trip.Adjustments = trip.Adjustments || [];
-            trip.Adjustments.push({});
-        };
-
-        $scope.saveAdjustment = function (trip) {
-            tripService.saveAdjustment(trip).then(function(response) {
-                globalMessage.success(response.Message);
-            }).catch(function (response) {
-                globalMessage.error(response.Message);
-            });
-        };
-
-        $scope.deleteAdjustment = function(trip, adjustmentIndex) {
-            trip.Adjustments.splice(adjustmentIndex, 1);
-        };
     }
 ]);
