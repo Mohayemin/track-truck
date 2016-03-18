@@ -40,16 +40,16 @@
                 });
             },
             getSalaryReport: function (filter) {
-                return repository.post('Employee', 'SalaryReport', filter).then(function (response) {
-                    var employees = response.EmployeeSalaries;
+                return repository.post('Employee', 'SalaryReport', filter).then(function (employeeSalaries) {
                     var total = {
-                        Allowance: collection.sum(employees, 'TotalAllowance'),
-                        Salary: collection.sum(employees, 'TotalSalary'),
-                        Adjustment: collection.sum(employees, 'TotalAdjustment'),
-                        Payable: collection.sum(employees, 'TotalPayable'),
+                        Allowance: collection.sum(employeeSalaries, 'TotalAllowance'),
+                        Salary: collection.sum(employeeSalaries, 'TotalSalary'),
+                        Adjustment: collection.sum(employeeSalaries, 'TotalAdjustment'),
+                        Payable: collection.sum(employeeSalaries, 'TotalPayable'),
+                        NumberOfTrips: collection.sum(employeeSalaries, 'NumberOfTrips')
                     }
                     return {
-                        employees: employees,
+                        employees: employeeSalaries,
                         total: total
                     };
                 });

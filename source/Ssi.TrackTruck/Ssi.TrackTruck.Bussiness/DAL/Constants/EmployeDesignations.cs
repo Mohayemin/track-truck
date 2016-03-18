@@ -7,5 +7,6 @@
         public static string Supervisor = "supervisor";
 
         public static string[] All = { Driver, Helper, Supervisor };
+        public static string[] DriverHelper = { Driver, Helper };
     }
 }
