@@ -185,6 +185,7 @@
     <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
+    <Content Include="Scripts\App\Trip\costAdjustment.html" />
     <Content Include="Scripts\App\Trip\costAdjustmentController.js" />
     <Content Include="Scripts\App\Trip\costType.js" />
     <Content Include="Scripts\App\Trip\salaryAdjustment.html" />
