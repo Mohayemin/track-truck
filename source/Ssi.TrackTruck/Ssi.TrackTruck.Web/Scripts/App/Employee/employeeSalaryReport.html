@@ -38,6 +38,9 @@
                     <th ts-criteria="Employee.Designation">
                         Designation
                     </th>
+                    <th ts-criteria="NumberOfTrips" class="text-right">
+                        Number of Trips
+                    </th>
                     <th ts-criteria="TotalAllowance" class="text-right">
                         Total Allowance
                     </th>
@@ -54,6 +57,7 @@
                 <tr class="active">
                     <th>Total</th>
                     <th></th>
+                    <td>{{total.NumberOfTrips}}</td>
                     <th ng-bind="total.Allowance | peso" class="text-right"></th>
                     <th ng-bind="total.Salary | peso" class="text-right"></th>
                     <th ng-bind="total.Adjustment | peso" class="text-right"></th>
@@ -64,6 +68,7 @@
                 <tr ng-repeat="employeeSalary in employeeSalaries" ts-repeat>
                     <td ng-bind="employeeSalary.Employee.FullName"></td>
                     <td ng-bind="employeeSalary.Employee.Designation"></td>
+                    <td>{{employeeSalary.NumberOfTrips}}</td>
                     <td ng-bind="employeeSalary.TotalAllowance | peso" class="text-right"></td>
                     <td ng-bind="employeeSalary.TotalSalary | peso" class="text-right"></td>
                     <td ng-bind="employeeSalary.TotalAdjustment | peso" class="text-right"></td>
@@ -74,6 +79,7 @@
                 <tr ng-if="employeeSalaries.length > 10" class="active">
                     <th>Total</th>
                     <th></th>
+                    <td>{{total.NumberOfTrips}}</td>
                     <th ng-bind="total.Allowance | peso" class="text-right"></th>
                     <th ng-bind="total.Salary | peso" class="text-right"></th>
                     <th ng-bind="total.Adjustment | peso" class="text-right"></th>

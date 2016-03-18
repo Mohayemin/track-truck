@@ -46,12 +46,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             return JsonNet(response);
         }
 
-        /*[HttpPost]
+        [HttpPost]
         [AllowedRoles(Role.Admin)]
         public ActionResult SalaryReport(DateTime fromDate, DateTime toDate)
         {
             var report = _employeeService.GetSalaryReport(fromDate, toDate);
             return JsonNet(report);
-        }*/
+        }
     }
 }

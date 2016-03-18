@@ -5,6 +5,7 @@ using Ssi.TrackTruck.Bussiness.Models;
 using System;
 using System.Linq;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
+using Ssi.TrackTruck.Bussiness.DAL.Trips;
 using Ssi.TrackTruck.Bussiness.Trips;
 
 namespace Ssi.TrackTruck.Bussiness.Employees
@@ -63,50 +64,34 @@ namespace Ssi.TrackTruck.Bussiness.Employees
             _repository.Save(employee);
             return Response.Success(employee, "Successfully edited");
         }
-/*
-        public EmployeeSalaryReportResponse GetSalaryReport(DateTime fromDate, DateTime toDate)
+
+        public IEnumerable<EmployeeSalary> GetSalaryReport(DateTime fromDate, DateTime toDate)
         {
-            fromDate = fromDate.ToUniversalTime();
-            toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
+            var trips = _tripRepository.GetTripsInRange(fromDate, toDate).Where(trip => trip.Status == TripStatus.Archived).ToList();
 
-            var drivers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Driver);
-            var helpers = _repository.GetWhere<DbEmployee>(employee => employee.Designation == EmployeDesignations.Helper);
-            var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
+            var contracts = _repository.WhereIn<DbTripContract, string>(contract => contract.TripId,
+                trips.Select(trip => trip.Id)).ToList();
 
-            var employeeSalaries = new List<EmployeeSalary>();
+            var employees = _repository.WhereIn<DbEmployee, string>(employee => employee.Designation, EmployeDesignations.DriverHelper);
 
-            foreach (var driver in drivers)
+            foreach (var employee in employees)
             {
-                var tripsForDriver = trips.Where(trip => trip.DriverId == driver.Id).ToList();
-                var adjustment = tripsForDriver.SelectMany(trip => trip.Adjustments).Sum(_ => _.AdjustmentInPeso);
+                var employeeContracts = contracts.Where(contract => contract.EmployeeId == employee.Id).ToList();
 
-                employeeSalaries.Add(new EmployeeSalary
+                var employeeTripIds = employeeContracts.Select(contract => contract.TripId).Distinct();
+                var employeeTrips = trips.Where(trip => employeeTripIds.Contains(trip.Id)).ToList();
+
+                double adjustment = 0;
+                var allowance = employeeContracts.Sum(contract => contract.AllowanceInPeso);
+                var salary = employeeContracts.Sum(contract => contract.SalaryInPeso);
+
+                if (employee.Designation == EmployeDesignations.Driver)
                 {
-                    Employee = driver,
-                    TotalAllowance = tripsForDriver.Sum(trip => trip.DriverAllowanceInPeso),
-                    TotalSalary = tripsForDriver.Sum(trip => trip.DriverSalaryInPeso),
-                    TotalAdjustment = adjustment
-                });
-            }
+                    adjustment = employeeTrips.Sum(trip => trip.TotalCost.AdjustmentInPeso) ?? 0.0;
+                }
 
-            foreach (var helper in helpers)
-            {
-                var tripsForHelper = trips.Where(trip => trip.HelperIds.Contains(helper.Id)).ToList();
-                employeeSalaries.Add(new EmployeeSalary
-                {
-                    Employee = helper,
-                    TotalAllowance = tripsForHelper.Sum(trip => trip.HelperAllowanceInPeso),
-                    TotalSalary = tripsForHelper.Sum(trip => trip.HelperSalaryInPeso),
-                    TotalAdjustment = 0
-                });
+                yield return new EmployeeSalary(employee, salary, allowance, adjustment, employeeTrips.Count);
             }
-
-            return new EmployeeSalaryReportResponse
-            {
-                FromDate = fromDate,
-                ToDate = toDate,
-                EmployeeSalaries = employeeSalaries
-            };
-        }*/
+        }
     }
 }
