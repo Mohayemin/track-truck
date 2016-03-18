@@ -1,17 +1,21 @@
-﻿<div>
+﻿<div class="trip-detail">
     <page-title>
-        <div class="btn-group btn-group-sm pull-right">
-            <delete-button module="'trip'" item-id="trip.Id" action="deleteItem" title="delete trip"></delete-button>
-        </div>
+        
+        <h4>
+            Ticket Number: <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
+            <status-label status="trip.StatusObject"></status-label>
+            <label class="btn-group btn-group-sm pull-right">
+                <delete-button module="'trip'" item-id="trip.Id" action="deleteItem"></delete-button>
+            </label>
+        </h4>
     </page-title>
     <div>
         <div class="row">
             <div class="col-sm-6">
+                <h4>
+                    Trip Info
+                </h4>
                 <dl class="dl-horizontal">
-                    <dt>Ticket Number</dt>
-                    <dd ng-bind="trip.TripTicketNumber"></dd>
-                    <dt>Status</dt>
-                    <dd><status-label status="trip.StatusObject"></status-label></dd>
                     <dt>Client</dt>
                     <dd ng-bind="trip.Client.Name"></dd>
                     <dt>Pickup Addresse</dt>
@@ -24,62 +28,71 @@
             </div>
 
             <div class="col-sm-6">
+                <h4>
+                    Stuffs
+                </h4>
                 <table class="table table-bordered table-condensed table-responsive">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Salary</th>
-                            <th>Allowance</th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Salary</th>
+                        <th>Allowance</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="contract in trip.Contracts">
-                            <td>
-                                {{contract.Employee.Designation}}
-                            </td>
-                            <td>
-                                {{contract.Employee.FullName}}
-                            </td>
-                            <td>
-                                {{contract.SalaryInPeso | peso}}
-                            </td>
-                            <td>
-                                {{contract.AllowanceInPeso | peso}}
-                            </td>
-                        </tr>
+                    <tr ng-repeat="contract in trip.Contracts">
+                        <td>
+                            {{contract.Employee.Designation}}
+                        </td>
+                        <td>
+                            {{contract.Employee.FullName}}
+                        </td>
+                        <td>
+                            {{contract.SalaryInPeso | peso}}
+                        </td>
+                        <td>
+                            {{contract.AllowanceInPeso | peso}}
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="col-sm-6">
+                <h4>
+                    Costs
+                    <a class="btn btn-warning btn-xs pull-right" ng-href="{{url.route('trip', trip.Id, 'adjustment')}}">
+                        <i class="fa fa-wrench"></i> Adjust cost
+                    </a>
+                </h4>
                 <table class="table table-condensed table-bordered table-responsive">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>Expected Cost</th>
-                            <th>Actual Cost</th>
-                            <th>Adjustment</th>
-                            <th>Comment</th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>Expected Cost</th>
+                        <th>Actual Cost</th>
+                        <th>Adjustment</th>
+                        <th>Comment</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="cost in trip.Costs">
-                            <td>{{cost.CostType}}</td>
-                            <td>{{cost.ExpectedCostInPeso | peso}}</td>
-                            <td>{{cost.ActualCostInPeso | peso}}</td>
-                            <td>{{cost.AdjustmentInPeso | peso}}</td>
-                            <td>{{cost.Comment}}</td>
-                        </tr>
+                    <tr ng-repeat="cost in trip.Costs">
+                        <td>{{cost.CostType}}</td>
+                        <td>{{cost.ExpectedCostInPeso | peso}}</td>
+                        <td>{{cost.ActualCostInPeso | peso}}</td>
+                        <td>{{cost.AdjustmentInPeso | peso}}</td>
+                        <td>{{cost.Comment}}</td>
+                    </tr>
                     </tbody>
                     <thead>
-                        <tr class="active">
-                            <th>Total</th>
-                            <th>{{trip.TotalCost.ExpectedCostInPeso | peso}}</th>
-                            <th>{{trip.TotalCost.ActualCostInPeso | peso}}</th>
-                            <th>{{trip.TotalCost.AdjustmentInPeso | peso}}</th>
-                            <th></th>
-                        </tr>
+                    <tr class="active">
+                        <th>Total</th>
+                        <th>{{trip.TotalCost.ExpectedCostInPeso | peso}}</th>
+                        <th>{{trip.TotalCost.ActualCostInPeso | peso}}</th>
+                        <th>{{trip.TotalCost.AdjustmentInPeso | peso}}</th>
+                        <th></th>
+                    </tr>
                     </thead>
                 </table>
             </div>
