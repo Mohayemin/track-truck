@@ -46,7 +46,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             toDate = toDate.ToUniversalTime().AddDays(1).AddTicks(-1);
 
             var trips = _tripRepository.GetTripsInRange(fromDate, toDate);
-            
+
             var tripResponses = GetTripResponses(trips);
 
             return new TripReportResponse
@@ -161,7 +161,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             return Response.Success(trip.Status.ToString(), "Drop received");
         }
 
-        /*public Response SaveAdjustments(string tripId, IList<DbTripSalaryAdjustment> adjustments)
+        public Response SaveAdjustments(string tripId, List<CostAdjustment> adjustments)
         {
             var trip = _repository.GetById<DbTrip>(tripId);
             if (trip == null)
@@ -169,9 +169,17 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 return Response.Error("", "No such trip found");
             }
 
-            trip.Adjustments = adjustments;
+            var costs = trip.Costs;
+            foreach (var adjustment in adjustments.Where(a => a.Id != null))
+            {
+                var cost = costs.Find(c => c.Id == adjustment.Id);
+                cost.ActualCostInPeso = adjustment.ActualCostInPeso;
+            }
+
+            costs.AddRange(adjustments.Where(a => a.Id == null).Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.ActualCostInPeso)));
+
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");
-        }*/
+        }
     }
 }
