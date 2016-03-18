@@ -174,9 +174,10 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 var cost = costs.Find(c => c.Id == adjustment.Id);
                 cost.ActualCostInPeso = adjustment.ActualCostInPeso;
+                cost.Comment = adjustment.Comment;
             }
 
-            costs.AddRange(adjustments.Where(a => a.Id == null).Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.ActualCostInPeso)));
+            costs.AddRange(adjustments.Where(a => a.Id == null).Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.ActualCostInPeso, a.Comment)));
 
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");
