@@ -96,7 +96,7 @@
             },
             getUsersByRole: function(role) {
                 return service.getAll().then(function() {
-                    return _.where(_users, { Role: role });
+                    return _.filter(_users, { Role: role });
                 });
             }
         };

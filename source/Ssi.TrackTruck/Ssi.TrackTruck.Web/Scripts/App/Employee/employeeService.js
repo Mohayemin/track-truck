@@ -30,7 +30,7 @@
         var service = {
             getAllByDesignation: function(designation) {
                 return service.getAll().then(function() {
-                    return _.where(_employees, { Designation: designation });
+                    return _.filter(_employees, { Designation: designation });
                 });
             },
             getAll: getAll,

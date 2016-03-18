@@ -11,7 +11,7 @@ namespace Ssi.TrackTruck.Web
                 .Include("~/Scripts/Lib/angular-route.js")
                 .Include("~/Scripts/Lib/angular-animate.js")
                 .Include("~/Scripts/Lib/ui-bootstrap-tpls-1.2.0.min.js")
-                .Include("~/Scripts/Lib/underscore-min.js")
+                .Include("~/Scripts/Lib/lodash.min.js")
                 .Include("~/Scripts/Lib/angular-tablesort.js")
                 .Include("~/Scripts/Lib/ng-tags-input.js")
                 .Include("~/Scripts/Lib/moment.min.js");
