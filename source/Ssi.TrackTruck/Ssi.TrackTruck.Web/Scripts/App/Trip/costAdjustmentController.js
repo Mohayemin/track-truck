@@ -2,56 +2,45 @@
     '$scope',
     'tripService',
     'costType',
+    'TripCost',
     'globalMessage',
     '$routeParams',
     function orderTripController(
         $scope,
         tripService,
         costType,
+        TripCost,
         globalMessage,
         $routeParams) {
-
-        function Adjustment(cost) {
-            this.Id = cost.Id;
-            this.ExpectedCostInPeso = cost.ExpectedCostInPeso || 0;
-            this.ActualCostInPeso = cost.ActualCostInPeso || this.ExpectedCostInPeso;
-            this.Comment = cost.Comment;
-            this.CostType = cost.CostType || costType.Discrepancy;
-        }
-
-        Adjustment.prototype.getAdjustment = function() {
-            return this.ExpectedCostInPeso - this.ActualCostInPeso;
-        };
-
         
         tripService.get($routeParams['id']).then(function (trip) {
             $scope.trip = trip;
-            $scope.adjustments = trip.Costs.map(function (cost) {
-                return new Adjustment(cost);
+            $scope.costs = trip.Costs.map(function (cost) {
+                return new TripCost(cost);
             });
-            $scope.total = new Adjustment({
-                ExpectedCostInPeso: _.sumBy($scope.adjustments, function (a) { return a.ExpectedCostInPeso; })
+            $scope.total = new TripCost({
+                ExpectedCostInPeso: _.sumBy($scope.costs, function (a) { return a.ExpectedCostInPeso; })
             });
 
             $scope.recalculateTotal();
         });
 
         $scope.save = function () {
-            tripService.saveAdjustment($scope.trip, $scope.adjustments);
+            tripService.saveAdjustment($scope.trip, $scope.costs);
         };
 
-        $scope.addNewAdjustment = function () {
-            $scope.adjustments.push(new Adjustment({}));
+        $scope.addNewCost = function () {
+            $scope.costs.push(new TripCost({}));
         };
 
-        $scope.deleteAdjustment = function (adjustment) {
-            _.remove($scope.adjustments, function (a) {
-                return adjustment === a;
+        $scope.deleteCost = function (cost) {
+            _.remove($scope.costs, function (c) {
+                return cost === c;
             });
         };
 
         $scope.recalculateTotal = function () {
-            $scope.total.ActualCostInPeso = _.sumBy($scope.adjustments, function (a) { return a.ActualCostInPeso; });
+            $scope.total.ActualCostInPeso = _.sumBy($scope.costs, function (a) { return a.ActualCostInPeso; });
         };
     }
 ]);
