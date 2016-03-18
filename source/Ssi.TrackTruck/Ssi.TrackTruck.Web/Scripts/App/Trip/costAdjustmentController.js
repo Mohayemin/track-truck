@@ -15,6 +15,7 @@
             this.Id = cost.Id;
             this.ExpectedCostInPeso = cost.ExpectedCostInPeso || 0;
             this.ActualCostInPeso = cost.ActualCostInPeso || this.ExpectedCostInPeso;
+            this.Comment = cost.Comment;
             this.CostType = cost.CostType || costType.Discrepancy;
         }
 

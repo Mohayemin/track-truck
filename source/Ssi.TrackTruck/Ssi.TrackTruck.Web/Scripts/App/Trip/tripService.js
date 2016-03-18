@@ -97,10 +97,10 @@
                     return new Trip(response);
                 });
             },
-            saveAdjustment: function (trip, costs) {
+            saveAdjustment: function (trip, adjustments) {
                 return repository.post('trip', 'SaveAdjustments', {
                     tripId: trip.Id,
-                    Adjustments: trip.Adjustments
+                    Adjustments: adjustments
                 });
             },
             archive: function(trip) {

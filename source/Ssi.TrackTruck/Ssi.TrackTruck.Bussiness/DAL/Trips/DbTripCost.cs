@@ -16,6 +16,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public TripCostType CostType { get; set; }
         public double ExpectedCostInPeso { get; set; }
         public double? ActualCostInPeso { get; set; }
+        public string Comment { get; set; }
         [BsonIgnore]
         public double? AdjustmentInPeso {
             get
@@ -24,18 +25,18 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
             }
         }
 
-        public string Comment { get; set; }
 
         public DbTripCost()
         {
             Id = ObjectId.GenerateNewId().ToString();
         }
 
-        public DbTripCost(TripCostType costType, double expectedCostInPeso, double? actualCostInPeso = null) : this()
+        public DbTripCost(TripCostType costType, double expectedCostInPeso, double? actualCostInPeso = null, string comment = null) : this()
         {
             CostType = costType;
             ExpectedCostInPeso = expectedCostInPeso;
             ActualCostInPeso = actualCostInPeso;
+            Comment = comment;
         }
     }
 }
