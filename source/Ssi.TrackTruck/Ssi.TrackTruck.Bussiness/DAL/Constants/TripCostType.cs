@@ -9,6 +9,7 @@
         Toll,
         Parking,
         Barge,
-        Bundle
+        Bundle,
+        Discrepancy
     }
 }
