@@ -16,18 +16,18 @@
 
 appModule.config([
     '$locationProvider',
-    'datepickerPopupConfig',
-    'datepickerConfig',
-    'timepickerConfig',
+    'uibDatepickerPopupConfig',
+    'uibDatepickerConfig',
+    'uibTimepickerConfig',
     'dateFormat',
-    function ($locationProvider, datepickerPopupConfig, datepickerConfig, timepickerConfig, dateFormat) {
+    function ($locationProvider, uibDatepickerPopupConfig, uibDatepickerConfig, uibTimepickerConfig, dateFormat) {
         console.log('configuring app');
 
         $locationProvider.html5Mode(false);
-        datepickerPopupConfig.datepickerPopup = dateFormat;
-        datepickerConfig.showWeeks = false;
-        datepickerPopupConfig.appendToBody = true;
-        timepickerConfig.showSpinners = false;
+        uibDatepickerPopupConfig.datepickerPopup = dateFormat;
+        uibDatepickerConfig.showWeeks = false;
+        uibDatepickerPopupConfig.appendToBody = true;
+        uibTimepickerConfig.showSpinners = false;
     }
 ]);
 

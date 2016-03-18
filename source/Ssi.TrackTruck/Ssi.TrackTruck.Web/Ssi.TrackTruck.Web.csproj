@@ -186,8 +186,12 @@
     <Content Include="Scripts\App\Auth\changePasswordController.js" />
     <Content Include="Scripts\App\Navigation\checkActive.js" />
     <Content Include="Scripts\App\Navigation\navs.js" />
+    <Content Include="Scripts\App\Trip\costAdjustment.html" />
+    <Content Include="Scripts\App\Trip\costAdjustmentController.js" />
+    <Content Include="Scripts\App\Trip\costType.js" />
     <Content Include="Scripts\App\Trip\salaryAdjustment.html" />
     <Content Include="Scripts\App\Trip\trip.js" />
+    <Content Include="Scripts\App\Trip\tripCost.js" />
     <Content Include="Scripts\App\Trip\tripDropUpdate.html" />
     <Content Include="Scripts\App\Trip\tripDetail.html" />
     <Content Include="Scripts\App\Trip\tripDetailController.js" />
@@ -223,10 +227,12 @@
     <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
     <Content Include="Scripts\Lib\angular-animate.js" />
+    <Content Include="Scripts\Lib\lodash.min.js" />
     <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Content\css\ng-tags-input.bootstrap.css" />
     <Content Include="Content\css\ng-tags-input.css" />
     <Content Include="Scripts\Lib\ng-tags-input.js" />
+    <Content Include="Scripts\Lib\ui-bootstrap-tpls-1.2.0.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
@@ -273,8 +279,6 @@
     <Content Include="Scripts\Lib\angular-tablesort.js" />
     <Content Include="Scripts\Lib\angular.js" />
     <Content Include="Scripts\Lib\angular.min.js" />
-    <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.13.4.min.js" />
-    <Content Include="Scripts\Lib\underscore-min.js" />
     <Content Include="Templates\datetimeDirective.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
@@ -25,32 +26,35 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
-        public double FuelCostInPeso { get; set; }
-        public double TollCostInPeso { get; set; }
-        public double ParkingCostInPeso { get; set; }
-        public double BargeCostInPeso { get; set; }
-        public double BundleCostInPeso { get; set; }
 
+        public List<DbTripCost> Costs { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string DriverId { get; set; }
-        public double DriverAllowanceInPeso { get; set; }
-        public double DriverSalaryInPeso { get; set; }
+        private DbTripCost _totalCost;
 
-
-        [BsonRepresentation(BsonType.ObjectId)]
-        public List<string> HelperIds { get; set; }
-        public double HelperAllowanceInPeso { get; set; }
-        public double HelperSalaryInPeso { get; set; }
-
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string SupervisorId { get; set; }
-
-        public IList<DbTripSalaryAdjustment> Adjustments { get; set; }
+        [BsonIgnore]
+        public DbTripCost TotalCost {
+            get
+            {
+                if (_totalCost == null)
+                {
+                    double? actualCost = null;
+                    if (Costs.Any(cost => cost.ActualCostInPeso != null))
+                    {
+                        actualCost = Costs.Sum(cost => cost.ActualCostInPeso);
+                    }
+                    _totalCost = new DbTripCost
+                    {
+                        ExpectedCostInPeso = Costs.Sum(cost => cost.ExpectedCostInPeso),
+                        ActualCostInPeso = actualCost
+                    };
+                }
+                return _totalCost;
+            }
+        }
 
         public DbTrip()
         {
-            Adjustments = new List<DbTripSalaryAdjustment>();
+            Costs = new List<DbTripCost>();
         }
     }
 }
