@@ -1,0 +1,95 @@
+﻿<div>
+    <page-title></page-title>
+    <form class="form-inline">
+        <div class="form-group form-group-sm">
+            <label class="control-label">Ticket</label>
+            <input ng-model="filter.TripTicketNumber"
+                   type="text" class="form-control" placeholder="Ticket Number" />
+        </div>
+        <div class="form-group form-group-sm">
+            <label class="control-label">Client</label>
+            <client-select ng-model="filter.Client"></client-select>
+        </div>
+
+        <div class="form-group form-group-sm">
+            <label class="control-label">Status</label>
+            <div class="btn-group btn-group-xs">
+                <label class="btn "
+                       ng-class="'btn-' + statusButtonClass(status)"
+                       ng-model="filter.Status[status.id]"
+                       uib-btn-checkbox="status.id"
+                       ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
+                    {{status.text}}
+                </label>
+            </div>
+        </div>
+
+    </form>
+    <hr />
+    <uib-accordion close-others="false">
+
+        <uib-accordion-group ng-repeat="trip in trips"
+                         is-open="trip.accordionOpen" class="animate-out-right" ng-show="trip.show && trip.Status != tripStatus.Archived.id">
+            <uib-accordion-heading>
+                <div class="row">
+                    <div class="col-md-3">
+                        <dl class="dl-horizontal">
+                            <dt>Ticket</dt>
+                            <dd>{{trip.TripTicketNumber}}</dd>
+                            <dt>Client</dt>
+                            <dd>{{trip.Client.Name}}</dd>
+                            <dt>Status</dt>
+                            <dd>
+                                <status-label status="trip.StatusObject"></status-label>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-5">
+                        <dl class="dl-horizontal">
+                            <dt>Truck</dt>
+                            <dd>{{trip.Truck.RegistrationNumber}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal">
+                            <dt>Pickup Address </dt>
+                            <dd>{{trip.PickupAddress.Text}}</dd>
+                            <dt>Pickup Time </dt>
+                            <dd>{{trip.ExpectedPickupTimeUtc | philDate}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </uib-accordion-heading>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-inline">
+                        <div class="form-group form-group-sm">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="trip.showDelivered" /> Show delivered
+                                </label>
+                            </div>
+                            <button type="button"
+                                    ng-click="archive(trip)"
+                                    ng-if="trip.Status === tripStatus.Delivered.id"
+                                    class="btn btn-sm btn-success">
+                                <i class="fa fa-lg fa-check-square-o"></i> Archive
+                            </button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="trip.showDelivered || !drop.IsDelivered">
+                    <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+                </div>
+
+                <div class="col-md-6">
+                    <ng-include src="'Scripts/App/Trip/salaryAdjustment.html'"></ng-include>
+                </div>
+            </div>
+        </uib-accordion-group>
+    </uib-accordion>
+
+</div>
+
