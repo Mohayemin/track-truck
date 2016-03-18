@@ -16,25 +16,25 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="adjustment in adjustments">
+            <tr ng-repeat="cost in costs">
                 <td>
-                    {{adjustment.CostType}}
+                    {{cost.CostType}}
                 </td>
                 <td>
-                    {{adjustment.ExpectedCostInPeso | peso}}
+                    {{cost.ExpectedCostInPeso | peso}}
                 </td>
                 <td>
                     <input class="form-control input-sm"
                            type="number"
-                           ng-model="adjustment.ActualCostInPeso"
+                           ng-model="cost.ActualCostInPeso"
                            ng-change="recalculateTotal()"
                            required />
                 </td>
                 <td>
-                    {{adjustment.getAdjustment() | peso}}
+                    {{cost.getAdjustment() | peso}}
                 </td>
                 <td>
-                    <input class="form-control input-sm" type="text" ng-model="adjustment.Comment" required />
+                    <input class="form-control input-sm" type="text" ng-model="cost.Comment" required />
                 </td>
             </tr>
         </tbody>
@@ -58,9 +58,9 @@
             </tr>
         </thead>
     </table>
-    <button type="button" class="btn btn-primary btn-xs" ng-click="addNewAdjustment()">
+    <button type="button" class="btn btn-primary btn-xs" ng-click="addNewCost()">
         <i class="fa fa-plus"></i>
-        Adjustment
+        Cost
     </button>
     <button type="button" class="btn btn-success btn-xs" ng-click="save()">
         <i class="fa fa-save"></i>

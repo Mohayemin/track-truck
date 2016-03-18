@@ -5,6 +5,7 @@
     'employeeService',
     'userService',
     'tripStatus',
+    'TripCost',
     'truckService',
     function (
         _,
@@ -13,6 +14,7 @@
         employeeService,
         userService,
         tripStatus,
+        TripCost,
         truckService
         ) {
         
@@ -51,6 +53,10 @@
             _this.Truck = {};
             truckService.get(_this.TruckId).then(function (truck) {
                 _this.Truck = truck;
+            });
+
+            _this.Costs = this.Costs.map(function(cost) {
+                return new TripCost(cost);
             });
 
             _this.AllDropsDelivered = _this.TotalNumberOfDrops == _this.DeliveredNumberOfDrops;
