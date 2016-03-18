@@ -1,15 +1,8 @@
 ﻿tripModule.value('costType', {
-    employee: [
-        'Driver salary',
-        'Driver allowance',
-        'Helper salary',
-        'Helper allowance'
-    ],
-    trip: [
-        'Fuel',
-        'Toll',
-        'Parking',
-        'Barge',
-        'Bundle'
-    ]
+    'Fuel': 'Fuel',
+    'Toll': 'Toll',
+    'Parking': 'Parking',
+    'Barge': 'Barge',
+    'Bundle': 'Bundle',
+    'Discrepancy': 'Discrepancy'
 });

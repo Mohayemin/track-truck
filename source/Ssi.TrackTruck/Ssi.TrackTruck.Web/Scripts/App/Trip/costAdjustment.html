@@ -1,1 +1,66 @@
-﻿Hello World!!
+﻿<div>
+    <page-title>
+        <h4>
+            Ticket Number: <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
+        </h4>
+    </page-title>
+
+    <table class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th class="col-sm-1 ">Cost type</th>
+                <th class="col-sm-1 ">Expected cost</th>
+                <th class="col-sm-2 col-xs-6">Actual cost</th>
+                <th class="col-sm-1 ">Adjustment</th>
+                <th class="col-sm-7 col-xs-6">Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="adjustment in adjustments">
+                <td>
+                    {{adjustment.CostType}}
+                </td>
+                <td>
+                    {{adjustment.ExpectedCostInPeso | peso}}
+                </td>
+                <td>
+                    <input class="form-control input-sm"
+                           type="number"
+                           ng-model="adjustment.ActualCostInPeso"
+                           ng-change="recalculateTotal()"
+                           required />
+                </td>
+                <td>
+                    {{adjustment.getAdjustment() | peso}}
+                </td>
+                <td>
+                    <input class="form-control input-sm" type="text" ng-model="adjustment.Comment" required />
+                </td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th>
+                    Total
+                </th>
+                <th>
+                    {{total.ExpectedCostInPeso | peso}}
+                </th>
+                <th>
+                    {{total.ActualCostInPeso | peso}}
+                </th>
+                <th>
+                    {{total.getAdjustment() | peso}}
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <button type="button" class="btn btn-primary btn-xs" ng-click="addNewAdjustment()">
+        <i class="fa fa-plus"></i>
+        Adjustment
+    </button>
+</div>
+
