@@ -18,7 +18,7 @@
                        ng-class="'btn-' + statusButtonClass(status)"
                        ng-model="filter.Status[status.id]"
                        uib-btn-checkbox="status.id"
-                       ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
+                       ng-repeat="status in [tripStatus.New, tripStatus.InProgress, tripStatus.Delivered]">
                     {{status.text}}
                 </label>
             </div>
@@ -29,7 +29,7 @@
     <uib-accordion close-others="false">
 
         <uib-accordion-group ng-repeat="trip in trips"
-                         is-open="trip.accordionOpen" class="animate-out-right">
+                         is-open="trip.accordionOpen"  ng-show="trip.show">
             <uib-accordion-heading>
                 <div class="row">
                     <div class="col-md-6">
