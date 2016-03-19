@@ -193,6 +193,7 @@
     <Content Include="Scripts\App\Trip\tripDropUpdate.html" />
     <Content Include="Scripts\App\Trip\tripDetail.html" />
     <Content Include="Scripts\App\Trip\tripDetailController.js" />
+    <Content Include="Scripts\App\Trip\tripLink.html" />
     <Content Include="Scripts\App\Trip\tripLink.js" />
     <Content Include="Scripts\App\Trip\tripStatus.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />

@@ -59,8 +59,28 @@
                 return new TripCost(cost);
             });
 
-            _this.AllDropsDelivered = _this.TotalNumberOfDrops == _this.DeliveredNumberOfDrops;
+            _this.AllDropsDelivered = _this.TotalNumberOfDrops === _this.DeliveredNumberOfDrops;
         }
+
+        Trip.prototype.isArchived = function() {
+            return this.Status === tripStatus.Archived.id;
+        };
+
+        Trip.prototype.isInProgress = function () {
+            return this.Status === tripStatus.InProgress.id;
+        };
+
+        Trip.prototype.isDelivered = function () {
+            return this.Status === tripStatus.Delivered.id;
+        };
+
+        Trip.prototype.isNew = function() {
+            return this.Status === tripStatus.New.id;
+        };
+
+        Trip.prototype.isCostAdjustable = function() {
+            return this.isNew() || this.isDelivered();
+        };
 
         return Trip;
     }
