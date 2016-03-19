@@ -1,5 +1,5 @@
 ﻿<form ng-submit="receive(drop, trip)">
-    <div class="panel panel-primary">
+    <div class="panel" ng-class="{'panel-primary': !drop.IsDelivered, 'panel-warning': drop.IsDelivered}">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-sm-4">Branch: {{drop.Branch.Name}}</div>
