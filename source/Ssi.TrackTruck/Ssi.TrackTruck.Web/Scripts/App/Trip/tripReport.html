@@ -86,7 +86,7 @@
             <tbody>
                 <tr ng-repeat="trip in trips" ts-repeat>
                     <td>
-                        <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
+                        <trip-link trip="trip" show-status="false"></trip-link>
                     </td>
                     <td>
                         <status-label status="trip.StatusObject"></status-label>

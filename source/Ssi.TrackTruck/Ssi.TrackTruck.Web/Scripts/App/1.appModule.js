@@ -31,5 +31,13 @@ appModule.config([
     }
 ]);
 
+appModule.run([
+    '$rootScope',
+    'tripStatus',
+    function($rootScope, tripStatus) {
+        $rootScope.tripStatus = tripStatus;
+    }
+]);
+
 appModule.value('_', window._);
 appModule.constant('dateFormat', 'MMMM dd, yyyy');
