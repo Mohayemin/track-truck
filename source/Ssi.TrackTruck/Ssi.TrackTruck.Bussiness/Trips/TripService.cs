@@ -116,10 +116,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 return Response.Error("", "Drop not found");
             }
-            if (drop.IsDelivered)
-            {
-                return Response.Error("", "The drop is already received");
-            }
 
             foreach (var rejection in request.DeliveryRejections)
             {
