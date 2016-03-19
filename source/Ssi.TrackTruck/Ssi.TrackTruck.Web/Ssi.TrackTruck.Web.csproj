@@ -188,12 +188,12 @@
     <Content Include="Scripts\App\Trip\costAdjustment.html" />
     <Content Include="Scripts\App\Trip\costAdjustmentController.js" />
     <Content Include="Scripts\App\Trip\costType.js" />
-    <Content Include="Scripts\App\Trip\salaryAdjustment.html" />
     <Content Include="Scripts\App\Trip\trip.js" />
     <Content Include="Scripts\App\Trip\tripCost.js" />
     <Content Include="Scripts\App\Trip\tripDropUpdate.html" />
     <Content Include="Scripts\App\Trip\tripDetail.html" />
     <Content Include="Scripts\App\Trip\tripDetailController.js" />
+    <Content Include="Scripts\App\Trip\tripLink.js" />
     <Content Include="Scripts\App\Trip\tripStatus.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
     <Content Include="Scripts\App\Trip\tripReport.html" />

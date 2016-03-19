@@ -1,8 +1,7 @@
 ﻿<div>
     <page-title>
         <h4>
-            Ticket Number: <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
-            <status-label status="trip.StatusObject"></status-label>
+            Ticket Number: <trip-link trip="trip"></trip-link>
         </h4>
     </page-title>
 
@@ -54,18 +53,23 @@
                     {{total.getAdjustment() | peso}}
                 </th>
                 <th>
-                    
+                    <button type="button" class="btn btn-primary btn-xs" ng-click="addNewCost()">
+                        <i class="fa fa-plus"></i>
+                        Cost
+                    </button>
                 </th>
             </tr>
         </thead>
     </table>
-    <button type="button" class="btn btn-primary btn-xs" ng-click="addNewCost()">
-        <i class="fa fa-plus"></i>
-        Cost
-    </button>
-    <button type="button" class="btn btn-success btn-xs" ng-click="save()">
+    <button type="button" class="btn btn-sm btn-success" ng-click="save()">
         <i class="fa fa-save"></i>
         Save
+    </button>
+    <button type="button"
+            ng-click="archive()"
+            ng-if="trip.Status === tripStatus.Delivered.id"
+            class="btn btn-sm btn-success">
+        <i class="fa fa-lg fa-check-square-o"></i> Archive
     </button>
 </div>
 

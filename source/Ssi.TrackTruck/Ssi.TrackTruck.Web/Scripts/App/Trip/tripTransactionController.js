@@ -84,13 +84,6 @@
             });
         };
 
-        $scope.archive = function(trip) {
-            tripService.archive(trip).then(function() {
-                globalMessage.success('Trip archived');
-            }).catch(function(response) {
-                globalMessage.error(response.Message);
-            });
-        };
 
     }
 ]);

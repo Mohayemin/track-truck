@@ -45,5 +45,13 @@
         $scope.recalculateTotal = function () {
             $scope.total.ActualCostInPeso = _.sumBy($scope.costs, function (a) { return a.ActualCostInPeso; });
         };
+
+        $scope.archive = function () {
+            tripService.archive($scope.trip).then(function () {
+                globalMessage.success('Trip archived');
+            }).catch(function (response) {
+                globalMessage.error(response.Message);
+            });
+        };
     }
 ]);
