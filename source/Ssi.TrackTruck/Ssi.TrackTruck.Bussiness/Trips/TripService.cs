@@ -169,15 +169,23 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 return Response.Error("", "No such trip found");
             }
 
+            var updatedAdjustments = adjustments.Where(adjustment => adjustment.Id != null);
+            var newAdjustments = adjustments.Where(adjustment => adjustment.Id == null);
+
             var costs = trip.Costs;
-            foreach (var adjustment in adjustments.Where(a => a.Id != null))
+
+            var updatedIds = updatedAdjustments.Select(adjustment => adjustment.Id).ToList();
+
+            costs.RemoveAll(cost => !updatedIds.Contains(cost.Id));
+
+            costs.ForEach(cost =>
             {
-                var cost = costs.Find(c => c.Id == adjustment.Id);
+                var adjustment = adjustments.Find(a => a.Id == cost.Id);
                 cost.ActualCostInPeso = adjustment.ActualCostInPeso;
                 cost.Comment = adjustment.Comment;
-            }
+            });
 
-            costs.AddRange(adjustments.Where(a => a.Id == null).Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.ActualCostInPeso, a.Comment)));
+            costs.AddRange(newAdjustments.Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.ActualCostInPeso, a.Comment)));
 
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");
