@@ -13,7 +13,7 @@
                     if (!angular.isDefined($scope.showStatus)) {
                         $scope.showStatus = true;
                     }
-                    $scope.url = url.route('trip', $scope.trip.Id);
+                    $scope.url = url;
                 }
             ]
         };
