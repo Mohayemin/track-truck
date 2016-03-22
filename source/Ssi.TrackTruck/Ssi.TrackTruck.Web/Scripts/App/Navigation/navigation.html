@@ -1,7 +1,7 @@
 ﻿<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <button type="button" class="navbar-toggle" ng-click="navCollapsed = !navCollapsed">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -9,7 +9,7 @@
             </button>
             <a class="navbar-brand" ng-href="{{url.route()}}">SSI Logistics</a>
         </div>
-        <div collapse="navCollapsed" class="collapse navbar-collapse">
+        <div uib-collapse="navCollapsed" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li ng-repeat="group in navGroups" uib-dropdown ng-class="{'active': group == activeGroup}" 
                     allowed-roles="group.roles">
