@@ -18,7 +18,7 @@
                         <i class="fa fa-fw fa-lg fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="nav in group.navs" ng-class="{'active': nav == activeNav}" allowed-roles="nav.roles">
+                        <li ng-repeat="nav in group.navs" ng-click="collapse()" ng-class="{'active': nav == activeNav}" allowed-roles="nav.roles">
                             <a ng-href="{{nav.url}}">
                                 <i ng-class="nav.iconClass"></i>&nbsp;
                                 <span ng-bind="nav.text"></span>

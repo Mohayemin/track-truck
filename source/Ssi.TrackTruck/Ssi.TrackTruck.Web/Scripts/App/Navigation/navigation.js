@@ -19,6 +19,14 @@
                     $scope.activeNav = null;
                     $scope.navCollapsed = true;
 
+                    $scope.collapse = function() {
+                        $scope.navCollapsed = true;
+                    };
+
+                    $scope.$watch('navCollapsed', function() {
+                        console.log($scope.navCollapsed);
+                    });
+
                     function setActiveNav(event, current) {
                         var routeId = current.$$route.id;
 
