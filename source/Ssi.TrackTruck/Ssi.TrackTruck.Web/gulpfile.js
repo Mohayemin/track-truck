@@ -2,7 +2,6 @@
     var minify = true;
     var gulp = require('gulp'),
         concat = require('gulp-concat'),
-        rename = require('gulp-rename'),
         uglify = require('gulp-uglify')
     ;
 
@@ -17,10 +16,23 @@
             { src: 'moment/moment.js', min: 'moment/min/moment.min.js' }
     ];
 
+    function concatAndMinify(src, outputFile) {
+        var stream = gulp.src(src)
+            .pipe(concat(outputFile, { newLine: '\r\n\r\n' }));
+
+        if (minify) {
+            stream = stream.pipe(uglify());
+        }
+
+        return stream.pipe(gulp.dest('bin.client'));
+    }
+
+    gulp.task('_build-signin', function () {
+        return concatAndMinify('Scripts/SignIn/*.js', 'signin.js');
+    });
+
     gulp.task('_build-utils', function () {
-        return gulp.src('Scripts/Util/*.js')
-            .pipe(concat('util.js', { newLine: '\r\n\r\n' }))
-            .pipe(gulp.dest('bin.client'));
+        return concatAndMinify('Scripts/Util/*.js', 'util.js');
     });
 
     gulp.task('_build-libs', function () {
@@ -34,6 +46,6 @@
             .pipe(gulp.dest('bin.client'));
     });
 
-    gulp.task('build-js', ['_build-utils', '_build-libs']);
+    gulp.task('build-js', ['_build-utils', '_build-libs', '_build-signin']);
 })();
 
