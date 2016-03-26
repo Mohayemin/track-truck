@@ -155,6 +155,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="gulpfile.js" />
     <Content Include="Scripts\App\appController.js" />
     <Content Include="Scripts\App\Attendance\1.attendanceModule.js" />
     <Content Include="Scripts\App\Attendance\attendanceReport.html" />
@@ -332,6 +333,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Page\_Footer.cshtml" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\file-system.pubxml" />
     <None Include="Properties\PublishProfiles\ssi.pubxml" />
     <None Include="Web.Debug.config">
