@@ -1,0 +1,93 @@
+﻿<div>
+    <page-title>
+        <h4>
+            Ticket Number: <trip-link trip="trip"></trip-link>
+            <span class="small text-right">
+                &nbsp;&nbsp;<i class="fa fa-info-circle"></i> You can adjust cost only when a trip is Delivered or New.
+            </span>
+        </h4>
+        
+    </page-title>
+
+    <form>
+        <fieldset ng-disabled="disable">
+            <table class="table table-responsive table-bordered">
+                <thead>
+                <tr>
+                    <th class="col-sm-1 ">Cost type</th>
+                    <th class="col-sm-1 ">Expected cost</th>
+                    <th class="col-sm-2 col-xs-6">Actual cost</th>
+                    <th class="col-sm-1 ">Adjustment</th>
+                    <th class="col-sm-7 col-xs-6">Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="cost in costs">
+                    <td>
+                        {{cost.CostType}}
+                    </td>
+                    <td>
+                        {{cost.ExpectedCostInPeso | peso}}
+                    </td>
+                    <td>
+                        <input class="form-control input-sm"
+                               type="number"
+                               ng-model="cost.ActualCostInPeso"
+                               ng-change="recalculateTotal()"
+                               required/>
+                    </td>
+                    <td>
+                        {{cost.getAdjustment() | peso}}
+                    </td>
+                    <td>
+                        <input ng-if="!cost.IsDiscrepancy"
+                               class="form-control input-sm" type="text" ng-model="cost.Comment"/>
+
+                        <div ng-if="cost.IsDiscrepancy" class="input-group input-group-sm">
+                            <input class="form-control" type="text" ng-model="cost.Comment"/>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-danger" ng-click="deleteCost(cost)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        {{total.ExpectedCostInPeso | peso}}
+                    </th>
+                    <th>
+                        {{total.ActualCostInPeso | peso}}
+                    </th>
+                    <th>
+                        {{total.getAdjustment() | peso}}
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="addNewCost()">
+                            <i class="fa fa-plus"></i>
+                            Cost
+                        </button>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+            <button type="button" class="btn btn-sm btn-success" ng-click="save()">
+                <i class="fa fa-save"></i>
+                Save
+            </button>
+            <button type="button"
+                    ng-click="saveAndArchive()"
+                    ng-if="trip.Status === tripStatus.Delivered.id"
+                    class="btn btn-sm btn-warning pull-right">
+                <i class="fa fa-lg fa-check-square-o"></i> Save and Archive
+            </button>
+        </fieldset>
+    </form>
+</div>
+
