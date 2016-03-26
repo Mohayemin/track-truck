@@ -5,6 +5,7 @@
         uglify = require('gulp-uglify'),
         expect = require('gulp-expect-file')
     ;
+    var cleanCSS = require('gulp-clean-css');
 
     var jsLibs = [
             { src: 'angular/angular.js', min: 'angular/angular.min.js' },
@@ -42,7 +43,7 @@
 
     gulp.task('_build-js-libs', function () {
         var prop = minify ? 'min' : 'src';
-        var libs = jsLibs.map(function(file) {
+        var libs = jsLibs.map(function (file) {
             return 'bower_components/' + file[prop];
         });
 
@@ -53,5 +54,33 @@
     });
 
     gulp.task('build-js', ['_build-js-utils', '_build-js-libs', '_build-js-signin', '_build-js-app']);
+
+    gulp.task('build-css', function () {
+        var files = [
+            'Content/css/bootstrap-superhero.min.css'
+            , 'Content/css/bootstrap-superhero-override.css'
+            , 'Content/css/font-awesome.min.css'
+            , 'Content/css/tablesort.css'
+            , 'Content/css/animate.css'
+            , 'Content/css/ng-tags-input.css'
+            , 'Content/css/ng-tags-input.bootstrap.css'
+            , 'Content/css/track-truck.css'
+        ];
+
+        gulp.src('Content/fonts/*')
+            .pipe(gulp.dest('bin.client/fonts'));
+
+        var stream = gulp.src(files)
+            .pipe(expect(files))
+            .pipe(concat('all.css'));
+
+        if (minify) {
+            stream = stream.pipe(cleanCSS());
+        }
+
+        stream.pipe(gulp.dest('bin.client/css'));
+
+        return stream;
+    });
 })();
 
