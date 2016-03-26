@@ -2,7 +2,8 @@
     var minify = false;
     var gulp = require('gulp'),
         concat = require('gulp-concat'),
-        uglify = require('gulp-uglify')
+        uglify = require('gulp-uglify'),
+        expect = require('gulp-expect-file')
     ;
 
     var jsLibs = [
@@ -46,6 +47,7 @@
         });
 
         return gulp.src(libs)
+            .pipe(expect(libs))
             .pipe(concat('lib.js'))
             .pipe(gulp.dest('bin.client'));
     });
