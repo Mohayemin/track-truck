@@ -8,9 +8,7 @@
 </head>
 <body>
     @Styles.Render("~/Content/css/all")
-    @Scripts.Render("~/js/lib")
-    @Scripts.Render("~/js/util")
-    @Scripts.Render("~/js/signin")
+    
 
     <div class="container main-container">
         <global-message></global-message>
@@ -55,5 +53,9 @@
     </div>
 
     @Html.Partial("_Footer")
+
+<script src="~/bin.client/lib.js"></script>
+    <script src="~/bin.client/util.js"></script>
+    @Scripts.Render("~/js/signin")
 </body>
 </html>
