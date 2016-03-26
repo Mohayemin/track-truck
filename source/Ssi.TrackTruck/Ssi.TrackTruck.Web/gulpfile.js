@@ -28,19 +28,19 @@
         return stream.pipe(gulp.dest('bin.client'));
     }
 
-    gulp.task('_build-app', function() {
+    gulp.task('_build-js-app', function () {
         return concatAndMinify('Scripts/App/**/*.js', 'app.js');
     });
 
-    gulp.task('_build-signin', function () {
+    gulp.task('_build-js-signin', function () {
         return concatAndMinify('Scripts/SignIn/*.js', 'signin.js');
     });
 
-    gulp.task('_build-utils', function () {
+    gulp.task('_build-js-utils', function () {
         return concatAndMinify('Scripts/Util/*.js', 'util.js');
     });
 
-    gulp.task('_build-libs', function () {
+    gulp.task('_build-js-libs', function () {
         var prop = minify ? 'min' : 'src';
         var libs = jsLibs.map(function(file) {
             return 'bower_components/' + file[prop];
@@ -52,6 +52,6 @@
             .pipe(gulp.dest('bin.client'));
     });
 
-    gulp.task('build-js', ['_build-utils', '_build-libs', '_build-signin', '_build-app']);
+    gulp.task('build-js', ['_build-js-utils', '_build-js-libs', '_build-js-signin', '_build-js-app']);
 })();
 
