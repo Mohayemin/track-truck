@@ -1,5 +1,5 @@
 ﻿(function () {
-    var minify = true;
+    var minify = false;
     var gulp = require('gulp'),
         concat = require('gulp-concat'),
         uglify = require('gulp-uglify')
@@ -27,6 +27,10 @@
         return stream.pipe(gulp.dest('bin.client'));
     }
 
+    gulp.task('_build-app', function() {
+        return concatAndMinify('Scripts/App/**/*.js', 'app.js');
+    });
+
     gulp.task('_build-signin', function () {
         return concatAndMinify('Scripts/SignIn/*.js', 'signin.js');
     });
@@ -46,6 +50,6 @@
             .pipe(gulp.dest('bin.client'));
     });
 
-    gulp.task('build-js', ['_build-utils', '_build-libs', '_build-signin']);
+    gulp.task('build-js', ['_build-utils', '_build-libs', '_build-signin', '_build-app']);
 })();
 
