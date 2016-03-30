@@ -82,5 +82,7 @@
 
         return stream;
     });
+
+    gulp.task('default', ['build-js', 'build-css']);
 })();
 
