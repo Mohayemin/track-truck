@@ -2,7 +2,7 @@
     'clientService',
     function (clientService) {
         return {
-            templateUrl: '/Scripts/App/Client/clientSelect.html',
+            templateUrl: 'Client/clientSelect.html',
             scope: {
                 ngModel: '=',
                 autoSelectIndex: '='
