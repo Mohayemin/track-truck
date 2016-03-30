@@ -1,7 +1,7 @@
 ﻿utilModule.directive('listButton', [
     function () {
         return {
-            templateUrl: '/Scripts/Util/listButton.html',
+            templateUrl: 'Util/listButton.html',
             replace: true,
             scope: {
                 module: '=',

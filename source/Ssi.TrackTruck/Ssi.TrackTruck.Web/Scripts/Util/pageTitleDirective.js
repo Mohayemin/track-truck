@@ -2,7 +2,7 @@
     'pageTitle',
     function (pageTitle) {
         var directive = {
-            templateUrl: '/Scripts/Util/pageTitle.html',
+            templateUrl: 'Util/pageTitle.html',
             transclude: true,
             controller: [
                 '$scope',
