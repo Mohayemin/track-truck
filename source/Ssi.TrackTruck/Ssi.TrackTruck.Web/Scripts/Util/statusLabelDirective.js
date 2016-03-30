@@ -5,7 +5,7 @@
             scope: {
                 status: '='
             },
-            templateUrl: '/Scripts/Util/statusLabel.html'
+            templateUrl: 'Util/statusLabel.html'
         };
     }
 ]);

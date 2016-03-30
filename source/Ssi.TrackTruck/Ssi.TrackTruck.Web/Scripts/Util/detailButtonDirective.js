@@ -1,7 +1,7 @@
 ﻿utilModule.directive('detailButton', [
     function () {
         return {
-            templateUrl: '/Scripts/Util/detailButton.html',
+            templateUrl: 'Util/detailButton.html',
             replace: true,
             scope: {
                 module: '=',

@@ -55,7 +55,7 @@
 
             <div class="row">
                 <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops">
-                    <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
+                    <ng-include src="url.template('Trip', 'tripDropUpdate')"></ng-include>
                 </div>
             </div>
         </uib-accordion-group>
