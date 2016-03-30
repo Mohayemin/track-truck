@@ -1,7 +1,7 @@
 ﻿utilModule.directive('datetime', [
     function datetimeDirective() {
         return {
-            templateUrl: '/Templates/datetimeDirective.html',
+            templateUrl: 'Util/datetimeDirective.html',
             scope: {
                 ngModel: '=',
                 hideTime: '=',
