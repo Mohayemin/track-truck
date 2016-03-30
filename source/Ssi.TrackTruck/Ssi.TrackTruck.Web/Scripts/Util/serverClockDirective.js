@@ -1,7 +1,7 @@
 ﻿utilModule.directive('serverClock', [
     function () {
         return {
-            templateUrl: '/Scripts/Util/serverClock.html',
+            templateUrl: 'Util/serverClock.html',
             replace: true,
             scope: {
                 url: '=',
