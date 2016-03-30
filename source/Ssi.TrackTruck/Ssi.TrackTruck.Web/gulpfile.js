@@ -7,6 +7,8 @@
         expect = require('gulp-expect-file')
     ;
     var cleanCSS = require('gulp-clean-css');
+    var templateCache = require('gulp-angular-templatecache');
+    var merge = require('merge-stream');
 
     var jsLibs = [
             { src: 'angular/angular.js', min: 'angular/angular.min.js' },
@@ -30,8 +32,19 @@
         return stream.pipe(gulp.dest(destFolder));
     }
 
+    function concateTemplates(src, outputFile, ngModule, root) {
+        return gulp.src(src)
+            .pipe(templateCache(outputFile, {
+                module: ngModule,
+                standalone: false,
+                root: root
+            }))
+            .pipe(gulp.dest(destFolder));
+    }
+    
     gulp.task('_build-js-app', function () {
-        return concatAndMinify('Scripts/App/**/*.js', 'app.js');
+        return merge(concatAndMinify('Scripts/App/**/*.js', 'app.js')
+            , concateTemplates('Scripts/App/**/*.html', 'app.templates.js', 'trackTruck'));
     });
 
     gulp.task('_build-js-signin', function () {
@@ -39,7 +52,8 @@
     });
 
     gulp.task('_build-js-utils', function () {
-        return concatAndMinify('Scripts/Util/*.js', 'util.js');
+        return merge (concatAndMinify('Scripts/Util/*.js', 'util.js')
+            , concateTemplates('Scripts/Util/*.html', 'util.templates.js', 'utilModule', 'Util/'));
     });
 
     gulp.task('_build-js-libs', function () {

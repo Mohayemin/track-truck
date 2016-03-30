@@ -6,7 +6,7 @@
                 trip: '=',
                 showStatus: '=?'
             },
-            templateUrl: url.template('trip', 'tripLink'),
+            templateUrl: url.template('Trip', 'tripLink'),
             controller: [
                 '$scope',
                 function ($scope) {

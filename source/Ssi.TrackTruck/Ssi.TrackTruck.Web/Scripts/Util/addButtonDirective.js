@@ -1,9 +1,9 @@
 ﻿utilModule.directive('addButton', [
     function () {
         return {
-            templateUrl: '/Scripts/Util/addButton.html',
+            templateUrl: 'Util/addButton.html',
             scope: {
-                module: '=',
+                module: '='
             },
             controller: [
                 '$scope',
