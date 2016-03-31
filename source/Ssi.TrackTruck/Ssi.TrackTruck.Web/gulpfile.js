@@ -15,6 +15,8 @@
             { src: 'angular-route/angular-route.js', min: 'angular-route/angular-route.min.js' },
             { src: 'angular-animate/angular-animate.js', min: 'angular-animate/angular-animate.min.js' },
             { src: 'angular-bootstrap/ui-bootstrap-tpls.js', min: 'angular-bootstrap/ui-bootstrap-tpls.js' },
+            { src: 'bootstrap-ui-datetime-picker/dist/datetime-picker.js', min: 'bootstrap-ui-datetime-picker/dist/datetime-picker.min.js' },
+            { src: 'bootstrap-ui-datetime-picker/dist/datetime-picker.tpls.js', min: '' },
             { src: 'lodash/dist/lodash.js', min: 'lodash/dist/lodash.min.js' },
             { src: 'angular-tablesort/js/angular-tablesort.js', min: 'angular-tablesort/js/angular-tablesort.js' },
             { src: 'ng-tags-input/ng-tags-input.js', min: 'ng-tags-input/ng-tags-input.min.js' },
