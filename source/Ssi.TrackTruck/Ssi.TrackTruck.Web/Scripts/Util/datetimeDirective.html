@@ -2,7 +2,7 @@
     <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="state.isOpen=true">
         <input type="text"
                class="form-control"
-               datetime-picker="hideTime ? dateFormat : dateTimeFormat"
+               datetime-picker="{{hideTime ? dateFormat : dateTimeFormat}}"
                is-open="state.isOpen"
                ng-required="required"
                placeholder="{{options.placeholder}}"
