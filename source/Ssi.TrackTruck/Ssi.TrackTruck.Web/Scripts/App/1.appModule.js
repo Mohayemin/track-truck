@@ -33,8 +33,7 @@ appModule.run([
     'dateFormat',
     'dateTimeFormat',
     'userRoles',
-    'uiDatetimePickerConfig',
-    function ($rootScope, tripStatus, designation, dateFormat, userRoles, dateTimeFormat) {
+    function ($rootScope, tripStatus, designation, dateFormat, dateTimeFormat, userRoles) {
         $rootScope.tripStatus = tripStatus;
         $rootScope.dateFormat = dateFormat;
         $rootScope.dateTimeFormat = dateTimeFormat;
