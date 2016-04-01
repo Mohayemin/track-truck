@@ -15,8 +15,6 @@
             { src: 'angular-route/angular-route.js', min: 'angular-route/angular-route.min.js' },
             { src: 'angular-animate/angular-animate.js', min: 'angular-animate/angular-animate.min.js' },
             { src: 'angular-bootstrap/ui-bootstrap-tpls.js', min: 'angular-bootstrap/ui-bootstrap-tpls.js' },
-           // { src: 'bootstrap-ui-datetime-picker/dist/datetime-picker.js', min: 'bootstrap-ui-datetime-picker/dist/datetime-picker.min.js' },
-           // { src: 'bootstrap-ui-datetime-picker/dist/datetime-picker.tpls.js', min: '' },
             { src: 'lodash/dist/lodash.js', min: 'lodash/dist/lodash.min.js' },
             { src: 'angular-tablesort/js/angular-tablesort.js', min: 'angular-tablesort/js/angular-tablesort.js' },
             { src: 'ng-tags-input/ng-tags-input.js', min: 'ng-tags-input/ng-tags-input.min.js' },
@@ -43,7 +41,7 @@
             }))
             .pipe(gulp.dest(destFolder));
     }
-    
+
     gulp.task('_build-js-app', function () {
         return merge(concatAndMinify('Scripts/App/**/*.js', 'app.js')
             , concateTemplates('Scripts/App/**/*.html', 'app.templates.js', 'trackTruck'));
@@ -54,7 +52,7 @@
     });
 
     gulp.task('_build-js-utils', function () {
-        return merge (concatAndMinify('Scripts/Util/*.js', 'util.js')
+        return merge(concatAndMinify('Scripts/Util/*.js', 'util.js')
             , concateTemplates('Scripts/Util/*.html', 'util.templates.js', 'utilModule', 'Util/'));
     });
 
@@ -98,6 +96,21 @@
         stream.pipe(gulp.dest(destFolder + '/css'));
 
         return stream;
+    });
+
+    gulp.task('watch', function () {
+        function changed(event) {
+            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        }
+
+        [
+            gulp.watch('Content/css/*.css', ['build-css']),
+            gulp.watch('Scripts/App/**/*', ['_build-js-app']),
+            gulp.watch('Scripts/Util/**/*', ['_build-js-utils']),
+            gulp.watch('Scripts/SignIn/**/*', ['_build-js-signin'])
+        ].forEach(function (watcher) {
+            watcher.on('change', changed);
+        });
     });
 
     gulp.task('default', ['build-js', 'build-css']);
