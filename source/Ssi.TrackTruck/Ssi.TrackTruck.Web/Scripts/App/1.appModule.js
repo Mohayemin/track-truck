@@ -32,12 +32,14 @@ appModule.run([
     'designation',
     'dateFormat',
     'dateTimeFormat',
+    'userRoles',
     'uiDatetimePickerConfig',
-    function ($rootScope, tripStatus, designation, dateFormat, dateTimeFormat) {
+    function ($rootScope, tripStatus, designation, dateFormat, userRoles, dateTimeFormat) {
         $rootScope.tripStatus = tripStatus;
         $rootScope.dateFormat = dateFormat;
         $rootScope.dateTimeFormat = dateTimeFormat;
         $rootScope.designation = designation;
+        $rootScope.roles = userRoles;
     }
 ]);
 

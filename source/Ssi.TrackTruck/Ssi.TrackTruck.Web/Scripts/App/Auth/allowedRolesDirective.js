@@ -19,7 +19,7 @@ authModule.directive('allowedRoles', [
 
                 signedInUser.load().then(function () {
                     if (roles.indexOf(signedInUser.Role) < 0) {
-                        element.remove();
+                        element.hide();
                     }
                 });
             }
