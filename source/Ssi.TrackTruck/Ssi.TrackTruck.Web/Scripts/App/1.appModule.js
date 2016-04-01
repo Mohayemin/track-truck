@@ -23,7 +23,6 @@ appModule.config([
         $locationProvider.html5Mode(false);
         uiDatetimePickerConfig.appendToBody = true;
         uiDatetimePickerConfig.showWeeks = false;
-        uiDatetimePickerConfig.closeOnDateSelection = false;
     }
 ]);
 
@@ -33,7 +32,7 @@ appModule.run([
     'dateFormat',
     'dateTimeFormat',
     'uiDatetimePickerConfig',
-    function ($rootScope, tripStatus, dateFormat, dateTimeFormat, uiDatetimePickerConfig) {
+    function ($rootScope, tripStatus, dateFormat, dateTimeFormat) {
         $rootScope.tripStatus = tripStatus;
         $rootScope.dateFormat = dateFormat;
         $rootScope.dateTimeFormat = dateTimeFormat;
