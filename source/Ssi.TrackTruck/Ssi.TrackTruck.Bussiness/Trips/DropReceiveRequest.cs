@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
@@ -7,6 +8,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
     {
         [Required]
         public string DropId { get; set; }
+        public DateTime ActualDropTimeUtc { get; set; }
         public IList<DeleveryRejection> DeliveryRejections { get; set; }
     }
 }

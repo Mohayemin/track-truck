@@ -5,6 +5,7 @@ using Ssi.TrackTruck.Bussiness.Auth;
 using Ssi.TrackTruck.Bussiness.DAL;
 using Ssi.TrackTruck.Bussiness.DAL.Constants;
 using Ssi.TrackTruck.Bussiness.DAL.Trips;
+using Ssi.TrackTruck.Bussiness.Helpers;
 using Ssi.TrackTruck.Bussiness.Models;
 
 namespace Ssi.TrackTruck.Bussiness.Trips
@@ -138,7 +139,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 dr.Comment = rejection.Comment;
             }
 
-            drop.ActualDropTimeUtc = DateTime.UtcNow;
+            drop.ActualDropTimeUtc = request.ActualDropTimeUtc.PhilippinesToUtc();
             drop.ReceiverUserId = _signedInUser.Id;
             drop.IsDelivered = true;
 

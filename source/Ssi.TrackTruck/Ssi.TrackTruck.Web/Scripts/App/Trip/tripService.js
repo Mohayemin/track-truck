@@ -63,7 +63,8 @@
             receiveDrop: function (drop, trip) {
                 var formattedRequest = {
                     DropId: drop.Id,
-                    DeliveryRejections: []
+                    DeliveryRejections: [],
+                    ActualDropTimeUtc: drop.ActualDropTimeUtc
                 };
 
                 drop.DeliveryReceipts.forEach(function (dr) {
