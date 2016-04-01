@@ -27,6 +27,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         [BsonRepresentation(BsonType.ObjectId)]
         public string TruckId { get; set; }
 
+        public List<DbHistory> UpdateHistories { get; set; }
+
         public List<DbTripCost> Costs { get; set; }
 
         private DbTripCost _totalCost;
@@ -55,6 +57,7 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public DbTrip()
         {
             Costs = new List<DbTripCost>();
+            UpdateHistories = new List<DbHistory>();
         }
     }
 }

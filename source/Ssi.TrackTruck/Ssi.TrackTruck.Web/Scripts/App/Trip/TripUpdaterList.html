@@ -1,0 +1,22 @@
+﻿<table class="table table-bordered table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Time</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="history in trip.UpdateHistories">
+            <td>
+                {{history.User.FullName}}
+            </td>
+            <td>
+                {{history.TimeUtc | philDate}}
+            </td>
+            <td>
+                {{history.Comment}}
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -216,3 +216,4 @@ Errors/*
 .vs
 bower_components
 bin.client
+*.DotSettings
