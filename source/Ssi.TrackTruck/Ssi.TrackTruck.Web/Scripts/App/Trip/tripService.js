@@ -37,6 +37,16 @@
             trip.StatusObject = statusObject;
         }
 
+        function updateStatus(trip, statusObject) {
+            return repository.post('trip', 'updateStatus', {
+                tripId: trip.Id,
+                status: statusObject.id
+            }).then(function () {
+                setTripStatus(trip, statusObject.id);
+                return trip;
+            });
+        }
+
         var service = {
             orderTrip: function (request) {
                 var foramtterRequest = angular.extend({}, request);
@@ -107,14 +117,11 @@
                     return result;
                 });
             },
-            archive: function(trip) {
-                return repository.post('trip', 'updateStatus', {
-                    tripId: trip.Id,
-                    status: tripStatus.Archived.id
-                }).then(function () {
-                    setTripStatus(trip, tripStatus.Archived.id);
-                    return trip;
-                });
+            archive: function (trip) {
+                return updateStatus(trip, tripStatus.Archived);
+            },
+            unarchive: function (trip) {
+                return updateStatus(trip, tripStatus.Delivered);
             }
         };
 

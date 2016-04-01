@@ -1,12 +1,14 @@
 ﻿<div>
     <page-title>
+        <unarchive-button trip="trip"></unarchive-button>
+        
         <h4>
             Ticket Number: <trip-link trip="trip"></trip-link>
+
             <span class="small text-right">
                 &nbsp;&nbsp;<i class="fa fa-info-circle"></i> You can adjust cost only when a trip is Delivered or New.
             </span>
         </h4>
-
     </page-title>
     <form ng-submit="save()">
         <fieldset ng-disabled="!trip.isCostAdjustable()">
