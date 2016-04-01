@@ -113,3 +113,7 @@
 .transactions .panel-group > .panel {
     border-bottom: 3px solid #df691a;
 }
+
+.transactions .drop-time-input .input-group {
+    width: 100%;
+}
