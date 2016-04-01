@@ -2,18 +2,16 @@
     '$scope',
     '$window',
     'tripService',
-    'costType',
     'TripCost',
-    'designation',
+    '$timeout',
     'globalMessage',
     '$routeParams',
     function orderTripController(
         $scope,
         $window,
         tripService,
-        costType,
         TripCost,
-        designation,
+        $timeout,
         globalMessage,
         $routeParams) {
 
@@ -34,12 +32,31 @@
             $scope.loading = false;
         });
 
-        $scope.save = function () {
+        function save() {
             globalMessage.info('Saving cost adjustments...', 0);
-            return tripService.saveAdjustment($scope.trip, $scope.costs).then(function() {
+            return tripService.saveAdjustment($scope.trip, $scope.costs).then(function () {
                 globalMessage.success('Cost adjustments saved');
             }).catch(function (response) {
                 globalMessage.error(response.Message);
+            });
+        }
+
+        $scope.save = function () {
+            $timeout(function() {
+                if ($scope.saveAndArchive) {
+                    var confirm = $window.confirm('You cannot adjust the cost after a trip is archived. \nAre you sure you want to archive?');
+
+                    confirm && save().then(function () {
+                        tripService.archive($scope.trip).then(function () {
+                            globalMessage.success('Trip archived');
+                        }).catch(function (response) {
+                            globalMessage.error(response.Message);
+                        });
+                    });
+                } else {
+                    save();
+                }
+                $scope.saveAndArchive = false;
             });
         };
 
@@ -56,18 +73,6 @@
 
         $scope.recalculateTotal = function () {
             $scope.total.ActualCostInPeso = _.sumBy($scope.costs, function (a) { return a.ActualCostInPeso; });
-        };
-
-        $scope.saveAndArchive = function () {
-            var confirm = $window.confirm('You cannot adjust the cost when a trip is archive. Are you sure you want to archive?');
-
-            confirm && $scope.save().then(function() {
-                tripService.archive($scope.trip).then(function () {
-                    globalMessage.success('Trip archived');
-                }).catch(function (response) {
-                    globalMessage.error(response.Message);
-                });
-            });
         };
     }
 ]);
