@@ -1,13 +1,19 @@
 ﻿<div>
-    <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="dateIsOpen=true">
-        <input ng-model="ngModel" ng-required="required"
-               type="text" is-open="dateIsOpen" uib-datepicker-popup placeholder="{{options.placeholder}}"
-               class="form-control" />
+    <div class="input-group" ng-class="{'input-group-sm': options.sm}" ng-click="state.isOpen=true">
+        <input type="text"
+               class="form-control"
+               datetime-picker="{{hideTime ? dateFormat : dateTimeFormat}}"
+               is-open="state.isOpen"
+               ng-required="required"
+               placeholder="{{options.placeholder}}"
+               enable-time="!hideTime"
+               close-on-date-selection ="hideTime"
+               ng-model="ngModel" />
+
         <span class="input-group-btn">
             <button type="button" class="btn btn-primary">
                 <i class="glyphicon glyphicon-calendar"></i>
             </button>
         </span>
     </div>
-    <uib-timepicker ng-show="!hideTime" ng-model="ngModel" show-meridian="true"></uib-timepicker>
 </div>

@@ -20,5 +20,8 @@
     "angular-bootstrap": "^1.2.5",
     "angular-route": "^1.5.2",
     "ng-tags-input": "^3.0.0"
+  },
+  "resolutions": {
+    "angular-bootstrap": "^1.2.5"
   }
 }

@@ -1,6 +1,12 @@
-﻿table.table.table-bordered th, table.table.table-bordered td {
+﻿table.table.table-bordered th
+, table.table.table-bordered td {
     border-color: #4e5d6c;
     border-width: 1px;
+    border-style: solid;
+}
+
+.dropdown-menu {
+    border: 1px solid #596a7b;
 }
 
 table.table thead th {

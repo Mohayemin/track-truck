@@ -238,6 +238,8 @@
     <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\crudStatus.js" />
+    <Content Include="Scripts\Util\datetime-picker.js" />
+    <Content Include="Scripts\Util\datetime-picker.tpls.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\pesoFilter.js" />
@@ -325,8 +327,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Page\_Footer.cshtml" />
     <Content Include="package.json" />
-    <None Include="Properties\PublishProfiles\file-system.pubxml" />
-    <None Include="Properties\PublishProfiles\ssi.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -336,6 +336,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Backdoor\" />
     <Folder Include="Views\ControllerBase\" />
     <Folder Include="Views\Info\" />
@@ -379,7 +380,8 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>gulp</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
