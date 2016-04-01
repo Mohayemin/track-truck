@@ -20,7 +20,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public string AssignedEmployeeId { get; set; }
 
         [BsonIgnore]
-        public double? AdjustmentInPeso {
+        public double? AdjustmentInPeso
+        {
             get
             {
                 return ExpectedCostInPeso - ActualCostInPeso;
@@ -33,10 +34,11 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
             Id = ObjectId.GenerateNewId().ToString();
         }
 
-        public DbTripCost(TripCostType costType, double expectedCostInPeso, double? actualCostInPeso = null, string comment = null) : this()
+        public DbTripCost(TripCostType costType, double expectedCostInPeso, string assignedEmployeeId, double? actualCostInPeso = null, string comment = null) : this()
         {
             CostType = costType;
             ExpectedCostInPeso = expectedCostInPeso;
+            AssignedEmployeeId = assignedEmployeeId;
             ActualCostInPeso = actualCostInPeso;
             Comment = comment;
         }
