@@ -1,0 +1,29 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html ng-app="trackTruck" ng-controller="appController">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSI Logistics</title>
+</head>
+<body>
+    <link href="~/bin.client/css/all.css" rel="stylesheet"/>
+
+    <div class="container main-container">
+        <div>
+            <navigation username="'@User.Identity.Name'"></navigation>
+            <global-message></global-message>
+            <ng-view></ng-view>
+        </div>
+    </div>
+
+    @Html.Partial("_Footer")
+
+    <script src="~/bin.client/lib.js"></script>
+    <script src="~/bin.client/util.js"></script>
+    <script src="~/bin.client/util.templates.js"></script>
+    <script src="~/bin.client/app.js"></script>
+    <script src="~/bin.client/app.templates.js"></script>
+</body>
+</html>
