@@ -1,0 +1,128 @@
+﻿<div>
+    <page-title></page-title>
+    <form ng-submit="loadReport()" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group">
+                        <button class="btn btn-info" ng-click="setToday()">Load Today</button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-warning" ng-click="setThisWeek()">Load This Week</button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-danger" ng-click="setThisMonth()">Load This Month</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            
+            <div class="col-sm-4">
+                <datetime ng-model="filter.fromDate" hide-time="true"></datetime>
+            </div>
+            <div class="col-sm-4">
+                <datetime ng-model="filter.toDate" hide-time="true"></datetime>
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-default btn-block">Load Range</button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table class="table table-bordered table-responsive table-hover" ts-wrapper>
+            <thead>
+                <tr>
+                    <th ts-criteria="TripTicketNumber">
+                        Ticket#
+                    </th>
+                    <th ts-criteria="StatusObject.text">
+                        Status
+                    </th>
+                    <th ts-criteria="DeliveredNumberOfDrops">
+                        Delivered Drops
+                    </th>
+                    <th ts-criteria="TotalNumberOfDrops">
+                        Total Drops
+                    </th>
+                    <th ts-criteria="Client.Name|lowercase">
+                        Client
+                    </th>
+                    <th ts-criteria="ExpectedPickupTime">
+                        Pickup Time
+                    </th>
+                    <th ts-criteria="Route|lowercase">
+                        Route
+                    </th>
+                    <th ts-criteria="TotalNumberOfBoxes">
+                        Total Boxes
+                    </th>
+                    <th ts-criteria="DeliveredNumberOfBoxes">
+                        Delivered Boxes
+                    </th>
+                    <th ts-criteria="RejectedNumberOfBoxes">
+                        Rejected Boxes
+                    </th>
+                    <th ts-criteria="Truck.RegistrationNumber">
+                        Truck
+                    </th>
+                </tr>
+                <tr class="active">
+                    <th>Total</th>
+                    <th></th>
+                    <th ng-bind="total.DeliveredNumberOfDrops"></th>
+                    <th ng-bind="total.TotalNumberOfDrops"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalNumberOfBoxes"></th>
+                    <th ng-bind="total.DeliveredNumberOfBoxes"></th>
+                    <th ng-bind="total.RejectedNumberOfBoxes"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="trip in trips" ts-repeat>
+                    <td>
+                        <trip-link trip="trip" show-status="false"></trip-link>
+                    </td>
+                    <td>
+                        <status-label status="trip.StatusObject"></status-label>
+                    </td>
+                    <td ng-bind="trip.DeliveredNumberOfDrops"></td>
+                    <td ng-bind="trip.TotalNumberOfDrops"></td>
+                    <td ng-bind="trip.Client.Name"></td>
+                    <td ng-bind="trip.ExpectedPickupTimeUtc | philDate"></td>
+                    <td>
+                        <span ng-bind="trip.PickupAddress.Text"></span>
+                        <span ng-repeat="drop in trip.Drops">
+                            <span>,</span>
+                            <span ng-bind="drop.Branch.Name"></span>
+                        </span>
+                    </td>
+                    <td ng-bind="trip.TotalNumberOfBoxes"></td>
+                    <td ng-bind="trip.DeliveredNumberOfBoxes"></td>
+                    <td ng-bind="trip.RejectedNumberOfBoxes" ng-class="{'error': 'trip.RejectedNumberOfBoxes>0'}"></td>
+                    <td ng-bind="trip.Truck.RegistrationNumber"></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr ng-if="trips.length > 10" class="active">
+                    <th>Total</th>
+                    <th></th>
+                    <th ng-bind="total.DeliveredNumberOfDrops"></th>
+                    <th ng-bind="total.TotalNumberOfDrops"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th ng-bind="total.TotalNumberOfBoxes"></th>
+                    <th ng-bind="total.DeliveredNumberOfBoxes"></th>
+                    <th ng-bind="total.RejectedNumberOfBoxes"></th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
