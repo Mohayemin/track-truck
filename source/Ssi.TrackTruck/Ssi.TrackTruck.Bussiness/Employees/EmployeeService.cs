@@ -80,15 +80,14 @@ namespace Ssi.TrackTruck.Bussiness.Employees
 
                 var employeeTripIds = employeeContracts.Select(contract => contract.TripId).Distinct();
                 var employeeTrips = trips.Where(trip => employeeTripIds.Contains(trip.Id)).ToList();
+                var employeeCosts = employeeTrips.SelectMany(trip => trip.Costs)
+                    .Where(cost => cost.AssignedEmployeeId == employee.Id).ToList();
 
-                double adjustment = 0;
                 var allowance = employeeContracts.Sum(contract => contract.AllowanceInPeso);
                 var salary = employeeContracts.Sum(contract => contract.SalaryInPeso);
-
-                if (employee.Designation == EmployeDesignations.Driver)
-                {
-                    adjustment = employeeTrips.Sum(trip => trip.TotalCost.AdjustmentInPeso) ?? 0.0;
-                }
+                
+                var adjustment = employeeCosts
+                    .Sum(cost => cost.AdjustmentInPeso ?? 0);
 
                 yield return new EmployeeSalary(employee, salary, allowance, adjustment, employeeTrips.Count);
             }
