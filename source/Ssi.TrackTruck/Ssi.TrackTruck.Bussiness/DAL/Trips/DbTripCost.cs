@@ -17,6 +17,8 @@ namespace Ssi.TrackTruck.Bussiness.DAL.Trips
         public double ExpectedCostInPeso { get; set; }
         public double? ActualCostInPeso { get; set; }
         public string Comment { get; set; }
+        public string AssignedEmployeeId { get; set; }
+
         [BsonIgnore]
         public double? AdjustmentInPeso {
             get

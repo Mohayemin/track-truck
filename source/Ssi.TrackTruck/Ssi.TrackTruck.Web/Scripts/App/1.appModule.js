@@ -29,13 +29,15 @@ appModule.config([
 appModule.run([
     '$rootScope',
     'tripStatus',
+    'designation',
     'dateFormat',
     'dateTimeFormat',
     'uiDatetimePickerConfig',
-    function ($rootScope, tripStatus, dateFormat, dateTimeFormat) {
+    function ($rootScope, tripStatus, designation, dateFormat, dateTimeFormat) {
         $rootScope.tripStatus = tripStatus;
         $rootScope.dateFormat = dateFormat;
         $rootScope.dateTimeFormat = dateTimeFormat;
+        $rootScope.designation = designation;
     }
 ]);
 
