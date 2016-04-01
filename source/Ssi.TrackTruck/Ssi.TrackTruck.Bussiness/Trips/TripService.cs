@@ -29,6 +29,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             var drops = orderRequest.Drops.Select(request => request.ToDrop(trip.Id));
             var contracts = orderRequest.ToContracts(trip.Id);
 
+            trip.UpdateHistories.Add(new DbHistory(_signedInUser.Id, DateTime.UtcNow, "created"));
+
             _repository.Create(trip);
             _repository.CreateAll(drops);
             _repository.CreateAll(contracts);
@@ -154,6 +156,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 trip.Status = newStatus;
                 _repository.Save(trip);
             }
+            
+            trip.UpdateHistories.Add(new DbHistory(_signedInUser.Id, DateTime.UtcNow, "drop received", drop.Id));
 
             return Response.Success(trip.Status.ToString(), "Drop received");
         }
@@ -185,6 +189,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             });
 
             costs.AddRange(newAdjustments.Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.AssignedEmployeeId, a.ActualCostInPeso, a.Comment)));
+
+            trip.UpdateHistories.Add(new DbHistory(_signedInUser.Id, DateTime.UtcNow, "cost updated"));
 
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");

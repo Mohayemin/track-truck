@@ -79,6 +79,7 @@
     <Compile Include="DAL\Entities\Entity.cs" />
     <Compile Include="DAL\Entities\IDeletable.cs" />
     <Compile Include="DAL\Entities\IEntity.cs" />
+    <Compile Include="DAL\DbHistory.cs" />
     <Compile Include="DAL\MongoRepository.cs" />
     <Compile Include="DAL\Trips\DbTripCost.cs" />
     <Compile Include="DAL\Trips\DbDeliveryReceipt.cs" />

@@ -60,6 +60,13 @@
 
             <div class="col-sm-6">
                 <h4>
+                    Updates
+                </h4>
+                <ng-include src="url.template('Trip', 'TripUpdaterList')"></ng-include>
+            </div>
+
+            <div class="col-sm-6">
+                <h4>
                     Costs
                     <a class="btn btn-warning btn-xs pull-right" ng-href="{{url.route('trip', trip.Id, 'adjustment')}}">
                         <i class="fa fa-wrench"></i> Adjust cost

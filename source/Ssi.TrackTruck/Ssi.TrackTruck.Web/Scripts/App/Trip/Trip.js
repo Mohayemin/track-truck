@@ -32,11 +32,13 @@
 
             _this.Client = {};
 
+            var userPromise = userService.getIndexedUsers();
+
             clientService.get(_this.ClientId).then(function (client) {
                 _this.Client = client;
                 _this.PickupAddress = _.find(_this.Client.Addresses, { Id: _this.PickupAddressId });
-
-                userService.getIndexedUsers().then(function (userIndex) {
+                
+                userPromise.then(function (userIndex) {
                     _this.Drops.forEach(function (drop) {
                         drop.Branch = _.find(_this.Client.Branches, { Id: drop.BranchId });
                         drop.ReceiverUser = userIndex[drop.ReceiverUserId];
@@ -57,6 +59,12 @@
 
             _this.Costs = this.Costs.map(function(cost) {
                 return new TripCost(cost);
+            });
+
+            userPromise.then(function(indexedUsers) {
+                _this.UpdateHistories.forEach(function(history) {
+                    history.User = indexedUsers[history.UserId];
+                });
             });
 
             _this.AllDropsDelivered = _this.TotalNumberOfDrops === _this.DeliveredNumberOfDrops;

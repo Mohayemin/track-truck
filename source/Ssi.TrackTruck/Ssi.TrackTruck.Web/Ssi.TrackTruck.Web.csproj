@@ -201,6 +201,7 @@
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
     <Content Include="Scripts\App\Trip\tripReport.html" />
     <Content Include="Scripts\App\Trip\tripReportController.js" />
+    <Content Include="Scripts\App\Trip\TripUpdaterList.html" />
     <Content Include="Scripts\App\Trip\unarchiveButton.html" />
     <Content Include="Scripts\App\Trip\unarchiveButton.js" />
     <Content Include="Scripts\App\Truck\truckEdit.html" />
