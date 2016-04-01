@@ -179,6 +179,8 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             {
                 var adjustment = adjustments.Find(a => a.Id == cost.Id);
                 cost.ActualCostInPeso = adjustment.ActualCostInPeso;
+                // TODO: validate if this employee is in contract with this trip
+                cost.AssignedEmployeeId = adjustment.AssignedEmployeeId;
                 cost.Comment = adjustment.Comment;
             });
 

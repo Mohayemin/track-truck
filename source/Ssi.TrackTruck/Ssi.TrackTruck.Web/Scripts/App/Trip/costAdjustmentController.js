@@ -4,6 +4,7 @@
     'tripService',
     'costType',
     'TripCost',
+    'designation',
     'globalMessage',
     '$routeParams',
     function orderTripController(
@@ -12,6 +13,7 @@
         tripService,
         costType,
         TripCost,
+        designation,
         globalMessage,
         $routeParams) {
 
@@ -22,6 +24,7 @@
             $scope.costs = trip.Costs.map(function (cost) {
                 return new TripCost(cost);
             });
+
             $scope.total = new TripCost({
                 ExpectedCostInPeso: _.sumBy($scope.costs, function (a) { return a.ExpectedCostInPeso; })
             });

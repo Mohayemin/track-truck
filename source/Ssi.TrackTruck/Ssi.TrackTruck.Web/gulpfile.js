@@ -98,7 +98,7 @@
         return stream;
     });
 
-    gulp.task('watch', function () {
+    gulp.task('watch', ['build-js', 'build-css'], function () {
         function changed(event) {
             console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
         }
