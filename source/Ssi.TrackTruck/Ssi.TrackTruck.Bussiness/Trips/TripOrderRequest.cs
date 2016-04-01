@@ -66,11 +66,11 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 Status = TripStatus.New,
                 Costs = new List<DbTripCost>
                 {
-                    new DbTripCost(TripCostType.Fuel, FuelCost),
-                    new DbTripCost(TripCostType.Parking, ParkingCost),
-                    new DbTripCost(TripCostType.Toll, TollCost),
-                    new DbTripCost(TripCostType.Barge, BargeCost),
-                    new DbTripCost(TripCostType.Bundle, BundleCost)
+                    new DbTripCost(TripCostType.Fuel, FuelCost, DriverId),
+                    new DbTripCost(TripCostType.Parking, ParkingCost, DriverId),
+                    new DbTripCost(TripCostType.Toll, TollCost, DriverId),
+                    new DbTripCost(TripCostType.Barge, BargeCost, DriverId),
+                    new DbTripCost(TripCostType.Bundle, BundleCost, DriverId)
                 }
             };
 

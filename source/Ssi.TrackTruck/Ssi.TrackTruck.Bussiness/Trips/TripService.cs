@@ -184,7 +184,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
                 cost.Comment = adjustment.Comment;
             });
 
-            costs.AddRange(newAdjustments.Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.ActualCostInPeso, a.Comment)));
+            costs.AddRange(newAdjustments.Select(a => new DbTripCost(TripCostType.Discrepancy, 0, a.AssignedEmployeeId, a.ActualCostInPeso, a.Comment)));
 
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");
