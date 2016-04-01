@@ -15,7 +15,6 @@
         globalMessage,
         $routeParams) {
 
-        $scope.disable = true;
         $scope.loading = true;
         tripService.get($routeParams['id']).then(function (trip) {
             $scope.trip = trip;
@@ -28,7 +27,6 @@
             });
 
             $scope.recalculateTotal();
-            $scope.disable = !trip.isCostAdjustable();
             $scope.loading = false;
         });
 
