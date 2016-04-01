@@ -101,3 +101,19 @@
 .trip-detail dl dt {
     text-align: left;
 }
+
+.transactions .panel-title a.accordion-toggle{
+    cursor: default;
+}
+
+.transactions .panel-title .expand-collapse{
+    cursor: pointer;
+}
+
+.transactions .panel-group > .panel {
+    border-bottom: 3px solid #df691a;
+}
+
+.transactions .drop-time-input .input-group {
+    width: 100%;
+}

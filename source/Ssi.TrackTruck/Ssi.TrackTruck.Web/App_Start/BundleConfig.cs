@@ -6,28 +6,6 @@ namespace Ssi.TrackTruck.Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            var lib = new ScriptBundle("~/js/lib")
-                .Include("~/Scripts/Lib/angular.js")
-                .Include("~/Scripts/Lib/angular-route.js")
-                .Include("~/Scripts/Lib/angular-animate.js")
-                .Include("~/Scripts/Lib/ui-bootstrap-tpls-1.2.0.min.js")
-                .Include("~/Scripts/Lib/lodash.min.js")
-                .Include("~/Scripts/Lib/angular-tablesort.js")
-                .Include("~/Scripts/Lib/ng-tags-input.js")
-                .Include("~/Scripts/Lib/moment.min.js");
-
-            var signIn = new ScriptBundle("~/js/signin")
-                .IncludeDirectory("~/Scripts/SignIn", "*.js");
-
-            var util = new ScriptBundle("~/js/util").IncludeDirectory("~/Scripts/Util", "*.js");
-
-            var app = new ScriptBundle("~/js/app").IncludeDirectory("~/Scripts/App", "*.js", true);
-
-            bundles.Add(lib);
-            bundles.Add(signIn);
-            bundles.Add(util);
-            bundles.Add(app);
-
             var css = new StyleBundle("~/Content/css/all")
                 .Include("~/Content/css/bootstrap-superhero.min.css")
                 .Include("~/Content/css/bootstrap-superhero-override.css")

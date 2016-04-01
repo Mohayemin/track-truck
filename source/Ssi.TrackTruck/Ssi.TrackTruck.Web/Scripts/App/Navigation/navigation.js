@@ -17,6 +17,11 @@
                     $scope.url = url;
                     $scope.activeGroup = null;
                     $scope.activeNav = null;
+                    $scope.navCollapsed = true;
+
+                    $scope.collapse = function() {
+                        $scope.navCollapsed = true;
+                    };
 
                     function setActiveNav(event, current) {
                         var routeId = current.$$route.id;

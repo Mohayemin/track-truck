@@ -10,6 +10,7 @@
     'user',
     'auth',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'tableSort',
     'ngTagsInput',
     'ngRoute']);
@@ -18,18 +19,26 @@ appModule.config([
     '$locationProvider',
     'uibDatepickerPopupConfig',
     'uibDatepickerConfig',
-    'uibTimepickerConfig',
-    'dateFormat',
-    function ($locationProvider, uibDatepickerPopupConfig, uibDatepickerConfig, uibTimepickerConfig, dateFormat) {
-        console.log('configuring app');
-
+    function ($locationProvider, uiDatetimePickerConfig) {
         $locationProvider.html5Mode(false);
-        uibDatepickerPopupConfig.datepickerPopup = dateFormat;
-        uibDatepickerConfig.showWeeks = false;
-        uibDatepickerPopupConfig.appendToBody = true;
-        uibTimepickerConfig.showSpinners = false;
+        uiDatetimePickerConfig.appendToBody = true;
+        uiDatetimePickerConfig.showWeeks = false;
+    }
+]);
+
+appModule.run([
+    '$rootScope',
+    'tripStatus',
+    'dateFormat',
+    'dateTimeFormat',
+    'uiDatetimePickerConfig',
+    function ($rootScope, tripStatus, dateFormat, dateTimeFormat) {
+        $rootScope.tripStatus = tripStatus;
+        $rootScope.dateFormat = dateFormat;
+        $rootScope.dateTimeFormat = dateTimeFormat;
     }
 ]);
 
 appModule.value('_', window._);
 appModule.constant('dateFormat', 'MMMM dd, yyyy');
+appModule.constant('dateTimeFormat', 'MMMM dd, yyyy hh:mm a');

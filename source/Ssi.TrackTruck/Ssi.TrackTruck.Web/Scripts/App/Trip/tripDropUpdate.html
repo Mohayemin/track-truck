@@ -1,8 +1,8 @@
 ﻿<form ng-submit="receive(drop, trip)">
-    <div class="panel panel-primary">
+    <div class="panel" ng-class="{'panel-primary': !drop.IsDelivered, 'panel-success': drop.IsDelivered}">
         <div class="panel-heading">
             <div class="row">
-                <div class="col-sm-4">Branch: {{drop.Branch.Name}}</div>
+                <div class="col-sm-4"> {{$index + 1}}. Branch: {{drop.Branch.Name}}</div>
                 <div class="col-sm-8">Time: {{drop.ExpectedDropTimeUtc | philDate}}</div>
             </div>
         </div>
@@ -16,28 +16,39 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="dr in drop.DeliveryReceipts">
-                    <td ng-bind="dr.DrNumber"></td>
-                    <td ng-bind="dr.NumberOfBoxes"></td>
-                    <td>
-                        <div class="input-group input-group-sm">
-                            <input class="form-control input-sm" type="number" min="0"
-                                   ng-attr-max="{{dr.NumberOfBoxes}}" ng-model="dr.RejectedNumberOfBoxes"/>
-                        </div>
-                    </td>
-                    <td>
-                        <input class="form-control input-sm" type="text" ng-model="dr.Comment"/>
-                    </td>
-                </tr>
+            <tr ng-repeat="dr in drop.DeliveryReceipts">
+                <td ng-bind="dr.DrNumber"></td>
+                <td ng-bind="dr.NumberOfBoxes"></td>
+                <td>
+                    <div class="input-group input-group-sm">
+                        <input class="form-control input-sm" type="number" min="0"
+                               ng-attr-max="{{dr.NumberOfBoxes}}" ng-model="dr.RejectedNumberOfBoxes"/>
+                    </div>
+                </td>
+                <td>
+                    <input class="form-control input-sm" type="text" ng-model="dr.Comment"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Delevery time</td>
+                <td colspan="2">
+                    <datetime class="drop-time-input" ng-model="drop.ActualDropTimeUtc" required="true" options="{sm: true}"></datetime>
+                </td>
+            </tr>
             </tbody>
         </table>
         <div class="panel-footer">
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-8">
+                    <label class="label label-success" ng-if="drop.IsDelivered">
+                        <i class="fa fa-check-square-o"></i>
+                        Delivered
+                    </label>
+                    &nbsp;
                     Total <span ng-bind="drop.DeliveryReceipts.length"></span> deliveries and
                     <span ng-bind="drop.TotalBoxes"></span> boxes
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                     <button type="submit" class="btn btn-sm btn-success pull-right">
                         <i class="fa fa-lg fa-check-square"></i>
                         Receive <span ng-bind="totalAccepted(drop) || 'None'"></span> ,

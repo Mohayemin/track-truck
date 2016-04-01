@@ -1,5 +1,6 @@
 ﻿tripModule.controller('tripTransactionController', [
     '$scope',
+    '$window',
     '$filter',
     'tripService',
     'collection',
@@ -7,6 +8,7 @@
     'globalMessage',
     function (
         $scope
+        , $window
         , $filter
         , tripService
         , collection
@@ -74,7 +76,9 @@
         };
 
         $scope.receive = function (drop, trip) {
-            tripService.receiveDrop(drop, trip).then(function () {
+            var confirm = !drop.IsDelivered || $window.confirm('you have already received this drop, are you sure you want to update it?');
+
+            confirm && tripService.receiveDrop(drop, trip).then(function () {
                 drop.IsDelivered = true;
                 globalMessage.success('drop received');
             }).catch(function (message) {
@@ -84,13 +88,6 @@
             });
         };
 
-        $scope.archive = function(trip) {
-            tripService.archive(trip).then(function() {
-                globalMessage.success('Trip archived');
-            }).catch(function(response) {
-                globalMessage.error(response.Message);
-            });
-        };
 
     }
 ]);

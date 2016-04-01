@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -154,6 +155,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="gulpfile.js" />
     <Content Include="Scripts\App\appController.js" />
     <Content Include="Scripts\App\Attendance\1.attendanceModule.js" />
     <Content Include="Scripts\App\Attendance\attendanceReport.html" />
@@ -188,12 +190,13 @@
     <Content Include="Scripts\App\Trip\costAdjustment.html" />
     <Content Include="Scripts\App\Trip\costAdjustmentController.js" />
     <Content Include="Scripts\App\Trip\costType.js" />
-    <Content Include="Scripts\App\Trip\salaryAdjustment.html" />
     <Content Include="Scripts\App\Trip\trip.js" />
     <Content Include="Scripts\App\Trip\tripCost.js" />
     <Content Include="Scripts\App\Trip\tripDropUpdate.html" />
     <Content Include="Scripts\App\Trip\tripDetail.html" />
     <Content Include="Scripts\App\Trip\tripDetailController.js" />
+    <Content Include="Scripts\App\Trip\tripLink.html" />
+    <Content Include="Scripts\App\Trip\tripLink.js" />
     <Content Include="Scripts\App\Trip\tripStatus.js" />
     <Content Include="Scripts\App\Trip\tripTransaction.html" />
     <Content Include="Scripts\App\Trip\tripReport.html" />
@@ -225,13 +228,8 @@
     <Content Include="Scripts\App\Trip\orderTrip.html" />
     <Content Include="Scripts\App\Trip\orderTripController.js" />
     <Content Include="Scripts\App\Trip\1.tripModule.js" />
-    <Content Include="Scripts\Lib\angular-animate.js" />
-    <Content Include="Scripts\Lib\lodash.min.js" />
-    <Content Include="Scripts\Lib\moment.min.js" />
     <Content Include="Content\css\ng-tags-input.bootstrap.css" />
     <Content Include="Content\css\ng-tags-input.css" />
-    <Content Include="Scripts\Lib\ng-tags-input.js" />
-    <Content Include="Scripts\Lib\ui-bootstrap-tpls-1.2.0.min.js" />
     <Content Include="Scripts\SignIn\signInController.js" />
     <Content Include="Scripts\SignIn\1.signInModule.js" />
     <Content Include="Scripts\App\Client\clientService.js" />
@@ -240,6 +238,8 @@
     <Content Include="Scripts\Util\addButtonDirective.js" />
     <Content Include="Scripts\Util\collection.js" />
     <Content Include="Scripts\Util\crudStatus.js" />
+    <Content Include="Scripts\Util\datetime-picker.js" />
+    <Content Include="Scripts\Util\datetime-picker.tpls.js" />
     <Content Include="Scripts\Util\datetimeDirective.js" />
     <Content Include="Scripts\App\Employee\employeeService.js" />
     <Content Include="Scripts\Util\pesoFilter.js" />
@@ -274,11 +274,7 @@
     <Content Include="Scripts\App\Truck\truckStatusReportController.js" />
     <Content Include="Scripts\Util\url.js" />
     <Content Include="Scripts\Util\1.utilModule.js" />
-    <Content Include="Scripts\Lib\angular-route.js" />
-    <Content Include="Scripts\Lib\angular-tablesort.js" />
-    <Content Include="Scripts\Lib\angular.js" />
-    <Content Include="Scripts\Lib\angular.min.js" />
-    <Content Include="Templates\datetimeDirective.html" />
+    <Content Include="Scripts\Util\datetimeDirective.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -330,8 +326,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Page\_Footer.cshtml" />
-    <None Include="Properties\PublishProfiles\file-system.pubxml" />
-    <None Include="Properties\PublishProfiles\ssi.pubxml" />
+    <Content Include="package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -341,6 +336,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Backdoor\" />
     <Folder Include="Views\ControllerBase\" />
     <Folder Include="Views\Info\" />
@@ -383,6 +379,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

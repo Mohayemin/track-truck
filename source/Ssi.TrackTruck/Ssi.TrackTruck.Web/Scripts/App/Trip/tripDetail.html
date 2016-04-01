@@ -2,8 +2,7 @@
     <page-title>
         
         <h4>
-            Ticket Number: <a ng-href="{{url.route('trip', trip.Id)}}" ng-bind="trip.TripTicketNumber"></a>
-            <status-label status="trip.StatusObject"></status-label>
+            Ticket Number: <trip-link trip="trip"></trip-link>
             <label class="btn-group btn-group-sm pull-right">
                 <delete-button module="'trip'" item-id="trip.Id" action="deleteItem"></delete-button>
             </label>
@@ -29,7 +28,7 @@
 
             <div class="col-sm-6">
                 <h4>
-                    Stuffs
+                    Staffs
                 </h4>
                 <table class="table table-bordered table-condensed table-responsive">
                     <thead>

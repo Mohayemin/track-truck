@@ -8,10 +8,7 @@
     <title>SSI Logistics</title>
 </head>
 <body>
-    @Styles.Render("~/Content/css/all")
-    @Scripts.Render("~/js/lib")
-    @Scripts.Render("~/js/util")
-    @Scripts.Render("~/js/app")
+    <link href="~/bin.client/css/all.css" rel="stylesheet"/>
 
     <div class="container main-container">
         <div>
@@ -22,5 +19,11 @@
     </div>
 
     @Html.Partial("_Footer")
+
+    <script src="~/bin.client/lib.js"></script>
+    <script src="~/bin.client/util.js"></script>
+    <script src="~/bin.client/util.templates.js"></script>
+    <script src="~/bin.client/app.js"></script>
+    <script src="~/bin.client/app.templates.js"></script>
 </body>
 </html>

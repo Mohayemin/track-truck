@@ -6,8 +6,8 @@
         }
 
         function template(module, feature) {
-            var root = '/Scripts/App/';
-            return root + module + '/' + feature + '.html';
+            module = module.charAt(0).toUpperCase() + module.slice(1);
+            return module + '/' + feature + '.html';
         }
 
         function path() {

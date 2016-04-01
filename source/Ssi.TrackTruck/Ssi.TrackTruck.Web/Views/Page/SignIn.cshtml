@@ -7,10 +7,7 @@
     <title>Sign In: SSI Logistics</title>
 </head>
 <body>
-    @Styles.Render("~/Content/css/all")
-    @Scripts.Render("~/js/lib")
-    @Scripts.Render("~/js/util")
-    @Scripts.Render("~/js/signin")
+    <link href="~/bin.client/css/all.css" rel="stylesheet" />
 
     <div class="container main-container">
         <global-message></global-message>
@@ -55,5 +52,10 @@
     </div>
 
     @Html.Partial("_Footer")
+
+    <script src="~/bin.client/lib.js"></script>
+    <script src="~/bin.client/util.js"></script>
+    <script src="~/bin.client/util.templates.js"></script>
+    <script src="~/bin.client/signin.js"></script>
 </body>
 </html>

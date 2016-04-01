@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div class="transactions">
     <page-title></page-title>
     <form class="form-inline">
         <div class="form-group form-group-sm">
@@ -18,7 +18,7 @@
                        ng-class="'btn-' + statusButtonClass(status)"
                        ng-model="filter.Status[status.id]"
                        uib-btn-checkbox="status.id"
-                       ng-repeat="status in [tripStatus.New, tripStatus.InProgress]">
+                       ng-repeat="status in [tripStatus.New, tripStatus.InProgress, tripStatus.Delivered]">
                     {{status.text}}
                 </label>
             </div>
@@ -29,28 +29,21 @@
     <uib-accordion close-others="false">
 
         <uib-accordion-group ng-repeat="trip in trips"
-                         is-open="trip.accordionOpen" class="animate-out-right" ng-show="trip.show && trip.Status != tripStatus.Archived.id">
+                             is-open="trip.accordionOpen" ng-show="trip.show">
             <uib-accordion-heading>
                 <div class="row">
-                    <div class="col-md-3">
+
+                    <div class="col-md-6">
                         <dl class="dl-horizontal">
                             <dt>Ticket</dt>
-                            <dd>{{trip.TripTicketNumber}}</dd>
+                            <dd ng-click="$event.stopPropagation();">
+                                <trip-link trip="trip"></trip-link>
+                            </dd>
                             <dt>Client</dt>
                             <dd>{{trip.Client.Name}}</dd>
-                            <dt>Status</dt>
-                            <dd>
-                                <status-label status="trip.StatusObject"></status-label>
-                            </dd>
                         </dl>
                     </div>
-                    <div class="col-md-5">
-                        <dl class="dl-horizontal">
-                            <dt>Truck</dt>
-                            <dd>{{trip.Truck.RegistrationNumber}}</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <dl class="dl-horizontal">
                             <dt>Pickup Address </dt>
                             <dd>{{trip.PickupAddress.Text}}</dd>
@@ -58,34 +51,17 @@
                             <dd>{{trip.ExpectedPickupTimeUtc | philDate}}</dd>
                         </dl>
                     </div>
+
                 </div>
+                <button class="btn btn-default btn-xs btn-block expand-collapse">
+                    Details <i class="fa fa-fw" ng-class="{'fa-caret-down': !trip.accordionOpen, 'fa-caret-up': trip.accordionOpen}"></i>
+                </button>
             </uib-accordion-heading>
 
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-inline">
-                        <div class="form-group form-group-sm">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" ng-model="trip.showDelivered" /> Show delivered
-                                </label>
-                            </div>
-                            <button type="button"
-                                    ng-click="archive(trip)"
-                                    ng-if="trip.Status === tripStatus.Delivered.id"
-                                    class="btn btn-sm btn-success">
-                                <i class="fa fa-lg fa-check-square-o"></i> Archive
-                            </button>
-                        </div>
-                    </div>
-                    <br />
-                </div>
-                <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops" ng-show="trip.showDelivered || !drop.IsDelivered">
-                    <ng-include src="'Scripts/App/Trip/tripDropUpdate.html'"></ng-include>
-                </div>
-
-                <div class="col-md-6">
-                    <ng-include src="'Scripts/App/Trip/salaryAdjustment.html'"></ng-include>
+                <div class="col-md-6 animate-out-right" ng-repeat="drop in trip.Drops">
+                    <ng-include src="url.template('Trip', 'tripDropUpdate')"></ng-include>
+                    <br/>
                 </div>
             </div>
         </uib-accordion-group>
