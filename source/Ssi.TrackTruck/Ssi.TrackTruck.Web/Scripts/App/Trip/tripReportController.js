@@ -30,8 +30,7 @@
         };
 
         $scope.loadReport = function () {
-            globalMessage.info('loading...', 0);
-            tripService.getReport($scope.filter).then(function (trips) {
+            $scope.promise = tripService.getReport($scope.filter).then(function(trips) {
                 $scope.total = {
                     DeliveredNumberOfDrops: 0,
                     TotalNumberOfDrops: 0,
@@ -48,8 +47,6 @@
                     $scope.total.DeliveredNumberOfBoxes += trip.DeliveredNumberOfBoxes;
                     $scope.total.RejectedNumberOfBoxes += trip.RejectedNumberOfBoxes;
                 });
-            }).finally(function() {
-                globalMessage.clear();
             });
         };
 
