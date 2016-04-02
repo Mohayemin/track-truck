@@ -58,7 +58,7 @@
 
         $scope.tripStatus = tripStatus;
 
-        tripService.getActiveTrips().then(function (trips) {
+        $scope.promise = tripService.getActiveTrips().then(function (trips) {
             $scope.trips = trips;
             if (trips.length) {
                 trips[0].accordionOpen = true;
