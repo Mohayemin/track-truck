@@ -1,10 +1,12 @@
 ﻿tripModule.controller('tripReportController', [
     '$scope',
     'wellKnownDateTime',
+    'globalMessage',
     'tripService',
     function (
         $scope
         , wellKnownDateTime
+        , globalMessage
         , tripService) {
 
         function setDateRange(from, to) {
@@ -28,7 +30,7 @@
         };
 
         $scope.loadReport = function () {
-
+            globalMessage.info('loading...', 0);
             tripService.getReport($scope.filter).then(function (trips) {
                 $scope.total = {
                     DeliveredNumberOfDrops: 0,
@@ -46,6 +48,8 @@
                     $scope.total.DeliveredNumberOfBoxes += trip.DeliveredNumberOfBoxes;
                     $scope.total.RejectedNumberOfBoxes += trip.RejectedNumberOfBoxes;
                 });
+            }).finally(function() {
+                globalMessage.clear();
             });
         };
 
