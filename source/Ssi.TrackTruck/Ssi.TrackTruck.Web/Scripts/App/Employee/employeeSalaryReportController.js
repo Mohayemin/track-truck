@@ -25,7 +25,7 @@
         };
 
         $scope.loadReport = function () {
-            employeeService.getSalaryReport($scope.filter).then(function (report) {
+            $scope.promise = employeeService.getSalaryReport($scope.filter).then(function (report) {
                 $scope.employeeSalaries = report.employees;
                 $scope.total = report.total;
             });

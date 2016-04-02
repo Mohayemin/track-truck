@@ -15,7 +15,7 @@
 
         $scope.loadReport = function() {
             if (filter.fromDate <= filter.toDate) {
-                attendanceService.getReport($scope.filter).then(function(data) {
+                $scope.promise = attendanceService.getReport($scope.filter).then(function(data) {
                     $scope.reportRows = data;
                 });
 
