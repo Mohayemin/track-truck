@@ -73,7 +73,6 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             }
         }
 
-
         public TripResponse Get(string id)
         {
             var trip = _repository.GetById<DbTrip>(id);
@@ -91,6 +90,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
         {
             var trips = _repository
                 .WhereIn<DbTrip, TripStatus>(trip => trip.Status, new[] { TripStatus.InProgress, TripStatus.New, TripStatus.Delivered })
+                .Where(trip => !trip.IsDeleted)
                 .OrderBy(trip => trip.Status);
 
             var tripIds = trips.Select(trip => trip.Id);
@@ -194,6 +194,26 @@ namespace Ssi.TrackTruck.Bussiness.Trips
 
             _repository.Save(trip);
             return Response.Success(message: "Adjustments saved");
+        }
+
+        public Response Delete(string tripId)
+        {
+            var trip = _repository.GetById<DbTrip>(tripId);
+            if (trip == null)
+            {
+                return Response.Error("", "Trip does not exist");
+            }
+            if (trip.IsDeleted)
+            {
+                return Response.Error("", "Trip is already deleted");
+            }
+            if (trip.Status != TripStatus.New)
+            {
+                return Response.Error("", "Trip cannot be deleted when in status " + trip.Status);
+            }
+            _repository.SoftDelete<DbTrip>(tripId);
+
+            return Response.Success(message:"Trip successfully deleted");
         }
     }
 }

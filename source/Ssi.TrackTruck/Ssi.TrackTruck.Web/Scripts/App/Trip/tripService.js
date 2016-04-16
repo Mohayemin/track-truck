@@ -122,6 +122,15 @@
             },
             unarchive: function (trip) {
                 return updateStatus(trip, tripStatus.Delivered);
+            },
+            'delete': function(tripId) {
+                return repository.post('Trip', 'Delete', { id: tripId }).then(function (response) {
+                    if (!response.IsError) {
+                        return response;
+                    }
+
+                    return $q.reject(response.Message || response.status || 'could not delete trip');
+                });
             }
         };
 
