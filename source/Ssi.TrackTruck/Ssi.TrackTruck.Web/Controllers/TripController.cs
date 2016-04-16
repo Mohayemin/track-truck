@@ -74,5 +74,12 @@ namespace Ssi.TrackTruck.Web.Controllers
             var response = _tripService.SaveAdjustments(tripId, adjustments);
             return new JsonNetResult(response);
         }
+
+        [HttpPost]
+        [AllowedRoles(Role.Admin, Role.Encoder)]
+        public ActionResult Delete(string id)
+        {
+            return new JsonNetResult(_tripService.Delete(id));
+        }
     }
 }
