@@ -151,13 +151,10 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             var thisTripDrops = _repository.GetWhere<DbTripDrop>(d => d.TripId == drop.TripId);
             var notAllDelivered = thisTripDrops.Any(d => !d.IsDelivered);
             var newStatus = notAllDelivered ? TripStatus.InProgress : TripStatus.Delivered;
-            if (newStatus != trip.Status)
-            {
-                trip.Status = newStatus;
-                _repository.Save(trip);
-            }
-            
             trip.UpdateHistories.Add(new DbHistory(_signedInUser.Id, DateTime.UtcNow, "drop received", drop.Id));
+            trip.Status = newStatus;
+
+            _repository.Save(trip);
 
             return Response.Success(trip.Status.ToString(), "Drop received");
         }
@@ -213,7 +210,7 @@ namespace Ssi.TrackTruck.Bussiness.Trips
             }
             _repository.SoftDelete<DbTrip>(tripId);
 
-            return Response.Success(message:"Trip successfully deleted");
+            return Response.Success(message: "Trip successfully deleted");
         }
     }
 }
