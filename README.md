@@ -24,7 +24,7 @@
 1. Clone/pull the release repository to your development machine from https://bitbucket.org/truckmonitoring/ssi-logistics-release.
 1. Update the main repository to `test-release` branch.
 1. Merge `dev` branch of the main repository with `test-release` branch.
-1. Publish the project Ssi.TrackTruck.Web to the location. Use Custom publish and choose *file system* method. **DO NOT check "Delete all existing files prior to publish"**.
+1. Publish the project Ssi.TrackTruck.Web to the location. Use Custom publish and choose *file system* method. **DO NOT** check "Delete all existing files prior to publish".
 1. Check if the Web.config file is OK. Specially the App settings `MONGOLAB_URI`.
 1. Commit and push the release repository. Please check the previous commit messages and use the same pattern.
 1. Clone/pull https://bitbucket.org/truckmonitoring/ssi-logistics-release to the deployment server.
@@ -35,6 +35,3 @@
 1. Increament third part of `AssemblyVersion` and `AssemblyFileVersion`.
 1. Commit the main repository with message version updated to x.y.z
 1. Push the main repository.
-
-
-
