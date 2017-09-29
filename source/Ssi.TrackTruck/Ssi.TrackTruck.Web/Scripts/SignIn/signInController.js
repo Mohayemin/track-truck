@@ -4,7 +4,10 @@
     'signInService',
     'globalMessage',
     function signInController($scope, $window, signInService, globalMessage) {
-        $scope.model = {};
+        $scope.model = {
+			Username: "mohayemin",
+			Password: "1"
+		};
 
         $scope.signIn = function() {
             $scope.response = null;
